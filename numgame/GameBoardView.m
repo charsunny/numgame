@@ -26,6 +26,8 @@
 
 #define SElECTED_CELL_TAG   (2048)
 
+
+typedef void(^TrickBlock)();
 //score marco
 #define Two_Same_Number_Score           10
 #define Four_Same_Number_Score          100
@@ -60,6 +62,7 @@
 
 @property (nonatomic, strong) GameBoardCell * curCell;
 
+@property (nonatomic, strong) TrickBlock trickBlock;
 
 @property (nonatomic, strong)NumberSelectionVIew * numberSelectionView;
 
@@ -213,6 +216,7 @@
             [self.maskView removeFromSuperview];
             [self.curCell hideAnimation];
             self.isChangeColor = NO;
+            [self callbackToMainGameController];
         }
     }
     
@@ -242,6 +246,7 @@
             [self.maskView removeFromSuperview];
             [self.curCell hideAnimation];
             self.isChangeNumer = NO;
+            [self callbackToMainGameController];
         }
     }
     
@@ -727,7 +732,12 @@
 
 
 
--(void)changeCellColor:(id)sender{
+-(void)changeCellColor:(TrickBlock)block{
+    
+    if (self.trickBlock) {
+        return;
+    }
+    self.trickBlock = block;
 
     if (!self.isChangeColor) {
         CALayer* layer = [CALayer layer];
@@ -738,7 +748,7 @@
         
         self.isChangeColor = YES;
     }
-   
+    //控制另一个道具
 
 
 }
@@ -823,7 +833,12 @@
 //}
 
 
-- (void)changeCellNumber:(id)btn{
+- (void)changeCellNumber:(TrickBlock) block{
+    
+    if (self.trickBlock) {
+        return;
+    }
+    self.trickBlock = block;
     if (!self.isChangeNumer) {
         CALayer* layer = [CALayer layer];
         layer.frame = CGRectMake(0, self.boardInset, self.frame.size.width, _cellNum*(_cellWidth+EDGE_INSET) -EDGE_INSET);
@@ -874,6 +889,7 @@
                  self.maskView = nil;
              }];
             self.isChangeColor = NO;
+            [self callbackToMainGameController];
         }
             break;
         case GBTrakingCategoryNum:
@@ -889,12 +905,23 @@
             }];
             self.isChangeNumer = NO;
         
+            [self callbackToMainGameController];
         }
             break;
         default:
             break;
     }
 
+}
+
+
+
+-(void)callbackToMainGameController{
+
+    if (self.trickBlock) {
+        self.trickBlock();
+    }
+    self.trickBlock = nil;
 }
 
 @end

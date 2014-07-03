@@ -63,6 +63,8 @@
 @property (nonatomic,strong) GameResultView *gameResultView;
 
 @property (nonatomic)BOOL unwindFromResultVC;
+
+@property (nonatomic)BOOL changeTrickBtn;
 @end
 
 @implementation NGGameViewController
@@ -140,6 +142,7 @@
     [_timeLabel setAdjustsFontSizeToFitWidth:YES];
     [_scoreLabel setAdjustsFontSizeToFitWidth:YES];
     self.gameBoardView.isChangeColor = NO;
+    self.changeTrickBtn = NO; //用来改变切换的TrickBtn
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -481,23 +484,67 @@
     //
     
     self.gameBoardView.isChangeColor = YES;
-    [self.gameBoardView performSelector:@selector(changeCellColor:) withObject:sender];
+    __block UIBarButtonItem* barBtnItem = (UIBarButtonItem*)sender;
+    __weak typeof(self) weakself = self;
+    [self.gameBoardView performSelector:@selector(changeCellColor:) withObject:^(){
+    
+        [barBtnItem setEnabled:YES];
+        weakself.changeTrickBtn = NO;
+    }];
   
-
+    if (!self.changeTrickBtn) {
+        [barBtnItem setEnabled:NO];
+        self.changeTrickBtn = YES;
+    }
+    
 
 }
 
 -(IBAction)changeCellNumber:(id)sender{
  
+    
+    
     [self.progressTimer invalidate];
    // self.gameBoardView.isChangeNumer = YES;
     self.gameBoardView.isChangeColor = NO;
-    [self.gameBoardView performSelector:@selector(changeCellNumber:) withObject:sender ];
+    __weak typeof(self) weakself = self;
+    __block UIBarButtonItem* barBtnItem = (UIBarButtonItem*)sender;
     
 
+    [self.gameBoardView performSelector:@selector(changeCellNumber:) withObject:^(){
+    
+        [barBtnItem setEnabled:YES];
+        weakself.changeTrickBtn = NO;
+    } ];
+    
+    if (!self.changeTrickBtn) {
+        
+         [barBtnItem setEnabled:NO];
+     
+        
+        self.changeTrickBtn = YES;
+    }
+   
+   
 
 }
 
+
+-(UIImage*)drawMaskImagofBtnItem:(UIBarButtonItem*)btnItem{
+
+    UIGraphicsBeginImageContext(btnItem.image.size);
+    UIImageView *imgView = [[UIImageView alloc]initWithImage:btnItem.image];
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [imgView.layer renderInContext:context];
+    CGFloat radius = MIN(btnItem.image.size.height, btnItem.image.size.width)/2;
+    CGContextSetFillColorWithColor(context, [UIColor colorWithWhite:1 alpha:0.8].CGColor);
+    CGContextAddArc(context, radius, radius, radius, 0, 2*M_PI, YES);
+    CGContextFillPath(context);
+    UIImage * retImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    return retImage;
+}
 
 
 @end
