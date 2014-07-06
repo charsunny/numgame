@@ -14,9 +14,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    for (id font in [UIFont familyNames]) {
-        NSLog(@"%@",font);
-    }
+    srand(time(NULL));
     if (![[GKLocalPlayer localPlayer] isAuthenticated]) {
         [[GKLocalPlayer localPlayer] setAuthenticateHandler:^(UIViewController *controller, NSError *error) {
             if (!error) {

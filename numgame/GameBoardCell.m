@@ -17,48 +17,34 @@
 
 @implementation GameBoardCell
 
-- (id)initWithFrame:(CGRect)frame andNum:(int)num
+- (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        [self setNumber:[self genRandNumber]];
         self.layer.cornerRadius = frame.size.width/2;
         self.clipsToBounds = YES;
-        self.backgroundColor = [UIColor greenColor];
+        self.backgroundColor = [self genRandColor];
+        self.number = [self genRandNumber];
         _numLabel = [[UILabel alloc] initWithFrame:self.bounds];
-        [_numLabel setText:[NSString stringWithFormat:@"%d",num]];
+        NSArray* brandArry = @[@"♡",@"♤",@"♧",@"♢"];
+        [_numLabel setText:brandArry[rand()%4]];
         [_numLabel setFont:[UIFont boldSystemFontOfSize:30]];
         [_numLabel setTextAlignment:NSTextAlignmentCenter];
         [self addSubview:_numLabel];
-        self.number = num;
     }
     return self;
 }
 
-- (void)setNumber:(int)number {
-    _number = number;
-    switch (number) {
-        case 1:{
-            self.backgroundColor =  RGBA(0x3a,0xc5,0x74,1.0);
-            break;
-        }
-        case 5:{
-            self.backgroundColor =  RGBA(0xc9,0x37,0x56,1.0);
-            break;
-        }
-        case 3:{
-            self.backgroundColor =  RGBA(0x44,0x8e,0xc9,1.0);
-            break;
-        }
-        case 4:{
-            self.backgroundColor =  RGBA(0xf1,0x6b,0x52,1.0);
-            break;
-        }
-        case 2:{
-            self.backgroundColor =  RGBA(0x8b,0x3e,0xbd,1.0);
-            break;
-        }
-    }
+- (UIColor*)genRandColor {
+    NSArray* colors = @[RGBA(0x3a,0xc5,0x74,1.0), RGBA(0xf1,0x6b,0x52,1.0), RGBA(0x44,0x8e,0xc9,1.0), RGBA(0x8b,0x3e,0xbd,1.0)];
+    return colors[rand()%4];
 }
+
+- (int)genRandNumber {
+    return rand()%4+1;
+}
+
 
 @end

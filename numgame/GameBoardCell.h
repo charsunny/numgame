@@ -14,6 +14,6 @@
 
 @property (nonatomic) int desTag;
 
-- (id)initWithFrame:(CGRect)frame andNum:(int)num;
+- (id)initWithFrame:(CGRect)frame;
 
 @end
