@@ -5,41 +5,48 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>1FB530EE-52F9-41D7-955D-671246EC9664</string>
+	<string>ECFDA17D-B731-4876-9147-0B3FFC517F0A</string>
 	<key>IDESourceControlProjectName</key>
 	<string>numgame</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>2647692E-E3F3-4C7B-AC28-8A6C8CCB2148</key>
-		<string>https://svn.baidu.com/app/wise/wmap/trunk/client/components/ios/complatform</string>
+		<key>07EBE407-5DCF-442B-B9F7-9012C9DDB0B6</key>
+		<string>https://github.com/charsunny/numgame.git</string>
+		<key>4CFFB146-5B29-4B28-B52D-F3C55F462808</key>
+		<string>https://github.com/charsunny/numgame.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>numgame/numgame.xcodeproj/project.xcworkspace</string>
+	<string>numgame.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>2647692E-E3F3-4C7B-AC28-8A6C8CCB2148</key>
-		<string>../../..</string>
-	</dict>
-	<key>IDESourceControlProjectRepositoryRootDictionary</key>
-	<dict>
-		<key>2647692E-E3F3-4C7B-AC28-8A6C8CCB2148</key>
-		<string>https://svn.baidu.com/app/wise/wmap</string>
+		<key>07EBE407-5DCF-442B-B9F7-9012C9DDB0B6</key>
+		<string>../..</string>
+		<key>4CFFB146-5B29-4B28-B52D-F3C55F462808</key>
+		<string>../../../../desktop/numgame</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://svn.baidu.com/app/wise/wmap/trunk/client/components/ios/complatform/numgame/numgame.xcodeproj</string>
+	<string>https://github.com/charsunny/numgame.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>2647692E-E3F3-4C7B-AC28-8A6C8CCB2148</string>
+	<string>07EBE407-5DCF-442B-B9F7-9012C9DDB0B6</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.subversion</string>
+			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>2647692E-E3F3-4C7B-AC28-8A6C8CCB2148</string>
+			<string>07EBE407-5DCF-442B-B9F7-9012C9DDB0B6</string>
 			<key>IDESourceControlWCCName</key>
-			<string>workspace</string>
+			<string>numgame</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>4CFFB146-5B29-4B28-B52D-F3C55F462808</string>
+			<key>IDESourceControlWCCName</key>
+			<string>numgame</string>
 		</dict>
 	</array>
 </dict>
