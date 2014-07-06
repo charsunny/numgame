@@ -1,0 +1,135 @@
+
+/* Class = "IBUIButton"; normalTitle = "L"; ObjectID = "0Wv-b0-UrL"; */
+"0Wv-b0-UrL.normalTitle" = "L";
+
+/* Class = "IBUIButton"; normalTitle = "email"; ObjectID = "5ML-Dc-2id"; */
+"5ML-Dc-2id.normalTitle" = "邮件";
+
+/* Class = "IBUIButton"; normalTitle = "J"; ObjectID = "5RR-rK-vZR"; */
+"5RR-rK-vZR.normalTitle" = "J";
+
+/* Class = "IBUILabel"; text = "time"; ObjectID = "6Zh-md-e1f"; */
+"6Zh-md-e1f.text" = "时间";
+
+/* Class = "IBUIButton"; normalTitle = "resume"; ObjectID = "6vG-xA-XEa"; */
+"6vG-xA-XEa.normalTitle" = "继续游戏";
+
+/* Class = "IBUIButton"; normalTitle = "play!"; ObjectID = "8OI-7h-aMf"; */
+"8OI-7h-aMf.normalTitle" = "开始!";
+
+/* Class = "IBUILabel"; text = "0"; ObjectID = "95y-co-i5M"; */
+"95y-co-i5M.text" = "0";
+
+/* Class = "IBUILabel"; text = "SCORES"; ObjectID = "9h4-Nq-OUQ"; */
+"9h4-Nq-OUQ.text" = "得分";
+
+/* Class = "IBUIButton"; normalTitle = "D"; ObjectID = "9wB-yg-kzd"; */
+"9wB-yg-kzd.normalTitle" = "D";
+
+/* Class = "IBUILabel"; text = "target"; ObjectID = "A0V-X9-CjL"; */
+"A0V-X9-CjL.text" = "目标";
+
+/* Class = "IBUIButton"; normalTitle = "main menu"; ObjectID = "D1y-DB-RVP"; */
+"D1y-DB-RVP.normalTitle" = "主菜单";
+
+/* Class = "IBUILabel"; text = "we're here for you"; ObjectID = "Dz9-aH-CkM"; */
+"Dz9-aH-CkM.text" = "我们在这儿等你";
+
+/* Class = "IBUILabel"; text = "contact us"; ObjectID = "Jh0-w4-0Wv"; */
+"Jh0-w4-0Wv.text" = "联系我们";
+
+/* Class = "IBUIButton"; normalTitle = "L"; ObjectID = "L6e-Pn-FaI"; */
+"L6e-Pn-FaI.normalTitle" = "L";
+
+/* Class = "IBUILabel"; text = "setting"; ObjectID = "LDs-cp-cti"; */
+"LDs-cp-cti.text" = "设置";
+
+/* Class = "IBUIButton"; normalTitle = "B"; ObjectID = "LTH-7f-DtO"; */
+"LTH-7f-DtO.normalTitle" = "B";
+
+/* Class = "IBUIButton"; normalTitle = "main menu"; ObjectID = "MZd-Fg-9Tm"; */
+"MZd-Fg-9Tm.normalTitle" = "主菜单";
+
+/* Class = "IBUIButton"; normalTitle = "H"; ObjectID = "Mb6-Kb-tTp"; */
+"Mb6-Kb-tTp.normalTitle" = "H";
+
+/* Class = "IBUILabel"; text = "YOUR BEST SCORE !"; ObjectID = "MfH-0J-KWr"; */
+"MfH-0J-KWr.text" = "新的最佳得分！";
+
+/* Class = "IBUILabel"; text = "classic"; ObjectID = "Nbg-Re-d3E"; */
+"Nbg-Re-d3E.text" = "经典模式";
+
+/* Class = "IBUIButton"; normalTitle = "try again"; ObjectID = "Oqy-0T-VGA"; */
+"Oqy-0T-VGA.normalTitle" = "再来一次";
+
+/* Class = "IBUIButton"; normalTitle = "A"; ObjectID = "Pv6-cI-9Bl"; */
+"Pv6-cI-9Bl.normalTitle" = "A";
+
+/* Class = "IBUIButton"; normalTitle = "restart"; ObjectID = "Q9x-9h-hRU"; */
+"Q9x-9h-hRU.normalTitle" = "重新开始";
+
+/* Class = "IBUIButton"; normalTitle = "E"; ObjectID = "Tgo-k5-KZD"; */
+"Tgo-k5-KZD.normalTitle" = "E";
+
+/* Class = "IBUILabel"; text = "how to play"; ObjectID = "Uua-CW-Jyr"; */
+"Uua-CW-Jyr.text" = "玩法简介";
+
+/* Class = "IBUILabel"; text = "timed"; ObjectID = "XE5-Dl-3he"; */
+"XE5-Dl-3he.text" = "限时模式";
+
+/* Class = "IBUILabel"; text = "3000"; ObjectID = "Z4h-Nb-zvG"; */
+"Z4h-Nb-zvG.text" = "3000";
+
+/* Class = "IBUILabel"; text = "leaderboard"; ObjectID = "afZ-79-og2"; */
+"afZ-79-og2.text" = "排行榜";
+
+/* Class = "IBUILabel"; text = "classic mode"; ObjectID = "bnI-v8-2q6"; */
+"bnI-v8-2q6.text" = "经典模式";
+
+/* Class = "IBUILabel"; text = "sound"; ObjectID = "ch5-sl-t6S"; */
+"ch5-sl-t6S.text" = "声音";
+
+/* Class = "IBUILabel"; text = "best"; ObjectID = "dH2-MO-4VD"; */
+"dH2-MO-4VD.text" = "最佳";
+
+/* Class = "IBUIButton"; normalTitle = "I"; ObjectID = "dZh-v3-iHc"; */
+"dZh-v3-iHc.normalTitle" = "I";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "dcx-Vh-xM8"; */
+"dcx-Vh-xM8.text" = "Label";
+
+/* Class = "IBUILabel"; text = "0"; ObjectID = "fCu-zB-BWS"; */
+"fCu-zB-BWS.text" = "0";
+
+/* Class = "IBUIButton"; normalTitle = "twitter"; ObjectID = "gzQ-CV-HQF"; */
+"gzQ-CV-HQF.normalTitle" = "新浪微博";
+
+/* Class = "IBUILabel"; text = "ABOUT"; ObjectID = "igd-IC-Yjd"; */
+"igd-IC-Yjd.text" = "关于";
+
+/* Class = "IBUILabel"; text = "20/20"; ObjectID = "n0G-mh-snd"; */
+"n0G-mh-snd.text" = "20/20";
+
+/* Class = "IBUILabel"; text = "rate"; ObjectID = "nkr-Tu-RZd"; */
+"nkr-Tu-RZd.text" = "评分";
+
+/* Class = "IBUILabel"; text = "how to play"; ObjectID = "oBR-jR-wZ2"; */
+"oBR-jR-wZ2.text" = "玩法简介";
+
+/* Class = "IBUIButton"; normalTitle = "L"; ObjectID = "qOz-YM-XUZ"; */
+"qOz-YM-XUZ.normalTitle" = "L";
+
+/* Class = "IBUIButton"; normalTitle = "M"; ObjectID = "r5A-pp-EvP"; */
+"r5A-pp-EvP.normalTitle" = "M";
+
+/* Class = "IBUIButton"; normalTitle = "Facebook"; ObjectID = "v4M-38-MXm"; */
+"v4M-38-MXm.normalTitle" = "Facebook";
+
+/* Class = "IBUIButton"; normalTitle = "C"; ObjectID = "xwD-nF-xhX"; */
+"xwD-nF-xhX.normalTitle" = "C";
+
+/* Class = "IBUILabel"; text = "settings"; ObjectID = "yJw-pE-OT6"; */
+"yJw-pE-OT6.text" = "设置";
+
+/* Class = "IBUILabel"; text = "ABOUT"; ObjectID = "ykb-dF-4rJ"; */
+"ykb-dF-4rJ.text" = "关于";
