@@ -106,7 +106,6 @@
                     [self removeEffectView];
                 }
             } else {
-               
                 if (_selectedCell.count == 1 && cell.number == preCell.number) {
                     canEliminated = YES;
                     currentCell = cell;
@@ -235,8 +234,9 @@
 }
 
 #pragma mark layout cell after combining cells
-- (void)combineCurrentCell:(GameBoardCell*)currentCell withPrevCell:(GameBoardCell*)prevCell
+- (void)combineCurrentCell:(GameBoardCell*)curCell withPrevCell:(GameBoardCell*)preCell
 {
+    curCell.color = preCell.color;
     [_selectedCell removeLastObject];
     [self relayoutCells];
 }
