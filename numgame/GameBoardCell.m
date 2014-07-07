@@ -32,7 +32,7 @@
         self.backgroundColor = [self genRandColor];
         _numLabel = [[UILabel alloc] initWithFrame:self.bounds];
         //NSArray* brandArry = @[@"♡",@"♤",@"♧",@"♢"];
-        NSArray* brandArry = @[@"1",@"2",@"3",@"4"];
+       // NSArray* brandArry = @[@"1",@"2",@"3",@"4"];
         [_numLabel setText:[NSString stringWithFormat:@"%d",_number ]];
         //[_numLabel setFont:[UIFont boldSystemFontOfSize:DefalutNumFontSize]];
         [_numLabel setFont:[UIFont fontWithName:DefalutNumFontFamily size:frame.size.width/2]];
