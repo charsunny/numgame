@@ -137,9 +137,16 @@
                     [_selectedCell addObject:cell];
                     [self addBorderEffectWithCell:cell eliminated:NO];
                     [self playSoundFXnamed:[NSString stringWithFormat:@"%d.aif", _selectedCell.count]];
-                    [_selectedCell enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
-                        [self addEffectToView:cell withAnimation:NO];
-                    }];
+                    if([self eliminatedSameColorCell]) {
+                        NSArray* colorArray = [self getAllCellWithColor:cell.color];
+                        [colorArray enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
+                            [self addEffectToView:cell withAnimation:NO];
+                        }];
+                    } else {
+                        [_selectedCell enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
+                            [self addEffectToView:cell withAnimation:NO];
+                        }];
+                    }
                 }
             }
         }
@@ -155,7 +162,10 @@
     if ([self currectNum] == 10) {
         [self removeEffectView];
         [self performSelector:@selector(playSoundFXnamed:) withObject:[NSString stringWithFormat:@"square_%d.aif", _selectedCell.count]];
-        [self eliminatedSameColorCell];
+        if([self eliminatedSameColorCell]) {
+            int curColor = ((GameBoardCell*)_selectedCell.firstObject).color;
+            [_selectedCell setArray:[self getAllCellWithColor:curColor]];
+        }
         [self relayoutCells];
         NSMutableArray* array = [NSMutableArray new];
         [self.subviews enumerateObjectsUsingBlock:^(UIView* view, NSUInteger idx, BOOL *stop) {
@@ -344,42 +354,31 @@
 
 
 
--(void)eliminatedSameColorCell{
+-(BOOL)eliminatedSameColorCell{
 
   // 判断相同颜色
-    BOOL  isSameColor = YES;
    int cellColorNum = ((GameBoardCell*)_selectedCell[0]).color;
     for (int i =1 ; i < _selectedCell.count ; i++) {
         if (cellColorNum != ((GameBoardCell*)_selectedCell[i]).color) {
-            isSameColor = NO;
-            break;
+            return NO;
         }
     }
-    if (isSameColor) {
-        //遍历整个数组
-        [_selectedCell removeAllObjects];
-      //TODO
-        for (int posx = 0; posx < _cellNum; posx++) {
-            
-            for (int posy = 0; posy <_cellNum ; posy++) {
-                int tag = posx + posy*_cellNum + 1;
-               GameBoardCell* cell = (GameBoardCell*)[self viewWithTag:tag];
-                if (cell.color == cellColorNum) {
-                    [_selectedCell addObject:cell];
-                }
-            }
-        }
-        
-    }
-    
-  
-    
-    
- // 消除
-
+    return YES;
 }
 
-
+- (NSArray*)getAllCellWithColor:(int)color {
+    NSMutableArray* array = [NSMutableArray new];
+    for (int posx = 0; posx < _cellNum; posx++) {
+        for (int posy = 0; posy <_cellNum ; posy++) {
+            int tag = posx + posy*_cellNum + 1;
+            GameBoardCell* cell = (GameBoardCell*)[self viewWithTag:tag];
+            if (cell.color == color) {
+                [array addObject:cell];
+            }
+        }
+    }
+    return array;
+}
 
 
 
