@@ -106,16 +106,18 @@
                     [self removeEffectView];
                 }
             } else {
-                [_selectedCell addObject:cell];
                 if (_selectedCell.count == 2 && cell.number == preCell.number && cell.color != preCell.color) {
                     canEliminated = YES;
                     currentCell = cell;
                     prevCell = preCell;
+                    [_selectedCell addObject:cell];
                 }
                 else if ([self currectNum] + cell.number < 10) {
                     [self addEffectToView:cell withAnimation:YES];
                     [self playSoundFXnamed:[NSString stringWithFormat:@"%d.aif", _selectedCell.count]];
+                    [_selectedCell addObject:cell];
                 } else if([self currectNum] + cell.number == 10) {
+                    [_selectedCell addObject:cell];
                     [self playSoundFXnamed:[NSString stringWithFormat:@"%d.aif", _selectedCell.count]];
                     [_selectedCell enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
                         [self addEffectToView:cell withAnimation:NO];
@@ -234,48 +236,8 @@
 #pragma mark layout cell after combining cells
 - (void)combineCurrentCell:(GameBoardCell*)currentCell withPrevCell:(GameBoardCell*)prevCell
 {
-    currentCell.color = prevCell.color;
-    int deltaTag = currentCell.tag - prevCell.tag;
-    
-    int startMovingCellIdx;
-    int endMovingCellIdx;
-    int movingStep = abs(deltaTag);
-    
-    //move from left to right
-    if(deltaTag == 1)
-    {
-         endMovingCellIdx = currentCell.tag - prevCell.tag % _cellNum;
-         startMovingCellIdx = currentCell.tag - 1;
-    }
-    //move from right to left
-    else if(deltaTag == -1)
-    {
-        startMovingCellIdx = currentCell.tag + 1;
-        endMovingCellIdx = prevCell.tag + prevCell.tag % _cellNum;
-    }
-    //move from bottom to top
-    else if(deltaTag == -1 * _cellNum)
-    {
-        
-    }
-    //move from top to bottom
-    else if(deltaTag == _cellNum)
-    {
-        
-    }
-    
-    /*
-    [UIView animateWithDuration:0.3f animations:^{
-        for (;startMovingCellIdx <= endMovingCellIdx; startMovingCellIdx+=movingStep) {
-            GameBoardCell* cell = (GameBoardCell*)[self viewWithTag:startMovingCellIdx];
-            cell.center = CGPointMake(startMovingCellIdx - movingStep, cell.center.y);
-        }
-    }];
-     */
     [_selectedCell removeLastObject];
     [self relayoutCells];
-    [_selectedCell removeAllObjects];
-    [self setNeedsDisplay];
 }
 
 #pragma mark relayout cell after eliminating cells
