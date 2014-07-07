@@ -29,7 +29,7 @@
         self.layer.cornerRadius = frame.size.width/2;
         self.clipsToBounds = YES;
         self.number = [self genRandNumber];
-        self.backgroundColor = [self generateColor:_number];
+        self.backgroundColor = [self genRandColor];
         _numLabel = [[UILabel alloc] initWithFrame:self.bounds];
         //NSArray* brandArry = @[@"♡",@"♤",@"♧",@"♢"];
         NSArray* brandArry = @[@"1",@"2",@"3",@"4"];
@@ -43,8 +43,11 @@
 }
 
 - (UIColor*)genRandColor {
-    NSArray* colors = @[RGBA(0x3a,0xc5,0x74,1.0), RGBA(0xf1,0x6b,0x52,1.0), RGBA(0x44,0x8e,0xc9,1.0), RGBA(0x8b,0x3e,0xbd,1.0)];
-    return colors[rand()%4];
+    //NSArray* colors = @[RGBA(0x3a,0xc5,0x74,1.0), RGBA(0xf1,0x6b,0x52,1.0), RGBA(0x44,0x8e,0xc9,1.0), RGBA(0x8b,0x3e,0xbd,1.0)];
+    //return colors[rand()%4];
+    int ranNum = rand() % 4;
+    self.color = ranNum;
+    return [self generateColor:ranNum];
 }
 
 - (int)genRandNumber {
