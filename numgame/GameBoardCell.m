@@ -25,15 +25,13 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        [self setNumber:[self genRandNumber]];
         self.layer.cornerRadius = frame.size.width/2;
         self.clipsToBounds = YES;
         self.number = [self genRandNumber];
         self.backgroundColor = [self genRandColor];
         _numLabel = [[UILabel alloc] initWithFrame:self.bounds];
         //NSArray* brandArry = @[@"♡",@"♤",@"♧",@"♢"];
-        NSArray* brandArry = @[@"1",@"2",@"3",@"4"];
-        [_numLabel setText:brandArry[rand()%4]];
+        [_numLabel setText:[NSString stringWithFormat:@"%d",_number ]];
         //[_numLabel setFont:[UIFont boldSystemFontOfSize:DefalutNumFontSize]];
         [_numLabel setFont:[UIFont fontWithName:DefalutNumFontFamily size:frame.size.width/2]];
         [_numLabel setTextAlignment:NSTextAlignmentCenter];
@@ -51,8 +49,10 @@
 }
 
 - (int)genRandNumber {
-    return rand()%4+1;
+    return rand()%4 + 1;
 }
+
+//color scheme from:http://www.colourlovers.com/palette/2584642/Vital_Passion
 - (UIColor*)generateColor:(int)number
 {
     switch (number) {
