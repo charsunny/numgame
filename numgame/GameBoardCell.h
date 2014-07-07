@@ -12,6 +12,8 @@
 
 @property (nonatomic) int number;
 
+@property (nonatomic) int color;
+
 @property (nonatomic) int desTag;
 
 - (id)initWithFrame:(CGRect)frame;

@@ -81,7 +81,7 @@
     
     [self initGameData];
     
-    [_gameBoardView layoutBoardWithCellNum:4];
+    [_gameBoardView layoutBoardWithCellNum:6];
     
     UISwipeGestureRecognizer *recoginizer1 = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(onSwipePauseView:)];
     recoginizer1.direction = UISwipeGestureRecognizerDirectionRight;
