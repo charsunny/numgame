@@ -29,7 +29,7 @@
         self.number = [self genRandNumber];
         _numLabel = [[UILabel alloc] initWithFrame:self.bounds];
         NSArray* brandArry = @[@"♡",@"♤",@"♧",@"♢"];
-        [_numLabel setText:brandArry[rand()%4]];
+        [_numLabel setText:brandArry[_number - 1]];
         [_numLabel setFont:[UIFont boldSystemFontOfSize:30]];
         [_numLabel setTextAlignment:NSTextAlignmentCenter];
         [self addSubview:_numLabel];
