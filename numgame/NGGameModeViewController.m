@@ -14,7 +14,7 @@
 @import GameKit;
 @import StoreKit;
 
-@interface NGGameModeViewController ()<GKLeaderboardViewControllerDelegate>
+@interface NGGameModeViewController ()<GKGameCenterControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
@@ -72,22 +72,11 @@
     
     //go to leader board
     if ([sender isEqual:_leaderButton]) {
-        GKLeaderboardViewController *leaderboardController = [[GKLeaderboardViewController alloc] init];
-        leaderboardController.category = nil;
-        leaderboardController.leaderboardDelegate = self;
-        if ([[GKLocalPlayer localPlayer] isAuthenticated]) {
-            [sender setEnabled:YES];
-            [self presentViewController:leaderboardController animated:YES completion:nil];
-        } else {
-            [sender setEnabled:YES];
-            [[GKLocalPlayer localPlayer] setAuthenticateHandler:^(UIViewController *controller, NSError *error) {
-                if (!error) {
-                    [controller dismissViewControllerAnimated:NO completion:^{
-                        [self presentViewController:leaderboardController animated:YES completion:nil];
-                    }];
-                }
-            }];
-        }
+        [sender setEnabled:YES];
+        GKGameCenterViewController *leaderboardController = [[GKGameCenterViewController alloc] init];
+        leaderboardController.viewState = GKGameCenterViewControllerStateLeaderboards;
+        leaderboardController.gameCenterDelegate = self;
+        [self presentViewController:leaderboardController animated:YES completion:nil];
     }
 }
 
@@ -118,8 +107,11 @@
 }
 
 #pragma mark -- leaderboarddelegate --
-- (void)leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController {
-    [viewController dismissViewControllerAnimated:YES completion:nil];
+- (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController {
+    [gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
+    if (![[GKLocalPlayer localPlayer] isAuthenticated]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"gamecenter:"]];
+    }
 }
 
 

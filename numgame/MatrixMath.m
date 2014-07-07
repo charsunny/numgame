@@ -48,9 +48,9 @@
 -(void)printResult:(NSArray*)result
 {
     for(int i = 0 ;i < [result count] ; i++) {
-        int index = [result[i] intValue];
-        int posx = index/(_size.width-0.5);
-        int posy = index%(int)_size.width;
+//        int index = [result[i] intValue];
+//        int posx = index/(_size.width-0.5);
+//        int posy = index%(int)_size.width;
     }
 }
 /**

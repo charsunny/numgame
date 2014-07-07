@@ -191,15 +191,11 @@
                     [[NGGameConfig sharedGameConfig] setClassicScore:_leftTime];
                     controller.isHighScore = YES;
                     [self playSoundFXnamed:@"cheer.m4a" Loop:NO];
-                    GKScore *scoreReporter = [[GKScore alloc] initWithCategory:@"mintime"];
+                    GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier:@"mintime"];
                     scoreReporter.value = _leftTime*10;
-                    [scoreReporter reportScoreWithCompletionHandler: ^(NSError *error)
-                     {
-                         if(error != nil)
-                         {
-                             [scoreReporter reportScoreWithCompletionHandler:nil];
-                         }
-                     }];
+                    [GKScore reportScores:@[scoreReporter] withCompletionHandler:^(NSError *error) {
+                        //
+                    }];
                 }
                 controller.completed = YES;
             } else {
@@ -213,15 +209,9 @@
                 [[NGGameConfig sharedGameConfig] setTimedScore:_score];
                 controller.isHighScore = YES;
                 
-                GKScore *scoreReporter = [[GKScore alloc] initWithCategory:@"scorewithlimittime"];
+                GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier:@"scorewithlimittime"];
                 scoreReporter.value = _score;
-                [scoreReporter reportScoreWithCompletionHandler: ^(NSError *error)
-                 {
-                     if(error != nil)
-                     {
-                         [scoreReporter reportScoreWithCompletionHandler:nil];
-                     }
-                 }];
+                [GKScore reportScores:@[scoreReporter] withCompletionHandler:nil];
             }
         }
     }
