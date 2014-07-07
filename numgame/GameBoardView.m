@@ -106,17 +106,16 @@
                     [self removeEffectView];
                 }
             } else {
-                if (_selectedCell.count == 1 && cell.number == preCell.number) {
+                [_selectedCell addObject:cell];
+                if (_selectedCell.count == 2 && cell.number == preCell.number && cell.color != preCell.color) {
                     canEliminated = YES;
                     currentCell = cell;
                     prevCell = preCell;
                 }
                 else if ([self currectNum] + cell.number < 10) {
-                    [_selectedCell addObject:cell];
                     [self addEffectToView:cell withAnimation:YES];
-                     [self playSoundFXnamed:[NSString stringWithFormat:@"%d.aif", _selectedCell.count]];
+                    [self playSoundFXnamed:[NSString stringWithFormat:@"%d.aif", _selectedCell.count]];
                 } else if([self currectNum] + cell.number == 10) {
-                    [_selectedCell addObject:cell];
                     [self playSoundFXnamed:[NSString stringWithFormat:@"%d.aif", _selectedCell.count]];
                     [_selectedCell enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
                         [self addEffectToView:cell withAnimation:NO];
@@ -186,7 +185,7 @@
     [effectView setClipsToBounds:YES];
     [self insertSubview:effectView belowSubview:view];
     if (animate) {
-        effectView.transform = CGAffineTransformMakeScale(0.5, 0.5);
+        //effectView.transform = CGAffineTransformMakeScale(0.5, 0.5);
         [UIView animateWithDuration:0.5f animations:^{
             effectView.transform = CGAffineTransformMakeScale(2, 2);
             effectView.alpha = 0;
@@ -273,6 +272,7 @@
         }
     }];
      */
+    [_selectedCell removeLastObject];
     [self relayoutCells];
     [_selectedCell removeAllObjects];
     [self setNeedsDisplay];
