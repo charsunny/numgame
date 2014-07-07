@@ -106,17 +106,18 @@
                     [self removeEffectView];
                 }
             } else {
-                if (_selectedCell.count == 2 && cell.number == preCell.number && cell.color != preCell.color) {
+               
+                if (_selectedCell.count == 1 && cell.number == preCell.number) {
                     canEliminated = YES;
                     currentCell = cell;
                     prevCell = preCell;
                     [_selectedCell addObject:cell];
                 }
-                else if ([self currectNum] + cell.number < 10) {
+                else if ( [self invalidateIfCanLine:cell]&&([self currectNum] + cell.number < 10)) {
                     [self addEffectToView:cell withAnimation:YES];
                     [self playSoundFXnamed:[NSString stringWithFormat:@"%d.aif", _selectedCell.count]];
                     [_selectedCell addObject:cell];
-                } else if([self currectNum] + cell.number == 10) {
+                } else if([self invalidateIfCanLine:cell]&&[self currectNum] + cell.number == 10) {
                     [_selectedCell addObject:cell];
                     [self playSoundFXnamed:[NSString stringWithFormat:@"%d.aif", _selectedCell.count]];
                     [_selectedCell enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
@@ -239,6 +240,49 @@
     [_selectedCell removeLastObject];
     [self relayoutCells];
 }
+
+
+-(BOOL)invalidateIfCanLine:(GameBoardCell*)cell{
+
+    if (self.selectedCell.count <= _cellNum) {
+        
+        if (self.selectedCell.count >0) {
+            
+            //判断是否已经有两个相连在cell中
+            
+            if (self.selectedCell.count ==2) {
+                
+                if (((GameBoardCell*)self.selectedCell[0]).number == ((GameBoardCell*)self.selectedCell[1]).number ) {
+                    return NO;
+                }
+                
+            }
+            
+            
+            
+            NSMutableArray * mutableArray = [[NSMutableArray alloc]initWithCapacity:self.selectedCell.count];
+            for (GameBoardCell * iterCell in self.selectedCell) {
+                [mutableArray addObject: [NSNumber numberWithInt:iterCell.number]];
+            }
+            
+            if ([mutableArray containsObject:[NSNumber numberWithInt:cell.number]])
+                return NO;
+
+            else
+                return YES;
+            
+        }
+
+    }
+ 
+    return NO;
+}
+
+
+
+
+
+
 
 #pragma mark relayout cell after eliminating cells
 - (void)relayoutCells {

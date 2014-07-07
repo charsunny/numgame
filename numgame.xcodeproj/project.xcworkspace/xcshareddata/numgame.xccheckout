@@ -5,41 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>2969E108-D7A4-4A30-BD36-B2E6694D349C</string>
+	<string>16B0864A-52A7-4A5C-BC54-B3AF9F86FFD4</string>
 	<key>IDESourceControlProjectName</key>
 	<string>numgame</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>2647692E-E3F3-4C7B-AC28-8A6C8CCB2148</key>
-		<string>https://svn.baidu.com/app/wise/wmap/trunk/client/components/ios/complatform</string>
+		<key>FFC61659-8762-42A0-8A08-58F3A787A603</key>
+		<string>https://github.com/charsunny/numgame.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>numgame/numgame.xcodeproj/project.xcworkspace</string>
+	<string>numgame.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>2647692E-E3F3-4C7B-AC28-8A6C8CCB2148</key>
-		<string>../../..</string>
-	</dict>
-	<key>IDESourceControlProjectRepositoryRootDictionary</key>
-	<dict>
-		<key>2647692E-E3F3-4C7B-AC28-8A6C8CCB2148</key>
-		<string>https://svn.baidu.com/app/wise/wmap</string>
+		<key>FFC61659-8762-42A0-8A08-58F3A787A603</key>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://svn.baidu.com/app/wise/wmap/trunk/client/components/ios/complatform/numgame/numgame.xcodeproj</string>
+	<string>https://github.com/charsunny/numgame.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>2647692E-E3F3-4C7B-AC28-8A6C8CCB2148</string>
+	<string>FFC61659-8762-42A0-8A08-58F3A787A603</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.subversion</string>
+			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>2647692E-E3F3-4C7B-AC28-8A6C8CCB2148</string>
+			<string>FFC61659-8762-42A0-8A08-58F3A787A603</string>
 			<key>IDESourceControlWCCName</key>
-			<string>workspace</string>
+			<string>numgame</string>
 		</dict>
 	</array>
 </dict>
