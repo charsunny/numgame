@@ -58,6 +58,19 @@
     return self;
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    if ([self viewWithTag:101]) {
+        return;
+    }
+    float width = self.frame.size.width/4;
+    for (int i = 0; i < 4; i++) {
+        UIView* border = [[UIView alloc] initWithFrame:CGRectMake(0 + width*i, 0, width, 5)];
+        border.tag = 101 + i;
+        [self addSubview:border];
+    }
+}
+
 - (void)layoutBoardWithCellNum:(int)num {
     float boardInset = (self.frame.size.height - self.frame.size.width)/2;
     if (iPhone5) {
@@ -86,6 +99,7 @@
         GameBoardCell* cell = (GameBoardCell*)view;
         [_selectedCell addObject:cell];
         //add effect
+        [self addBorderEffectWithCell:cell eliminated:NO];
         [self addEffectToView:cell withAnimation:YES];
         // play sound
         [self playSoundFXnamed:@"1.aif"];
@@ -103,6 +117,7 @@
             if ([_selectedCell containsObject:cell]) {
                 if([_selectedCell indexOfObject:preCell] -[_selectedCell indexOfObject:cell] == 1) {
                     [_selectedCell removeLastObject];
+                    [self removeBorderEffectWithCell:preCell];
                     [self removeEffectView];
                 }
             } else {
@@ -111,13 +126,16 @@
                     currentCell = cell;
                     prevCell = preCell;
                     [_selectedCell addObject:cell];
+                    [self addBorderEffectWithCell:cell eliminated:YES];
                 }
                 else if ( [self validateIfCanLine:cell]&&([self currectNum] + cell.number < 10)) {
                     [self addEffectToView:cell withAnimation:YES];
                     [self playSoundFXnamed:[NSString stringWithFormat:@"%d.aif", _selectedCell.count]];
                     [_selectedCell addObject:cell];
+                    [self addBorderEffectWithCell:cell eliminated:NO];
                 } else if([self validateIfCanLine:cell]&&[self currectNum] + cell.number == 10) {
                     [_selectedCell addObject:cell];
+                    [self addBorderEffectWithCell:cell eliminated:NO];
                     [self playSoundFXnamed:[NSString stringWithFormat:@"%d.aif", _selectedCell.count]];
                     [_selectedCell enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
                         [self addEffectToView:cell withAnimation:NO];
@@ -130,6 +148,7 @@
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self removeAllBorderEffect];
     if(canEliminated){
         [self combineCurrentCell:currentCell withPrevCell:prevCell];
     }
@@ -156,6 +175,7 @@
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self removeAllBorderEffect];
     [_selectedCell removeAllObjects];
     [self setNeedsDisplay];
 }
@@ -179,6 +199,49 @@
         sum += cell.number;
     }];
     return sum;
+}
+
+- (void)addBorderEffectWithCell:(GameBoardCell*)cell eliminated:(BOOL)elimate {
+    if (!elimate) {
+        UIView* view =  [self viewWithTag:100+_selectedCell.count];
+//        CGRect rect = view.frame;
+        view.backgroundColor = [GameBoardCell generateColor:cell.color];
+//        view.frame = CGRectMake(view.frame.origin.x, 0, 0, view.frame.size.height);
+//        [UIView animateWithDuration:0.3 animations:^{
+//            view.frame = rect;
+//        }];
+    } else {
+        UIView* view =  [self viewWithTag:102];
+//        CGRect rect = view.frame;
+        view.backgroundColor = [GameBoardCell generateColor:prevCell.color];
+//        view.frame = CGRectMake(view.frame.origin.x, 0, 0, view.frame.size.height);
+//        [UIView animateWithDuration:0.3 animations:^{
+//            view.frame = rect;
+//        }];
+        for (int i  = 3; i <= 4; i ++ ) {
+            UIView* view =  [self viewWithTag:100+i];
+//            CGRect rect = view.frame;
+            view.backgroundColor = [GameBoardCell generateColor:currentCell.color];
+//            view.frame = CGRectMake(view.frame.origin.x, 0, 0, view.frame.size.height);
+//            [UIView animateWithDuration:0.3 animations:^{
+//                view.frame = rect;
+//            }];
+        }
+    }
+}
+
+- (void)removeBorderEffectWithCell:(GameBoardCell*)cell {
+    for (int i = _selectedCell.count; i < 4; i++) {
+        UIView* view =  [self viewWithTag:101+i];
+        view.backgroundColor = [UIColor clearColor];
+    }
+}
+
+- (void)removeAllBorderEffect {
+    for (int i = 0; i < 4; i++) {
+        UIView* view =  [self viewWithTag:101+i];
+        view.backgroundColor = [UIColor clearColor];
+    }
 }
 
 - (void)addEffectToView:(GameBoardCell*)view withAnimation:(BOOL)animate {

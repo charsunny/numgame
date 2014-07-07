@@ -43,21 +43,21 @@
 - (void)setColor:(int)color
 {
     _color = color;
-    self.backgroundColor = [self generateColor:color];
+    self.backgroundColor = [GameBoardCell generateColor:color];
 }
 - (UIColor*)genRandColor {
     //NSArray* colors = @[RGBA(0x3a,0xc5,0x74,1.0), RGBA(0xf1,0x6b,0x52,1.0), RGBA(0x44,0x8e,0xc9,1.0), RGBA(0x8b,0x3e,0xbd,1.0)];
     //return colors[rand()%4];
     int ranNum = rand() % 4;
     self.color = ranNum;
-    return [self generateColor:ranNum];
+    return [GameBoardCell generateColor:ranNum];
 }
 
 - (int)genRandNumber {
     return rand()%4+1;
 }
 //color scheme from:http://www.colourlovers.com/palette/2584642/Vital_Passion
-- (UIColor*)generateColor:(int)number
++ (UIColor*)generateColor:(int)number
 {
     switch (number) {
         case 0:

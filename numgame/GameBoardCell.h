@@ -16,6 +16,8 @@
 
 @property (nonatomic) int desTag;
 
++ (UIColor*)generateColor:(int)number;
+
 - (id)initWithFrame:(CGRect)frame;
 
 @end
