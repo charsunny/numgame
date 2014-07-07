@@ -113,11 +113,11 @@
                     prevCell = preCell;
                     [_selectedCell addObject:cell];
                 }
-                else if ( [self invalidateIfCanLine:cell]&&([self currectNum] + cell.number < 10)) {
+                else if ( [self validateIfCanLine:cell]&&([self currectNum] + cell.number < 10)) {
                     [self addEffectToView:cell withAnimation:YES];
                     [self playSoundFXnamed:[NSString stringWithFormat:@"%d.aif", _selectedCell.count]];
                     [_selectedCell addObject:cell];
-                } else if([self invalidateIfCanLine:cell]&&[self currectNum] + cell.number == 10) {
+                } else if([self validateIfCanLine:cell]&&[self currectNum] + cell.number == 10) {
                     [_selectedCell addObject:cell];
                     [self playSoundFXnamed:[NSString stringWithFormat:@"%d.aif", _selectedCell.count]];
                     [_selectedCell enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
@@ -242,7 +242,7 @@
 }
 
 
--(BOOL)invalidateIfCanLine:(GameBoardCell*)cell{
+-(BOOL)validateIfCanLine:(GameBoardCell*)cell{
 
     if (self.selectedCell.count <= _cellNum) {
         
@@ -277,6 +277,9 @@
  
     return NO;
 }
+
+
+
 
 
 
