@@ -19,6 +19,12 @@
 #define BOARD_WIDTH         (320)
 
 @interface GameBoardView()
+{
+    //flag that indicates that 2 cells can be eliminated;
+    BOOL canEliminated;
+    GameBoardCell* currentCell;
+    GameBoardCell* prevCell;
+}
 
 @property (nonatomic) int cellNum;
 
@@ -100,7 +106,12 @@
                     [self removeEffectView];
                 }
             } else {
-                if ([self currectNum] + cell.number < 10) {
+                if (_selectedCell.count == 1 && cell.number == preCell.number) {
+                    canEliminated = YES;
+                    currentCell = cell;
+                    prevCell = preCell;
+                }
+                else if ([self currectNum] + cell.number < 10) {
                     [_selectedCell addObject:cell];
                     [self addEffectToView:cell withAnimation:YES];
                      [self playSoundFXnamed:[NSString stringWithFormat:@"%d.aif", _selectedCell.count]];
@@ -118,6 +129,9 @@
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    if(canEliminated){
+        [self combineCurrentCell:currentCell withPrevCell:prevCell];
+    }
     if ([self currectNum] == 10) {
         [self removeEffectView];
         [self performSelector:@selector(playSoundFXnamed:) withObject:[NSString stringWithFormat:@"square_%d.aif", _selectedCell.count]];
@@ -135,6 +149,7 @@
         }
     }
     [_selectedCell removeAllObjects];
+    canEliminated = NO;
     [self setNeedsDisplay];
 }
 
@@ -217,6 +232,53 @@
     }
 }
 
+#pragma mark layout cell after combining cells
+- (void)combineCurrentCell:(GameBoardCell*)currentCell withPrevCell:(GameBoardCell*)prevCell
+{
+    currentCell.color = prevCell.color;
+    int deltaTag = currentCell.tag - prevCell.tag;
+    
+    int startMovingCellIdx;
+    int endMovingCellIdx;
+    int movingStep = abs(deltaTag);
+    
+    //move from left to right
+    if(deltaTag == 1)
+    {
+         endMovingCellIdx = currentCell.tag - prevCell.tag % _cellNum;
+         startMovingCellIdx = currentCell.tag - 1;
+    }
+    //move from right to left
+    else if(deltaTag == -1)
+    {
+        startMovingCellIdx = currentCell.tag + 1;
+        endMovingCellIdx = prevCell.tag + prevCell.tag % _cellNum;
+    }
+    //move from bottom to top
+    else if(deltaTag == -1 * _cellNum)
+    {
+        
+    }
+    //move from top to bottom
+    else if(deltaTag == _cellNum)
+    {
+        
+    }
+    
+    /*
+    [UIView animateWithDuration:0.3f animations:^{
+        for (;startMovingCellIdx <= endMovingCellIdx; startMovingCellIdx+=movingStep) {
+            GameBoardCell* cell = (GameBoardCell*)[self viewWithTag:startMovingCellIdx];
+            cell.center = CGPointMake(startMovingCellIdx - movingStep, cell.center.y);
+        }
+    }];
+     */
+    [self relayoutCells];
+    [_selectedCell removeAllObjects];
+    [self setNeedsDisplay];
+}
+
+#pragma mark relayout cell after eliminating cells
 - (void)relayoutCells {
     
     NSMutableDictionary* moveDict = [NSMutableDictionary new];
@@ -239,6 +301,7 @@
         }
     }
     
+    //delete the selected cells that combining the correct sum
     [_selectedCell enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
         [cell removeFromSuperview];
     }];
