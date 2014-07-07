@@ -171,8 +171,8 @@
     [effectView setClipsToBounds:YES];
     [self insertSubview:effectView belowSubview:view];
     if (animate) {
-        effectView.transform = CGAffineTransformMakeScale(0.5, 0.5);
-        [UIView animateWithDuration:0.5f animations:^{
+        //effectView.transform = CGAffineTransformMakeScale(0.5, 0.5);
+        [UIView animateWithDuration:0.3f animations:^{
             effectView.transform = CGAffineTransformMakeScale(2, 2);
             effectView.alpha = 0;
         } completion:^(BOOL finished) {

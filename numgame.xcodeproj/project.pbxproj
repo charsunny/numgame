@@ -655,7 +655,6 @@
 				ORGANIZATIONNAME = "Sun Xi";
 				TargetAttributes = {
 					50EDF3A318FFB755003FBA71 = {
-						DevelopmentTeam = CX3SW7JBRE;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
 								enabled = 1;

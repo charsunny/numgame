@@ -9,6 +9,9 @@
 #import "GameBoardCell.h"
 @import CoreGraphics;
 
+#define DefalutNumFontSize 30
+#define DefalutNumFontFamily @"AppleSDGothicNeo-Thin"
+
 @interface GameBoardCell()
 
 @property (strong, nonatomic) UILabel* numLabel;
@@ -25,12 +28,14 @@
         [self setNumber:[self genRandNumber]];
         self.layer.cornerRadius = frame.size.width/2;
         self.clipsToBounds = YES;
-        self.backgroundColor = [self genRandColor];
         self.number = [self genRandNumber];
+        self.backgroundColor = [self generateColor:_number];
         _numLabel = [[UILabel alloc] initWithFrame:self.bounds];
-        NSArray* brandArry = @[@"♡",@"♤",@"♧",@"♢"];
+        //NSArray* brandArry = @[@"♡",@"♤",@"♧",@"♢"];
+        NSArray* brandArry = @[@"1",@"2",@"3",@"4"];
         [_numLabel setText:brandArry[rand()%4]];
-        [_numLabel setFont:[UIFont boldSystemFontOfSize:30]];
+        //[_numLabel setFont:[UIFont boldSystemFontOfSize:DefalutNumFontSize]];
+        [_numLabel setFont:[UIFont fontWithName:DefalutNumFontFamily size:frame.size.width/2]];
         [_numLabel setTextAlignment:NSTextAlignmentCenter];
         [self addSubview:_numLabel];
     }
@@ -44,6 +49,22 @@
 
 - (int)genRandNumber {
     return rand()%4+1;
+}
+- (UIColor*)generateColor:(int)number
+{
+    switch (number) {
+        case 0:
+            return UIColorFromRGB(0xFF814F);
+        case 1:
+            return UIColorFromRGB(0xF9FF4F);
+        case 2:
+            return UIColorFromRGB(0x34D3FF);
+        case 3:
+            return UIColorFromRGB(0x46FFAB);
+        default:
+            return UIColorFromRGB(0xFF814F);
+            break;
+    }
 }
 
 
