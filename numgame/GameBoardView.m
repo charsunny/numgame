@@ -189,6 +189,7 @@
     [_selectedCell removeAllObjects];
     canEliminated = NO;
     [self setNeedsDisplay];
+    [self debugCell];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -478,4 +479,33 @@
     scaleAnimation.springBounciness = 18.0f;
     [view.layer pop_addAnimation:scaleAnimation forKey:@"layerScaleSpringAnimation"];
 }
+
+
+#pragma mark for debugging
+
+
+- (void)debugCell{
+    
+    NSMutableArray * array = [NSMutableArray arrayWithCapacity:0];
+    
+    for(id view in self.subviews){
+        if ([view isKindOfClass:[GameBoardCell class]]) {
+            [array addObject: view];
+        }
+    }
+    NSLog(@"array中GameBoardView的个数：%d",array.count);
+    for (GameBoardView * view in array) {
+        NSLog(@"views tag is %d",view.tag);
+    }
+    
+    
+}
+
+
+
+
 @end
+
+
+
+
