@@ -101,7 +101,7 @@
         [_selectedCell addObject:cell];
         //add effect
         [self addBorderEffectWithCell:cell eliminated:NO];
-        [self addEffectToView:cell withAnimation:YES];
+        [cell addRippleEffectToView:YES];
         // play sound
         [self playSoundFXnamed:@"1.aif"];
         [self addBouncingAnimation:view];
@@ -136,7 +136,7 @@
                     [self addBorderEffectWithCell:cell eliminated:YES];
                 }
                 else if ( [self validateIfCanLine:cell]&&([self currectNum] + cell.number < 10)) {
-                    [self addEffectToView:cell withAnimation:YES];
+                    [cell addRippleEffectToView:YES];
                     [self playSoundFXnamed:[NSString stringWithFormat:@"%d.aif", _selectedCell.count]];
                     [_selectedCell addObject:cell];
                     [self addBorderEffectWithCell:cell eliminated:NO];
@@ -147,11 +147,11 @@
                     if([self eliminatedSameColorCell]) {
                         NSArray* colorArray = [self getAllCellWithColor:cell.color];
                         [colorArray enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
-                            [self addEffectToView:cell withAnimation:NO];
+                            [cell addRippleEffectToView:NO];
                         }];
                     } else {
                         [_selectedCell enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
-                            [self addEffectToView:cell withAnimation:NO];
+                            [cell addRippleEffectToView:NO];
                         }];
                     }
                 }
@@ -273,10 +273,9 @@
 }
 
 - (void)removeEffectView {
-    [_effectViewArray enumerateObjectsUsingBlock:^(UIView* view, NSUInteger idx, BOOL *stop) {
-        [view removeFromSuperview];
+    [_selectedCell enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
+        [cell removeRippleEffectView];
     }];
-    [_effectViewArray removeAllObjects];
 }
 
 // Only override drawRect: if you perform custom drawing.
@@ -307,7 +306,11 @@
 #pragma mark layout cell after combining cells
 - (void)combineCurrentCell:(GameBoardCell*)curCell withPrevCell:(GameBoardCell*)preCell
 {
-    curCell.color = preCell.color;
+    POPBasicAnimation *colorAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerBackgroundColor];
+    colorAnimation.fromValue = [GameBoardCell generateColor:curCell.color];
+    colorAnimation.toValue =[GameBoardCell generateColor:prevCell.color];
+    colorAnimation.duration = 0.3f;
+    [curCell.layer pop_addAnimation:colorAnimation forKey:@"colorAnimation"];
     [_selectedCell removeLastObject];
     [self relayoutCells];
 }
@@ -497,9 +500,9 @@
             [array addObject: view];
         }
     }
-    NSLog(@"array中GameBoardView的个数：%d",array.count);
+    //NSLog(@"array中GameBoardView的个数：%d",array.count);
     for (GameBoardView * view in array) {
-        NSLog(@"views tag is %d",view.tag);
+        //NSLog(@"views tag is %d",view.tag);
     }
     
     

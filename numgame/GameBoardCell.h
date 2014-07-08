@@ -19,5 +19,6 @@
 + (UIColor*)generateColor:(int)number;
 
 - (id)initWithFrame:(CGRect)frame;
-
+- (void)addRippleEffectToView:(BOOL)animate;
+- (void)removeRippleEffectView;
 @end

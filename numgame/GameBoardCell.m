@@ -15,7 +15,7 @@
 @interface GameBoardCell()
 
 @property (strong, nonatomic) UILabel* numLabel;
-
+@property (strong, nonatomic) UIView* effectView;
 @end
 
 @implementation GameBoardCell
@@ -27,7 +27,7 @@
         // Initialization code
         //[self setNumber:[self genRandNumber]];
         self.layer.cornerRadius = frame.size.width/2;
-        self.clipsToBounds = YES;
+        //self.clipsToBounds = YES;
         self.number = [self genRandNumber];
         self.backgroundColor = [self genRandColor];
         _numLabel = [[UILabel alloc] initWithFrame:self.bounds];
@@ -74,4 +74,26 @@
     }
 }
 
+- (void)addRippleEffectToView:(BOOL)animate {
+    _effectView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    _effectView.layer.cornerRadius = self.layer.cornerRadius;
+    [_effectView setBackgroundColor:self.backgroundColor];
+    [_effectView setClipsToBounds:YES];
+    [self insertSubview:_effectView belowSubview:self];
+    if (animate) {
+        [UIView animateWithDuration:0.4f animations:^{
+            _effectView.transform = CGAffineTransformMakeScale(2, 2);
+            _effectView.alpha = 0;
+        } completion:^(BOOL finished) {
+            [_effectView removeFromSuperview];
+        }];
+    } else {
+        _effectView.transform = CGAffineTransformMakeScale(1.3, 1.3);
+        _effectView.alpha = 0.7;
+    }
+}
+
+- (void)removeRippleEffectView {
+    [_effectView removeFromSuperview];
+}
 @end
