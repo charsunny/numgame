@@ -105,7 +105,7 @@
             [_scoreLabel setText:@"0/10"];
             [_timeLabel setText:@"0.0"];
             [_scoreTitle setText:@"target"];
-            [_timeTitle setText:@"time"];
+            [_timeTitle setText:@"Time"];
             [_bestLabel setText:[NSString stringWithFormat:@"%.1f",[[NGGameConfig sharedGameConfig] classicScore]]];
             break;
         case NGGameModeTimed:

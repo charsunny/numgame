@@ -345,8 +345,15 @@
     }
     
     //delete the selected cells that combining the correct sum
-    [_selectedCell enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
-        [cell removeFromSuperview];
+    [UIView animateWithDuration:0.8f animations:^{
+        [_selectedCell enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
+            //cell.frame = CGRectMake(cell.center.x, cell.center.y, 0, 0);
+            cell.transform = CGAffineTransformMakeScale(0,0);
+        }];
+    } completion:^(BOOL finished) {
+        [_selectedCell enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
+            [cell removeFromSuperview];
+        }];
     }];
     
     [moveDict enumerateKeysAndObjectsUsingBlock:^(NSNumber* key, NSNumber* obj, BOOL *stop) {
