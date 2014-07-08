@@ -174,17 +174,6 @@
             [_selectedCell setArray:[self getAllCellWithColor:curColor]];
         }
         [self relayoutCells];
-        NSMutableArray* array = [NSMutableArray new];
-        [self.subviews enumerateObjectsUsingBlock:^(UIView* view, NSUInteger idx, BOOL *stop) {
-            if ([view isKindOfClass:[GameBoardCell class]]) {
-                GameBoardCell* cell = (GameBoardCell*)view;
-                [array addObject:@(cell.number)];
-            }
-        }];
-        MatrixMath* matrixMath = [[MatrixMath alloc]initWithArray:array andSize:CGSizeMake(_cellNum, _cellNum)];
-        if ([matrixMath isSumExist:10]) {
-            NSLog(@"%d",matrixMath.result.count);
-        }
     }
     [_selectedCell removeAllObjects];
     canEliminated = NO;
@@ -415,13 +404,10 @@
     }
     
     //delete the selected cells that combining the correct sum
-    /*
-    [UIView animateWithDuration:0.8f animations:^{
-        prevCell.transform = CGAffineTransformMakeScale(0,0);
-    } completion:^(BOOL finished) {
+    [_selectedCell enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
+        [cell removeFromSuperview];
     }];
-    */
-    [prevCell removeFromSuperview];
+    //[prevCell removeFromSuperview];
     [moveDict enumerateKeysAndObjectsUsingBlock:^(NSNumber* key, NSNumber* obj, BOOL *stop) {
         GameBoardCell* moveCell = (GameBoardCell*)[self viewWithTag:key.intValue];
         moveCell.tag = obj.intValue;
@@ -436,22 +422,40 @@
         [self addSubview:cell];
     }];
     
-    [UIView animateWithDuration:0.3f animations:^{
-        [moveDict enumerateKeysAndObjectsUsingBlock:^(NSNumber* key, NSNumber* obj, BOOL *stop) {
-            GameBoardCell* moveCell = (GameBoardCell*)[self viewWithTag:obj.intValue];
-            NSValue* value = _posArray[obj.intValue-1];
-            CGPoint desPos = [value CGPointValue];
-            moveCell.center = desPos;
-        }];
-        
-        [addArray enumerateObjectsUsingBlock:^(NSNumber* obj, BOOL *stop) {
-            NSValue* value = _posArray[obj.intValue-1];
-            CGPoint desPos = [value CGPointValue];
-            GameBoardCell* addCell = (GameBoardCell*)[self viewWithTag:obj.intValue];
-            addCell.center = desPos;
-        }];
-
+    [moveDict enumerateKeysAndObjectsUsingBlock:^(NSNumber* key, NSNumber* obj, BOOL *stop) {
+        POPSpringAnimation* animation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewCenter];
+        //animation.velocity = @(1000.);
+        animation.toValue = _posArray[obj.intValue-1];
+        animation.springBounciness = 10;
+        GameBoardCell* moveCell = (GameBoardCell*)[self viewWithTag:obj.intValue];
+        [moveCell pop_addAnimation:animation forKey:@"move"];
     }];
+    
+    [addArray enumerateObjectsUsingBlock:^(NSNumber* obj, BOOL *stop) {
+        POPSpringAnimation* animation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewCenter];
+        //animation.velocity = @(1000.);
+        animation.springBounciness = 10;
+        animation.toValue = _posArray[obj.intValue-1];
+        GameBoardCell* addCell = (GameBoardCell*)[self viewWithTag:obj.intValue];
+        [addCell pop_addAnimation:animation forKey:@"addmove"];
+    }];
+    
+//    [UIView animateWithDuration:0.3f animations:^{
+//        [moveDict enumerateKeysAndObjectsUsingBlock:^(NSNumber* key, NSNumber* obj, BOOL *stop) {
+//            GameBoardCell* moveCell = (GameBoardCell*)[self viewWithTag:obj.intValue];
+//            NSValue* value = _posArray[obj.intValue-1];
+//            CGPoint desPos = [value CGPointValue];
+//            moveCell.center = desPos;
+//        }];
+//        
+//        [addArray enumerateObjectsUsingBlock:^(NSNumber* obj, BOOL *stop) {
+//            NSValue* value = _posArray[obj.intValue-1];
+//            CGPoint desPos = [value CGPointValue];
+//            GameBoardCell* addCell = (GameBoardCell*)[self viewWithTag:obj.intValue];
+//            addCell.center = desPos;
+//        }];
+//
+//    }];
 }
 
 -(void) playSoundFXnamed:(NSString*)vSFXName
