@@ -58,6 +58,19 @@
     return self;
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    if ([self viewWithTag:101]) {
+        return;
+    }
+    float width = self.frame.size.width/4;
+    for (int i = 0; i < 4; i++) {
+        UIView* border = [[UIView alloc] initWithFrame:CGRectMake(0 + width*i, 0, width, 5)];
+        border.tag = 101 + i;
+        [self addSubview:border];
+    }
+}
+
 - (void)layoutBoardWithCellNum:(int)num {
     float boardInset = (self.frame.size.height - self.frame.size.width)/2;
     if (iPhone5) {
@@ -86,6 +99,7 @@
         GameBoardCell* cell = (GameBoardCell*)view;
         [_selectedCell addObject:cell];
         //add effect
+        [self addBorderEffectWithCell:cell eliminated:NO];
         [self addEffectToView:cell withAnimation:YES];
         // play sound
         [self playSoundFXnamed:@"1.aif"];
@@ -103,6 +117,7 @@
             if ([_selectedCell containsObject:cell]) {
                 if([_selectedCell indexOfObject:preCell] -[_selectedCell indexOfObject:cell] == 1) {
                     [_selectedCell removeLastObject];
+                    [self removeBorderEffectWithCell:preCell];
                     [self removeEffectView];
                 }
             } else {
@@ -111,17 +126,27 @@
                     currentCell = cell;
                     prevCell = preCell;
                     [_selectedCell addObject:cell];
+                    [self addBorderEffectWithCell:cell eliminated:YES];
                 }
                 else if ( [self validateIfCanLine:cell]&&([self currectNum] + cell.number < 10)) {
                     [self addEffectToView:cell withAnimation:YES];
                     [self playSoundFXnamed:[NSString stringWithFormat:@"%d.aif", _selectedCell.count]];
                     [_selectedCell addObject:cell];
+                    [self addBorderEffectWithCell:cell eliminated:NO];
                 } else if([self validateIfCanLine:cell]&&[self currectNum] + cell.number == 10) {
                     [_selectedCell addObject:cell];
+                    [self addBorderEffectWithCell:cell eliminated:NO];
                     [self playSoundFXnamed:[NSString stringWithFormat:@"%d.aif", _selectedCell.count]];
-                    [_selectedCell enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
-                        [self addEffectToView:cell withAnimation:NO];
-                    }];
+                    if([self eliminatedSameColorCell]) {
+                        NSArray* colorArray = [self getAllCellWithColor:cell.color];
+                        [colorArray enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
+                            [self addEffectToView:cell withAnimation:NO];
+                        }];
+                    } else {
+                        [_selectedCell enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
+                            [self addEffectToView:cell withAnimation:NO];
+                        }];
+                    }
                 }
             }
         }
@@ -130,13 +155,17 @@
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self removeAllBorderEffect];
     if(canEliminated){
         [self combineCurrentCell:currentCell withPrevCell:prevCell];
     }
     if ([self currectNum] == 10) {
         [self removeEffectView];
         [self performSelector:@selector(playSoundFXnamed:) withObject:[NSString stringWithFormat:@"square_%d.aif", _selectedCell.count]];
-        [self eliminatedSameColorCell];
+        if([self eliminatedSameColorCell]) {
+            int curColor = ((GameBoardCell*)_selectedCell.firstObject).color;
+            [_selectedCell setArray:[self getAllCellWithColor:curColor]];
+        }
         [self relayoutCells];
         NSMutableArray* array = [NSMutableArray new];
         [self.subviews enumerateObjectsUsingBlock:^(UIView* view, NSUInteger idx, BOOL *stop) {
@@ -156,6 +185,7 @@
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self removeAllBorderEffect];
     [_selectedCell removeAllObjects];
     [self setNeedsDisplay];
 }
@@ -179,6 +209,49 @@
         sum += cell.number;
     }];
     return sum;
+}
+
+- (void)addBorderEffectWithCell:(GameBoardCell*)cell eliminated:(BOOL)elimate {
+    if (!elimate) {
+        UIView* view =  [self viewWithTag:100+_selectedCell.count];
+//        CGRect rect = view.frame;
+        view.backgroundColor = [GameBoardCell generateColor:cell.color];
+//        view.frame = CGRectMake(view.frame.origin.x, 0, 0, view.frame.size.height);
+//        [UIView animateWithDuration:0.3 animations:^{
+//            view.frame = rect;
+//        }];
+    } else {
+        UIView* view =  [self viewWithTag:102];
+//        CGRect rect = view.frame;
+        view.backgroundColor = [GameBoardCell generateColor:prevCell.color];
+//        view.frame = CGRectMake(view.frame.origin.x, 0, 0, view.frame.size.height);
+//        [UIView animateWithDuration:0.3 animations:^{
+//            view.frame = rect;
+//        }];
+        for (int i  = 3; i <= 4; i ++ ) {
+            UIView* view =  [self viewWithTag:100+i];
+//            CGRect rect = view.frame;
+            view.backgroundColor = [GameBoardCell generateColor:currentCell.color];
+//            view.frame = CGRectMake(view.frame.origin.x, 0, 0, view.frame.size.height);
+//            [UIView animateWithDuration:0.3 animations:^{
+//                view.frame = rect;
+//            }];
+        }
+    }
+}
+
+- (void)removeBorderEffectWithCell:(GameBoardCell*)cell {
+    for (int i = _selectedCell.count; i < 4; i++) {
+        UIView* view =  [self viewWithTag:101+i];
+        view.backgroundColor = [UIColor clearColor];
+    }
+}
+
+- (void)removeAllBorderEffect {
+    for (int i = 0; i < 4; i++) {
+        UIView* view =  [self viewWithTag:101+i];
+        view.backgroundColor = [UIColor clearColor];
+    }
 }
 
 - (void)addEffectToView:(GameBoardCell*)view withAnimation:(BOOL)animate {
@@ -281,42 +354,31 @@
 
 
 
--(void)eliminatedSameColorCell{
+-(BOOL)eliminatedSameColorCell{
 
   // 判断相同颜色
-    BOOL  isSameColor = YES;
    int cellColorNum = ((GameBoardCell*)_selectedCell[0]).color;
     for (int i =1 ; i < _selectedCell.count ; i++) {
         if (cellColorNum != ((GameBoardCell*)_selectedCell[i]).color) {
-            isSameColor = NO;
-            break;
+            return NO;
         }
     }
-    if (isSameColor) {
-        //遍历整个数组
-        [_selectedCell removeAllObjects];
-      //TODO
-        for (int posx = 0; posx < _cellNum; posx++) {
-            
-            for (int posy = 0; posy <_cellNum ; posy++) {
-                int tag = posx + posy*_cellNum + 1;
-               GameBoardCell* cell = (GameBoardCell*)[self viewWithTag:tag];
-                if (cell.color == cellColorNum) {
-                    [_selectedCell addObject:cell];
-                }
-            }
-        }
-        
-    }
-    
-  
-    
-    
- // 消除
-
+    return YES;
 }
 
-
+- (NSArray*)getAllCellWithColor:(int)color {
+    NSMutableArray* array = [NSMutableArray new];
+    for (int posx = 0; posx < _cellNum; posx++) {
+        for (int posy = 0; posy <_cellNum ; posy++) {
+            int tag = posx + posy*_cellNum + 1;
+            GameBoardCell* cell = (GameBoardCell*)[self viewWithTag:tag];
+            if (cell.color == color) {
+                [array addObject:cell];
+            }
+        }
+    }
+    return array;
+}
 
 
 

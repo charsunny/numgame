@@ -20,7 +20,7 @@
 @import GameKit;
 @import StoreKit;
 
-@interface NGGameViewController ()<UICollectionViewDataSource, UICollectionViewDelegateFlowLayout,UIAlertViewDelegate,ADBannerViewDelegate, GADInterstitialDelegate, GADBannerViewDelegate>
+@interface NGGameViewController ()<UIAlertViewDelegate,ADBannerViewDelegate, GADInterstitialDelegate, GADBannerViewDelegate>
 
 @property (weak, nonatomic) IBOutlet GameBoardView *gameBoardView;
 
