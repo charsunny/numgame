@@ -111,6 +111,7 @@
     UITouch* touch = [touches anyObject];
     _movePoint = [touch locationInView:self];
     UIView* view = [self hitTest:_movePoint withEvent:nil];
+    //canEliminated = NO;
     if ([view isKindOfClass:[GameBoardCell class]]) {
         GameBoardCell* cell = (GameBoardCell*)view;
         GameBoardCell* preCell = [_selectedCell lastObject];
@@ -120,8 +121,10 @@
                     [_selectedCell removeLastObject];
                     [self removeBorderEffectWithCell:preCell];
                     [self removeEffectView];
+                    canEliminated = NO;
                 }
             } else {
+                //检测两个数字相同的cell
                 if (_selectedCell.count == 1 && cell.number == preCell.number) {
                     canEliminated = YES;
                     currentCell = cell;
