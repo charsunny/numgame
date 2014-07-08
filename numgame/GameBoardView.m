@@ -414,17 +414,13 @@
     }
     
     //delete the selected cells that combining the correct sum
+    /*
     [UIView animateWithDuration:0.8f animations:^{
-        [_selectedCell enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
-            //cell.frame = CGRectMake(cell.center.x, cell.center.y, 0, 0);
-            cell.transform = CGAffineTransformMakeScale(0,0);
-        }];
+        prevCell.transform = CGAffineTransformMakeScale(0,0);
     } completion:^(BOOL finished) {
-        [_selectedCell enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
-            [cell removeFromSuperview];
-        }];
     }];
-    
+    */
+    [prevCell removeFromSuperview];
     [moveDict enumerateKeysAndObjectsUsingBlock:^(NSNumber* key, NSNumber* obj, BOOL *stop) {
         GameBoardCell* moveCell = (GameBoardCell*)[self viewWithTag:key.intValue];
         moveCell.tag = obj.intValue;
