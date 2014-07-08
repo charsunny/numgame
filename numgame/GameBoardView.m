@@ -104,7 +104,9 @@
         [self addEffectToView:cell withAnimation:YES];
         // play sound
         [self playSoundFXnamed:@"1.aif"];
+        [self addBouncingAnimation:view];
     }
+    
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -124,6 +126,7 @@
                     canEliminated = NO;
                 }
             } else {
+                [self addBouncingAnimation:view];
                 //检测两个数字相同的cell
                 if (_selectedCell.count == 1 && cell.number == preCell.number) {
                     canEliminated = YES;
@@ -470,4 +473,13 @@
     [player play];
 }
 
+#pragma mark touch cell poping animation
+-(void)addBouncingAnimation:(UIView*)view
+{
+    POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+    scaleAnimation.velocity = [NSValue valueWithCGSize:CGSizeMake(3.f, 3.f)];
+    scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.f, 1.f)];
+    scaleAnimation.springBounciness = 18.0f;
+    [view.layer pop_addAnimation:scaleAnimation forKey:@"layerScaleSpringAnimation"];
+}
 @end
