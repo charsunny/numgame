@@ -103,6 +103,7 @@
 		5034020719695DCA00AAD2B6 /* square_8.aif in Resources */ = {isa = PBXBuildFile; fileRef = 503401D719695DCA00AAD2B6 /* square_8.aif */; };
 		5034020819695DCA00AAD2B6 /* square_9.aif in Resources */ = {isa = PBXBuildFile; fileRef = 503401D819695DCA00AAD2B6 /* square_9.aif */; };
 		5034020919695DCA00AAD2B6 /* square_10.aif in Resources */ = {isa = PBXBuildFile; fileRef = 503401D919695DCA00AAD2B6 /* square_10.aif */; };
+		5043F980196C1FCA00BD2DB5 /* libpop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5043F979196C1FC100BD2DB5 /* libpop.a */; };
 		508B8AFF1917BEC100DC9FA6 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 508B8AFE1917BEC100DC9FA6 /* Social.framework */; };
 		508B8B021918861900DC9FA6 /* NGGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 508B8B011918861900DC9FA6 /* NGGuideViewController.m */; };
 		508B8B0D191891E900DC9FA6 /* NGAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 508B8B0C191891E900DC9FA6 /* NGAboutViewController.m */; };
@@ -145,6 +146,34 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		5043F978196C1FC100BD2DB5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5043F971196C1FC100BD2DB5 /* pop.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EC191218162FB53A00E0CC76;
+			remoteInfo = pop;
+		};
+		5043F97A196C1FC100BD2DB5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5043F971196C1FC100BD2DB5 /* pop.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EC68857F18C7B60000C6194C;
+			remoteInfo = "pop-osx";
+		};
+		5043F97C196C1FC100BD2DB5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5043F971196C1FC100BD2DB5 /* pop.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = ECF01ED318C92B7F009E0AD1;
+			remoteInfo = "pop-tests";
+		};
+		5043F97E196C1FC100BD2DB5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5043F971196C1FC100BD2DB5 /* pop.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EC7E319918C93D6500B38170;
+			remoteInfo = "pop-tests-osx";
+		};
 		50EDF3CD18FFB756003FBA71 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 50EDF39C18FFB755003FBA71 /* Project object */;
@@ -267,6 +296,7 @@
 		503401D719695DCA00AAD2B6 /* square_8.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = square_8.aif; sourceTree = "<group>"; };
 		503401D819695DCA00AAD2B6 /* square_9.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = square_9.aif; sourceTree = "<group>"; };
 		503401D919695DCA00AAD2B6 /* square_10.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = square_10.aif; sourceTree = "<group>"; };
+		5043F971196C1FC100BD2DB5 /* pop.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = pop.xcodeproj; path = pop/pop.xcodeproj; sourceTree = "<group>"; };
 		508B8AFE1917BEC100DC9FA6 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		508B8B001918861900DC9FA6 /* NGGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGGuideViewController.h; sourceTree = "<group>"; };
 		508B8B011918861900DC9FA6 /* NGGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NGGuideViewController.m; sourceTree = "<group>"; };
@@ -323,6 +353,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5043F980196C1FCA00BD2DB5 /* libpop.a in Frameworks */,
 				508B8AFF1917BEC100DC9FA6 /* Social.framework in Frameworks */,
 				5014AF32190F8D2A00827D82 /* CoreTelephony.framework in Frameworks */,
 				5014AF30190F8D2400827D82 /* StoreKit.framework in Frameworks */,
@@ -494,9 +525,21 @@
 			path = piano;
 			sourceTree = "<group>";
 		};
+		5043F972196C1FC100BD2DB5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5043F979196C1FC100BD2DB5 /* libpop.a */,
+				5043F97B196C1FC100BD2DB5 /* pop.framework */,
+				5043F97D196C1FC100BD2DB5 /* pop-tests.octest */,
+				5043F97F196C1FC100BD2DB5 /* pop-tests-osx.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		50EDF39B18FFB755003FBA71 = {
 			isa = PBXGroup;
 			children = (
+				5043F971196C1FC100BD2DB5 /* pop.xcodeproj */,
 				50EDF3AD18FFB755003FBA71 /* numgame */,
 				50EDF3CF18FFB756003FBA71 /* numgameTests */,
 				50EDF3A618FFB755003FBA71 /* Frameworks */,
@@ -679,6 +722,12 @@
 			mainGroup = 50EDF39B18FFB755003FBA71;
 			productRefGroup = 50EDF3A518FFB755003FBA71 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 5043F972196C1FC100BD2DB5 /* Products */;
+					ProjectRef = 5043F971196C1FC100BD2DB5 /* pop.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				50EDF3A318FFB755003FBA71 /* numgame */,
@@ -686,6 +735,37 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		5043F979196C1FC100BD2DB5 /* libpop.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libpop.a;
+			remoteRef = 5043F978196C1FC100BD2DB5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5043F97B196C1FC100BD2DB5 /* pop.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = pop.framework;
+			remoteRef = 5043F97A196C1FC100BD2DB5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5043F97D196C1FC100BD2DB5 /* pop-tests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "pop-tests.octest";
+			remoteRef = 5043F97C196C1FC100BD2DB5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5043F97F196C1FC100BD2DB5 /* pop-tests-osx.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "pop-tests-osx.octest";
+			remoteRef = 5043F97E196C1FC100BD2DB5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		50EDF3A218FFB755003FBA71 /* Resources */ = {
@@ -957,6 +1037,11 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "numgame/numgame-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Applications/Xcode6-Beta3.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",
+					pop,
+				);
 				INFOPLIST_FILE = "numgame/numgame-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -966,7 +1051,10 @@
 					"$(PROJECT_DIR)/numgame/GoogleAdMobAdsSdkiOS-6.5.1",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -983,6 +1071,11 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "numgame/numgame-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Applications/Xcode6-Beta3.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",
+					pop,
+				);
 				INFOPLIST_FILE = "numgame/numgame-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -991,7 +1084,10 @@
 					"$(PROJECT_DIR)/numgame/GoogleAdMobAdsSdkiOS-6.5.1/Add-ons/GoogleAnalyticsServicesiOS_3.0",
 					"$(PROJECT_DIR)/numgame/GoogleAdMobAdsSdkiOS-6.5.1",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

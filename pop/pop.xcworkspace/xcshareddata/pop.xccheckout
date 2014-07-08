@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>9FAFA0B5-89C8-4D26-8791-A2CBB70ED815</string>
+	<key>IDESourceControlProjectName</key>
+	<string>pop</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>312D1FB0-57FE-4C5A-9212-51F2B81BAFAE</key>
+		<string>https://github.com/charsunny/pop.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>pop.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>312D1FB0-57FE-4C5A-9212-51F2B81BAFAE</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/charsunny/pop.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>312D1FB0-57FE-4C5A-9212-51F2B81BAFAE</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>312D1FB0-57FE-4C5A-9212-51F2B81BAFAE</string>
+			<key>IDESourceControlWCCName</key>
+			<string>pop</string>
+		</dict>
+	</array>
+</dict>
+</plist>
