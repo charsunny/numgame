@@ -75,19 +75,24 @@
 }
 
 - (void)addRippleEffectToView:(BOOL)animate {
-    _effectView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-    _effectView.layer.cornerRadius = self.layer.cornerRadius;
-    [_effectView setBackgroundColor:self.backgroundColor];
-    [_effectView setClipsToBounds:YES];
-    [self insertSubview:_effectView belowSubview:self];
     if (animate) {
+        UIView* tmpView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+        tmpView.layer.cornerRadius = self.layer.cornerRadius;
+        [tmpView setBackgroundColor:self.backgroundColor];
+        [tmpView setClipsToBounds:YES];
+        [self insertSubview:tmpView belowSubview:self];
         [UIView animateWithDuration:0.4f animations:^{
-            _effectView.transform = CGAffineTransformMakeScale(2, 2);
-            _effectView.alpha = 0;
+            tmpView.transform = CGAffineTransformMakeScale(2, 2);
+            tmpView.alpha = 0;
         } completion:^(BOOL finished) {
-            [_effectView removeFromSuperview];
+            [tmpView removeFromSuperview];
         }];
     } else {
+        _effectView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+        _effectView.layer.cornerRadius = self.layer.cornerRadius;
+        [_effectView setBackgroundColor:self.backgroundColor];
+        [self insertSubview:_effectView belowSubview:self];
+        [_effectView setClipsToBounds:YES];
         _effectView.transform = CGAffineTransformMakeScale(1.3, 1.3);
         _effectView.alpha = 0.7;
     }

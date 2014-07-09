@@ -23,8 +23,6 @@
 {
     //flag that indicates that 2 cells can be eliminated;
     BOOL canEliminated;
-    GameBoardCell* currentCell;
-    GameBoardCell* prevCell;
 }
 
 @property (nonatomic) int cellNum;
@@ -118,7 +116,7 @@
     if ([view isKindOfClass:[GameBoardCell class]]) {
         GameBoardCell* cell = (GameBoardCell*)view;
         GameBoardCell* preCell = [_selectedCell lastObject];
-        if (cell == prevCell) {
+        if (cell == preCell) {
             [self setNeedsDisplay];
             return;
         }
@@ -135,7 +133,7 @@
                 //检测两个数字相同的cell
                 if (_selectedCell.count == 1 && cell.number == preCell.number) {
                     [_selectedCell addObject:cell];
-                    NSLog(@"%d",_selectedCell.count);
+                    canEliminated = YES;
                     [self addBorderEffectWithCell:cell eliminated:YES];
                     [_selectedCell enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
                         [cell addRippleEffectToView:NO];
@@ -169,10 +167,7 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [self removeAllBorderEffect];
-    if(canEliminated){
-        [self combineCurrentCell:currentCell withPrevCell:prevCell];
-    }
-    if ([self currectNum] == 10) {
+    if ([self currectNum] == 10 || canEliminated) {
         [self removeEffectView];
         [self performSelector:@selector(playSoundFXnamed:) withObject:[NSString stringWithFormat:@"square_%d.aif", _selectedCell.count]];
         if([self eliminatedSameColorCell]) {
@@ -222,28 +217,15 @@
 - (void)addBorderEffectWithCell:(GameBoardCell*)cell eliminated:(BOOL)elimate {
     if (!elimate) {
         UIView* view =  [self viewWithTag:100+_selectedCell.count];
-//        CGRect rect = view.frame;
         view.backgroundColor = [GameBoardCell generateColor:cell.color];
-//        view.frame = CGRectMake(view.frame.origin.x, 0, 0, view.frame.size.height);
-//        [UIView animateWithDuration:0.3 animations:^{
-//            view.frame = rect;
-//        }];
     } else {
+        GameBoardCell* curCell = [_selectedCell lastObject];
+        GameBoardCell* preCell = [_selectedCell firstObject];
         UIView* view =  [self viewWithTag:102];
-//        CGRect rect = view.frame;
-        view.backgroundColor = [GameBoardCell generateColor:prevCell.color];
-//        view.frame = CGRectMake(view.frame.origin.x, 0, 0, view.frame.size.height);
-//        [UIView animateWithDuration:0.3 animations:^{
-//            view.frame = rect;
-//        }];
+        view.backgroundColor = [GameBoardCell generateColor:preCell.color];
         for (int i  = 3; i <= 4; i ++ ) {
             UIView* view =  [self viewWithTag:100+i];
-//            CGRect rect = view.frame;
-            view.backgroundColor = [GameBoardCell generateColor:currentCell.color];
-//            view.frame = CGRectMake(view.frame.origin.x, 0, 0, view.frame.size.height);
-//            [UIView animateWithDuration:0.3 animations:^{
-//                view.frame = rect;
-//            }];
+            view.backgroundColor = [GameBoardCell generateColor:curCell.color];
         }
     }
 }
@@ -314,18 +296,18 @@
     }
 }
 
-#pragma mark layout cell after combining cells
-- (void)combineCurrentCell:(GameBoardCell*)curCell withPrevCell:(GameBoardCell*)preCell
-{
-    POPBasicAnimation *colorAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerBackgroundColor];
-    colorAnimation.fromValue = [GameBoardCell generateColor:curCell.color];
-    colorAnimation.toValue =[GameBoardCell generateColor:prevCell.color];
-    colorAnimation.duration = 0.3f;
-    [curCell.layer pop_addAnimation:colorAnimation forKey:@"colorAnimation"];
-    [_selectedCell removeLastObject];
-    [self addDashBoardScore:1];
-    [self relayoutCells];
-}
+//#pragma mark layout cell after combining cells
+//- (void)combineCurrentCell:(GameBoardCell*)curCell withPrevCell:(GameBoardCell*)preCell
+//{
+//    POPBasicAnimation *colorAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerBackgroundColor];
+//    colorAnimation.fromValue = [GameBoardCell generateColor:curCell.color];
+//    colorAnimation.toValue =[GameBoardCell generateColor:prevCell.color];
+//    colorAnimation.duration = 0.3f;
+//    [curCell.layer pop_addAnimation:colorAnimation forKey:@"colorAnimation"];
+//    [_selectedCell removeLastObject];
+//    [self addDashBoardScore:1];
+//    [self relayoutCells];
+//}
 
 
 -(BOOL)validateIfCanLine:(GameBoardCell*)cell{
@@ -368,6 +350,9 @@
 
 -(BOOL)eliminatedSameColorCell{
 
+    if (_selectedCell.count < 4) {
+        return NO;
+    }
   // 判断相同颜色
    int cellColorNum = ((GameBoardCell*)_selectedCell[0]).color;
     for (int i =1 ; i < _selectedCell.count ; i++) {
