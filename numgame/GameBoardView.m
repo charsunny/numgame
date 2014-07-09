@@ -118,6 +118,10 @@
     if ([view isKindOfClass:[GameBoardCell class]]) {
         GameBoardCell* cell = (GameBoardCell*)view;
         GameBoardCell* preCell = [_selectedCell lastObject];
+        if (cell == prevCell) {
+            [self setNeedsDisplay];
+            return;
+        }
         if ([self view:cell.tag isNearby:preCell.tag]) {
             if ([_selectedCell containsObject:cell]) {
                 if([_selectedCell indexOfObject:preCell] -[_selectedCell indexOfObject:cell] == 1) {
@@ -130,11 +134,12 @@
                 [self addBouncingAnimation:view];
                 //检测两个数字相同的cell
                 if (_selectedCell.count == 1 && cell.number == preCell.number) {
-                    canEliminated = YES;
-                    currentCell = cell;
-                    prevCell = preCell;
                     [_selectedCell addObject:cell];
+                    NSLog(@"%d",_selectedCell.count);
                     [self addBorderEffectWithCell:cell eliminated:YES];
+                    [_selectedCell enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
+                        [cell addRippleEffectToView:NO];
+                    }];
                 }
                 else if ( [self validateIfCanLine:cell]&&([self currectNum] + cell.number < 10)) {
                     [cell addRippleEffectToView:YES];
