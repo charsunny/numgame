@@ -135,12 +135,18 @@
                                 <rect key="frame" x="0.0" y="90" width="320" height="340"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nvs-Rd-Wsp">
-                                <rect key="frame" x="51" y="438" width="38" height="30"/>
-                                <state key="normal" title="Color">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4ej-gM-mPW">
+                                <rect key="frame" x="0.0" y="436" width="320" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="I7x-aU-Q70"/>
+                                    <barButtonItem systemItem="undo" id="VcL-2O-8tR"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="GlL-o5-ngI"/>
+                                    <barButtonItem title="B" id="ytJ-Ev-alb"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="C3l-Gd-0tv"/>
+                                    <barButtonItem title="C" id="tLy-Wf-sfb"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="5jo-wP-y6u"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
