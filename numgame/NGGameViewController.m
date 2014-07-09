@@ -76,7 +76,7 @@
     [_gADBannerView setBackgroundColor:[UIColor colorWithRed:59/255.0 green:188/255.0 blue:229/255.0 alpha:1.0]];
     _gADBannerView.rootViewController = self;
     _gADBannerView.delegate = self;
-    [self.view addSubview:_gADBannerView];
+    //[self.view addSubview:_gADBannerView];
     [_gADBannerView loadRequest:[GADRequest request]];
     
     _gADInterstitial = [[GADInterstitial alloc] init];

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.7" systemVersion="14A283o" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="ktx-ga-6Ec">
     <dependencies>
-        <deployment version="1792" identifier="iOS"/>
+        <deployment version="1792" defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6181.2"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
@@ -131,38 +131,33 @@
                                     <outletCollection property="gestureRecognizers" destination="SnS-F0-q3K" appends="YES" id="8eu-hk-ryQ"/>
                                 </connections>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Fk-I6-EI7" customClass="GADBannerView">
-                                <rect key="frame" x="0.0" y="430" width="320" height="50"/>
-                                <color key="backgroundColor" red="0.12941176469999999" green="0.72549019609999998" blue="0.90588235289999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="zzW-66-rvr"/>
-                                </constraints>
-                            </view>
                             <view appearanceType="aqua" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J5Y-w2-x2M" customClass="GameBoardView">
                                 <rect key="frame" x="0.0" y="90" width="320" height="340"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nvs-Rd-Wsp">
+                                <rect key="frame" x="51" y="438" width="38" height="30"/>
+                                <state key="normal" title="Color">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="8Fk-I6-EI7" firstAttribute="leading" secondItem="y4h-6H-pbq" secondAttribute="leading" id="1Ft-A8-5tw"/>
                             <constraint firstAttribute="trailing" secondItem="Rv7-mT-eyh" secondAttribute="trailing" id="5qA-Wt-YeB"/>
-                            <constraint firstAttribute="trailing" secondItem="8Fk-I6-EI7" secondAttribute="trailing" id="8UK-07-yrX"/>
                             <constraint firstAttribute="trailing" secondItem="JcA-ad-MAr" secondAttribute="trailing" constant="-320" id="HRG-HY-IBn"/>
                             <constraint firstItem="JcA-ad-MAr" firstAttribute="top" secondItem="y4h-6H-pbq" secondAttribute="top" constant="90" id="RW8-lP-6hv"/>
+                            <constraint firstItem="J5Y-w2-x2M" firstAttribute="bottom" secondItem="JcA-ad-MAr" secondAttribute="bottom" id="YSZ-JZ-blX"/>
                             <constraint firstItem="Rv7-mT-eyh" firstAttribute="leading" secondItem="y4h-6H-pbq" secondAttribute="leading" id="dsR-dR-uLq"/>
-                            <constraint firstItem="8Fk-I6-EI7" firstAttribute="top" secondItem="J5Y-w2-x2M" secondAttribute="bottom" id="hSY-2s-GGd"/>
                             <constraint firstItem="J5Y-w2-x2M" firstAttribute="leading" secondItem="y4h-6H-pbq" secondAttribute="leading" id="hj9-zX-Hg9"/>
                             <constraint firstAttribute="bottom" secondItem="JcA-ad-MAr" secondAttribute="bottom" constant="50" id="iSB-fJ-LdO"/>
-                            <constraint firstItem="J5Y-w2-x2M" firstAttribute="trailing" secondItem="8Fk-I6-EI7" secondAttribute="trailing" id="p0z-ew-y3v"/>
+                            <constraint firstItem="J5Y-w2-x2M" firstAttribute="trailing" secondItem="Rv7-mT-eyh" secondAttribute="trailing" id="mXq-K1-Wt4"/>
                             <constraint firstItem="JcA-ad-MAr" firstAttribute="leading" secondItem="J5Y-w2-x2M" secondAttribute="trailing" id="r2x-XY-HPd"/>
                             <constraint firstItem="J5Y-w2-x2M" firstAttribute="top" secondItem="Rv7-mT-eyh" secondAttribute="bottom" id="sTd-ac-3cz"/>
-                            <constraint firstItem="CJb-HF-sOf" firstAttribute="top" secondItem="8Fk-I6-EI7" secondAttribute="bottom" id="x6o-eI-07z"/>
                             <constraint firstItem="Rv7-mT-eyh" firstAttribute="top" secondItem="y4h-6H-pbq" secondAttribute="top" id="yRW-zY-TU8"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="gADBannerView" destination="8Fk-I6-EI7" id="kxR-CQ-afp"/>
                         <outlet property="gameBoardView" destination="J5Y-w2-x2M" id="5RQ-as-nLE"/>
                         <outlet property="pauseView" destination="JcA-ad-MAr" id="cj2-zA-zEQ"/>
                         <outlet property="scoreLabel" destination="fCu-zB-BWS" id="ssc-bd-00g"/>
