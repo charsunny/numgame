@@ -8,8 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol GameBoardViewDelegate <NSObject>
+@optional
+-(void)increaseScore:(int)deltaScore;
+-(void)decreaseScore:(int)deltaScore;
+@end
 @interface GameBoardView : UIView
 
+@property (weak,nonatomic)id<GameBoardViewDelegate>delegate;
 - (void)layoutBoardWithCellNum:(int)num;
+
 
 @end

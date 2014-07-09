@@ -173,6 +173,11 @@
         if([self eliminatedSameColorCell]) {
             int curColor = ((GameBoardCell*)_selectedCell.firstObject).color;
             [_selectedCell setArray:[self getAllCellWithColor:curColor]];
+            [self addDashBoardScore:10];
+        }
+        else
+        {
+            [self addDashBoardScore:4];
         }
         [self relayoutCells];
     }
@@ -313,6 +318,7 @@
     colorAnimation.duration = 0.3f;
     [curCell.layer pop_addAnimation:colorAnimation forKey:@"colorAnimation"];
     [_selectedCell removeLastObject];
+    [self addDashBoardScore:1];
     [self relayoutCells];
 }
 
@@ -488,6 +494,13 @@
     [view.layer pop_addAnimation:scaleAnimation forKey:@"layerScaleSpringAnimation"];
 }
 
+-(void)addDashBoardScore:(int)score
+{
+    if([self.delegate respondsToSelector:@selector(increaseScore:)])
+    {
+        [self.delegate increaseScore:score];
+    }
+}
 
 #pragma mark for debugging
 

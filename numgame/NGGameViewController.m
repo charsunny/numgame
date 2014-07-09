@@ -14,28 +14,28 @@
 #import "GADInterstitial.h"
 #import "NGResultViewController.h"
 #import "GameBoardView.h"
+#import <pop/pop.h>
 @import AudioToolbox;
 @import AVFoundation;
 @import iAd;
 @import GameKit;
 @import StoreKit;
 
-@interface NGGameViewController ()<UIAlertViewDelegate,ADBannerViewDelegate, GADInterstitialDelegate, GADBannerViewDelegate>
+@interface NGGameViewController ()<UIAlertViewDelegate,ADBannerViewDelegate, GADInterstitialDelegate, GADBannerViewDelegate,GameBoardViewDelegate>
 
 @property (weak, nonatomic) IBOutlet GameBoardView *gameBoardView;
 
 @property (weak, nonatomic) IBOutlet UILabel *timeTitle;
 
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (nonatomic)int timeSpent;
 
 @property (weak, nonatomic) IBOutlet UILabel *scoreTitle;
 
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
-
-@property (weak, nonatomic) IBOutlet UILabel *bestLabel;
+@property (nonatomic)int score;
 
 @property (weak, nonatomic) IBOutlet UIView *pauseView;
-
 
 @property (strong, nonatomic) NSTimer* progressTimer;
 
@@ -44,8 +44,6 @@
 @property (strong, nonatomic) GADInterstitial* gADInterstitial;
 
 @property (strong, nonatomic) AVAudioPlayer *audioPlayer;
-
-@property (nonatomic) int score;
 
 @property (nonatomic) float leftTime;
 
@@ -56,7 +54,19 @@
 @end
 
 @implementation NGGameViewController
-
+#pragma mark property
+- (void)setTimeSpent:(int)timeSpent
+{
+    _timeSpent = timeSpent;
+    _timeLabel.text = [NSString stringWithFormat:@"%d",_timeSpent];
+    [self addPopSpringAnimation:_timeLabel];
+}
+- (void)setScore:(int)score
+{
+    _score = score;
+    _scoreLabel.text = [NSString stringWithFormat:@"%d",_score];
+    [self addPopSpringAnimation:_scoreLabel];
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -74,6 +84,7 @@
     [_gADInterstitial setDelegate:self];
     [_gADInterstitial loadRequest:[GADRequest request]];
 
+    _timeSpent = 0;
     _leftTime = 10.0;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onResignActive:) name:@"resignactive" object:nil];
@@ -81,6 +92,7 @@
     
     [self initGameData];
     
+    _gameBoardView.delegate = self;
     [_gameBoardView layoutBoardWithCellNum:6];
     
     UISwipeGestureRecognizer *recoginizer1 = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(onSwipePauseView:)];
@@ -98,6 +110,7 @@
                                                                     options:0
                                                                     metrics:nil
                                                                     views:NSDictionaryOfVariableBindings(_timeLabel,_scoreLabel)]];
+    [self resumeGame];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -114,11 +127,10 @@
         case NGGameModeClassic:
             _leftTime = 0;
             _score = 0;
-            [_scoreLabel setText:@"0.0"];
-            [_timeLabel setText:@"0.0"];
+            [_scoreLabel setText:@"0"];
+            [_timeLabel setText:@"0"];
             [_scoreTitle setText:@"Score"];
             [_timeTitle setText:@"Time"];
-            [_bestLabel setText:[NSString stringWithFormat:@"%.1f",[[NGGameConfig sharedGameConfig] classicScore]]];
             break;
         case NGGameModeTimed:
             _leftTime = 10.0;
@@ -127,7 +139,6 @@
             [_timeLabel setText:@"0.0"];
             [_scoreTitle setText:@"Score"];
             [_timeTitle setText:@"time"];
-            [_bestLabel setText:[NSString stringWithFormat:@"%d",[[NGGameConfig sharedGameConfig] timedScore]]];
             break;
         default:
             break;
@@ -143,16 +154,19 @@
 
 - (void)resumeGame {
     [_progressTimer invalidate];
-    _progressTimer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(updateState) userInfo:nil repeats:YES];
+    _progressTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateGameTime) userInfo:nil repeats:YES];
     [_progressTimer fire];
     //[self genRandomNumberWithAnimate:NO];
 }
 
-- (void)updateState {
-    if (_gameMode == NGGameModeClassic) {
-        _leftTime += 0.1f;
-        [_timeLabel setText:[NSString stringWithFormat:@"%.1f",_leftTime]];
-    } else {
+-(void)updateGameTime
+{
+   if(_gameMode == NGGameModeClassic)
+   {
+       self.timeSpent+=1;
+   }
+   else
+   {
         _leftTime -= 0.1f;
         if (_leftTime > 0) {
             [_timeLabel setText:[NSString stringWithFormat:@"%.1f",_leftTime]];
@@ -161,9 +175,8 @@
             [_progressTimer invalidate];
             [self showResult];
         }
-    }
+   }
 }
-
 
 #pragma mark  --IBACTION--
 
@@ -330,4 +343,22 @@ didFailToReceiveAdWithError:(GADRequestError *)error {
     }];
 }
 
+#pragma mark GameBoardViewDelegate
+- (void)increaseScore:(int)deltaScore
+{
+    self.score+=deltaScore;
+}
+-(void)decreaseScore:(int)deltaScore
+{
+    self.score-=deltaScore;
+}
+#pragma makr pop animation 
+-(void)addPopSpringAnimation:(UIView*)view
+{
+    POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+    scaleAnimation.velocity = [NSValue valueWithCGSize:CGSizeMake(3.f, 3.f)];
+    scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.f, 1.f)];
+    scaleAnimation.springBounciness = 18.0f;
+    [view.layer pop_addAnimation:scaleAnimation forKey:@"scoreScaleSpring"];
+}
 @end
