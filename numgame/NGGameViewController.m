@@ -86,6 +86,18 @@
     UISwipeGestureRecognizer *recoginizer1 = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(onSwipePauseView:)];
     recoginizer1.direction = UISwipeGestureRecognizerDirectionRight;
     [_pauseView addGestureRecognizer:recoginizer1];
+    
+    _timeTitle.textAlignment = NSTextAlignmentCenter;
+    _scoreTitle.textAlignment = NSTextAlignmentCenter;
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(50)-[_timeTitle(>=100)]-(50)-[_scoreTitle(==_timeTitle)]-(50)-|"
+                                                                    options:0
+                                                                    metrics:nil
+                                                                    views:NSDictionaryOfVariableBindings(_timeTitle,_scoreTitle)]];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(50)-[_timeLabel(>=100)]-(50)-[_scoreLabel(==_timeLabel)]-(50)-|"
+                                                                    options:0
+                                                                    metrics:nil
+                                                                    views:NSDictionaryOfVariableBindings(_timeLabel,_scoreLabel)]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -102,9 +114,9 @@
         case NGGameModeClassic:
             _leftTime = 0;
             _score = 0;
-            [_scoreLabel setText:@"0/10"];
+            [_scoreLabel setText:@"0.0"];
             [_timeLabel setText:@"0.0"];
-            [_scoreTitle setText:@"target"];
+            [_scoreTitle setText:@"Score"];
             [_timeTitle setText:@"Time"];
             [_bestLabel setText:[NSString stringWithFormat:@"%.1f",[[NGGameConfig sharedGameConfig] classicScore]]];
             break;
@@ -113,7 +125,7 @@
             _score = 0;
             [_scoreLabel setText:@"0"];
             [_timeLabel setText:@"0.0"];
-            [_scoreTitle setText:@"score"];
+            [_scoreTitle setText:@"Score"];
             [_timeTitle setText:@"time"];
             [_bestLabel setText:[NSString stringWithFormat:@"%d",[[NGGameConfig sharedGameConfig] timedScore]]];
             break;

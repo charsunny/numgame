@@ -54,6 +54,7 @@
         _effectViewArray = [NSMutableArray new];
         _playerForSound = [NSMutableDictionary new];
         self.backgroundColor = [UIColor clearColor];
+        
         [self setClipsToBounds:YES];
     }
     return self;
