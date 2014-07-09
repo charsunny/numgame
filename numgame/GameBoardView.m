@@ -392,6 +392,8 @@
 
 #pragma mark relayout cell after eliminating cells
 - (void)relayoutCells {
+    
+    NSMutableArray* selCells = [_selectedCell mutableCopy];
 
     NSMutableDictionary* moveDict = [NSMutableDictionary new];
     NSMutableSet* addArray = [NSMutableSet new];
@@ -400,7 +402,7 @@
         for (int posy = _cellNum -1; posy >= 0; posy--) {
             int tag = posx+posy*_cellNum+1;
             GameBoardCell* cell = (GameBoardCell*)[self viewWithTag:tag];
-            if ([_selectedCell containsObject:cell]) {
+            if ([selCells containsObject:cell]) {
                 int desTag = delIdx*_cellNum + 1 + posx ;
                 [addArray addObject:@(desTag)];
                 delIdx++;
@@ -414,7 +416,7 @@
     }
     
     //delete the selected cells that combining the correct sum
-    [_selectedCell enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
+    [selCells enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
         [cell removeFromSuperview];
     }];
     //[prevCell removeFromSuperview];
