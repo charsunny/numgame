@@ -361,4 +361,13 @@ didFailToReceiveAdWithError:(GADRequestError *)error {
     scaleAnimation.springBounciness = 18.0f;
     [view.layer pop_addAnimation:scaleAnimation forKey:@"scoreScaleSpring"];
 }
+
+
+-(IBAction)changeCellColor:(id)sender{
+
+
+
+
+}
+
 @end
