@@ -15,7 +15,8 @@
 @interface GameBoardCell()
 
 @property (strong, nonatomic) UILabel* numLabel;
-@property (strong, nonatomic) UIView* effectView;
+@property (strong, nonatomic) CALayer* effectLayer;
+
 @end
 
 @implementation GameBoardCell
@@ -88,17 +89,18 @@
             [tmpView removeFromSuperview];
         }];
     } else {
-        _effectView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-        _effectView.layer.cornerRadius = self.layer.cornerRadius;
-        [_effectView setBackgroundColor:self.backgroundColor];
-        [self insertSubview:_effectView belowSubview:self];
-        [_effectView setClipsToBounds:YES];
-        _effectView.transform = CGAffineTransformMakeScale(1.3, 1.3);
-        _effectView.alpha = 0.7;
+        _effectLayer = [CALayer layer];
+        _effectLayer.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+        _effectLayer.cornerRadius = self.layer.cornerRadius;
+        _effectLayer.backgroundColor = self.backgroundColor.CGColor;
+        _effectLayer.opacity = 0.7;
+        _effectLayer.transform = CATransform3DMakeScale(1.3, 1.3, 1.0);
+        [self.layer insertSublayer:_effectLayer below:self.numLabel.layer];
     }
 }
 
 - (void)removeRippleEffectView {
-    [_effectView removeFromSuperview];
+    [_effectLayer removeFromSuperlayer];
+    [self.layer setNeedsDisplay];
 }
 @end

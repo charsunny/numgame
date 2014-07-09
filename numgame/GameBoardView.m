@@ -123,9 +123,9 @@
         if ([self view:cell.tag isNearby:preCell.tag]) {
             if ([_selectedCell containsObject:cell]) {
                 if([_selectedCell indexOfObject:preCell] -[_selectedCell indexOfObject:cell] == 1) {
+                    [self removeEffectView];
                     [_selectedCell removeLastObject];
                     [self removeBorderEffectWithCell:preCell];
-                    [self removeEffectView];
                     canEliminated = NO;
                 }
             } else {
