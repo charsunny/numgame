@@ -46,3 +46,5 @@ DerivedData/numgame/Build/Intermediates/numgame.build/Debug-iphonesimulator/numg
 *.hmap
 
 *.idx
+
+numgame.xcodeproj/xcuserdata/charsunny.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist

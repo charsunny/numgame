@@ -392,7 +392,7 @@
 
 #pragma mark relayout cell after eliminating cells
 - (void)relayoutCells {
-    
+
     NSMutableDictionary* moveDict = [NSMutableDictionary new];
     NSMutableSet* addArray = [NSMutableSet new];
     for (int posx = 0; posx < _cellNum; posx++) {
@@ -423,6 +423,7 @@
         moveCell.tag = obj.intValue;
     }];
     
+    
     [addArray enumerateObjectsUsingBlock:^(NSNumber* obj, BOOL *stop) {
         GameBoardCell* cell = [[GameBoardCell alloc] initWithFrame:CGRectMake(0, 0, _cellWidth, _cellWidth)];
         [cell setTag:obj.intValue];
@@ -432,40 +433,54 @@
         [self addSubview:cell];
     }];
     
+    NSMutableDictionary * xdim = [[NSMutableDictionary alloc]initWithCapacity:6];
+    //初始化数组
+    for (int i =1; i <= _cellNum; i++) {
+        [xdim setObject:@(0) forKey:[NSNumber numberWithInt:i]];
+    }
+    
+    
+    [moveDict enumerateKeysAndObjectsUsingBlock:^(NSNumber* key, NSNumber* obj, BOOL *stop) {
+    
+      NSNumber * tmp =[xdim objectForKey:[NSNumber numberWithInt:(key.intValue) %_cellNum]];
+        
+        if ((obj.intValue/_cellNum) > tmp.intValue) {
+            [xdim setObject:[NSNumber numberWithInt:(obj.intValue/_cellNum)] forKey:[NSNumber numberWithInt:(key.intValue) %_cellNum]];
+        }
+ 
+    }];
+    
+    int baseIntNumber = _cellNum;
     [moveDict enumerateKeysAndObjectsUsingBlock:^(NSNumber* key, NSNumber* obj, BOOL *stop) {
         POPSpringAnimation* animation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewCenter];
-        //animation.velocity = @(1000.);
         animation.toValue = _posArray[obj.intValue-1];
         animation.springBounciness = 10;
+        
+        
+        NSNumber * baseNum = [xdim objectForKey: [NSNumber numberWithInt:obj.intValue%_cellNum]];
+        int baseIntNumber  = baseNum.intValue;
+        
+        
+        int level = baseIntNumber- (obj.intValue - 0.5)/_cellNum;
+        
+        
+        
+        animation.beginTime = CACurrentMediaTime() + 0.1*level;
         GameBoardCell* moveCell = (GameBoardCell*)[self viewWithTag:obj.intValue];
         [moveCell pop_addAnimation:animation forKey:@"move"];
+        
     }];
     
     [addArray enumerateObjectsUsingBlock:^(NSNumber* obj, BOOL *stop) {
         POPSpringAnimation* animation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewCenter];
-        //animation.velocity = @(1000.);
+        animation.velocity = [NSValue valueWithCGPoint:CGPointMake(0, 10*obj.intValue/6)];
         animation.springBounciness = 10;
+        int level = baseIntNumber - (obj.intValue - 0.5)/_cellNum;
+        animation.beginTime = CACurrentMediaTime() + 0.1*level;
         animation.toValue = _posArray[obj.intValue-1];
         GameBoardCell* addCell = (GameBoardCell*)[self viewWithTag:obj.intValue];
         [addCell pop_addAnimation:animation forKey:@"addmove"];
     }];
-    
-//    [UIView animateWithDuration:0.3f animations:^{
-//        [moveDict enumerateKeysAndObjectsUsingBlock:^(NSNumber* key, NSNumber* obj, BOOL *stop) {
-//            GameBoardCell* moveCell = (GameBoardCell*)[self viewWithTag:obj.intValue];
-//            NSValue* value = _posArray[obj.intValue-1];
-//            CGPoint desPos = [value CGPointValue];
-//            moveCell.center = desPos;
-//        }];
-//        
-//        [addArray enumerateObjectsUsingBlock:^(NSNumber* obj, BOOL *stop) {
-//            NSValue* value = _posArray[obj.intValue-1];
-//            CGPoint desPos = [value CGPointValue];
-//            GameBoardCell* addCell = (GameBoardCell*)[self viewWithTag:obj.intValue];
-//            addCell.center = desPos;
-//        }];
-//
-//    }];
 }
 
 -(void) playSoundFXnamed:(NSString*)vSFXName
