@@ -20,20 +20,20 @@
 
 @implementation GameBoardCell
 
+- (void)setCellNumber:(int)cellNumber
+{
+    _cellNumber = cellNumber;
+    [_numLabel setText:[NSString stringWithFormat:@"%d",cellNumber ]];
+}
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        //[self setNumber:[self genRandNumber]];
         self.layer.cornerRadius = frame.size.width/2;
-        //self.clipsToBounds = YES;
-        self.number = [self genRandNumber];
-        self.backgroundColor = [self genRandColor];
         _numLabel = [[UILabel alloc] initWithFrame:self.bounds];
-        //NSArray* brandArry = @[@"♡",@"♤",@"♧",@"♢"];
-        [_numLabel setText:[NSString stringWithFormat:@"%d",_number ]];
-        //[_numLabel setFont:[UIFont boldSystemFontOfSize:DefalutNumFontSize]];
+        self.cellNumber = [self genRandNumber];
+        self.backgroundColor = [self genRandColor];
         [_numLabel setFont:[UIFont fontWithName:DefalutNumFontFamily size:frame.size.width/2]];
         [_numLabel setTextAlignment:NSTextAlignmentCenter];
         [self addSubview:_numLabel];
@@ -46,15 +46,13 @@
     self.backgroundColor = [GameBoardCell generateColor:color];
 }
 - (UIColor*)genRandColor {
-    //NSArray* colors = @[RGBA(0x3a,0xc5,0x74,1.0), RGBA(0xf1,0x6b,0x52,1.0), RGBA(0x44,0x8e,0xc9,1.0), RGBA(0x8b,0x3e,0xbd,1.0)];
-    //return colors[rand()%4];
     int ranNum = rand() % 4;
     self.color = ranNum;
     return [GameBoardCell generateColor:ranNum];
 }
 
 - (int)genRandNumber {
-    return rand()%4+1;
+    return rand()%5+1;
 }
 //color scheme from:http://www.colourlovers.com/palette/2584642/Vital_Passion
 + (UIColor*)generateColor:(int)number
@@ -96,4 +94,5 @@
 - (void)removeRippleEffectView {
     [_effectView removeFromSuperview];
 }
+
 @end

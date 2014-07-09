@@ -19,6 +19,7 @@
 
 #define BOARD_WIDTH         (320)
 
+#define TargetScore          12
 @interface GameBoardView()
 {
     //flag that indicates that 2 cells can be eliminated;
@@ -129,19 +130,19 @@
             } else {
                 [self addBouncingAnimation:view];
                 //检测两个数字相同的cell
-                if (_selectedCell.count == 1 && cell.number == preCell.number) {
+                currentCell = cell;
+                prevCell = preCell;
+                if (_selectedCell.count == 1 && cell.cellNumber == preCell.cellNumber) {
                     canEliminated = YES;
-                    currentCell = cell;
-                    prevCell = preCell;
                     [_selectedCell addObject:cell];
                     [self addBorderEffectWithCell:cell eliminated:YES];
                 }
-                else if ( [self validateIfCanLine:cell]&&([self currectNum] + cell.number < 10)) {
+                else if ( [self validateIfCanLine:cell]&&([self currectNum] + cell.cellNumber < TargetScore)) {
                     [cell addRippleEffectToView:YES];
                     [self playSoundFXnamed:[NSString stringWithFormat:@"%d.aif", _selectedCell.count]];
                     [_selectedCell addObject:cell];
                     [self addBorderEffectWithCell:cell eliminated:NO];
-                } else if([self validateIfCanLine:cell]&&[self currectNum] + cell.number == 10) {
+                } else if([self validateIfCanLine:cell]&&[self currectNum] + cell.cellNumber == TargetScore) {
                     [_selectedCell addObject:cell];
                     [self addBorderEffectWithCell:cell eliminated:NO];
                     [self playSoundFXnamed:[NSString stringWithFormat:@"%d.aif", _selectedCell.count]];
@@ -165,9 +166,9 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [self removeAllBorderEffect];
     if(canEliminated){
-        [self combineCurrentCell:currentCell withPrevCell:prevCell];
+        //[self combineCurrentCell:currentCell withPrevCell:prevCell];
     }
-    if ([self currectNum] == 10) {
+    if ([self currectNum] == TargetScore) {
         [self removeEffectView];
         [self performSelector:@selector(playSoundFXnamed:) withObject:[NSString stringWithFormat:@"square_%d.aif", _selectedCell.count]];
         if([self eliminatedSameColorCell]) {
@@ -180,6 +181,21 @@
             [self addDashBoardScore:4];
         }
         [self relayoutCells];
+    }
+    else if(_selectedCell.count == 2)
+    {
+        int total = prevCell.cellNumber + currentCell.cellNumber;
+        if( total % 2 == 0 )
+        {
+            prevCell.cellNumber = total/2;
+            currentCell.cellNumber = total/2;
+        }
+        else
+        {
+            int temp = prevCell.cellNumber;
+            prevCell.cellNumber = currentCell.cellNumber;
+            currentCell.cellNumber = temp;
+        }
     }
     [_selectedCell removeAllObjects];
     canEliminated = NO;
@@ -209,7 +225,7 @@
 - (int)currectNum {
     __block int sum = 0;
     [_selectedCell enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
-        sum += cell.number;
+        sum += cell.cellNumber;
     }];
     return sum;
 }
@@ -325,6 +341,7 @@
 
 -(BOOL)validateIfCanLine:(GameBoardCell*)cell{
 
+    return YES;
     if (self.selectedCell.count <= _cellNum) {
         
         if (self.selectedCell.count >0) {
@@ -333,7 +350,7 @@
             
             if (self.selectedCell.count ==2) {
                 
-                if (((GameBoardCell*)self.selectedCell[0]).number == ((GameBoardCell*)self.selectedCell[1]).number ) {
+                if (((GameBoardCell*)self.selectedCell[0]).cellNumber == ((GameBoardCell*)self.selectedCell[1]).cellNumber ) {
                     return NO;
                 }
                 
@@ -343,10 +360,10 @@
             
             NSMutableArray * mutableArray = [[NSMutableArray alloc]initWithCapacity:self.selectedCell.count];
             for (GameBoardCell * iterCell in self.selectedCell) {
-                [mutableArray addObject: [NSNumber numberWithInt:iterCell.number]];
+                [mutableArray addObject: [NSNumber numberWithInt:iterCell.cellNumber]];
             }
             
-            if ([mutableArray containsObject:[NSNumber numberWithInt:cell.number]])
+            if ([mutableArray containsObject:[NSNumber numberWithInt:cell.cellNumber]])
                 return NO;
 
             else

@@ -10,7 +10,7 @@
 
 @interface GameBoardCell : UIView
 
-@property (nonatomic) int number;
+@property (nonatomic) int cellNumber;
 
 @property (nonatomic) int color;
 
