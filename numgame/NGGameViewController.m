@@ -67,14 +67,17 @@
 - (void)setTimeSpent:(int)timeSpent
 {
     _timeSpent = timeSpent;
-    _timeLabel.text = [NSString stringWithFormat:@"%d",_timeSpent];
+    NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
+    _timeLabel.text = [NSString stringWithFormat:@"%d/%@",_timeSpent, levelInfo[@"step"]];
     [self addPopSpringAnimation:_timeLabel];
 }
 
 - (void)setScore:(int)score
 {
     _score = score;
-    _scoreLabel.text = [NSString stringWithFormat:@"%d",_score];
+    self.timeSpent++;
+    NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
+    [_scoreLabel setText:[NSString stringWithFormat:@"%d/%@",_score, levelInfo[@"score"]]];
     [self addPopSpringAnimation:_scoreLabel];
 }
 
@@ -118,6 +121,8 @@
     recoginizer1.direction = UISwipeGestureRecognizerDirectionRight;
     [_pauseView addGestureRecognizer:recoginizer1];
     
+    [_timeLabel setAdjustsFontSizeToFitWidth:YES];
+    [_scoreLabel setAdjustsFontSizeToFitWidth:YES];
     _timeTitle.textAlignment = NSTextAlignmentCenter;
     _scoreTitle.textAlignment = NSTextAlignmentCenter;
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(50)-[_timeTitle(>=100)]-(50)-[_scoreTitle(==_timeTitle)]-(50)-|"
@@ -147,7 +152,7 @@
     switch (_gameMode) {
         case NGGameModeClassic: {
             NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
-            _leftTime = 0;
+            _timeSpent = 0;
             _score = 0;
             [_scoreLabel setText:[NSString stringWithFormat:@"0/%@",levelInfo[@"score"]]];
             [_timeLabel setText:[NSString stringWithFormat:@"0/%@",levelInfo[@"step"]]];

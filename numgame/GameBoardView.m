@@ -224,7 +224,7 @@
         else
         {
             [self addDashBoardScore:Four_Same_Number_Score];
-        w}
+        }
         [self relayoutCells];
     }
     
