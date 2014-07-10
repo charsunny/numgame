@@ -9,6 +9,7 @@
 #import "GameBoardView.h"
 #import "GameBoardCell.h"
 #import "MatrixMath.h"
+#import "HMSideMenu.h"
 #import <pop/pop.h>
 @import CoreGraphics;
 @import AVFoundation;
@@ -19,6 +20,7 @@
 
 #define BOARD_WIDTH         (320)
 
+#define SElECTED_CELL_TAG   (2048)
 @interface GameBoardView()
 {
     //flag that indicates that 2 cells can be eliminated;
@@ -41,6 +43,10 @@
 
 @property (nonatomic, strong) NSMutableDictionary* playerForSound;
 
+@property (nonatomic,strong) HMSideMenu* sideMenu;
+@property (nonatomic, assign) int  SelectedCellColor;
+@property (nonatomic,strong) NSMutableSet * storeSelectedCellSet;
+
 @end
 
 @implementation GameBoardView
@@ -54,7 +60,7 @@
         _effectViewArray = [NSMutableArray new];
         _playerForSound = [NSMutableDictionary new];
         self.backgroundColor = [UIColor clearColor];
-        
+        self.storeSelectedCellSet = [[NSMutableSet alloc]initWithCapacity:1];
         [self setClipsToBounds:YES];
     }
     return self;
@@ -91,12 +97,28 @@
             [self addSubview:view];
         }
     }
+    [self initSelectionCells];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch* touch = [touches anyObject];
+
+    
     CGPoint pos = [touch locationInView:self];
     UIView* view = [self hitTest:pos withEvent:nil];
+    
+    if (touch.tapCount == 1 && self.isChangeColor) {
+        
+        if ([view isKindOfClass:[GameBoardCell class]]) {
+            GameBoardCell * cell = (GameBoardCell*)view;
+            //弹出选择颜色的框
+            [self.storeSelectedCellSet addObject:cell];
+            [self toggeSelectionCells];
+        
+        }
+    }
+    
+    
     if ([view isKindOfClass:[GameBoardCell class]]) {
         GameBoardCell* cell = (GameBoardCell*)view;
         [_selectedCell addObject:cell];
@@ -545,8 +567,84 @@
 }
 
 
+-(void)changeCellColor:(id)sender{
+
+    [self showPauseCellEffective];
 
 
+}
+
+
+-(void) showPauseCellEffective{
+    
+    NSArray * subcells = [self subviews];
+    
+    for (UIView * view in subcells) {
+        if ( [view isKindOfClass:[GameBoardCell class]]) {
+            
+            //TODO 给view加图层
+            
+        }
+    }
+    
+    
+}
+
+
+-(void)initSelectionCells{
+
+    NSMutableArray * cellArray = [[NSMutableArray alloc]initWithCapacity:4];
+    NSArray * colorArray = @[UIColorFromRGB(0xFF814F),UIColorFromRGB(0xF9FF4F),UIColorFromRGB(0x34D3FF),UIColorFromRGB(0x46FFAB)];
+    
+    for (int i = 0; i < 4; i++) {
+//        GameBoardCell * cell = [[GameBoardCell alloc]initWithFrame:CGRectMake(0, 0, _cellWidth, _cellWidth)];
+//        [cell setColor:i];
+//        [cell setMenuActionWithBlock:^{
+//            NSLog(@"傻逼");
+//        }];
+        
+        UIView * cell = [[UIView alloc]initWithFrame:CGRectMake(0, 0, _cellWidth, _cellWidth)];
+        [cell setBackgroundColor:colorArray[i]];
+        [cell setTag:i + SElECTED_CELL_TAG ];
+        __block UIView* weak_cell = cell;
+        [cell setMenuActionWithBlock:^{
+            
+            [self.sideMenu close];
+            
+            self.SelectedCellColor = weak_cell.tag- SElECTED_CELL_TAG;
+            //改变点击celll的颜色
+            [self performSelectorOnMainThread:@selector(changeCellColor) withObject:nil waitUntilDone:YES];
+            
+                    }];
+        
+        [cellArray addObject: cell];
+    }
+  
+    self.sideMenu = [[HMSideMenu alloc]initWithItems:cellArray];
+    [self.sideMenu setItemSpacing:_cellWidth/3.0];
+    [self addSubview:self.sideMenu];
+   // [self.sideMenu close];
+    
+
+}
+
+
+-(void)toggeSelectionCells{
+
+    if (!self.sideMenu.isOpen) {
+        [self.sideMenu open];
+        self.isChangeColor = NO;
+    }
+    
+}
+
+-(void) changeCellColor{
+
+  GameBoardCell * cell =[self.storeSelectedCellSet anyObject];
+    [cell setColor:self.SelectedCellColor];
+    [self.storeSelectedCellSet removeAllObjects];
+    
+}
 @end
 
 

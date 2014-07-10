@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18459D9F196D951800CC0F39 /* HMSideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 18459D9E196D951800CC0F39 /* HMSideMenu.m */; };
 		50066275190E065C00CCE97E /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50066274190E065C00CCE97E /* iAd.framework */; };
 		5006627D190E504D00CCE97E /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5006627C190E504D00CCE97E /* GameKit.framework */; };
 		5014AE2C190E920400827D82 /* NGGameModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5014AE2B190E920400827D82 /* NGGameModeViewController.m */; };
@@ -184,6 +185,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		18459D9D196D951800CC0F39 /* HMSideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSideMenu.h; sourceTree = "<group>"; };
+		18459D9E196D951800CC0F39 /* HMSideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSideMenu.m; sourceTree = "<group>"; };
 		50066274190E065C00CCE97E /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		50066276190E066600CCE97E /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		5006627C190E504D00CCE97E /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
@@ -385,6 +388,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18459D9C196D951800CC0F39 /* HMSideView */ = {
+			isa = PBXGroup;
+			children = (
+				18459D9D196D951800CC0F39 /* HMSideMenu.h */,
+				18459D9E196D951800CC0F39 /* HMSideMenu.m */,
+			);
+			path = HMSideView;
+			sourceTree = "<group>";
+		};
 		5014AE33190F86D400827D82 /* GoogleAdMobAdsSdkiOS-6.5.1 */ = {
 			isa = PBXGroup;
 			children = (
@@ -641,6 +653,7 @@
 		50FB049119694C1600941EEF /* view */ = {
 			isa = PBXGroup;
 			children = (
+				18459D9C196D951800CC0F39 /* HMSideView */,
 				50FB049219694C2500941EEF /* GameBoardCell.h */,
 				50FB049319694C2500941EEF /* GameBoardCell.m */,
 				50FB049419694C2500941EEF /* GameBoardView.h */,
@@ -904,6 +917,7 @@
 				5014AF35190F9B1F00827D82 /* NGResultViewController.m in Sources */,
 				50EDF3B818FFB755003FBA71 /* NGAppDelegate.m in Sources */,
 				508B8B0D191891E900DC9FA6 /* NGAboutViewController.m in Sources */,
+				18459D9F196D951800CC0F39 /* HMSideMenu.m in Sources */,
 				50FB049719694C2500941EEF /* GameBoardView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

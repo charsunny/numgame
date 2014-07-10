@@ -14,6 +14,7 @@
 #import "GADInterstitial.h"
 #import "NGResultViewController.h"
 #import "GameBoardView.h"
+#import "GameBoardCell.h"
 #import <pop/pop.h>
 @import AudioToolbox;
 @import AVFoundation;
@@ -50,6 +51,7 @@
 @property (nonatomic) BOOL loadADSuccess;
 
 @property (nonatomic) BOOL haveSound;
+
 
 @end
 
@@ -110,6 +112,8 @@
                                                                     options:0
                                                                     metrics:nil
                                                                     views:NSDictionaryOfVariableBindings(_timeLabel,_scoreLabel)]];
+    
+    self.gameBoardView.isChangeColor = NO;
     [self resumeGame];
 }
 
@@ -365,9 +369,24 @@ didFailToReceiveAdWithError:(GADRequestError *)error {
 
 -(IBAction)changeCellColor:(id)sender{
 
-
+    [self.progressTimer invalidate];
+    //让所有cell处于激活状态
+       //当点击了cell识别这个cell在这个view上弹出一个popView，有4种颜色
+    
+    
+    //点击popView的颜色改变cell的颜色，popView移除
+    
+    
+    //
+    
+    self.gameBoardView.isChangeColor = YES;
+    [self.gameBoardView performSelector:@selector(changeCellColor:) withObject:sender];
+  
 
 
 }
+
+
+
 
 @end

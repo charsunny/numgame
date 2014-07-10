@@ -16,6 +16,7 @@
 @interface GameBoardView : UIView
 
 @property (weak,nonatomic)id<GameBoardViewDelegate>delegate;
+@property (nonatomic ,assign) BOOL isChangeColor;
 - (void)layoutBoardWithCellNum:(int)num;
 
 
