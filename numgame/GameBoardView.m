@@ -21,6 +21,10 @@
 #define BOARD_WIDTH         (320)
 
 #define SElECTED_CELL_TAG   (2048)
+
+//score marco
+#define Two_Same_Number_Score  2
+#define Four_Same_Number_Score 10
 @interface GameBoardView()
 {
     //flag that indicates that 2 cells can be eliminated;
@@ -204,22 +208,32 @@
     if ([self currectNum] == 10 || canEliminated) {
         [self removeEffectView];
         [self performSelector:@selector(playSoundFXnamed:) withObject:[NSString stringWithFormat:@"square_%d.aif", _selectedCell.count]];
+        //4个cell是否拥有相同颜色
         if([self eliminatedSameColorCell]) {
             int curColor = ((GameBoardCell*)_selectedCell.firstObject).color;
+            [self addDashBoardScore: [self getOtherSameColorSocre:curColor]];
+            [self addDashBoardScore:Four_Same_Number_Score];
             [_selectedCell setArray:[self getAllCellWithColor:curColor]];
-            [self addDashBoardScore:10];
         }
+        //消除2个cell所得分数
+        else if(canEliminated)
+        {
+            [self addDashBoardScore:Two_Same_Number_Score];
+        }
+        //消除不同颜色的4个cell所得分数
         else
         {
-            [self addDashBoardScore:4];
-        }
+            [self addDashBoardScore:Four_Same_Number_Score];
+        w}
         [self relayoutCells];
     }
+    
     [_selectedCell removeAllObjects];
     canEliminated = NO;
     [self setNeedsDisplay];
-    [self debugCell];
+    //[self debugCell];
 }
+
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
     [self removeAllBorderEffect];
@@ -381,7 +395,7 @@
 }
 
 
-
+//判断是否是4个cell相连 且 颜色相同
 -(BOOL)eliminatedSameColorCell{
 
     if (_selectedCell.count < 4) {
@@ -535,12 +549,29 @@
     [view.layer pop_addAnimation:scaleAnimation forKey:@"layerScaleSpringAnimation"];
 }
 
+
+#pragma mark 分数相关 score related
 -(void)addDashBoardScore:(int)score
 {
     if([self.delegate respondsToSelector:@selector(increaseScore:)])
     {
         [self.delegate increaseScore:score];
     }
+}
+
+//获取相同颜色的其它cell分数(即其自身数字)
+- (int)getOtherSameColorSocre:(int)curColor
+{
+    NSArray* arr = [self getAllCellWithColor:curColor];
+    int sum = 0;
+    for (int i = 0 ; i<arr.count; i++) {
+        sum+=((GameBoardCell*)arr[i]).number;
+    }
+    for(int k=0;k<_selectedCell.count;k++)
+    {
+        sum-=((GameBoardCell*)_selectedCell[k]).number;
+    }
+    return sum;
 }
 
 #pragma mark for debugging
