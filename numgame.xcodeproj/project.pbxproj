@@ -108,6 +108,7 @@
 		508B8AFF1917BEC100DC9FA6 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 508B8AFE1917BEC100DC9FA6 /* Social.framework */; };
 		508B8B021918861900DC9FA6 /* NGGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 508B8B011918861900DC9FA6 /* NGGuideViewController.m */; };
 		508B8B0D191891E900DC9FA6 /* NGAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 508B8B0C191891E900DC9FA6 /* NGAboutViewController.m */; };
+		50949E76196EBBCB00903689 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 50949E75196EBBCB00903689 /* config.plist */; };
 		50EDF3A818FFB755003FBA71 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50EDF3A718FFB755003FBA71 /* Foundation.framework */; };
 		50EDF3AA18FFB755003FBA71 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50EDF3A918FFB755003FBA71 /* CoreGraphics.framework */; };
 		50EDF3AC18FFB755003FBA71 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50EDF3AB18FFB755003FBA71 /* UIKit.framework */; };
@@ -248,9 +249,6 @@
 		5014AF6019163AA700827D82 /* soundZ.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = soundZ.mp3; sourceTree = "<group>"; };
 		5014AF6119163AA700827D82 /* touch.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = touch.m4a; sourceTree = "<group>"; };
 		503401A4196954D800AAD2B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		503401A61969555500AAD2B6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		503401A71969555500AAD2B6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main_iPhone.strings"; sourceTree = "<group>"; };
-		503401A81969555600AAD2B6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		503401A919695DCA00AAD2B6 /* 1.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1.aif; sourceTree = "<group>"; };
 		503401AA19695DCA00AAD2B6 /* 2.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = 2.aif; sourceTree = "<group>"; };
 		503401AB19695DCA00AAD2B6 /* 3.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = 3.aif; sourceTree = "<group>"; };
@@ -305,6 +303,10 @@
 		508B8B011918861900DC9FA6 /* NGGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NGGuideViewController.m; sourceTree = "<group>"; };
 		508B8B0B191891E900DC9FA6 /* NGAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGAboutViewController.h; sourceTree = "<group>"; };
 		508B8B0C191891E900DC9FA6 /* NGAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NGAboutViewController.m; sourceTree = "<group>"; };
+		50949E6B196EB98100903689 /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/Main_iPhone.strings"; sourceTree = "<group>"; };
+		50949E73196EB98100903689 /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		50949E74196EB98100903689 /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		50949E75196EBBCB00903689 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 		50EDF3A418FFB755003FBA71 /* numgame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = numgame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50EDF3A718FFB755003FBA71 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		50EDF3A918FFB755003FBA71 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -628,6 +630,7 @@
 				50EDF3B018FFB755003FBA71 /* InfoPlist.strings */,
 				50EDF3B318FFB755003FBA71 /* main.m */,
 				50EDF3B518FFB755003FBA71 /* numgame-Prefix.pch */,
+				50949E75196EBBCB00903689 /* config.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -730,7 +733,7 @@
 			knownRegions = (
 				en,
 				Base,
-				"zh-Hans",
+				"zh-Hans-CN",
 			);
 			mainGroup = 50EDF39B18FFB755003FBA71;
 			productRefGroup = 50EDF3A518FFB755003FBA71 /* Products */;
@@ -863,6 +866,7 @@
 				503401EB19695DCA00AAD2B6 /* soundE.mp3 in Resources */,
 				50FCBE4A19166EC500203703 /* bauhs93.ttf in Resources */,
 				503401F119695DCA00AAD2B6 /* soundK.mp3 in Resources */,
+				50949E76196EBBCB00903689 /* config.plist in Resources */,
 				5014AF7819163AA700827D82 /* soundS.mp3 in Resources */,
 				5014AF7319163AA700827D82 /* soundN.mp3 in Resources */,
 				50FA44711918C47400D24F7B /* iTunesArtwork.png in Resources */,
@@ -945,7 +949,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				503401A4196954D800AAD2B6 /* Base */,
-				503401A71969555500AAD2B6 /* zh-Hans */,
+				50949E6B196EB98100903689 /* zh-Hans-CN */,
 			);
 			name = Main_iPhone.storyboard;
 			sourceTree = "<group>";
@@ -954,7 +958,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				50EDF3B118FFB755003FBA71 /* en */,
-				503401A61969555500AAD2B6 /* zh-Hans */,
+				50949E73196EB98100903689 /* zh-Hans-CN */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -963,7 +967,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				50EDF3D318FFB756003FBA71 /* en */,
-				503401A81969555600AAD2B6 /* zh-Hans */,
+				50949E74196EB98100903689 /* zh-Hans-CN */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

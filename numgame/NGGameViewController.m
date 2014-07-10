@@ -29,11 +29,17 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeTitle;
 
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
-@property (nonatomic)int timeSpent;
+
+@property (nonatomic) int timeSpent;
+
+@property (nonatomic) int currectLevel;
+
+@property (nonatomic, strong) NSArray* levelConfig;
 
 @property (weak, nonatomic) IBOutlet UILabel *scoreTitle;
 
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+
 @property (nonatomic)int score;
 
 @property (weak, nonatomic) IBOutlet UIView *pauseView;
@@ -56,6 +62,7 @@
 @end
 
 @implementation NGGameViewController
+
 #pragma mark property
 - (void)setTimeSpent:(int)timeSpent
 {
@@ -63,17 +70,27 @@
     _timeLabel.text = [NSString stringWithFormat:@"%d",_timeSpent];
     [self addPopSpringAnimation:_timeLabel];
 }
+
 - (void)setScore:(int)score
 {
     _score = score;
     _scoreLabel.text = [NSString stringWithFormat:@"%d",_score];
     [self addPopSpringAnimation:_scoreLabel];
 }
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     srand((unsigned int)time(NULL));
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    //init gameconfig
+    
+    _currectLevel = 1;
+    
+    NSString* levelPath = [[NSBundle mainBundle] pathForResource:@"config" ofType:@"plist"];
+    _levelConfig = [NSArray arrayWithContentsOfFile:levelPath];
+    
     [_gADBannerView setAdUnitID:@"a1535f4e3f36f4b"];
     [_gADBannerView setBackgroundColor:[UIColor colorWithRed:59/255.0 green:188/255.0 blue:229/255.0 alpha:1.0]];
     _gADBannerView.rootViewController = self;
@@ -128,21 +145,19 @@
 
 - (void)initGameData {
     switch (_gameMode) {
-        case NGGameModeClassic:
+        case NGGameModeClassic: {
+            NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
             _leftTime = 0;
             _score = 0;
-            [_scoreLabel setText:@"0"];
-            [_timeLabel setText:@"0"];
-            [_scoreTitle setText:@"Score"];
-            [_timeTitle setText:@"Time"];
+            [_scoreLabel setText:[NSString stringWithFormat:@"0/%@",levelInfo[@"score"]]];
+            [_timeLabel setText:[NSString stringWithFormat:@"0/%@",levelInfo[@"step"]]];
             break;
+        }
         case NGGameModeTimed:
             _leftTime = 10.0;
             _score = 0;
             [_scoreLabel setText:@"0"];
             [_timeLabel setText:@"0.0"];
-            [_scoreTitle setText:@"Score"];
-            [_timeTitle setText:@"time"];
             break;
         default:
             break;
@@ -157,17 +172,16 @@
 
 
 - (void)resumeGame {
-    [_progressTimer invalidate];
-    _progressTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateGameTime) userInfo:nil repeats:YES];
-    [_progressTimer fire];
-    //[self genRandomNumberWithAnimate:NO];
+//    [_progressTimer invalidate];
+//    _progressTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateGameTime) userInfo:nil repeats:YES];
+//    [_progressTimer fire];
 }
 
 -(void)updateGameTime
 {
    if(_gameMode == NGGameModeClassic)
    {
-       self.timeSpent+=1;
+       self.timeSpent++;
    }
    else
    {
