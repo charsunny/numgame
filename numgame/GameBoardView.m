@@ -44,7 +44,7 @@
 @property (nonatomic,strong) HMSideMenu* sideMenu;
 @property (nonatomic, assign) int  SelectedCellColor;
 @property (nonatomic,strong) NSMutableSet * storeSelectedCellSet;
-
+@property (nonatomic,strong) UIView * mengceng;
 @end
 
 @implementation GameBoardView
@@ -110,6 +110,18 @@
         if ([view isKindOfClass:[GameBoardCell class]]) {
             GameBoardCell * cell = (GameBoardCell*)view;
             //弹出选择颜色的框
+            
+            self.mengceng = [[UIView alloc]initWithFrame:CGRectOffset(self.frame, 0, -50)];
+            [self.mengceng setFrame:CGRectMake(self.mengceng.frame.origin.x, self.mengceng.frame.origin.y, self.mengceng.frame.size.width, _cellNum*(_cellWidth+EDGE_INSET) -EDGE_INSET)];
+            self.mengceng.backgroundColor = [UIColor whiteColor];
+            self.mengceng.alpha = 0;
+            [self addSubview:self.mengceng];
+            
+            [UIView animateWithDuration:0.3 animations:^{
+                self.mengceng.alpha = 0.5;
+            }];
+            [self bringSubviewToFront:cell];
+            
             [self.storeSelectedCellSet addObject:cell];
             [self toggeSelectionCells];
         
@@ -608,6 +620,7 @@
     self.sideMenu = [[HMSideMenu alloc]initWithItems:cellArray];
     [self.sideMenu setItemSpacing:_cellWidth/3.0];
     [self addSubview:self.sideMenu];
+    [self bringSubviewToFront:self.sideMenu];
    // [self.sideMenu close];
     
 
@@ -628,7 +641,7 @@
   GameBoardCell * cell =[self.storeSelectedCellSet anyObject];
     [cell setColor:self.SelectedCellColor];
     [self.storeSelectedCellSet removeAllObjects];
-    
+    [self.mengceng removeFromSuperview];
 }
 @end
 
