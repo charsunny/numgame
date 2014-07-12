@@ -21,4 +21,5 @@
 - (id)initWithFrame:(CGRect)frame;
 - (void)addRippleEffectToView:(BOOL)animate;
 - (void)removeRippleEffectView;
+- (void)addFlyEffect:(CGPoint)endPoint callback:(void (^)())callback;
 @end
