@@ -4,61 +4,61 @@
 <array>
 	<dict>
 		<key>score</key>
-		<string>50</string>
-		<key>step</key>
-		<string>10</string>
-	</dict>
-	<dict>
-		<key>score</key>
-		<string>150</string>
-		<key>step</key>
-		<string>10</string>
-	</dict>
-	<dict>
-		<key>score</key>
-		<string>250</string>
-		<key>step</key>
-		<string>10</string>
-	</dict>
-	<dict>
-		<key>score</key>
 		<string>500</string>
 		<key>step</key>
-		<string>15</string>
-	</dict>
-	<dict>
-		<key>score</key>
-		<string>750</string>
-		<key>step</key>
-		<string>15</string>
+		<string>10</string>
 	</dict>
 	<dict>
 		<key>score</key>
 		<string>1000</string>
 		<key>step</key>
-		<string>15</string>
-	</dict>
-	<dict>
-		<key>score</key>
-		<string>1250</string>
-		<key>step</key>
-		<string>20</string>
+		<string>10</string>
 	</dict>
 	<dict>
 		<key>score</key>
 		<string>1500</string>
 		<key>step</key>
-		<string>20</string>
+		<string>10</string>
 	</dict>
 	<dict>
 		<key>score</key>
 		<string>2000</string>
 		<key>step</key>
+		<string>15</string>
+	</dict>
+	<dict>
+		<key>score</key>
+		<string>3000</string>
+		<key>step</key>
+		<string>15</string>
+	</dict>
+	<dict>
+		<key>score</key>
+		<string>4000</string>
+		<key>step</key>
+		<string>15</string>
+	</dict>
+	<dict>
+		<key>score</key>
+		<string>5000</string>
+		<key>step</key>
 		<string>20</string>
 	</dict>
 	<dict>
 		<key>score</key>
-		<string>2500</string>
+		<string>7500</string>
+		<key>step</key>
+		<string>20</string>
+	</dict>
+	<dict>
+		<key>score</key>
+		<string>10000</string>
+		<key>step</key>
+		<string>20</string>
+	</dict>
+	<dict>
+		<key>score</key>
+		<string>125000</string>
 		<key>step</key>
 		<string>20</string>
 	</dict>

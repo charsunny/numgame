@@ -23,8 +23,9 @@
 #define SElECTED_CELL_TAG   (2048)
 
 //score marco
-#define Two_Same_Number_Score  2
-#define Four_Same_Number_Score 10
+#define Two_Same_Number_Score           10
+#define Four_Same_Number_Score          100
+#define Four_Diff_Color_Number_Score    50
 @interface GameBoardView()
 {
     //flag that indicates that 2 cells can be eliminated;
@@ -62,6 +63,7 @@
         _effectViewArray = [NSMutableArray new];
         _playerForSound = [NSMutableDictionary new];
         self.backgroundColor = [UIColor clearColor];
+        self.multipleTouchEnabled = NO;
         self.storeSelectedCellSet = [[NSMutableSet alloc]initWithCapacity:1];
         [self setClipsToBounds:YES];
     }
@@ -223,7 +225,7 @@
         //消除不同颜色的4个cell所得分数
         else
         {
-            [self addDashBoardScore:Four_Same_Number_Score];
+            [self addDashBoardScore:Four_Diff_Color_Number_Score];
         }
         [self relayoutCells];
     }
@@ -563,6 +565,9 @@
 - (int)getOtherSameColorSocre:(int)curColor
 {
     NSArray* arr = [self getAllCellWithColor:curColor];
+    
+    return (arr.count - _selectedCell.count)*10;
+    
     int sum = 0;
     for (int i = 0 ; i<arr.count; i++) {
         sum+=((GameBoardCell*)arr[i]).number;
