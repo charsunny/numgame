@@ -21,6 +21,7 @@
 @property (nonatomic ,strong) UIButton *playBtn;
 @property (nonatomic ,strong) UIButton *shareBtn;
 @property (nonatomic, strong) NSString* score;
+@property (nonatomic,assign) BOOL isCompleted;
 @end
 
 @implementation GameResultView
@@ -32,7 +33,7 @@
 
     CGRect rect = [[UIApplication sharedApplication] keyWindow].frame;
     self = [self initWithFrame:rect];
-    
+    self.isCompleted = isPass;
     if (self) {
         [self setBackgroundColor:[UIColor colorWithRed:127 green:127 blue:127 alpha:0.8]];
         _contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 280, 200)];
@@ -105,7 +106,13 @@
     
     self.playBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     _playBtn.frame = CGRectMake(140, 160, 140, 40);
-    [_playBtn setTitle:@"Next Level" forState:UIControlStateNormal];
+    if (self.isCompleted) {
+         [_playBtn setTitle:@"Next Level" forState:UIControlStateNormal];
+    }
+    else{
+        [_playBtn setTitle:@"Try again" forState:UIControlStateNormal];
+    }
+   
     [_playBtn.titleLabel setFont:[UIFont fontWithName:TITLE_FONT size:20]];
     [_contentView addSubview:_playBtn];
     [_playBtn addTarget:self action:@selector(playBtnPressed:) forControlEvents: UIControlEventTouchUpInside];
@@ -132,7 +139,7 @@
 
 -(void)menuBtnPressed:(UIButton*)btn{
 
-    [self removeFromSuperview];
+   
 
     
 }
@@ -140,6 +147,7 @@
 
 -(void)playBtnPressed:(UIButton*)btn{
 
+     [self removeFromSuperview];
 }
 
 - (void)shareBtnPressed:(UIButton*)btn {
