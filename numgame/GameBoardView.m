@@ -598,11 +598,9 @@
         }
     }
     //NSLog(@"array中GameBoardView的个数：%d",array.count);
-    for (GameBoardView * view in array) {
+    //for (GameBoardView * view in array) {
         //NSLog(@"views tag is %d",view.tag);
-    }
-    
-    
+    //}
 }
 
 

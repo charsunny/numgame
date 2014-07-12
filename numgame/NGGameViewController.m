@@ -23,7 +23,7 @@
 @import GameKit;
 @import StoreKit;
 
-@interface NGGameViewController ()<UIAlertViewDelegate,ADBannerViewDelegate, GADInterstitialDelegate, GADBannerViewDelegate,GameBoardViewDelegate>
+@interface NGGameViewController ()<UIAlertViewDelegate,GameBoardViewDelegate>
 
 @property (weak, nonatomic) IBOutlet GameBoardView *gameBoardView;
 
@@ -49,19 +49,14 @@
 
 @property (strong, nonatomic) NSTimer* progressTimer;
 
-@property (weak, nonatomic) IBOutlet GADBannerView* gADBannerView;
-
-@property (strong, nonatomic) GADInterstitial* gADInterstitial;
-
 @property (strong, nonatomic) AVAudioPlayer *audioPlayer;
 
 @property (nonatomic) float leftTime;
 
-@property (nonatomic) BOOL loadADSuccess;
-
 @property (nonatomic) BOOL haveSound;
 
 @property (nonatomic,strong) GameResultView *gameResultView;
+
 @end
 
 @implementation NGGameViewController
@@ -88,8 +83,6 @@
 {
     [super viewDidLoad];
     srand((unsigned int)time(NULL));
-	// Do any additional setup after loading the view, typically from a nib.
-    
     //init gameconfig
     
     _currectLevel = 1;
@@ -97,18 +90,6 @@
     NSString* levelPath = [[NSBundle mainBundle] pathForResource:@"config" ofType:@"plist"];
     _levelConfig = [NSArray arrayWithContentsOfFile:levelPath];
     
-    [_gADBannerView setAdUnitID:@"a1535f4e3f36f4b"];
-    [_gADBannerView setBackgroundColor:[UIColor colorWithRed:59/255.0 green:188/255.0 blue:229/255.0 alpha:1.0]];
-    _gADBannerView.rootViewController = self;
-    _gADBannerView.delegate = self;
-    //[self.view addSubview:_gADBannerView];
-    [_gADBannerView loadRequest:[GADRequest request]];
-    
-    _gADInterstitial = [[GADInterstitial alloc] init];
-    _gADInterstitial.adUnitID = @"a1535f4e3f36f4b";
-    [_gADInterstitial setDelegate:self];
-    [_gADInterstitial loadRequest:[GADRequest request]];
-
     _timeSpent = 0;
     _leftTime = 10.0;
     
@@ -126,18 +107,6 @@
     
     [_timeLabel setAdjustsFontSizeToFitWidth:YES];
     [_scoreLabel setAdjustsFontSizeToFitWidth:YES];
-    //self.gameResultView = [[GameResultView alloc]initGameResultViewWithScore:100 Completion:YES];
- //   [self.view addSubview:self.gameResultView];
-//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(50)-[_timeTitle(>=100)]-(50)-[_scoreTitle(==_timeTitle)]-(50)-|"
-//                                                                    options:0
-//                                                                    metrics:nil
-//                                                                    views:NSDictionaryOfVariableBindings(_timeTitle,_scoreTitle)]];
-//    
-//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(50)-[_timeLabel(>=100)]-(50)-[_scoreLabel(==_timeLabel)]-(50)-|"
-//                                                                    options:0
-//                                                                    metrics:nil
-//                                                                    views:NSDictionaryOfVariableBindings(_timeLabel,_scoreLabel)]];
-    
     self.gameBoardView.isChangeColor = NO;
     [self resumeGame];
 }
@@ -237,9 +206,6 @@
     [_progressTimer invalidate];
     if([destinationViewController isKindOfClass:[NGResultViewController class]]) {
         NGResultViewController* controller = (NGResultViewController*)destinationViewController;
-        if (_loadADSuccess) {
-            [controller setGADInterstitial:_gADInterstitial];
-        }
         controller.gameMode = _gameMode;
         if (_gameMode == NGGameModeClassic) {
             controller.time = _timeLabel.text;
@@ -275,34 +241,6 @@
             }
         }
     }
-}
-
-#pragma mark -- ads -- 
-
-- (void)adViewWillPresentScreen:(GADBannerView *)adView {
-    [_progressTimer invalidate];
-}
-
-- (void)interstitialDidReceiveAd:(GADInterstitial *)ad {
-    _loadADSuccess = YES;
-}
-
-- (void)interstitial:(GADInterstitial *)ad
-didFailToReceiveAdWithError:(GADRequestError *)error {
-    _loadADSuccess = NO;
-}
-
-- (void)interstitialDidDismissScreen:(GADInterstitial *)ad {
-    _gADInterstitial = [[GADInterstitial alloc] init];
-    _gADInterstitial.adUnitID = @"a1535f4e3f36f4b";
-    [_gADInterstitial setDelegate:self];
-    [_gADInterstitial loadRequest:[GADRequest request]];
-    [self showResult];
-}
-
-- (void)interstitialWillLeaveApplication:(GADInterstitial *)ad {
-    [self showResult];
-    [self initGameData];
 }
 
 #pragma mark -- play sound -- 
