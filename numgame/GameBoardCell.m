@@ -143,7 +143,9 @@
 }
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
-    self.animtionCallback();
+    if (self.animtionCallback) {
+        self.animtionCallback();
+    }
     [self removeFromSuperview];
 }
 

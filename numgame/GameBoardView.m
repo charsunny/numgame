@@ -227,8 +227,7 @@
             [_selectedCell setArray:[self getAllCellWithColor:curColor]];
             __weak typeof(self) weakSelf = self;
             [self addCellFlyAnimation:^{
-                [weakSelf addDashBoardScore: [weakSelf getOtherSameColorSocre:curColor]];
-                [weakSelf addDashBoardScore:Four_Same_Number_Score];
+                [weakSelf addDashBoardScore: [weakSelf getOtherSameColorSocre:curColor] + Four_Same_Number_Score];
             }];
         }
         //消除2个cell所得分数
@@ -698,9 +697,13 @@
         CGPoint newPoint = [self convertPoint:copyCell.frame.origin toView:self.superview];
         copyCell.frame = CGRectMake(newPoint.x, newPoint.y, copyCell.frame.size.width, copyCell.frame.size.height);
         [weakSelf.superview addSubview:copyCell];
-        [copyCell addFlyEffect:scoreLabel.center callback:^{
-            callback();
-        }];
+        if (idx == 0) {
+            [copyCell addFlyEffect:scoreLabel.center callback:^{
+                callback();
+            }];
+        } else {
+            [copyCell addFlyEffect:scoreLabel.center callback:nil];
+        }
     }];
 }
 @end

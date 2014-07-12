@@ -209,6 +209,13 @@
 - (void)showResult {
     self.gameResultView = [[GameResultView alloc]initGameResultViewWithScore:100 Completion:YES];
     [self.view addSubview:self.gameResultView];
+    self.score = 0;
+    self.timeSpent = 0;
+    _currectLevel +=1;
+    NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
+    [_scoreLabel setText:[NSString stringWithFormat:@"%d/%@",_score, levelInfo[@"score"]]];
+    [_levelLabel setText:[NSString stringWithFormat:@"%d",_currectLevel]];
+    [self addPopSpringAnimation:_scoreLabel];
 }
 
 #pragma mark -- background handler --
