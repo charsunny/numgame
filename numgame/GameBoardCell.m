@@ -133,11 +133,13 @@
     pathAnimation.path = curvePath;
     
     CAAnimationGroup* groupAnimation = [[CAAnimationGroup alloc] init];
+    groupAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     groupAnimation.animations = @[ pathAnimation, scaleAnimation,opacity];
     groupAnimation.duration = 0.3;
     groupAnimation.removedOnCompletion = YES;
     groupAnimation.fillMode = kCAFillModeForwards;
     groupAnimation.delegate = self;
+    groupAnimation.beginTime = CACurrentMediaTime() + rand() % 3 * 0.1;
     [self.layer addAnimation:groupAnimation forKey:@"flyCellEffect"];
     self.alpha = 0;
 }

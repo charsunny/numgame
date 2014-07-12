@@ -62,6 +62,7 @@
 @property (nonatomic) BOOL haveSound;
 
 @property (nonatomic,strong) GameResultView *gameResultView;
+
 @end
 
 @implementation NGGameViewController
@@ -383,6 +384,24 @@ didFailToReceiveAdWithError:(GADRequestError *)error {
 {
     self.score+=deltaScore;
     NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
+    UILabel* scoreDeltaLabel = [[UILabel alloc]initWithFrame:CGRectMake(_scoreLabel.frame.origin.x - 20 , _scoreLabel.frame.origin.y, 50, 50)];
+    scoreDeltaLabel.text =[NSString stringWithFormat:@"+%d",deltaScore ];
+    scoreDeltaLabel.font = [UIFont fontWithName:@"Apple SD Gothic Neo" size:14];
+    scoreDeltaLabel.textAlignment = NSTextAlignmentCenter;
+    scoreDeltaLabel.textColor = [UIColor grayColor];
+    scoreDeltaLabel.alpha = 0;
+    [self.view addSubview:scoreDeltaLabel];
+    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        scoreDeltaLabel.alpha = 1;
+        scoreDeltaLabel.transform = CGAffineTransformMakeTranslation(0, -30);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            scoreDeltaLabel.alpha = 0;
+            scoreDeltaLabel.transform = CGAffineTransformMakeTranslation(0, -50);
+        } completion:^(BOOL finished) {
+            [scoreDeltaLabel removeFromSuperview];
+        }];
+    }];
     if ([levelInfo[@"score"] intValue] <= self.score) {
         [self showResult];
     } else if ([levelInfo[@"step"] intValue] <= self.timeSpent) {
