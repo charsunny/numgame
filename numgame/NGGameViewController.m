@@ -168,19 +168,28 @@
         } else {
             [_timeLabel setText:@"0.0"];
             [_progressTimer invalidate];
-            [self showResult];
+            [self showResult:YES];
         }
    }
 }
 
 #pragma mark  --IBACTION--
 
-- (void)showResult {
-    self.gameResultView = [[GameResultView alloc]initGameResultViewWithScore:100 Completion:YES];
+- (void)showResult:(BOOL)completed {
+    self.gameResultView = [[GameResultView alloc]initGameResultViewWithScore:self.score Completion:completed];
     [self.view addSubview:self.gameResultView];
-    self.score = 0;
-    self.timeSpent = 0;
-    _currectLevel +=1;
+   
+    if (completed) {
+        self.timeSpent = 0;
+        _currectLevel +=1;
+     
+    }
+    else{
+        self.timeSpent = 0;
+        self.score = 0;
+    
+    }
+
     NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
     [_scoreLabel setText:[NSString stringWithFormat:@"%d/%@",_score, levelInfo[@"score"]]];
     [_levelLabel setText:[NSString stringWithFormat:@"%d",_currectLevel]];
@@ -321,10 +330,28 @@
 {
     self.score+=deltaScore;
     NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
+    UILabel* scoreDeltaLabel = [[UILabel alloc]initWithFrame:CGRectMake(_scoreLabel.frame.origin.x - 20 , _scoreLabel.frame.origin.y, 50, 50)];
+    scoreDeltaLabel.text =[NSString stringWithFormat:@"+%d",deltaScore ];
+    scoreDeltaLabel.font = [UIFont fontWithName:@"Apple SD Gothic Neo" size:14];
+    scoreDeltaLabel.textAlignment = NSTextAlignmentCenter;
+    scoreDeltaLabel.textColor = [UIColor grayColor];
+    scoreDeltaLabel.alpha = 0;
+    [self.view addSubview:scoreDeltaLabel];
+    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        scoreDeltaLabel.alpha = 1;
+        scoreDeltaLabel.transform = CGAffineTransformMakeTranslation(0, -30);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            scoreDeltaLabel.alpha = 0;
+            scoreDeltaLabel.transform = CGAffineTransformMakeTranslation(0, -50);
+        } completion:^(BOOL finished) {
+            [scoreDeltaLabel removeFromSuperview];
+        }];
+    }];
     if ([levelInfo[@"score"] intValue] <= self.score) {
-        [self showResult];
+        [self showResult:YES];
     } else if ([levelInfo[@"step"] intValue] <= self.timeSpent) {
-        [self showResult];
+        [self showResult:NO];
     }
 }
 -(void)decreaseScore:(int)deltaScore

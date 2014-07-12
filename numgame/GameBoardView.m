@@ -220,10 +220,6 @@
         //4个cell是否拥有相同颜色
         if([self eliminatedSameColorCell]) {
             int curColor = ((GameBoardCell*)_selectedCell.firstObject).color;
-            
-//            [self addDashBoardScore: [self getOtherSameColorSocre:curColor]];
-//            [self addDashBoardScore:Four_Same_Number_Score];
-            
             [_selectedCell setArray:[self getAllCellWithColor:curColor]];
             __weak typeof(self) weakSelf = self;
             [self addCellFlyAnimation:^{

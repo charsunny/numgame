@@ -20,6 +20,7 @@
 @property (nonatomic ,strong) UIButton *playBtn;
 @property (nonatomic ,strong) UIButton *shareBtn;
 @property (nonatomic, strong) NSString* score;
+@property (nonatomic,assign) BOOL isCompleted;
 
 @end
 
@@ -32,7 +33,7 @@
 
     CGRect rect = [[UIApplication sharedApplication] keyWindow].frame;
     self = [self initWithFrame:rect];
-    
+    self.isCompleted = isPass;
     if (self) {
         [self setBackgroundColor:[UIColor colorWithRed:127 green:127 blue:127 alpha:0.8]];
         
@@ -99,19 +100,16 @@
     
     self.playBtn = [UIButton buttonWithType:UIButtonTypeSystem];
     _playBtn.frame = CGRectMake(140, 160, 140, 40);
-    [_playBtn setTitle:@"Next Level" forState:UIControlStateNormal];
+    if (self.isCompleted) {
+         [_playBtn setTitle:@"Next Level" forState:UIControlStateNormal];
+    }
+    else{
+        [_playBtn setTitle:@"Try again" forState:UIControlStateNormal];
+    }
+   
     [_playBtn.titleLabel setFont:[UIFont fontWithName:TITLE_FONT size:20]];
     [self addSubview:_playBtn];
     [_playBtn addTarget:self action:@selector(playBtnPressed:) forControlEvents: UIControlEventTouchUpInside];
-    
-//    UIView * horizon_view = [[UIView alloc]initWithFrame:CGRectMake(0, 159.5, 280, 0.5)];
-//    horizon_view.backgroundColor = [UIColor lightGrayColor];
-//    [_contentView addSubview:horizon_view];
-//
-//    UIView * vertical_view =[[UIView alloc]initWithFrame:CGRectMake(140, 159.5, 0.5, 50)];
-//    vertical_view.backgroundColor = [UIColor lightGrayColor];
-//    [_contentView addSubview:vertical_view];
-    
 }
 
 
@@ -126,7 +124,7 @@
 
 -(void)menuBtnPressed:(UIButton*)btn{
 
-    [self removeFromSuperview];
+   
 
     
 }
@@ -134,25 +132,11 @@
 
 -(void)playBtnPressed:(UIButton*)btn{
 
+     [self removeFromSuperview];
 }
 
 - (void)shareBtnPressed:(UIButton*)btn {
 
 }
-
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-//- (void)drawRect:(CGRect)rect
-//{
-//    // Drawing code
-//    CGContextRef context = UIGraphicsGetCurrentContext();
-//    CGContextSetLineWidth(context, 1);
-//    CGContextSetStrokeColorWithColor(context, [UIColor redColor].CGColor);
-//    CGContextMoveToPoint(context, 0, 150);
-//    CGContextAddLineToPoint(context, 280, 150);
-//    CGContextMoveToPoint(context, 140, 150);
-//    CGContextAddLineToPoint(context, 140, 200);
-//    CGContextStrokePath(context);
-//}
 
 @end
