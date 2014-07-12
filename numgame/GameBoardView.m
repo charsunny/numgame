@@ -48,7 +48,8 @@
 @property (nonatomic,strong) HMSideMenu* sideMenu;
 @property (nonatomic, assign) int  SelectedCellColor;
 @property (nonatomic,strong) NSMutableSet * storeSelectedCellSet;
-@property (nonatomic,strong) UIView * mengceng;
+@property (nonatomic,strong) UIView * maskView;
+@property (nonatomic,assign) float boardInset;
 @end
 
 @implementation GameBoardView
@@ -82,10 +83,11 @@
 }
 
 - (void)layoutBoardWithCellNum:(int)num {
-    float boardInset = (self.frame.size.height - self.frame.size.width)/2;
+     _boardInset = (self.frame.size.height - self.frame.size.width)/2;
     if (iPhone5) {
-        boardInset += 28;
+        _boardInset += 28;
     }
+    // boardInset
     _cellNum = num;
     int cellInset = CELL_INSET - (num - 3);
     _cellWidth = (BOARD_WIDTH - 2*EDGE_INSET - (num-1)*cellInset)/num;
@@ -93,7 +95,7 @@
         for(int j = 0; j < num; j++) {
             GameBoardCell* view = [[GameBoardCell alloc] initWithFrame:CGRectMake(0, 0, _cellWidth, _cellWidth)];
             view.tag = i*num + j + 1;
-            CGPoint center = CGPointMake(EDGE_INSET + _cellWidth/2 + j*(_cellWidth+cellInset), boardInset + EDGE_INSET + _cellWidth/2 + i*(_cellWidth+cellInset));
+            CGPoint center = CGPointMake(EDGE_INSET + _cellWidth/2 + j*(_cellWidth+cellInset), _boardInset + EDGE_INSET + _cellWidth/2 + i*(_cellWidth+cellInset));
             _posArray[i*num + j] = [NSValue valueWithCGPoint:center];
             [view setCenter:center];
             [self addSubview:view];
@@ -115,14 +117,16 @@
             GameBoardCell * cell = (GameBoardCell*)view;
             //弹出选择颜色的框
             
-            self.mengceng = [[UIView alloc]initWithFrame:CGRectOffset(self.frame, 0, -50)];
-            [self.mengceng setFrame:CGRectMake(self.mengceng.frame.origin.x, self.mengceng.frame.origin.y, self.mengceng.frame.size.width, _cellNum*(_cellWidth+EDGE_INSET) -EDGE_INSET)];
-            self.mengceng.backgroundColor = [UIColor whiteColor];
-            self.mengceng.alpha = 0;
-            [self addSubview:self.mengceng];
+        //    self.maskView = [[UIView alloc]initWithFrame:CGRectOffset(self.frame, 0, -50)];
+            self.maskView = [[UIView alloc]initWithFrame:CGRectMake(0, self.boardInset, self.frame.size.width, _cellNum*(_cellWidth+EDGE_INSET) -EDGE_INSET)];
             
+//            [self.maskView setFrame:CGRectMake(self.maskView.frame.origin.x, self.maskView.frame.origin.y, self.maskView.frame.size.width, _cellNum*(_cellWidth+EDGE_INSET) -EDGE_INSET)];
+            self.maskView.backgroundColor = [UIColor whiteColor];
+            self.maskView.alpha = 0;
+            [self addSubview:self.maskView];
+    
             [UIView animateWithDuration:0.3 animations:^{
-                self.mengceng.alpha = 0.5;
+                self.maskView.alpha = 0.5;
             }];
             [self bringSubviewToFront:cell];
             
@@ -602,7 +606,7 @@
 
 }
 
-
+///增加停顿时候的效果
 -(void) showPauseCellEffective{
     
     NSArray * subcells = [self subviews];
@@ -611,6 +615,7 @@
         if ( [view isKindOfClass:[GameBoardCell class]]) {
             
             //TODO 给view加图层
+         //   [((GameBoardCell *)view)addRippleEffectToView:NO];
             
         }
     }
@@ -625,13 +630,10 @@
     NSArray * colorArray = @[UIColorFromRGB(0xFF814F),UIColorFromRGB(0xF9FF4F),UIColorFromRGB(0x34D3FF),UIColorFromRGB(0x46FFAB)];
     
     for (int i = 0; i < 4; i++) {
-//        GameBoardCell * cell = [[GameBoardCell alloc]initWithFrame:CGRectMake(0, 0, _cellWidth, _cellWidth)];
-//        [cell setColor:i];
-//        [cell setMenuActionWithBlock:^{
-//            NSLog(@"傻逼");
-//        }];
+
         
         UIView * cell = [[UIView alloc]initWithFrame:CGRectMake(0, 0, _cellWidth, _cellWidth)];
+        cell.layer.cornerRadius = _cellWidth/2.0f;
         [cell setBackgroundColor:colorArray[i]];
         [cell setTag:i + SElECTED_CELL_TAG ];
         __block UIView* weak_cell = cell;
@@ -651,7 +653,8 @@
     self.sideMenu = [[HMSideMenu alloc]initWithItems:cellArray];
     [self.sideMenu setItemSpacing:_cellWidth/3.0];
     [self addSubview:self.sideMenu];
-    [self bringSubviewToFront:self.sideMenu];
+ //   [self bringSubviewToFront:self.sideMenu];
+ //   [self insertSubview:self.sideMenu aboveSubview:self.maskView];
    // [self.sideMenu close];
     
 
@@ -662,6 +665,7 @@
 
     if (!self.sideMenu.isOpen) {
         [self.sideMenu open];
+        [self bringSubviewToFront:self.sideMenu];
         self.isChangeColor = NO;
     }
     
@@ -672,7 +676,7 @@
   GameBoardCell * cell =[self.storeSelectedCellSet anyObject];
     [cell setColor:self.SelectedCellColor];
     [self.storeSelectedCellSet removeAllObjects];
-    [self.mengceng removeFromSuperview];
+    [self.maskView removeFromSuperview];
 }
 @end
 
