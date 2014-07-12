@@ -12,10 +12,11 @@
 #define DefalutNumFontSize 30
 #define DefalutNumFontFamily @"AppleSDGothicNeo-Thin"
 
-@interface GameBoardCell()
+@interface GameBoardCell()<NSCopying>
 
 @property (strong, nonatomic) UILabel* numLabel;
 @property (strong, nonatomic) CALayer* effectLayer;
+@property (strong,nonatomic)void (^animtionCallback)();
 
 @end
 
@@ -102,5 +103,76 @@
 - (void)removeRippleEffectView {
     [_effectLayer removeFromSuperlayer];
     [self.layer setNeedsDisplay];
+}
+
+- (void)addFlyEffect:(CGPoint)endPoint callback:(void (^)())callback
+{
+    //CGPoint curPoint = [self convertPoint:self.frame.origin fromView:self.superview];
+    self.animtionCallback = callback;
+    CGPoint curPoint = self.frame.origin;
+    
+   
+    CABasicAnimation* opacity = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    opacity.fromValue = @(1);
+    opacity.toValue = @(0.5);
+    
+    CABasicAnimation* scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    scaleAnimation.fromValue = @(1);
+    scaleAnimation.toValue = @(0.3);
+    
+    CAKeyframeAnimation* pathAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+    pathAnimation.calculationMode = kCAAnimationPaced;
+    pathAnimation.fillMode = kCAFillModeForwards;
+    pathAnimation.removedOnCompletion = YES;
+    
+    CGMutablePathRef curvePath = CGPathCreateMutable();
+    CGPathMoveToPoint(curvePath, nil, curPoint.x, curPoint.y);
+    CGPoint midPoint = CGPointMake((endPoint.x + curPoint.x)/2 + rand() % 2 * 40 * (rand() % 2 == 1 ? 1 : -1), (endPoint.y + curPoint.y)/2 + rand() % 2 * 40 * (rand() % 2 == 1 ? 1 : -1));
+    
+    CGPathAddCurveToPoint(curvePath, nil, midPoint.x, midPoint.y, midPoint.x, midPoint.y, endPoint.x, endPoint.y);
+    
+    pathAnimation.path = curvePath;
+    //pathAnimation.delegate = self;
+    
+    CAAnimationGroup* groupAnimation = [[CAAnimationGroup alloc] init];
+    groupAnimation.animations = @[ pathAnimation, scaleAnimation,opacity];
+    groupAnimation.duration = 0.3;
+    groupAnimation.delegate = self;
+    [self.layer addAnimation:groupAnimation forKey:@"flyCellEffect"];
+    
+    
+    /*
+    //CGPoint midPoint = CGPointMake((endPoint.x + curPoint.x)/2, (endPoint.y + curPoint.y)/2);
+    //get k1
+    float k1 = (endPoint.y - curPoint.y ) / (endPoint.x - curPoint.x);
+    //get b1
+    float b1 = endPoint.y - k1 * endPoint.y;
+    
+    //get k2
+    float k2 = -k1;
+    //get b2
+    float b2 = midPoint.y - k2 * midPoint.x;
+    
+    //get dalta y
+    float deltaY = 50;
+     
+     //( (y3 - b2)/k2 - midX)^2 + (y3 - midY)^2 = detalY * deltaY
+     //k2 * x3 + b2 = y3
+     */
+
+}
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+{
+    self.animtionCallback();
+    [self removeFromSuperview];
+}
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    GameBoardCell* copyCell = [[GameBoardCell alloc]initWithFrame:self.frame];
+    copyCell.number = self.number;
+    copyCell.backgroundColor = self.backgroundColor;
+    [copyCell.numLabel setText:[NSString stringWithFormat:@"%d",_number ]];
+    return copyCell;
 }
 @end

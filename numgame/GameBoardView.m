@@ -215,19 +215,32 @@
         //4个cell是否拥有相同颜色
         if([self eliminatedSameColorCell]) {
             int curColor = ((GameBoardCell*)_selectedCell.firstObject).color;
-            [self addDashBoardScore: [self getOtherSameColorSocre:curColor]];
-            [self addDashBoardScore:Four_Same_Number_Score];
+            
+//            [self addDashBoardScore: [self getOtherSameColorSocre:curColor]];
+//            [self addDashBoardScore:Four_Same_Number_Score];
+            
             [_selectedCell setArray:[self getAllCellWithColor:curColor]];
+            __weak typeof(self) weakSelf = self;
+            [self addCellFlyAnimation:^{
+                [weakSelf addDashBoardScore: [self getOtherSameColorSocre:curColor]];
+                [weakSelf addDashBoardScore:Four_Same_Number_Score];
+            }];
         }
         //消除2个cell所得分数
         else if(canEliminated)
         {
-            [self addDashBoardScore:Two_Same_Number_Score];
+            __weak typeof(self) weakSelf = self;
+            [self addCellFlyAnimation:^{
+                [weakSelf addDashBoardScore:Two_Same_Number_Score];
+            }];
         }
         //消除不同颜色的4个cell所得分数
         else
         {
-            [self addDashBoardScore:Four_Same_Number_Score];
+            __weak typeof(self) weakSelf = self;
+            [self addCellFlyAnimation:^{
+                [weakSelf addDashBoardScore:Four_Same_Number_Score];
+            }];
         }
         [self relayoutCells];
     }
@@ -347,19 +360,6 @@
         CGContextStrokePath(ref);
     }
 }
-
-//#pragma mark layout cell after combining cells
-//- (void)combineCurrentCell:(GameBoardCell*)curCell withPrevCell:(GameBoardCell*)preCell
-//{
-//    POPBasicAnimation *colorAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerBackgroundColor];
-//    colorAnimation.fromValue = [GameBoardCell generateColor:curCell.color];
-//    colorAnimation.toValue =[GameBoardCell generateColor:prevCell.color];
-//    colorAnimation.duration = 0.3f;
-//    [curCell.layer pop_addAnimation:colorAnimation forKey:@"colorAnimation"];
-//    [_selectedCell removeLastObject];
-//    [self addDashBoardScore:1];
-//    [self relayoutCells];
-//}
 
 
 -(BOOL)validateIfCanLine:(GameBoardCell*)cell{
@@ -677,6 +677,22 @@
     [cell setColor:self.SelectedCellColor];
     [self.storeSelectedCellSet removeAllObjects];
     [self.maskView removeFromSuperview];
+}
+
+#pragma mark fly cell animtion
+- (void)addCellFlyAnimation:(void (^)())callback
+{
+    UILabel* scoreLabel = (UILabel*)[self.superview viewWithTag:1898];
+    __weak typeof(self) weakSelf = self;
+    [_selectedCell enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
+        GameBoardCell* copyCell = [cell copy];
+        CGPoint newPoint = [self convertPoint:copyCell.frame.origin toView:self.superview];
+        copyCell.frame = CGRectMake(newPoint.x, newPoint.y, copyCell.frame.size.width, copyCell.frame.size.height);
+        [weakSelf.superview addSubview:copyCell];
+        [copyCell addFlyEffect:scoreLabel.center callback:^{
+            callback();
+        }];
+    }];
 }
 @end
 
