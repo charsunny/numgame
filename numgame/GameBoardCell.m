@@ -130,36 +130,16 @@
     CGPoint midPoint = CGPointMake((endPoint.x + curPoint.x)/2 + rand() % 2 * 40 * (rand() % 2 == 1 ? 1 : -1), (endPoint.y + curPoint.y)/2 + rand() % 2 * 40 * (rand() % 2 == 1 ? 1 : -1));
     
     CGPathAddCurveToPoint(curvePath, nil, midPoint.x, midPoint.y, midPoint.x, midPoint.y, endPoint.x, endPoint.y);
-    
     pathAnimation.path = curvePath;
-    //pathAnimation.delegate = self;
     
     CAAnimationGroup* groupAnimation = [[CAAnimationGroup alloc] init];
     groupAnimation.animations = @[ pathAnimation, scaleAnimation,opacity];
     groupAnimation.duration = 0.3;
+    groupAnimation.removedOnCompletion = YES;
+    groupAnimation.fillMode = kCAFillModeForwards;
     groupAnimation.delegate = self;
     [self.layer addAnimation:groupAnimation forKey:@"flyCellEffect"];
-    
-    
-    /*
-    //CGPoint midPoint = CGPointMake((endPoint.x + curPoint.x)/2, (endPoint.y + curPoint.y)/2);
-    //get k1
-    float k1 = (endPoint.y - curPoint.y ) / (endPoint.x - curPoint.x);
-    //get b1
-    float b1 = endPoint.y - k1 * endPoint.y;
-    
-    //get k2
-    float k2 = -k1;
-    //get b2
-    float b2 = midPoint.y - k2 * midPoint.x;
-    
-    //get dalta y
-    float deltaY = 50;
-     
-     //( (y3 - b2)/k2 - midX)^2 + (y3 - midY)^2 = detalY * deltaY
-     //k2 * x3 + b2 = y3
-     */
-
+    self.alpha = 0;
 }
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
