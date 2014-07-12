@@ -11,6 +11,7 @@
 #import "MatrixMath.h"
 #import "HMSideMenu.h"
 #import <pop/pop.h>
+#import "GameResultView.h"
 @import CoreGraphics;
 @import AVFoundation;
 
@@ -50,6 +51,8 @@
 @property (nonatomic,strong) NSMutableSet * storeSelectedCellSet;
 @property (nonatomic,strong) UIView * maskView;
 @property (nonatomic,assign) float boardInset;
+
+
 @end
 
 @implementation GameBoardView
@@ -663,6 +666,7 @@
 
 -(void)toggeSelectionCells{
 
+    
     if (!self.sideMenu.isOpen) {
         [self.sideMenu open];
         [self bringSubviewToFront:self.sideMenu];

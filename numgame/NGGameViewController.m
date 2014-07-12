@@ -16,6 +16,7 @@
 #import "GameBoardView.h"
 #import "GameBoardCell.h"
 #import <pop/pop.h>
+#import "GameResultView.h"
 @import AudioToolbox;
 @import AVFoundation;
 @import iAd;
@@ -60,7 +61,7 @@
 
 @property (nonatomic) BOOL haveSound;
 
-
+@property (nonatomic,strong) GameResultView *gameResultView;
 @end
 
 @implementation NGGameViewController
@@ -125,6 +126,8 @@
     
     [_timeLabel setAdjustsFontSizeToFitWidth:YES];
     [_scoreLabel setAdjustsFontSizeToFitWidth:YES];
+    //self.gameResultView = [[GameResultView alloc]initGameResultViewWithScore:100 Completion:YES];
+ //   [self.view addSubview:self.gameResultView];
 //    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(50)-[_timeTitle(>=100)]-(50)-[_scoreTitle(==_timeTitle)]-(50)-|"
 //                                                                    options:0
 //                                                                    metrics:nil
@@ -204,7 +207,8 @@
 #pragma mark  --IBACTION--
 
 - (void)showResult {
-    [self performSegueWithIdentifier:@"resultsegue" sender:self];
+    self.gameResultView = [[GameResultView alloc]initGameResultViewWithScore:100 Completion:YES];
+    [self.view addSubview:self.gameResultView];
 }
 
 #pragma mark -- background handler --
