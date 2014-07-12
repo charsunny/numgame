@@ -10,57 +10,57 @@
 	</dict>
 	<dict>
 		<key>score</key>
-		<string>100</string>
-		<key>step</key>
-		<string>15</string>
-	</dict>
-	<dict>
-		<key>score</key>
 		<string>150</string>
 		<key>step</key>
-		<string>20</string>
-	</dict>
-	<dict>
-		<key>score</key>
-		<string>200</string>
-		<key>step</key>
-		<string>25</string>
+		<string>10</string>
 	</dict>
 	<dict>
 		<key>score</key>
 		<string>250</string>
 		<key>step</key>
-		<string>30</string>
-	</dict>
-	<dict>
-		<key>score</key>
-		<string>300</string>
-		<key>step</key>
-		<string>35</string>
-	</dict>
-	<dict>
-		<key>score</key>
-		<string>350</string>
-		<key>step</key>
-		<string>40</string>
-	</dict>
-	<dict>
-		<key>score</key>
-		<string>400</string>
-		<key>step</key>
-		<string>45</string>
-	</dict>
-	<dict>
-		<key>score</key>
-		<string>450</string>
-		<key>step</key>
-		<string>50</string>
+		<string>10</string>
 	</dict>
 	<dict>
 		<key>score</key>
 		<string>500</string>
 		<key>step</key>
-		<string>55</string>
+		<string>15</string>
+	</dict>
+	<dict>
+		<key>score</key>
+		<string>750</string>
+		<key>step</key>
+		<string>15</string>
+	</dict>
+	<dict>
+		<key>score</key>
+		<string>1000</string>
+		<key>step</key>
+		<string>15</string>
+	</dict>
+	<dict>
+		<key>score</key>
+		<string>1250</string>
+		<key>step</key>
+		<string>20</string>
+	</dict>
+	<dict>
+		<key>score</key>
+		<string>1500</string>
+		<key>step</key>
+		<string>20</string>
+	</dict>
+	<dict>
+		<key>score</key>
+		<string>2000</string>
+		<key>step</key>
+		<string>20</string>
+	</dict>
+	<dict>
+		<key>score</key>
+		<string>2500</string>
+		<key>step</key>
+		<string>20</string>
 	</dict>
 </array>
 </plist>

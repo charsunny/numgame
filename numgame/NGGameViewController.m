@@ -40,6 +40,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *levelLabel;
+
 @property (nonatomic)int score;
 
 @property (weak, nonatomic) IBOutlet UIView *pauseView;
@@ -123,17 +125,15 @@
     
     [_timeLabel setAdjustsFontSizeToFitWidth:YES];
     [_scoreLabel setAdjustsFontSizeToFitWidth:YES];
-    _timeTitle.textAlignment = NSTextAlignmentCenter;
-    _scoreTitle.textAlignment = NSTextAlignmentCenter;
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(50)-[_timeTitle(>=100)]-(50)-[_scoreTitle(==_timeTitle)]-(50)-|"
-                                                                    options:0
-                                                                    metrics:nil
-                                                                    views:NSDictionaryOfVariableBindings(_timeTitle,_scoreTitle)]];
-    
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(50)-[_timeLabel(>=100)]-(50)-[_scoreLabel(==_timeLabel)]-(50)-|"
-                                                                    options:0
-                                                                    metrics:nil
-                                                                    views:NSDictionaryOfVariableBindings(_timeLabel,_scoreLabel)]];
+//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(50)-[_timeTitle(>=100)]-(50)-[_scoreTitle(==_timeTitle)]-(50)-|"
+//                                                                    options:0
+//                                                                    metrics:nil
+//                                                                    views:NSDictionaryOfVariableBindings(_timeTitle,_scoreTitle)]];
+//    
+//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(50)-[_timeLabel(>=100)]-(50)-[_scoreLabel(==_timeLabel)]-(50)-|"
+//                                                                    options:0
+//                                                                    metrics:nil
+//                                                                    views:NSDictionaryOfVariableBindings(_timeLabel,_scoreLabel)]];
     
     self.gameBoardView.isChangeColor = NO;
     [self resumeGame];
@@ -153,8 +153,8 @@
         case NGGameModeClassic: {
             NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
             _timeSpent = 0;
-            _score = 0;
-            [_scoreLabel setText:[NSString stringWithFormat:@"0/%@",levelInfo[@"score"]]];
+            [_levelLabel setText:[NSString stringWithFormat:@"%d",_currectLevel]];
+            [_scoreLabel setText:[NSString stringWithFormat:@"%d/%@",_score, levelInfo[@"score"]]];
             [_timeLabel setText:[NSString stringWithFormat:@"0/%@",levelInfo[@"step"]]];
             break;
         }
@@ -233,7 +233,8 @@
         if (_gameMode == NGGameModeClassic) {
             controller.time = _timeLabel.text;
             controller.score = _scoreLabel.text;
-            if (_score == 10) {
+            NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
+            if ([levelInfo[@"score"] intValue] <= self.score) {
                 float shorttime = [[NGGameConfig sharedGameConfig] classicScore];
                 if(_leftTime < shorttime || shorttime == 0) {
                     [[NGGameConfig sharedGameConfig] setClassicScore:_leftTime];
@@ -241,14 +242,14 @@
                     [self playSoundFXnamed:@"cheer.m4a" Loop:NO];
                     GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier:@"mintime"];
                     scoreReporter.value = _leftTime*10;
-                    [GKScore reportScores:@[scoreReporter] withCompletionHandler:^(NSError *error) {
-                        //
-                    }];
+                    [GKScore reportScores:@[scoreReporter] withCompletionHandler:nil];
                 }
                 controller.completed = YES;
+                _currectLevel++;
             } else {
                 controller.completed = NO;
             }
+            [self initGameData];
         } else if (_gameMode == NGGameModeTimed) {
             controller.time = _timeLabel.text;
             controller.score = _scoreLabel.text;
@@ -370,6 +371,12 @@ didFailToReceiveAdWithError:(GADRequestError *)error {
 - (void)increaseScore:(int)deltaScore
 {
     self.score+=deltaScore;
+    NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
+    if ([levelInfo[@"score"] intValue] <= self.score) {
+        [self showResult];
+    } else if ([levelInfo[@"step"] intValue] <= self.timeSpent) {
+        [self showResult];
+    }
 }
 -(void)decreaseScore:(int)deltaScore
 {

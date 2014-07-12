@@ -19,8 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *highScoreLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
-@property (weak, nonatomic) IBOutlet
-UILabel *modeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *modeLabel;
 
 @end
 
@@ -44,16 +43,15 @@ UILabel *modeLabel;
     if (_gameMode == NGGameModeClassic) {
         if (_isHighScore) {
             [_highScoreLabel setText:@"new best record!"];
-            [_scoreLabel setText:[_time stringByAppendingString:@"s"]];
         } else {
             if (_completed) {
-                [_highScoreLabel setText:@"time this round :"];
-                [_scoreLabel setText:[_time stringByAppendingString:@"s"]];
+                [_highScoreLabel setText:@"score this round :"];
             } else {
-                [_highScoreLabel setText:@"fail to finish! "];
-                [_scoreLabel setText:@"😕"];
+                [_highScoreLabel setText:@"😕fail to finish! "];
+                [_backButton setTitle:@"try again" forState:UIControlStateNormal];
             }
         }
+        [_scoreLabel setText:_score];
         [_modeLabel setText:@"classic mode"];
     } else if (_gameMode == NGGameModeTimed) {
         if (_isHighScore) {
