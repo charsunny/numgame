@@ -337,16 +337,19 @@
     scoreDeltaLabel.textColor = [UIColor grayColor];
     scoreDeltaLabel.alpha = 0;
     [self.view addSubview:scoreDeltaLabel];
-    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        scoreDeltaLabel.alpha = 1;
-        scoreDeltaLabel.transform = CGAffineTransformMakeTranslation(0, -30);
+    
+    
+    CAKeyframeAnimation* keyFrameAnimation = [CAKeyframeAnimation animationWithKeyPath:@"opacity"];
+    keyFrameAnimation.values = @[@0,@1,@0];
+    keyFrameAnimation.keyTimes = @[@0, @(0.5), @(0.8)];
+    keyFrameAnimation.duration = 0.8;
+    keyFrameAnimation.additive = YES;
+    [scoreDeltaLabel.layer addAnimation:keyFrameAnimation forKey:@"opacityAnimation"];
+    
+    [UIView animateWithDuration:0.8 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        scoreDeltaLabel.transform = CGAffineTransformMakeTranslation(0, -50);
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-            scoreDeltaLabel.alpha = 0;
-            scoreDeltaLabel.transform = CGAffineTransformMakeTranslation(0, -50);
-        } completion:^(BOOL finished) {
-            [scoreDeltaLabel removeFromSuperview];
-        }];
+        [scoreDeltaLabel removeFromSuperview];
     }];
     if ([levelInfo[@"score"] intValue] <= self.score) {
         [self showResult:YES];
