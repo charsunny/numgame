@@ -66,7 +66,25 @@
 {
     _timeSpent = timeSpent;
     NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
-    _timeLabel.text = [NSString stringWithFormat:@"%d/%@",_timeSpent, levelInfo[@"step"]];
+    //_timeLabel.text = [NSString stringWithFormat:@"%d/%@",_timeSpent, levelInfo[@"step"]];
+    
+    NSString* wholeString =[NSString stringWithFormat:@"%d/%@",_timeSpent, levelInfo[@"step"]];
+    
+    NSMutableAttributedString* mutableAttrString = [[NSMutableAttributedString alloc]initWithString:wholeString];
+    [mutableAttrString addAttribute:NSFontAttributeName
+                              value:[UIFont fontWithName:@"AppleSDGothicNeo-Light" size:30]
+                              range:NSMakeRange(0, wholeString.length)];
+    
+    int delta =[levelInfo[@"step"] intValue]- self.timeSpent;
+    if(delta <= 5)
+    {
+        [mutableAttrString addAttribute:NSForegroundColorAttributeName value:[UIColor orangeColor] range:NSMakeRange(0, [NSString stringWithFormat:@"%d",_timeSpent].length)];
+        if(delta <= 3)
+        {
+            [mutableAttrString addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, [NSString stringWithFormat:@"%d",_timeSpent].length)];
+        }
+    }
+    _timeLabel.attributedText = mutableAttrString;
     [self addPopSpringAnimation:_timeLabel];
 }
 
@@ -338,10 +356,9 @@
     scoreDeltaLabel.alpha = 0;
     [self.view addSubview:scoreDeltaLabel];
     
-    
     CAKeyframeAnimation* keyFrameAnimation = [CAKeyframeAnimation animationWithKeyPath:@"opacity"];
-    keyFrameAnimation.values = @[@0,@1,@0];
-    keyFrameAnimation.keyTimes = @[@0, @(0.5), @(0.8)];
+    keyFrameAnimation.values = @[@0,@1,@1,@0];
+    keyFrameAnimation.keyTimes = @[@0, @(0.2),@(0.7), @(0.8)];
     keyFrameAnimation.duration = 0.8;
     keyFrameAnimation.additive = YES;
     [scoreDeltaLabel.layer addAnimation:keyFrameAnimation forKey:@"opacityAnimation"];
@@ -351,6 +368,7 @@
     } completion:^(BOOL finished) {
         [scoreDeltaLabel removeFromSuperview];
     }];
+    
     if ([levelInfo[@"score"] intValue] <= self.score) {
         [self showResult:YES];
     } else if ([levelInfo[@"step"] intValue] <= self.timeSpent) {
