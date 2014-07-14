@@ -12,6 +12,8 @@
 #import "HMSideMenu.h"
 #import <pop/pop.h>
 #import "GameResultView.h"
+#import "NumberSelectionVIew.h"
+//#import "NEContainerView.h"
 @import CoreGraphics;
 @import AVFoundation;
 
@@ -53,6 +55,9 @@
 @property (nonatomic,strong) UIView * maskView;
 @property (nonatomic,assign) float boardInset;
 
+
+
+@property (nonatomic, strong)NumberSelectionVIew * numberSelectionView;
 
 @end
 
@@ -107,6 +112,7 @@
         }
     }
     [self initSelectionCells];
+    [self testNumberCell];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -121,11 +127,9 @@
         if ([view isKindOfClass:[GameBoardCell class]]) {
             GameBoardCell * cell = (GameBoardCell*)view;
             //弹出选择颜色的框
-            
-        //    self.maskView = [[UIView alloc]initWithFrame:CGRectOffset(self.frame, 0, -50)];
+  
             self.maskView = [[UIView alloc]initWithFrame:CGRectMake(0, self.boardInset, self.frame.size.width, _cellNum*(_cellWidth+EDGE_INSET) -EDGE_INSET)];
             
-//            [self.maskView setFrame:CGRectMake(self.maskView.frame.origin.x, self.maskView.frame.origin.y, self.maskView.frame.size.width, _cellNum*(_cellWidth+EDGE_INSET) -EDGE_INSET)];
             self.maskView.backgroundColor = [UIColor whiteColor];
             self.maskView.alpha = 0;
             [self addSubview:self.maskView];
@@ -141,6 +145,27 @@
         }
     }
     
+    if (touch.tapCount == 1 && self.isChangeNumer) {
+        if ([view isKindOfClass:[GameBoardCell class]]) {
+            GameBoardCell * cell = (GameBoardCell*) view;
+            self.maskView = [[UIView alloc]initWithFrame:CGRectMake(0, self.boardInset, self.frame.size.width, _cellNum*(_cellWidth+EDGE_INSET) -EDGE_INSET)];
+            
+            self.maskView.backgroundColor = [UIColor whiteColor];
+            self.maskView.alpha = 0;
+            [self addSubview:self.maskView];
+            
+            [UIView animateWithDuration:0.3 animations:^{
+                self.maskView.alpha = 0.5;
+            }];
+            [self bringSubviewToFront:cell];
+            
+            [self.storeSelectedCellSet addObject:cell];
+            [self togglecellNumberChanged];
+
+        }
+    }
+    
+ 
     
     if ([view isKindOfClass:[GameBoardCell class]]) {
         GameBoardCell* cell = (GameBoardCell*)view;
@@ -249,6 +274,7 @@
     canEliminated = NO;
     [self setNeedsDisplay];
     //[self debugCell];
+   
 }
 
 
@@ -656,12 +682,45 @@
     self.sideMenu = [[HMSideMenu alloc]initWithItems:cellArray];
     [self.sideMenu setItemSpacing:_cellWidth/3.0];
     [self addSubview:self.sideMenu];
- //   [self bringSubviewToFront:self.sideMenu];
- //   [self insertSubview:self.sideMenu aboveSubview:self.maskView];
-   // [self.sideMenu close];
+
     
 
 }
+
+-(void)testNumberCell{
+
+/***为什么不好用****/
+    NSArray* colorArray = @[UIColorFromRGB(0xFF814F),UIColorFromRGB(0xF9FF4F),UIColorFromRGB(0x34D3FF),UIColorFromRGB(0x46FFAB)];
+    
+    NSMutableArray * items = [[NSMutableArray alloc]initWithCapacity:0];
+    for (int i = 0; i < 4; i++) {
+       
+        UILabel* item = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, _cellWidth, _cellWidth)];
+        [item setText:[NSString stringWithFormat:@"%d",i+1]];
+        [item setFont:[UIFont fontWithName:NUM_FONT size:30]];
+        [item setTextColor:colorArray[i]];
+        [item setUserInteractionEnabled:YES];
+        item.backgroundColor = [UIColor clearColor];
+        [items addObject:item];
+    }
+    
+    
+    self.numberSelectionView= [[NumberSelectionVIew alloc]initWithNumberItems:items withTouchBlock:^(NSInteger idx) {
+        NSLog(@"%d",idx);
+    }];
+
+    [self addSubview:_numberSelectionView];
+    [_numberSelectionView bringSubviewToFront:self];
+    [_numberSelectionView show];
+    
+    
+
+    
+
+   
+    
+}
+
 
 
 -(void)toggeSelectionCells{
@@ -671,8 +730,17 @@
         [self.sideMenu open];
         [self bringSubviewToFront:self.sideMenu];
         self.isChangeColor = NO;
-    }
+        }
     
+    
+}
+
+
+-(void)togglecellNumberChanged{
+
+   // 激发选择的动画
+
+
 }
 
 -(void) changeCellColor{
@@ -701,6 +769,25 @@
             [copyCell addFlyEffect:scoreLabel.center callback:nil];
         }
     }];
+}
+
+
+- (void)changeCellNumber:(id)btn{
+
+
+}
+
+
+
+//-(UIView*)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
+//    [super hitTest:point withEvent:event];
+//    return self;
+//
+//}
+
+-(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{
+
+    return YES;
 }
 @end
 

@@ -451,6 +451,16 @@ didFailToReceiveAdWithError:(GADRequestError *)error {
 
 }
 
+-(IBAction)changeCellNumber:(id)sender{
+ 
+    [self.progressTimer invalidate];
+   // self.gameBoardView.isChangeNumer = YES;
+    self.gameBoardView.isChangeColor = NO;
+    [self.gameBoardView performSelector:@selector(changeCellNumber:) withObject:sender ];
+    
+
+
+}
 
 
 

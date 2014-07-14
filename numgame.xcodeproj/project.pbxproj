@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		18459D9F196D951800CC0F39 /* HMSideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 18459D9E196D951800CC0F39 /* HMSideMenu.m */; };
+		18B0CF851971959700FBA5A7 /* NumberSelectionVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B0CF841971959700FBA5A7 /* NumberSelectionVIew.m */; };
 		18E903481971329700935BD7 /* GameResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E903471971329700935BD7 /* GameResultView.m */; };
 		50066275190E065C00CCE97E /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50066274190E065C00CCE97E /* iAd.framework */; };
 		5006627D190E504D00CCE97E /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5006627C190E504D00CCE97E /* GameKit.framework */; };
@@ -163,6 +164,8 @@
 /* Begin PBXFileReference section */
 		18459D9D196D951800CC0F39 /* HMSideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSideMenu.h; sourceTree = "<group>"; };
 		18459D9E196D951800CC0F39 /* HMSideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSideMenu.m; sourceTree = "<group>"; };
+		18B0CF831971959700FBA5A7 /* NumberSelectionVIew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberSelectionVIew.h; sourceTree = "<group>"; };
+		18B0CF841971959700FBA5A7 /* NumberSelectionVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberSelectionVIew.m; sourceTree = "<group>"; };
 		18E903461971329700935BD7 /* GameResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameResultView.h; sourceTree = "<group>"; };
 		18E903471971329700935BD7 /* GameResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameResultView.m; sourceTree = "<group>"; };
 		50066274190E065C00CCE97E /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
@@ -580,6 +583,8 @@
 				50FB049519694C2500941EEF /* GameBoardView.m */,
 				18E903461971329700935BD7 /* GameResultView.h */,
 				18E903471971329700935BD7 /* GameResultView.m */,
+				18B0CF831971959700FBA5A7 /* NumberSelectionVIew.h */,
+				18B0CF841971959700FBA5A7 /* NumberSelectionVIew.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -810,6 +815,7 @@
 				5014AE2C190E920400827D82 /* NGGameModeViewController.m in Sources */,
 				50FB049619694C2500941EEF /* GameBoardCell.m in Sources */,
 				50EDF3B418FFB755003FBA71 /* main.m in Sources */,
+				18B0CF851971959700FBA5A7 /* NumberSelectionVIew.m in Sources */,
 				18E903481971329700935BD7 /* GameResultView.m in Sources */,
 				508B8B021918861900DC9FA6 /* NGGuideViewController.m in Sources */,
 				5014AF35190F9B1F00827D82 /* NGResultViewController.m in Sources */,
