@@ -26,16 +26,11 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
-        //[self setNumber:[self genRandNumber]];
         self.layer.cornerRadius = frame.size.width/2;
-        //self.clipsToBounds = YES;
         self.number = [self genRandNumber];
         self.backgroundColor = [self genRandColor];
         _numLabel = [[UILabel alloc] initWithFrame:self.bounds];
-        //NSArray* brandArry = @[@"♡",@"♤",@"♧",@"♢"];
         [_numLabel setText:[NSString stringWithFormat:@"%d",_number ]];
-        //[_numLabel setFont:[UIFont boldSystemFontOfSize:DefalutNumFontSize]];
         [_numLabel setFont:[UIFont fontWithName:DefalutNumFontFamily size:frame.size.width/2]];
         [_numLabel setTextAlignment:NSTextAlignmentCenter];
         [self addSubview:_numLabel];
