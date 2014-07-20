@@ -25,6 +25,10 @@
 
 @interface NGGameViewController ()<UIAlertViewDelegate,GameBoardViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UIView *headView;
+
+@property (weak, nonatomic) IBOutlet UIToolbar *toolBar;
+
 @property (weak, nonatomic) IBOutlet GameBoardView *gameBoardView;
 
 @property (weak, nonatomic) IBOutlet UILabel *timeTitle;
@@ -67,7 +71,6 @@
     _timeSpent = timeSpent;
     NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
     //_timeLabel.text = [NSString stringWithFormat:@"%d/%@",_timeSpent, levelInfo[@"step"]];
-    
     NSString* wholeString =[NSString stringWithFormat:@"%d/%@",_timeSpent, levelInfo[@"step"]];
     
     NSMutableAttributedString* mutableAttrString = [[NSMutableAttributedString alloc]initWithString:wholeString];
@@ -103,6 +106,12 @@
     srand((unsigned int)time(NULL));
     //init gameconfig
     
+    for (UIBarButtonItem* item in _toolBar.items) {
+        if ([item isKindOfClass:[UIBarButtonItem class]]) {
+            item.image = [item.image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        }
+    }
+    
     _currectLevel = 1;
     
     NSString* levelPath = [[NSBundle mainBundle] pathForResource:@"config" ofType:@"plist"];
@@ -122,7 +131,6 @@
     UISwipeGestureRecognizer *recoginizer1 = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(onSwipePauseView:)];
     recoginizer1.direction = UISwipeGestureRecognizerDirectionRight;
     [_pauseView addGestureRecognizer:recoginizer1];
-    
     [_timeLabel setAdjustsFontSizeToFitWidth:YES];
     [_scoreLabel setAdjustsFontSizeToFitWidth:YES];
     self.gameBoardView.isChangeColor = NO;
@@ -136,6 +144,19 @@
     } else {
         _haveSound = NO;
     }
+}
+
+- (void)viewDidLayoutSubviews {
+    UIView* spLine  = [_headView viewWithTag:100];
+    if (spLine == nil) {
+        UIToolbar* toolbar = [[UIToolbar alloc] initWithFrame:_headView.bounds];
+        [_headView insertSubview:toolbar atIndex:0];
+        spLine = [[UIView alloc] initWithFrame:CGRectMake(0, _headView.frame.size.height - 0.5f, _headView.frame.size.width, 0.5f)];
+        spLine.backgroundColor = [UIColor lightGrayColor];
+        [_headView addSubview:spLine];
+        [_headView setTag:100];
+    }
+    
 }
 
 - (void)initGameData {
@@ -387,6 +408,10 @@
     scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.f, 1.f)];
     scaleAnimation.springBounciness = 18.0f;
     [view.layer pop_addAnimation:scaleAnimation forKey:@"scoreScaleSpring"];
+}
+
+- (IBAction)showMenu:(id)sender {
+    [self onTapHeaderView:nil];
 }
 
 

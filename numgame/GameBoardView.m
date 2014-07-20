@@ -112,7 +112,7 @@
         }
     }
     [self initSelectionCells];
-    [self testNumberCell];
+    //[self testNumberCell];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
