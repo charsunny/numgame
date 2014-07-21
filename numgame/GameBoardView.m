@@ -684,13 +684,17 @@
 
 -(void)changeCellColor:(id)sender{
 
-    CALayer* layer = [CALayer layer];
-    layer.frame = CGRectMake(0, self.boardInset, self.frame.size.width, _cellNum*(_cellWidth+EDGE_INSET) -EDGE_INSET);
-    layer.backgroundColor = [UIColor blueColor].CGColor;
-    [layer setOpacity:0.3];
-    [self.layer setMask:layer];
-    
-    self.isChangeColor = YES;
+    if (!self.isChangeColor) {
+        CALayer* layer = [CALayer layer];
+        layer.frame = CGRectMake(0, self.boardInset, self.frame.size.width, _cellNum*(_cellWidth+EDGE_INSET) -EDGE_INSET);
+        layer.backgroundColor = [UIColor blueColor].CGColor;
+        [layer setOpacity:0.3];
+        [self.layer setMask:layer];
+        
+        self.isChangeColor = YES;
+    }
+   
+
 
 }
 
@@ -775,13 +779,16 @@
 
 
 - (void)changeCellNumber:(id)btn{
-    CALayer* layer = [CALayer layer];
-    layer.frame = CGRectMake(0, self.boardInset, self.frame.size.width, _cellNum*(_cellWidth+EDGE_INSET) -EDGE_INSET);
-    layer.backgroundColor = [UIColor blueColor].CGColor;
-    [layer setOpacity:0.3];
-    [self.layer setMask:layer];
-    
-    self.isChangeNumer = YES;
+    if (!self.isChangeNumer) {
+        CALayer* layer = [CALayer layer];
+        layer.frame = CGRectMake(0, self.boardInset, self.frame.size.width, _cellNum*(_cellWidth+EDGE_INSET) -EDGE_INSET);
+        layer.backgroundColor = [UIColor blueColor].CGColor;
+        [layer setOpacity:0.3];
+        [self.layer setMask:layer];
+         self.isChangeNumer = YES;
+    }
+ 
+   
 }
 
 
