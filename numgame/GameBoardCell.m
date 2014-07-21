@@ -20,7 +20,7 @@
 @property (strong, nonatomic) CALayer* effectLayer;
 @property (strong,nonatomic)void (^animtionCallback)();
 //增加方法
-@property (strong ,nonatomic) NSMutableArray * accessoryItems;
+
 @property (assign, nonatomic) GBTrakingCategory  trakingCategory;
 @end
 
@@ -247,7 +247,8 @@
                 label.textAlignment = NSTextAlignmentCenter ;
                 label.text = itemArray[i];
                 label.textColor = [UIColor blackColor];
-                label.font = [UIFont systemFontOfSize:20];
+                //label.font = [UIFont systemFontOfSize:20];
+                label.font = [UIFont fontWithName:DefalutNumFontFamily size:20];
                 [(UIView*)self.accessoryItems[i] setBackgroundColor:[GameBoardCell generateColor:self.color]];
                 [(UIView*)self.accessoryItems[i] addSubview:label];
                 [label sizeToFit];
@@ -360,8 +361,55 @@
             springAnimation.toValue =[NSValue valueWithCGPoint: CGPointMake(item.center.x, item.center.y+45)];
             springAnimation.springBounciness = 20;
             [item  pop_addAnimation:springAnimation forKey:@"centerBottom"];
+            break;
+        }
+             //右下
+        case 4:{
+           
+            POPSpringAnimation * springAnimation = [POPSpringAnimation animation];
+            springAnimation.property = [POPMutableAnimatableProperty propertyWithName:kPOPViewCenter];
+            springAnimation.fromValue = [NSValue valueWithCGPoint:item.center];
+            springAnimation.toValue =[NSValue valueWithCGPoint: CGPointMake(item.center.x+45, item.center.y+45)];
+            springAnimation.springBounciness = 20;
+            [item  pop_addAnimation:springAnimation forKey:@"centerRightDown"];
+            break;
+        }
+           //左下
+        case 5:{
+            POPSpringAnimation * springAnimation = [POPSpringAnimation animation];
+            springAnimation.property = [POPMutableAnimatableProperty propertyWithName:kPOPViewCenter];
+            springAnimation.fromValue = [NSValue valueWithCGPoint:item.center];
+            springAnimation.toValue =[NSValue valueWithCGPoint: CGPointMake(item.center.x-45, item.center.y+45)];
+            springAnimation.springBounciness = 20;
+            [item  pop_addAnimation:springAnimation forKey:@"centerLeftDown"];
+            break;
         
         }
+         // 右上
+        case 6:{
+            POPSpringAnimation * springAnimation = [POPSpringAnimation animation];
+            springAnimation.property = [POPMutableAnimatableProperty propertyWithName:kPOPViewCenter];
+            springAnimation.fromValue = [NSValue valueWithCGPoint:item.center];
+            springAnimation.toValue =[NSValue valueWithCGPoint: CGPointMake(item.center.x+45, item.center.y-45)];
+            springAnimation.springBounciness = 20;
+            [item  pop_addAnimation:springAnimation forKey:@"centerRightUp"];
+            break;
+
+        
+        }
+         //左上
+        case 7:{
+            POPSpringAnimation * springAnimation = [POPSpringAnimation animation];
+            springAnimation.property = [POPMutableAnimatableProperty propertyWithName:kPOPViewCenter];
+            springAnimation.fromValue = [NSValue valueWithCGPoint:item.center];
+            springAnimation.toValue =[NSValue valueWithCGPoint: CGPointMake(item.center.x-45, item.center.y-45)];
+            springAnimation.springBounciness = 20;
+            [item  pop_addAnimation:springAnimation forKey:@"centerLeftUp"];
+            break;
+        
+        
+        }
+            
             
         default:
             break;
@@ -436,7 +484,27 @@
              directions = [NSMutableArray arrayWithArray:@[@(0),@(1),@(3)]];
             break;
         }
-            
+        case GBCellPositionRightDown:
+        {
+            directions = [NSMutableArray arrayWithArray:@[@(1),@(4),@(3)]];
+            break;
+        }
+        case GBCellPositionLeftDown:{
+           
+            directions = [NSMutableArray arrayWithArray:@[@(0),@(5),@(3)]];
+            break;
+        }
+        case GBCellPositionLeftUp:{
+        
+             directions = [NSMutableArray arrayWithArray:@[@(0),@(2),@(7)]];
+            break;
+        
+        }
+        case GBCellPositionRightUp:{
+        
+             directions = [NSMutableArray arrayWithArray:@[@(1),@(6),@(2)]];
+            break;
+        }
         default:
             break;
     }

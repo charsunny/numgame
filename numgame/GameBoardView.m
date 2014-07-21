@@ -111,42 +111,65 @@
             [view setCenter:center];
             [self addSubview:view];
             //+++定义View的Position//四个角弹出动画会出现问题
-            if (view.tag%_cellNum == 1) {
-                [view setCellPositon:GBCellPositionLeft];
-            }
-            else if (view.tag % _cellNum ==0){
+//            if (view.tag%_cellNum == 1) {
+//                [view setCellPositon:GBCellPositionLeft];
+//            }
+//            else if (view.tag % _cellNum ==0){
+//            
+//                [view setCellPositon:GBCellPositionRight];
+//            }
+//            else if (view.tag/_cellNum == 0){
+//            
+//                [view setCellPositon:GBCellPositionTop];
+//                
+//            }
+//            else {
+//            
+//                [view setCellPositon:GBCellPositionNormal];
+//            }
             
-                [view setCellPositon:GBCellPositionRight];
-            }
-            else if (view.tag/_cellNum == 0){
-            
-                [view setCellPositon:GBCellPositionTop];
-                
-            }
-            else {
-            
-                [view setCellPositon:GBCellPositionNormal];
-            }
-            
+            [self setCellPosition:view];
             [view setDelegate:self];
             
         }
     }
-    [self initSelectionCells];
-    
-    //测试代码
-    //[self testNumberCell];
-//    GameBoardCell * view = [[GameBoardCell alloc]initWithFrame:CGRectMake(100, 290, _cellWidth, _cellWidth)];
-// //   view.backgroundColor  = [GameBoardCell generateColor:2];
-//    view.color = 2;
-//    view.cellPositon = GBCellPositionRight;
-//    [view addTrickingWithType:GBTrakingCategoryColor];
-//    
-//    [self addSubview:view];
-//    
-//    [view showAnimation];
 
 }
+
+-(void)setCellPosition:(GameBoardCell*)cell{
+
+    if (cell.tag == 1) {
+        [cell setCellPositon:GBCellPositionRightDown];
+    }
+    else if (cell.tag == _cellNum) {
+        [cell setCellPositon:GBCellPositionLeftDown];
+    }
+    else if (cell.tag == _cellNum*(_cellNum-1)+1){
+    
+        [cell setCellPositon:GBCellPositionRightUp];
+    }
+    else if (cell.tag == _cellNum*_cellNum){
+    
+        [cell setCellPositon:GBCellPositionLeftUp];
+    }
+    else if (cell.tag %_cellNum == 1){
+    
+        [cell setCellPositon:GBCellPositionLeft];
+    }
+    else if (cell.tag %_cellNum == 0){
+        [cell setCellPositon:GBCellPositionRight];
+    }
+    else if (cell.tag/_cellNum == 0){
+        [cell setCellPositon:GBCellPositionTop];
+    }
+    else{
+    
+        [cell setCellPositon:GBCellPositionNormal];
+    }
+
+}
+
+
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch* touch = [touches anyObject];
@@ -160,22 +183,26 @@
         if ([view isKindOfClass:[GameBoardCell class]]) {
             GameBoardCell * cell = (GameBoardCell*)view;
             //弹出选择颜色的框
-  
+            if (!(cell.accessoryItems.count >0)) {
+                
+                [self.layer.mask removeFromSuperlayer];
             self.maskView = [[UIView alloc]initWithFrame:CGRectMake(0, self.boardInset, self.frame.size.width, _cellNum*(_cellWidth+EDGE_INSET) -EDGE_INSET)];
             
             self.maskView.backgroundColor = [UIColor whiteColor];
-            self.maskView.alpha = 0;
+            self.maskView.alpha = 0.5;
             [self addSubview:self.maskView];
-    
-            [UIView animateWithDuration:0.3 animations:^{
-                self.maskView.alpha = 0.5;
-            }];
+               
+                
+//            [UIView animateWithDuration:0.3 animations:^{
+//                self.maskView.alpha = 0.5;
+//            }];
             [self bringSubviewToFront:cell];
             
-            [cell addTrickingWithType:GBTrakingCategoryColor];
-            [cell showAnimation];
-//            [self.storeSelectedCellSet addObject:cell];
-//            [self toggeSelectionCells];
+  
+                [cell addTrickingWithType:GBTrakingCategoryColor];
+                [cell showAnimation];
+  
+            }
         
         }
     }
@@ -183,20 +210,26 @@
     if (touch.tapCount == 1 && self.isChangeNumer) {
         if ([view isKindOfClass:[GameBoardCell class]]) {
             GameBoardCell * cell = (GameBoardCell*) view;
+            
+            if (!(cell.accessoryItems.count >0)) {
+                [self.layer.mask removeFromSuperlayer];
             self.maskView = [[UIView alloc]initWithFrame:CGRectMake(0, self.boardInset, self.frame.size.width, _cellNum*(_cellWidth+EDGE_INSET) -EDGE_INSET)];
             
             self.maskView.backgroundColor = [UIColor whiteColor];
-            self.maskView.alpha = 0;
+            self.maskView.alpha = 0.5;
             [self addSubview:self.maskView];
             
-            [UIView animateWithDuration:0.3 animations:^{
-                self.maskView.alpha = 0.5;
-            }];
+//            [UIView animateWithDuration:0.3 animations:^{
+//                self.maskView.alpha = 0.5;
+//            }];
             [self bringSubviewToFront:cell];
             
             
-            [cell addTrickingWithType:GBTrakingCategoryNum];
-            [cell showAnimation];
+                [cell addTrickingWithType:GBTrakingCategoryNum];
+                [cell showAnimation];
+     
+            }
+
 //            [self.storeSelectedCellSet addObject:cell];
 //            [self togglecellNumberChanged];
 
@@ -539,6 +572,10 @@
         CGPoint desPos = [value CGPointValue];
         cell.center = CGPointMake(desPos.x, -25);
         [self addSubview:cell];
+        [self setCellPosition:cell];
+        [cell setDelegate:self];
+        
+      //增加cell
     }];
     
     NSMutableDictionary * xdim = [[NSMutableDictionary alloc]initWithCapacity:6];
@@ -666,8 +703,13 @@
 
 -(void)changeCellColor:(id)sender{
 
-    [self showPauseCellEffective];
-
+    CALayer* layer = [CALayer layer];
+    layer.frame = CGRectMake(0, self.boardInset, self.frame.size.width, _cellNum*(_cellWidth+EDGE_INSET) -EDGE_INSET);
+    layer.backgroundColor = [UIColor blueColor].CGColor;
+    [layer setOpacity:0.3];
+    [self.layer setMask:layer];
+    
+    self.isChangeColor = YES;
 
 }
 
@@ -708,7 +750,7 @@
             
             self.SelectedCellColor = weak_cell.tag- SElECTED_CELL_TAG;
             //改变点击celll的颜色
-            [self performSelectorOnMainThread:@selector(changeCellColor) withObject:nil waitUntilDone:YES];
+        //    [self performSelectorOnMainThread:@selector(changeCellColor) withObject:nil waitUntilDone:YES];
             
                     }];
         
@@ -779,18 +821,23 @@
 
 }
 
--(void) changeCellColor{
-
-//  GameBoardCell * cell =[self.storeSelectedCellSet anyObject];
-//    [cell setColor:self.SelectedCellColor];
-//    [self.storeSelectedCellSet removeAllObjects];
-//    [self.maskView removeFromSuperview];
-    
-    self.isChangeColor = YES;
-}
+//-(void) changeCellColor{
+//
+////  GameBoardCell * cell =[self.storeSelectedCellSet anyObject];
+////    [cell setColor:self.SelectedCellColor];
+////    [self.storeSelectedCellSet removeAllObjects];
+////    [self.maskView removeFromSuperview];
+//    
+//   
+//}
 
 
 - (void)changeCellNumber:(id)btn{
+    CALayer* layer = [CALayer layer];
+    layer.frame = CGRectMake(0, self.boardInset, self.frame.size.width, _cellNum*(_cellWidth+EDGE_INSET) -EDGE_INSET);
+    layer.backgroundColor = [UIColor blueColor].CGColor;
+    [layer setOpacity:0.3];
+    [self.layer setMask:layer];
     
     self.isChangeNumer = YES;
 }

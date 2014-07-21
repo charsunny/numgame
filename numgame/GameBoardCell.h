@@ -18,6 +18,10 @@ typedef NS_ENUM(NSUInteger, GBCellPosition) {
     GBCellPositionLeft,
     GBCellPositionRight,
     GBCellPositionTop,
+    GBCellPositionRightDown,
+    GBCellPositionLeftDown,
+    GBCellPositionRightUp,
+    GBCellPositionLeftUp
 };
 
 //定义道具的显示
@@ -47,6 +51,7 @@ typedef NS_ENUM(NSUInteger, GBTrakingCategory) {
 //初始化cell的位置
 @property (nonatomic,assign) GBCellPosition  cellPositon;
 
+@property (strong ,nonatomic) NSMutableArray * accessoryItems;
 
 + (UIColor*)generateColor:(int)number;
 

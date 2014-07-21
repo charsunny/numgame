@@ -18,6 +18,7 @@
 @property (weak,nonatomic)id<GameBoardViewDelegate>delegate;
 @property (nonatomic ,assign) BOOL isChangeColor;
 @property (nonatomic,assign) BOOL isChangeNumer;
+
 - (void)layoutBoardWithCellNum:(int)num;
 -(void)addDashBoardScore:(int)score;
 
