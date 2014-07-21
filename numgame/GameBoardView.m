@@ -29,7 +29,7 @@
 #define Two_Same_Number_Score           10
 #define Four_Same_Number_Score          100
 #define Four_Diff_Color_Number_Score    50
-@interface GameBoardView()
+@interface GameBoardView()<GameboardCellDelegate>
 {
     //flag that indicates that 2 cells can be eliminated;
     BOOL canEliminated;
@@ -75,6 +75,7 @@
         self.multipleTouchEnabled = NO;
         self.storeSelectedCellSet = [[NSMutableSet alloc]initWithCapacity:1];
         [self setClipsToBounds:YES];
+       // [self setUserInteractionEnabled:YES];
     }
     return self;
 }
@@ -109,10 +110,42 @@
             _posArray[i*num + j] = [NSValue valueWithCGPoint:center];
             [view setCenter:center];
             [self addSubview:view];
+            //+++定义View的Position//四个角弹出动画会出现问题
+            if (view.tag%_cellNum == 1) {
+                [view setCellPositon:GBCellPositionLeft];
+            }
+            else if (view.tag % _cellNum ==0){
+            
+                [view setCellPositon:GBCellPositionRight];
+            }
+            else if (view.tag/_cellNum == 0){
+            
+                [view setCellPositon:GBCellPositionTop];
+                
+            }
+            else {
+            
+                [view setCellPositon:GBCellPositionNormal];
+            }
+            
+            [view setDelegate:self];
+            
         }
     }
     [self initSelectionCells];
+    
+    //测试代码
     //[self testNumberCell];
+//    GameBoardCell * view = [[GameBoardCell alloc]initWithFrame:CGRectMake(100, 290, _cellWidth, _cellWidth)];
+// //   view.backgroundColor  = [GameBoardCell generateColor:2];
+//    view.color = 2;
+//    view.cellPositon = GBCellPositionRight;
+//    [view addTrickingWithType:GBTrakingCategoryColor];
+//    
+//    [self addSubview:view];
+//    
+//    [view showAnimation];
+
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -139,8 +172,10 @@
             }];
             [self bringSubviewToFront:cell];
             
-            [self.storeSelectedCellSet addObject:cell];
-            [self toggeSelectionCells];
+            [cell addTrickingWithType:GBTrakingCategoryColor];
+            [cell showAnimation];
+//            [self.storeSelectedCellSet addObject:cell];
+//            [self toggeSelectionCells];
         
         }
     }
@@ -159,8 +194,11 @@
             }];
             [self bringSubviewToFront:cell];
             
-            [self.storeSelectedCellSet addObject:cell];
-            [self togglecellNumberChanged];
+            
+            [cell addTrickingWithType:GBTrakingCategoryNum];
+            [cell showAnimation];
+//            [self.storeSelectedCellSet addObject:cell];
+//            [self togglecellNumberChanged];
 
         }
     }
@@ -743,11 +781,20 @@
 
 -(void) changeCellColor{
 
-  GameBoardCell * cell =[self.storeSelectedCellSet anyObject];
-    [cell setColor:self.SelectedCellColor];
-    [self.storeSelectedCellSet removeAllObjects];
-    [self.maskView removeFromSuperview];
+//  GameBoardCell * cell =[self.storeSelectedCellSet anyObject];
+//    [cell setColor:self.SelectedCellColor];
+//    [self.storeSelectedCellSet removeAllObjects];
+//    [self.maskView removeFromSuperview];
+    
+    self.isChangeColor = YES;
 }
+
+
+- (void)changeCellNumber:(id)btn{
+    
+    self.isChangeNumer = YES;
+}
+
 
 #pragma mark fly cell animtion
 - (void)addCellFlyAnimation:(void (^)())callback
@@ -770,23 +817,45 @@
 }
 
 
-- (void)changeCellNumber:(id)btn{
 
+
+-(void)gameBoardCell:(GameBoardCell *)cell withCategory:(GBTrakingCategory)category{
+
+    switch (category) {
+        case GBTrakingCategoryColor:
+        {
+             [UIView animateWithDuration:0.25 animations:^{
+                 
+                 [self.maskView setAlpha:0.0];
+             } completion:^(BOOL finished) {
+                 
+                 [self.maskView removeFromSuperview];
+                 self.maskView = nil;
+             }];
+            self.isChangeColor = NO;
+        }
+            break;
+        case GBTrakingCategoryNum:
+        {
+        
+            [UIView animateWithDuration:0.25 animations:^{
+                
+                [self.maskView setAlpha:0.0];
+            } completion:^(BOOL finished) {
+                
+                [self.maskView removeFromSuperview];
+                self.maskView = nil;
+            }];
+            self.isChangeNumer = NO;
+        
+        }
+            break;
+        default:
+            break;
+    }
 
 }
 
-
-
-//-(UIView*)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
-//    [super hitTest:point withEvent:event];
-//    return self;
-//
-//}
-
--(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{
-
-    return YES;
-}
 @end
 
 
