@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.7" systemVersion="14A283o" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="ktx-ga-6Ec">
     <dependencies>
-        <deployment version="1792" identifier="iOS"/>
+        <deployment version="1792" defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6181.2"/>
     </dependencies>
     <scenes>
@@ -343,12 +343,12 @@
                                         <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="17"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="leaderboard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="afZ-79-og2">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="steped" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="afZ-79-og2">
                                         <rect key="frame" x="20" y="290" width="143" height="21"/>
-                                        <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="17"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="setting" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LDs-cp-cti">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="endless" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LDs-cp-cti">
                                         <rect key="frame" x="183" y="290" width="100" height="21"/>
                                         <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="17"/>
                                         <nil key="highlightedColor"/>
@@ -360,11 +360,39 @@
                                     <constraint firstAttribute="width" constant="320" id="xRd-T5-a11"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Urk-uD-tcK">
+                                <rect key="frame" x="0.0" y="436" width="160" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="aEf-9v-DtU"/>
+                                </constraints>
+                                <state key="normal" title="leaderboard">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kop-Bg-y5B">
+                                <rect key="frame" x="160" y="436" width="160" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="yqc-34-s3q"/>
+                                </constraints>
+                                <state key="normal" title="settings">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Exn-aZ-OBq" firstAttribute="top" secondItem="Urk-uD-tcK" secondAttribute="bottom" id="5A5-Th-trn"/>
+                            <constraint firstItem="Exn-aZ-OBq" firstAttribute="top" secondItem="Urk-uD-tcK" secondAttribute="bottom" id="6Ex-zX-Lgf"/>
+                            <constraint firstItem="kop-Bg-y5B" firstAttribute="leading" secondItem="Urk-uD-tcK" secondAttribute="trailing" id="7I3-Wx-WPe"/>
+                            <constraint firstItem="Exn-aZ-OBq" firstAttribute="top" secondItem="kop-Bg-y5B" secondAttribute="bottom" id="7NB-n8-5r8"/>
                             <constraint firstAttribute="centerY" secondItem="YYV-Sd-MUw" secondAttribute="centerY" id="9Qw-AM-U1h"/>
+                            <constraint firstAttribute="trailing" secondItem="kop-Bg-y5B" secondAttribute="trailing" id="9ux-uJ-99P"/>
+                            <constraint firstItem="Exn-aZ-OBq" firstAttribute="top" secondItem="kop-Bg-y5B" secondAttribute="bottom" id="ES6-g2-YGG"/>
+                            <constraint firstItem="Urk-uD-tcK" firstAttribute="width" secondItem="kop-Bg-y5B" secondAttribute="width" id="FCO-C2-BRW"/>
                             <constraint firstAttribute="centerX" secondItem="YYV-Sd-MUw" secondAttribute="centerX" id="Jp5-TW-RoT"/>
+                            <constraint firstAttribute="trailing" secondItem="kop-Bg-y5B" secondAttribute="trailing" id="X5d-qZ-AJr"/>
+                            <constraint firstItem="Urk-uD-tcK" firstAttribute="leading" secondItem="Jzs-5G-b5R" secondAttribute="leading" id="chZ-kV-P92"/>
+                            <constraint firstItem="Urk-uD-tcK" firstAttribute="leading" secondItem="Jzs-5G-b5R" secondAttribute="leading" id="frz-3I-pf3"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="94A-eu-OUx"/>
@@ -380,7 +408,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vYv-GZ-TE6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-491" y="48"/>
+            <point key="canvasLocation" x="-416" y="48"/>
         </scene>
         <!--Result View Controller-->
         <scene sceneID="WXg-Gb-Xbt">

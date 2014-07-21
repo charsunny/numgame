@@ -355,7 +355,9 @@
 - (IBAction)onButtonClick:(UIButton *)sender {
     if (sender.tag == 1) {
         [self onSwipePauseView:nil];
-        [self initGameTimer];
+        if (_gameMode == NGGameModeTimed) {
+            [self initGameTimer];
+        }
     } else if (sender.tag == 2) {
         [UIView animateWithDuration:0.3f animations:^{
             _gameBoardView.center = CGPointMake(_gameBoardView.center.x + 320, _gameBoardView.center.y);
