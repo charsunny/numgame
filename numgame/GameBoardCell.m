@@ -422,16 +422,30 @@
 -(void)hideNumberItem:(UIView*)item{
 
     POPBasicAnimation * anim = [POPBasicAnimation animationWithPropertyNamed:kPOPViewCenter];
-    anim.toValue = [NSValue valueWithCGPoint:item.center];
+    anim.fromValue = [NSValue  valueWithCGPoint:item.center];
+    
+   // CGPoint toPoint = [item convertPoint:self.center toView:self];
+    anim.toValue = [NSValue valueWithCGPoint:CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2)];
     anim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    anim.duration = 0.5;
-    [item pop_addAnimation:anim forKey:@"myAnimation"];
-    [UIView animateWithDuration:0.3 animations:^{
-        item.opaque = 0;
-    } completion:^(BOOL finished) {
+    [item pop_addAnimation:anim forKey:nil];
+    [anim setCompletionBlock:^(POPAnimation * ani, BOOL finish) {
         [item removeFromSuperview];
-        [self.accessoryItems removeObject:item];
     }];
+   // POPSpringAnimation* anim =[POPSpringAnimation animationWithPropertyNamed:kPOPViewCenter];
+ //   anim.fromValue = [NSValue valueWithCGPoint:item.center];
+   // anim.toValue = [NSValue valueWithCGPoint:self.center];
+   // anim.springBounciness = 20;
+   
+//    [UIView animateWithDuration:0.3 animations:^{
+//        item.opaque = 0;
+//    } completion:^(BOOL finished) {
+//        [item removeFromSuperview];
+//        [self.accessoryItems removeObject:item];
+//    }];
+    
+   // item.opaque = 0;
+   // [item removeFromSuperview];
+  //  [self.accessoryItems removeObject:item];
 }
 
 
@@ -522,8 +536,8 @@
     [self.accessoryItems enumerateObjectsUsingBlock:^(UIView* item, NSUInteger idx, BOOL *stop) {
         [self hideNumberItem:item];
     }];
+    [self.accessoryItems removeAllObjects];
     
-
 }
 
 @end
