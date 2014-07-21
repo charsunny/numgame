@@ -17,6 +17,7 @@
 #import "GameBoardCell.h"
 #import <pop/pop.h>
 #import "GameResultView.h"
+#import "NGGameUtil.h"
 @import AudioToolbox;
 @import AVFoundation;
 @import iAd;
@@ -61,6 +62,7 @@
 
 @property (nonatomic,strong) GameResultView *gameResultView;
 
+@property (nonatomic)BOOL unwindFromResultVC;
 @end
 
 @implementation NGGameViewController
@@ -142,6 +144,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    if (_unwindFromResultVC) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
     if ([[[NGGameConfig sharedGameConfig] sound] isEqualToString:@"J"]) {
         _haveSound = YES;
     } else {
@@ -211,6 +216,9 @@
 #pragma mark  --IBACTION--
 
 - (void)showResult:(BOOL)completed {
+    
+    [self performSegueWithIdentifier:@"resultsegue" sender:self];
+    return;
     self.gameResultView = [[GameResultView alloc]initGameResultViewWithScore:self.score Completion:completed];
     [self.view addSubview:self.gameResultView];
    
@@ -251,6 +259,7 @@
     [_progressTimer invalidate];
     if([destinationViewController isKindOfClass:[NGResultViewController class]]) {
         NGResultViewController* controller = (NGResultViewController*)destinationViewController;
+        controller.prevBgImageView = [[UIImageView alloc]initWithImage:[NGGameUtil screenshot:self.view]];
         controller.gameMode = _gameMode;
         if (_gameMode == NGGameModeClassic) {
             controller.time = _timeLabel.text;
@@ -287,6 +296,28 @@
         }
     }
 }
+
+-(IBAction)unwindViewControllerForNextLevel:(UIStoryboardSegue *)unwindSegue
+{
+    /*
+    NGResultViewController* gameResultViewController = (NGResultViewController*)unwindSegue.sourceViewController;
+    
+    if ([gameResultViewController isKindOfClass:[NGResultViewController class]])
+    {
+        
+    }
+     */
+}
+-(IBAction)unwindViewControllerForMainPage:(UIStoryboardSegue *)unwindSegue
+{
+    
+    [_gameBoardView setHidden:YES];
+    NSLog(@"%@",self.navigationController.viewControllers[0]);
+    NSLog(@"%@",self.navigationController.viewControllers[1]);
+    _unwindFromResultVC = YES;
+    //[self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 
 #pragma mark -- play sound -- 
 

@@ -7,6 +7,7 @@
 //
 
 #import "NGResultViewController.h"
+#import "NGGameViewController.h"
 @import Social;
 
 @interface NGResultViewController ()
@@ -40,6 +41,10 @@
     // Do any additional setup after loading the view.
     [_shareButton.titleLabel setFont:[UIFont fontWithName:@"icomoon" size:30]];
     [_titleLabel setFont:[UIFont fontWithName:TITLE_FONT size:40]];
+    UIToolbar* blurView = [[UIToolbar alloc]initWithFrame:self.view.bounds];
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self.view insertSubview:self.prevBgImageView atIndex:0];
+    [self.view insertSubview:blurView atIndex:1];
     if (_gameMode == NGGameModeClassic) {
         if (_isHighScore) {
             [_highScoreLabel setText:@"new best record!"];
@@ -88,11 +93,16 @@
 */
 
 - (IBAction)onPlayAgain:(UIButton *)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    //[self.navigationController popToRootViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)onBack:(UIButton*)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    //[self.navigationController popViewControllerAnimated:YES];
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+        //[self.navigationController popToRootViewControllerAnimated:YES];
+    }];
 }
 
 - (IBAction)onShare:(UIButton*)sender {
