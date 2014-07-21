@@ -68,27 +68,30 @@
 #pragma mark property
 - (void)setTimeSpent:(int)timeSpent
 {
-    _timeSpent = timeSpent;
-    NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
-    //_timeLabel.text = [NSString stringWithFormat:@"%d/%@",_timeSpent, levelInfo[@"step"]];
-    NSString* wholeString =[NSString stringWithFormat:@"%d/%@",_timeSpent, levelInfo[@"step"]];
-    
-    NSMutableAttributedString* mutableAttrString = [[NSMutableAttributedString alloc]initWithString:wholeString];
-    [mutableAttrString addAttribute:NSFontAttributeName
-                              value:[UIFont fontWithName:@"AppleSDGothicNeo-Light" size:30]
-                              range:NSMakeRange(0, wholeString.length)];
-    
-    int delta =[levelInfo[@"step"] intValue]- self.timeSpent;
-    if(delta <= 5)
-    {
-        [mutableAttrString addAttribute:NSForegroundColorAttributeName value:[UIColor orangeColor] range:NSMakeRange(0, [NSString stringWithFormat:@"%d",_timeSpent].length)];
-        if(delta <= 3)
+    if (_gameMode == NGGameModeClassic) {
+        _timeSpent = timeSpent;
+        NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
+        //_timeLabel.text = [NSString stringWithFormat:@"%d/%@",_timeSpent, levelInfo[@"step"]];
+        NSString* wholeString =[NSString stringWithFormat:@"%d/%@",_timeSpent, levelInfo[@"step"]];
+        
+        NSMutableAttributedString* mutableAttrString = [[NSMutableAttributedString alloc]initWithString:wholeString];
+        [mutableAttrString addAttribute:NSFontAttributeName
+                                  value:[UIFont fontWithName:@"AppleSDGothicNeo-Light" size:30]
+                                  range:NSMakeRange(0, wholeString.length)];
+        
+        int delta =[levelInfo[@"step"] intValue]- self.timeSpent;
+        if(delta <= 5)
         {
-            [mutableAttrString addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, [NSString stringWithFormat:@"%d",_timeSpent].length)];
+            [mutableAttrString addAttribute:NSForegroundColorAttributeName value:[UIColor orangeColor] range:NSMakeRange(0, [NSString stringWithFormat:@"%d",_timeSpent].length)];
+            if(delta <= 3)
+            {
+                [mutableAttrString addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, [NSString stringWithFormat:@"%d",_timeSpent].length)];
+            }
         }
+        _timeLabel.attributedText = mutableAttrString;
+        [self addPopSpringAnimation:_timeLabel];
     }
-    _timeLabel.attributedText = mutableAttrString;
-    [self addPopSpringAnimation:_timeLabel];
+    
 }
 
 - (void)setScore:(int)score
@@ -96,7 +99,11 @@
     _score = score;
     self.timeSpent++;
     NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
-    [_scoreLabel setText:[NSString stringWithFormat:@"%d/%@",_score, levelInfo[@"score"]]];
+    if (_gameMode == NGGameModeClassic) {
+        [_scoreLabel setText:[NSString stringWithFormat:@"%d/%@",_score, levelInfo[@"score"]]];
+    } else {
+        [_scoreLabel setText:[NSString stringWithFormat:@"%d",_score]];
+    }
     [self addPopSpringAnimation:_scoreLabel];
 }
 
@@ -105,20 +112,17 @@
     [super viewDidLoad];
     srand((unsigned int)time(NULL));
     //init gameconfig
-    
     for (UIBarButtonItem* item in _toolBar.items) {
         if ([item isKindOfClass:[UIBarButtonItem class]]) {
             item.image = [item.image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         }
     }
-    
     _currectLevel = 1;
     
     NSString* levelPath = [[NSBundle mainBundle] pathForResource:@"config" ofType:@"plist"];
     _levelConfig = [NSArray arrayWithContentsOfFile:levelPath];
-    
     _timeSpent = 0;
-    _leftTime = 10.0;
+    _leftTime = 60;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onResignActive:) name:@"resignactive" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onBecomeActive:) name:@"becomeactive" object:nil];
@@ -134,7 +138,6 @@
     [_timeLabel setAdjustsFontSizeToFitWidth:YES];
     [_scoreLabel setAdjustsFontSizeToFitWidth:YES];
     self.gameBoardView.isChangeColor = NO;
-    [self resumeGame];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -156,7 +159,6 @@
         [_headView addSubview:spLine];
         [_headView setTag:100];
     }
-    
 }
 
 - (void)initGameData {
@@ -170,10 +172,11 @@
             break;
         }
         case NGGameModeTimed:
-            _leftTime = 10.0;
+            _leftTime = 60;
             _score = 0;
             [_scoreLabel setText:@"0"];
-            [_timeLabel setText:@"0.0"];
+            [_timeLabel setText:@"60"];
+            [self initGameTimer];
             break;
         default:
             break;
@@ -187,29 +190,22 @@
 }
 
 
-- (void)resumeGame {
-//    [_progressTimer invalidate];
-//    _progressTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateGameTime) userInfo:nil repeats:YES];
-//    [_progressTimer fire];
+- (void)initGameTimer {
+    _progressTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateGameTime) userInfo:nil repeats:YES];
+    [_progressTimer fire];
 }
 
 -(void)updateGameTime
 {
-   if(_gameMode == NGGameModeClassic)
-   {
-       self.timeSpent++;
-   }
-   else
-   {
-        _leftTime -= 0.1f;
-        if (_leftTime > 0) {
-            [_timeLabel setText:[NSString stringWithFormat:@"%.1f",_leftTime]];
-        } else {
-            [_timeLabel setText:@"0.0"];
-            [_progressTimer invalidate];
-            [self showResult:YES];
-        }
-   }
+    _leftTime -= 1;
+    if (_leftTime > 0) {
+        [_timeLabel setText:[NSString stringWithFormat:@"%.0f",_leftTime]];
+    } else {
+        [_timeLabel setText:@"0"];
+        [_progressTimer invalidate];
+        [self showResult:YES];
+    }
+
 }
 
 #pragma mark  --IBACTION--
@@ -237,13 +233,14 @@
 
 #pragma mark -- background handler --
 - (void)onBecomeActive:(NSNotification*)notif {
-   
+    
 }
 
 - (void)onResignActive:(NSNotification*)notif {
     if (_pauseView.center.x > 320) {
-        [self onTapHeaderView:nil];
+        [self performSelector:@selector(onTapHeaderView:) withObject:nil afterDelay:0.3f];
     }
+    [_progressTimer invalidate];
 }
 
 #pragma mark - Navigation
@@ -327,6 +324,7 @@
 - (IBAction)onButtonClick:(UIButton *)sender {
     if (sender.tag == 1) {
         [self onSwipePauseView:nil];
+        [self initGameTimer];
     } else if (sender.tag == 2) {
         [UIView animateWithDuration:0.3f animations:^{
             _gameBoardView.center = CGPointMake(_gameBoardView.center.x + 320, _gameBoardView.center.y);
@@ -355,7 +353,6 @@
 }
 
 - (void)onSwipePauseView:(UISwipeGestureRecognizer*)recognizer {
-    [self resumeGame];
     [UIView animateWithDuration:0.3f animations:^{
         _gameBoardView.center = CGPointMake(_gameBoardView.center.x + 320, _gameBoardView.center.y);
         _pauseView.center = CGPointMake(_pauseView.center.x + 320, _pauseView.center.y);
@@ -390,10 +387,12 @@
         [scoreDeltaLabel removeFromSuperview];
     }];
     
-    if ([levelInfo[@"score"] intValue] <= self.score) {
-        [self showResult:YES];
-    } else if ([levelInfo[@"step"] intValue] <= self.timeSpent) {
-        [self showResult:NO];
+    if (_gameMode == NGGameModeClassic) {
+        if ([levelInfo[@"score"] intValue] <= self.score) {
+            [self showResult:YES];
+        } else if ([levelInfo[@"step"] intValue] <= self.timeSpent) {
+            [self showResult:NO];
+        }
     }
 }
 -(void)decreaseScore:(int)deltaScore
