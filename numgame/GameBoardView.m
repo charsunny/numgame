@@ -231,7 +231,6 @@
             }
 
 //            [self.storeSelectedCellSet addObject:cell];
-//            [self togglecellNumberChanged];
 
         }
     }
@@ -344,8 +343,6 @@
     [_selectedCell removeAllObjects];
     canEliminated = NO;
     [self setNeedsDisplay];
-    //[self debugCell];
-   
 }
 
 
@@ -682,23 +679,7 @@
     return sum;
 }
 
-#pragma mark for debugging
 
-
-- (void)debugCell{
-    
-    NSMutableArray * array = [NSMutableArray arrayWithCapacity:0];
-    
-    for(id view in self.subviews){
-        if ([view isKindOfClass:[GameBoardCell class]]) {
-            [array addObject: view];
-        }
-    }
-    //NSLog(@"array中GameBoardView的个数：%d",array.count);
-    //for (GameBoardView * view in array) {
-        //NSLog(@"views tag is %d",view.tag);
-    //}
-}
 
 
 -(void)changeCellColor:(id)sender{
@@ -765,39 +746,6 @@
 
 }
 
--(void)testNumberCell{
-
-/***为什么不好用****/
-    NSArray* colorArray = @[UIColorFromRGB(0xFF814F),UIColorFromRGB(0xF9FF4F),UIColorFromRGB(0x34D3FF),UIColorFromRGB(0x46FFAB)];
-    
-    NSMutableArray * items = [[NSMutableArray alloc]initWithCapacity:0];
-    for (int i = 0; i < 4; i++) {
-       
-        UILabel* item = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, _cellWidth, _cellWidth)];
-        [item setText:[NSString stringWithFormat:@"%d",i+1]];
-        [item setFont:[UIFont fontWithName:NUM_FONT size:30]];
-        [item setTextColor:colorArray[i]];
-        [item setUserInteractionEnabled:YES];
-        item.backgroundColor = [UIColor clearColor];
-        [items addObject:item];
-    }
-    
-    
-    self.numberSelectionView= [[NumberSelectionVIew alloc]initWithNumberItems:items withTouchBlock:^(NSInteger idx) {
-        NSLog(@"%d",idx);
-    }];
-
-    [self addSubview:_numberSelectionView];
-    [_numberSelectionView bringSubviewToFront:self];
-    [_numberSelectionView show];
-    
-    
-
-    
-
-   
-    
-}
 
 
 
@@ -814,12 +762,6 @@
 }
 
 
--(void)togglecellNumberChanged{
-
-   // 激发选择的动画
-
-
-}
 
 //-(void) changeCellColor{
 //
