@@ -121,6 +121,7 @@
 		50FCBE4A19166EC500203703 /* bauhs93.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 50FCBE4919166EC500203703 /* bauhs93.ttf */; };
 		50FCBE57191763B100203703 /* showg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 50FCBE56191763B100203703 /* showg.ttf */; };
 		50FCBE591917655B00203703 /* Curlz MT.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 50FCBE581917655B00203703 /* Curlz MT.TTF */; };
+		9D5A1074197D3627007BBECE /* NGGameUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D5A1073197D3627007BBECE /* NGGameUtil.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -305,6 +306,8 @@
 		50FCBE4919166EC500203703 /* bauhs93.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bauhs93.ttf; sourceTree = "<group>"; };
 		50FCBE56191763B100203703 /* showg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = showg.ttf; sourceTree = "<group>"; };
 		50FCBE581917655B00203703 /* Curlz MT.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Curlz MT.TTF"; sourceTree = "<group>"; };
+		9D5A1072197D3627007BBECE /* NGGameUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGGameUtil.h; sourceTree = "<group>"; };
+		9D5A1073197D3627007BBECE /* NGGameUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NGGameUtil.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -517,6 +520,8 @@
 			children = (
 				50FB049819694C5E00941EEF /* MatrixMath.h */,
 				50FB049919694C5E00941EEF /* MatrixMath.m */,
+				9D5A1072197D3627007BBECE /* NGGameUtil.h */,
+				9D5A1073197D3627007BBECE /* NGGameUtil.m */,
 				50FB049119694C1600941EEF /* view */,
 				5014AF4119163AA700827D82 /* res */,
 				5014AE33190F86D400827D82 /* GoogleAdMobAdsSdkiOS-6.5.1 */,
@@ -638,7 +643,6 @@
 				ORGANIZATIONNAME = "Sun Xi";
 				TargetAttributes = {
 					50EDF3A318FFB755003FBA71 = {
-						DevelopmentTeam = CX3SW7JBRE;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
 								enabled = 1;
@@ -812,6 +816,7 @@
 				5014AF38190FF45E00827D82 /* NGGameConfig.m in Sources */,
 				50FB049A19694C5E00941EEF /* MatrixMath.m in Sources */,
 				5014AE2F190E982C00827D82 /* NGOptionViewController.m in Sources */,
+				9D5A1074197D3627007BBECE /* NGGameUtil.m in Sources */,
 				5014AE2C190E920400827D82 /* NGGameModeViewController.m in Sources */,
 				50FB049619694C2500941EEF /* GameBoardCell.m in Sources */,
 				50EDF3B418FFB755003FBA71 /* main.m in Sources */,
