@@ -13,6 +13,7 @@
 #import <pop/pop.h>
 #import "GameResultView.h"
 #import "NumberSelectionVIew.h"
+#import "NGGameUtil.h"
 //#import "NEContainerView.h"
 @import CoreGraphics;
 @import AVFoundation;
@@ -33,6 +34,8 @@
 {
     //flag that indicates that 2 cells can be eliminated;
     BOOL canEliminated;
+    
+    NSMutableArray* borderViewArr;
 }
 
 @property (nonatomic) int cellNum;
@@ -76,6 +79,7 @@
         self.multipleTouchEnabled = NO;
         self.storeSelectedCellSet = [[NSMutableSet alloc]initWithCapacity:1];
         [self setClipsToBounds:YES];
+        borderViewArr = [NSMutableArray new];
        // [self setUserInteractionEnabled:YES];
     }
     return self;
@@ -93,6 +97,7 @@
         [self addSubview:border];
     }
 }
+
 
 - (void)layoutBoardWithCellNum:(int)num {
      _boardInset = (self.frame.size.height - self.frame.size.width)/2;
@@ -378,34 +383,71 @@
     return sum;
 }
 
+//添加header bar 下部分 得分 情况 border view
 - (void)addBorderEffectWithCell:(GameBoardCell*)cell eliminated:(BOOL)elimate {
     if (!elimate) {
         UIView* view =  [self viewWithTag:100+_selectedCell.count];
-        view.backgroundColor = [GameBoardCell generateColor:cell.color];
+        view.alpha = 0.0f;
+        
+        float width = self.frame.size.width/4;
+        //若用户移动太快，将之前的动画停止掉
+        for(int k = 0 ; k < borderViewArr.count ; k++)
+        {
+            UIView* v = (UIView*)borderViewArr[k];
+            [v.layer removeAllAnimations];
+        }
+        
+        
+        UIView* borderView = [[UIView alloc]initWithFrame:view.frame];
+        borderView.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y,0 , view.frame.size.height);
+        borderView.backgroundColor = [GameBoardCell generateColor:cell.color];
+        [self addSubview:borderView];
+        [borderViewArr addObject:borderView];
+        
+        [UIView animateWithDuration:0.3 delay:0 usingSpringWithDamping:0.3 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            borderView.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y,width, view.frame.size.height);
+        } completion:^(BOOL finished) {
+        }];
+        
+        
     } else {
         GameBoardCell* curCell = [_selectedCell lastObject];
-        GameBoardCell* preCell = [_selectedCell firstObject];
         UIView* view =  [self viewWithTag:102];
-        view.backgroundColor = [GameBoardCell generateColor:preCell.color];
-        for (int i  = 3; i <= 4; i ++ ) {
-            UIView* view =  [self viewWithTag:100+i];
-            view.backgroundColor = [GameBoardCell generateColor:curCell.color];
-        }
+        view.alpha = 0.0f;
+        
+        UIView* borderView = [[UIView alloc]initWithFrame:view.frame];
+        borderView.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y,0 , view.frame.size.height);
+        borderView.backgroundColor = [GameBoardCell generateColor:curCell.color];
+        [self addSubview:borderView];
+        [borderViewArr addObject:borderView];
+        float width = self.frame.size.width;
+        CGFloat finalWidth  = (4 - _selectedCell.count + 1) / 4.0 * width;
+        [UIView animateWithDuration:0.3 delay:0 usingSpringWithDamping:0.3 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            borderView.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y, finalWidth, view.frame.size.height);
+        } completion:^(BOOL finished) {
+        }];
     }
 }
-
 - (void)removeBorderEffectWithCell:(GameBoardCell*)cell {
-    for (int i = _selectedCell.count; i < 4; i++) {
-        UIView* view =  [self viewWithTag:101+i];
-        view.backgroundColor = [UIColor clearColor];
+    for(int k = _selectedCell.count ; k < borderViewArr.count ; k++)
+    {
+        [(UIView*)borderViewArr[k] removeFromSuperview];
+        [borderViewArr removeObjectAtIndex:k];
     }
+}
+- (void)clearBorderViewArr
+{
+    for(int k = 0 ; k < borderViewArr.count ; k++)
+    {
+        [(UIView*)borderViewArr[k] removeFromSuperview];
+    }
+    [borderViewArr removeAllObjects];
 }
 
 - (void)removeAllBorderEffect {
-    for (int i = 0; i < 4; i++) {
-        UIView* view =  [self viewWithTag:101+i];
-        view.backgroundColor = [UIColor clearColor];
-    }
+    [self clearBorderViewArr];
+    
+    //float width = self.frame.size.width;
 }
 
 - (void)addEffectToView:(GameBoardCell*)view withAnimation:(BOOL)animate {
