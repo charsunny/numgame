@@ -55,6 +55,7 @@
 @property (nonatomic,strong) UIView * maskView;
 @property (nonatomic,assign) float boardInset;
 
+@property (nonatomic, strong) GameBoardCell * curCell;
 
 
 @property (nonatomic, strong)NumberSelectionVIew * numberSelectionView;
@@ -183,6 +184,7 @@
         if ([view isKindOfClass:[GameBoardCell class]]) {
             GameBoardCell * cell = (GameBoardCell*)view;
             //弹出选择颜色的框
+            self.curCell = cell;
             if (!(cell.accessoryItems.count >0)) {
                 
                 [self.layer.mask removeFromSuperlayer];
@@ -191,26 +193,28 @@
             self.maskView.backgroundColor = [UIColor whiteColor];
             self.maskView.alpha = 0.5;
             [self addSubview:self.maskView];
-               
-                
-//            [UIView animateWithDuration:0.3 animations:^{
-//                self.maskView.alpha = 0.5;
-//            }];
+
             [self bringSubviewToFront:cell];
-            
-  
                 [cell addTrickingWithType:GBTrakingCategoryColor];
                 [cell showAnimation];
   
             }
         
+            
+        }
+        
+        if ([view isEqual:self.maskView]) {
+            
+            [self.maskView removeFromSuperview];
+            [self.curCell hideAnimation];
+            self.isChangeColor = NO;
         }
     }
     
     if (touch.tapCount == 1 && self.isChangeNumer) {
         if ([view isKindOfClass:[GameBoardCell class]]) {
             GameBoardCell * cell = (GameBoardCell*) view;
-            
+            self.curCell = cell;
             if (!(cell.accessoryItems.count >0)) {
                 [self.layer.mask removeFromSuperlayer];
             self.maskView = [[UIView alloc]initWithFrame:CGRectMake(0, self.boardInset, self.frame.size.width, _cellNum*(_cellWidth+EDGE_INSET) -EDGE_INSET)];
@@ -218,10 +222,6 @@
             self.maskView.backgroundColor = [UIColor whiteColor];
             self.maskView.alpha = 0.5;
             [self addSubview:self.maskView];
-            
-//            [UIView animateWithDuration:0.3 animations:^{
-//                self.maskView.alpha = 0.5;
-//            }];
             [self bringSubviewToFront:cell];
             
             
@@ -230,8 +230,13 @@
      
             }
 
-//            [self.storeSelectedCellSet addObject:cell];
-
+        }
+        
+        if ([view isEqual:self.maskView]) {
+            
+            [self.maskView removeFromSuperview];
+            [self.curCell hideAnimation];
+            self.isChangeNumer = NO;
         }
     }
     
@@ -471,8 +476,6 @@
                 }
                 
             }
-            
-            
             
             NSMutableArray * mutableArray = [[NSMutableArray alloc]initWithCapacity:self.selectedCell.count];
             for (GameBoardCell * iterCell in self.selectedCell) {
