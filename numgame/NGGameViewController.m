@@ -183,6 +183,18 @@
             [_timeLabel setText:@"60"];
             [self initGameTimer];
             break;
+        case NGGameModeSteped:
+            _score = 0;
+            _leftTime = 30;
+            [_scoreLabel setText:@"0"];
+            [_timeLabel setText:@"30"];
+            break;
+        case NGGameModeEndless:
+            _score = 0;
+            _leftTime = 0;
+            [_scoreLabel setText:@"0"];
+            [_timeLabel setText:@"0"];
+            break;
         default:
             break;
     }
@@ -426,6 +438,15 @@
         } else if ([levelInfo[@"step"] intValue] <= self.timeSpent) {
             [self showResult:NO];
         }
+    } else if (_gameMode == NGGameModeSteped) {
+        _leftTime--;
+        [_timeLabel setText:[NSString stringWithFormat:@"%.0f",_leftTime]];
+        if (_leftTime == 0) {
+            [self showResult:YES];
+        }
+    } else if (_gameMode == NGGameModeEndless) {
+        _leftTime++;
+        [_timeLabel setText:[NSString stringWithFormat:@"%.0f",_leftTime]];
     }
 }
 -(void)decreaseScore:(int)deltaScore

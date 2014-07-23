@@ -11,8 +11,8 @@
 typedef enum {
     NGGameModeClassic = 0,
     NGGameModeTimed,
-    NGGameModeRush,
-    NGGameModeZen
+    NGGameModeSteped,
+    NGGameModeEndless
 } NGGameMode;
 
 @interface NGGameConfig : NSObject

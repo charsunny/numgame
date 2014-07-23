@@ -70,14 +70,14 @@
         [sender setTransform:CGAffineTransformMakeScale(1.0, 1.0)];
     }];
     
-    //go to leader board
-    if ([sender isEqual:_leaderButton]) {
-        [sender setEnabled:YES];
-        GKGameCenterViewController *leaderboardController = [[GKGameCenterViewController alloc] init];
-        leaderboardController.viewState = GKGameCenterViewControllerStateLeaderboards;
-        leaderboardController.gameCenterDelegate = self;
-        [self presentViewController:leaderboardController animated:YES completion:nil];
-    }
+//    //go to leader board
+//    if ([sender isEqual:_leaderButton]) {
+//        [sender setEnabled:YES];
+//        GKGameCenterViewController *leaderboardController = [[GKGameCenterViewController alloc] init];
+//        leaderboardController.viewState = GKGameCenterViewControllerStateLeaderboards;
+//        leaderboardController.gameCenterDelegate = self;
+//        [self presentViewController:leaderboardController animated:YES completion:nil];
+//    }
 }
 
 - (IBAction)touchDown:(UIButton*)sender {
@@ -103,6 +103,12 @@
     } else if ([segue.identifier isEqualToString:@"timedsegue"]) {
         NGGameViewController* destVC = (NGGameViewController*)segue.destinationViewController;
         destVC.gameMode = NGGameModeTimed;
+    } else if ([segue.identifier isEqualToString:@"stepedsegue"]) {
+        NGGameViewController* destVC = (NGGameViewController*)segue.destinationViewController;
+        destVC.gameMode = NGGameModeSteped;
+    } else if ([segue.identifier isEqualToString:@"endlesssegue"]) {
+        NGGameViewController* destVC = (NGGameViewController*)segue.destinationViewController;
+        destVC.gameMode = NGGameModeEndless;
     }
 }
 
