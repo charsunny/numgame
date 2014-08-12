@@ -11,7 +11,7 @@
 @import CoreGraphics;
 
 #define DefalutNumFontSize 30
-#define DefalutNumFontFamily @"AppleSDGothicNeo-Thin"
+#define DefalutNumFontFamily @"AppleSDGothicNeo-Regular"
 #define SubViewBaseTag (2004)
 #define kAnimationDelay 0.1
 @interface GameBoardCell()<NSCopying>
@@ -33,11 +33,11 @@
         self.layer.cornerRadius = frame.size.width/2;
         self.number = [self genRandNumber];
         self.backgroundColor = [self genRandColor];
-//        _numLabel = [[UILabel alloc] initWithFrame:self.bounds];
-//        [_numLabel setText:[NSString stringWithFormat:@"%d",_number ]];
-//        [_numLabel setFont:[UIFont fontWithName:DefalutNumFontFamily size:frame.size.width/2]];
-//        [_numLabel setTextAlignment:NSTextAlignmentCenter];
-//        [self addSubview:_numLabel];
+        
+        self.layer.shadowColor = [UIColor blackColor].CGColor;
+        self.layer.shadowOffset = CGSizeMake(0, 0);
+        self.layer.shadowOpacity = 0.25;
+        self.layer.shadowRadius = 3;
     }
     return self;
 }
@@ -63,12 +63,21 @@
     _number = number;
     
     if (!_numLabel) {
+        _numLabel = [[UILabel alloc] initWithFrame:CGRectOffset(self.bounds, 0, 1.5)];
+        //_numLabel.backgroundColor = [UIColor blackColor];
+        //_numLabel.alpha = .4;
+        [_numLabel setText:[NSString stringWithFormat:@"%d",_number ]];
+        [_numLabel setFont:[UIFont fontWithName:DefalutNumFontFamily size:self.frame.size.width/2]];
+        [_numLabel setTextColor:[UIColor whiteColor]];
         
-     _numLabel = [[UILabel alloc] initWithFrame:self.bounds];
-     [_numLabel setText:[NSString stringWithFormat:@"%d",_number ]];
-     [_numLabel setFont:[UIFont fontWithName:DefalutNumFontFamily size:self.frame.size.width/2]];
-     [_numLabel setTextAlignment:NSTextAlignmentCenter];
-     [self addSubview:_numLabel];
+        _numLabel.layer.shadowColor = [UIColor blackColor].CGColor;
+        _numLabel.layer.shadowOffset = CGSizeMake(0, 1);
+        _numLabel.layer.shadowOpacity = 0.5;
+        _numLabel.layer.shadowRadius = 1;
+        _numLabel.numberOfLines = 0;
+        
+        [_numLabel setTextAlignment:NSTextAlignmentCenter];
+        [self addSubview:_numLabel];
     }
     else{
       [_numLabel setText:[NSString stringWithFormat:@"%d",_number ]];
@@ -83,16 +92,16 @@
     switch (number) {
         case 0:
             //红色
-            return UIColorFromRGB(0xFF814F);
+            return UIColorFromRGB(0xFC6666);
         case 1:
             //黄色
-            return UIColorFromRGB(0xF9FF4F);
+            return UIColorFromRGB(0xFED531);
         case 2:
             //蓝色
-            return UIColorFromRGB(0x34D3FF);
+            return UIColorFromRGB(0x4DC9FD);
         case 3:
             //绿色
-            return UIColorFromRGB(0x46FFAB);
+            return UIColorFromRGB(0x00F3C2);
         default:
             
             return UIColorFromRGB(0xFF814F);
