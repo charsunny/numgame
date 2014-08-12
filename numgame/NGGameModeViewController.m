@@ -11,6 +11,7 @@
 #import "NGGameViewController.h"
 #import "GADBannerView.h"
 #import "NGGuideViewController.h"
+#import <pop/pop.h>
 @import GameKit;
 @import StoreKit;
 
@@ -18,17 +19,17 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
-@property (weak, nonatomic) IBOutlet UIButton *classicButton;
-
-@property (weak, nonatomic) IBOutlet UIButton *leaderButton;
-
-@property (weak, nonatomic) IBOutlet UIButton *timedButton;
-
-@property (weak, nonatomic) IBOutlet UIButton *settingButton;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray* modeButtons;
 
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 
-@property (weak, nonatomic) IBOutlet GADBannerView* gADBannerView;
+@property (weak, nonatomic) IBOutlet UILabel *modeLabel;
+
+@property (weak, nonatomic) IBOutlet UIButton *playButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *rankButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *settingButton;
 
 @end
 
@@ -38,20 +39,16 @@
 {
     [super viewDidLoad];
     
-//    [_gADBannerView setAdUnitID:@"a1535f4e3f36f4b"];
-//    _gADBannerView.rootViewController = self;
-//    [self.view addSubview:_gADBannerView];
-//    [_gADBannerView loadRequest:[GADRequest request]];
-    // Do any additional setup after loading the view.
+    [_rankButton.titleLabel setFont:[UIFont fontWithName:@"icomoon" size:24]];
+    [_settingButton.titleLabel setFont:[UIFont fontWithName:@"icomoon" size:24]];
     
-    for (int i = 0; i < 4; i++) {
-        UILabel* label = (UILabel*)[_containerView viewWithTag:i+1];
-        [label setFont:[UIFont fontWithName:TITLE_FONT size:20]];
-    }
-    [_classicButton.titleLabel setFont:[UIFont fontWithName:@"icomoon" size:44]];
-    [_leaderButton.titleLabel setFont:[UIFont fontWithName:@"icomoon" size:44]];
-    [_timedButton.titleLabel setFont:[UIFont fontWithName:@"icomoon" size:44]];
-    [_settingButton.titleLabel setFont:[UIFont fontWithName:@"icomoon" size:44]];
+    NGGameMode gameMode = [[NGGameConfig sharedGameConfig] gamemode];
+    [_modeLabel setText:[self getModeString:gameMode]];
+    [_modeButtons enumerateObjectsUsingBlock:^(UIButton* button, NSUInteger idx, BOOL *stop) {
+        [button setAlpha:(gameMode == idx)?1.0f:0.5f];
+        [button.titleLabel setFont:[UIFont fontWithName:@"icomoon" size:40]];
+        [_playButton setBackgroundColor:button.backgroundColor];
+    }];
     [_titleLabel setFont:[UIFont fontWithName:TITLE_FONT size:50]];
     if ([[NGGameConfig sharedGameConfig] isFirstLoad]) {
         [self performSegueWithIdentifier:@"guidesegue" sender:self];
@@ -64,35 +61,49 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (NSString*)getModeString:(NGGameMode)mode {
+    switch (mode) {
+        case NGGameModeClassic:
+            return NSLocalizedString(@"classic mode", @"classic");
+        case NGGameModeTimed:
+            return NSLocalizedString(@"timed mode", @"classic");
+        case NGGameModeSteped:
+            return NSLocalizedString(@"stepped mode", @"classic");
+        case NGGameModeEndless:
+            return NSLocalizedString(@"endless mode", @"classic");
+        default:
+            break;
+    }
+    return nil;
+}
+
+- (IBAction)onTouchDownMode:(UIButton*)button {
+    [button setAlpha:1.0f];
+    POPSpringAnimation* animation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewScaleXY];
+    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(1.2, 1.2)];
+    animation.springBounciness = 3;
+    [button pop_addAnimation:animation forKey:@"bouces"];
+    [animation setCompletionBlock:^(POPAnimation *animation, BOOL finish) {
+        POPSpringAnimation* animate = [POPSpringAnimation animationWithPropertyNamed:kPOPViewScaleXY];
+        animate.toValue = [NSValue valueWithCGPoint:CGPointMake(1.0, 1.0)];
+        animate.springBounciness = 20;
+        [button pop_addAnimation:animate forKey:@"bouces1"];
+    }];
+}
 
 - (IBAction)onClickMode:(UIButton *)sender {
-    [UIView animateWithDuration:0.15f animations:^{
-        [sender setTransform:CGAffineTransformMakeScale(1.0, 1.0)];
-    }];
-    
-//    //go to leader board
-//    if ([sender isEqual:_leaderButton]) {
-//        [sender setEnabled:YES];
-//        GKGameCenterViewController *leaderboardController = [[GKGameCenterViewController alloc] init];
-//        leaderboardController.viewState = GKGameCenterViewControllerStateLeaderboards;
-//        leaderboardController.gameCenterDelegate = self;
-//        [self presentViewController:leaderboardController animated:YES completion:nil];
-//    }
-}
-
-- (IBAction)touchDown:(UIButton*)sender {
-    
-}
-
-- (IBAction)touchCanceled:(UIButton*)sender {
-    [UIView animateWithDuration:0.15f animations:^{
-        [sender setTransform:CGAffineTransformMakeScale(1.0, 1.0)];
-    }];
-}
-
-- (IBAction)touchUpOutSide:(UIButton*)sender {
-    [UIView animateWithDuration:0.15f animations:^{
-        [sender setTransform:CGAffineTransformMakeScale(1.0, 1.0)];
+    [_modeButtons enumerateObjectsUsingBlock:^(UIButton* button, NSUInteger idx, BOOL *stop) {
+        [button setAlpha:(sender == button)?1.0f:0.5f];
+        if (sender == button) {
+            [_modeLabel setText:[self getModeString:idx]];
+            [_playButton setBackgroundColor:button.backgroundColor];
+            CATransition* moveAnimation = [CATransition animation];
+            [moveAnimation setType:kCATransitionMoveIn];
+            [moveAnimation setSubtype:kCATransitionFromRight];
+            [moveAnimation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+            [_modeLabel.layer addAnimation:moveAnimation forKey:@"xxx"];
+            
+        }
     }];
 }
 
