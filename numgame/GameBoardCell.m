@@ -14,10 +14,13 @@
 #define DefalutNumFontFamily @"AppleSDGothicNeo-Regular"
 #define SubViewBaseTag (2004)
 #define kAnimationDelay 0.1
+
 @interface GameBoardCell()<NSCopying>
 
 @property (strong, nonatomic) UILabel* numLabel;
+
 @property (strong, nonatomic) CALayer* effectLayer;
+
 @property (strong,nonatomic)void (^animtionCallback)();
 //增加方法
 
@@ -31,20 +34,37 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.layer.cornerRadius = frame.size.width/2;
+        self.clipsToBounds = NO;
         self.number = [self genRandNumber];
-        self.backgroundColor = [self genRandColor];
+        self.numLabel.alpha = 0;
         
-        self.layer.shadowColor = [UIColor blackColor].CGColor;
-        self.layer.shadowOffset = CGSizeMake(0, 0);
-        self.layer.shadowOpacity = 0.25;
-        self.layer.shadowRadius = 3;
+        
+        UIImage* shadowImg = [UIImage imageNamed:@"cell_shadow@2x"];
+        UIImageView* imgView = [[UIImageView alloc]initWithFrame:CGRectInset(frame, -5, -5)];
+        imgView.image = shadowImg;
+        
+        CALayer* backgroundLayer = [CALayer layer];
+        backgroundLayer.backgroundColor = [self genRandColor].CGColor;
+        backgroundLayer.cornerRadius = frame.size.width/2;
+        backgroundLayer.frame = self.bounds;
+        
+        
+        UIImage* numberShadowImg = [UIImage imageNamed:[NSString stringWithFormat:@"number%d@2x",self.number]];
+        UIImageView* numberImgView = [[UIImageView alloc]initWithFrame:CGRectInset(frame, 0, 0)];
+        numberImgView.image = numberShadowImg;
+        
+        
+        [self.layer insertSublayer:backgroundLayer atIndex:0];
+        [self.layer insertSublayer:imgView.layer below:backgroundLayer];
+        [self.layer insertSublayer:numberImgView.layer above:backgroundLayer];
+        
     }
     return self;
 }
 - (void)setColor:(int)color
 {
     _color = color;
-    self.backgroundColor = [GameBoardCell generateColor:color];
+    //self.backgroundColor = [GameBoardCell generateColor:color];
 }
 - (UIColor*)genRandColor {
     //NSArray* colors = @[RGBA(0x3a,0xc5,0x74,1.0), RGBA(0xf1,0x6b,0x52,1.0), RGBA(0x44,0x8e,0xc9,1.0), RGBA(0x8b,0x3e,0xbd,1.0)];
@@ -70,10 +90,12 @@
         [_numLabel setFont:[UIFont fontWithName:DefalutNumFontFamily size:self.frame.size.width/2]];
         [_numLabel setTextColor:[UIColor whiteColor]];
         
+        /*
         _numLabel.layer.shadowColor = [UIColor blackColor].CGColor;
         _numLabel.layer.shadowOffset = CGSizeMake(0, 1);
         _numLabel.layer.shadowOpacity = 0.5;
         _numLabel.layer.shadowRadius = 1;
+         */
         _numLabel.numberOfLines = 0;
         
         [_numLabel setTextAlignment:NSTextAlignmentCenter];

@@ -109,8 +109,14 @@ typedef void(^TrickBlock)();
     }
     // boardInset
     _cellNum = num;
-    int cellInset = CELL_INSET - (num - 3);
-    _cellWidth = (BOARD_WIDTH - 2*EDGE_INSET - (num-1)*cellInset)/num;
+    //int cellInset = CELL_INSET - (num - 3);
+    
+    
+    
+    //_cellWidth = (BOARD_WIDTH - 2*EDGE_INSET - (num-1)*cellInset)/num;
+    
+    _cellWidth = 40;
+    int cellInset = 10;
     for (int i = 0; i < num; i++) {
         for(int j = 0; j < num; j++) {
             GameBoardCell* view = [[GameBoardCell alloc] initWithFrame:CGRectMake(0, 0, _cellWidth, _cellWidth)];
