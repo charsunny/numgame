@@ -7,7 +7,6 @@
 //
 
 #import "NGOptionViewController.h"
-#import "GADBannerView.h"
 #import "NGGameConfig.h"
 @import Social;
 @import StoreKit;
@@ -26,8 +25,6 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *aboutButton;
 
-@property (weak, nonatomic) IBOutlet GADBannerView* gADBannerView;
-
 @end
 
 @implementation NGOptionViewController
@@ -45,10 +42,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [_gADBannerView setAdUnitID:@"a1535f4e3f36f4b"];
-    _gADBannerView.rootViewController = self;
-    [self.view addSubview:_gADBannerView];
-    [_gADBannerView loadRequest:[GADRequest request]];
     [_backButton.titleLabel setFont:[UIFont fontWithName:@"icomoon" size:30]];
     [_soundButton.titleLabel setFont:[UIFont fontWithName:@"icomoon" size:44]];
     [_removeButton.titleLabel setFont:[UIFont fontWithName:@"icomoon" size:44]];

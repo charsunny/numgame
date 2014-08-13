@@ -7,12 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GADInterstitial.h"
 #import "NGGameConfig.h"
 
 @interface NGResultViewController : UIViewController
-
-@property (strong, nonatomic) GADInterstitial* gADInterstitial;
 
 @property (nonatomic) NGGameMode gameMode;
 

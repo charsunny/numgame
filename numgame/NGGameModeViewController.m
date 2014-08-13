@@ -9,7 +9,6 @@
 #import "NGGameModeViewController.h"
 #import "NGGameConfig.h"
 #import "NGGameViewController.h"
-#import "GADBannerView.h"
 #import "NGGuideViewController.h"
 #import <pop/pop.h>
 @import GameKit;

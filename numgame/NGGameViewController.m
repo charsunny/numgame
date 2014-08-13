@@ -10,8 +10,6 @@
 #import "NGOptionViewController.h"
 #import "NGGameModeViewController.h"
 #import "NGGameConfig.h"
-#import "GADBannerView.h"
-#import "GADInterstitial.h"
 #import "NGResultViewController.h"
 #import "GameBoardView.h"
 #import "GameBoardCell.h"
