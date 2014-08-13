@@ -14,10 +14,15 @@
 #import <pop/pop.h>
 @import GameKit;
 @import StoreKit;
+@import AVFoundation;
 
 @interface NGGameModeViewController ()<GKGameCenterControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
+@property (strong, nonatomic) AVAudioPlayer *audioPlayer;
+
+@property (nonatomic) BOOL haveSound;
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray* modeButtons;
 
@@ -41,13 +46,16 @@
     
     [_rankButton.titleLabel setFont:[UIFont fontWithName:@"icomoon" size:24]];
     [_settingButton.titleLabel setFont:[UIFont fontWithName:@"icomoon" size:24]];
+    [_rankButton addTarget:self action:@selector(onClickRankButton) forControlEvents:UIControlEventTouchUpInside];
     
     NGGameMode gameMode = [[NGGameConfig sharedGameConfig] gamemode];
     [_modeLabel setText:[self getModeString:gameMode]];
     [_modeButtons enumerateObjectsUsingBlock:^(UIButton* button, NSUInteger idx, BOOL *stop) {
         [button setAlpha:(gameMode == idx)?1.0f:0.5f];
         [button.titleLabel setFont:[UIFont fontWithName:@"icomoon" size:40]];
-        [_playButton setBackgroundColor:button.backgroundColor];
+        if (gameMode == idx) {
+             [_playButton setBackgroundColor:button.backgroundColor];
+        }
     }];
     [_titleLabel setFont:[UIFont fontWithName:TITLE_FONT size:50]];
     if ([[NGGameConfig sharedGameConfig] isFirstLoad]) {
@@ -59,6 +67,15 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if ([[[NGGameConfig sharedGameConfig] sound] isEqualToString:@"J"]) {
+        _haveSound = YES;
+    } else {
+        _haveSound = NO;
+    }
 }
 
 - (NSString*)getModeString:(NGGameMode)mode {
@@ -95,6 +112,8 @@
     [_modeButtons enumerateObjectsUsingBlock:^(UIButton* button, NSUInteger idx, BOOL *stop) {
         [button setAlpha:(sender == button)?1.0f:0.5f];
         if (sender == button) {
+            [self playSoundFXnamed:[NSString stringWithFormat:@"square_%d.aif",idx+2] Loop:NO];
+            [[NGGameConfig sharedGameConfig] setGamemode:idx];
             [_modeLabel setText:[self getModeString:idx]];
             [_playButton setBackgroundColor:button.backgroundColor];
             CATransition* moveAnimation = [CATransition animation];
@@ -108,18 +127,18 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"classicsegue"]) {
+    if ([segue.destinationViewController isKindOfClass:[NGGameViewController class]]) {
         NGGameViewController* destVC = (NGGameViewController*)segue.destinationViewController;
-        destVC.gameMode = NGGameModeClassic;
-    } else if ([segue.identifier isEqualToString:@"timedsegue"]) {
-        NGGameViewController* destVC = (NGGameViewController*)segue.destinationViewController;
-        destVC.gameMode = NGGameModeTimed;
-    } else if ([segue.identifier isEqualToString:@"stepedsegue"]) {
-        NGGameViewController* destVC = (NGGameViewController*)segue.destinationViewController;
-        destVC.gameMode = NGGameModeSteped;
-    } else if ([segue.identifier isEqualToString:@"endlesssegue"]) {
-        NGGameViewController* destVC = (NGGameViewController*)segue.destinationViewController;
-        destVC.gameMode = NGGameModeEndless;
+        destVC.gameMode = [[NGGameConfig sharedGameConfig] gamemode];
+    }
+}
+
+- (void)onClickRankButton {
+    GKGameCenterViewController *gameCenterController = [[GKGameCenterViewController alloc] init];
+    if (gameCenterController != nil)
+    {
+        gameCenterController.gameCenterDelegate = self;
+        [self presentViewController:gameCenterController animated:YES completion:nil];
     }
 }
 
@@ -131,6 +150,28 @@
     }
 }
 
+-(void) playSoundFXnamed:(NSString*) vSFXName Loop:(BOOL) vLoop
+{
+    if (!_haveSound) {
+        return;
+    }
+    NSError *error;
+    
+    NSBundle* bundle = [NSBundle mainBundle];
+    
+    NSString* bundleDirectory = (NSString*)[bundle bundlePath];
+    
+    NSURL *url = [NSURL fileURLWithPath:[bundleDirectory stringByAppendingPathComponent:vSFXName]];
+    
+    _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+    
+    if(vLoop)
+        _audioPlayer.numberOfLoops = -1;
+    else
+        _audioPlayer.numberOfLoops = 0;
+    
+    [_audioPlayer play];
+}
 
 
 

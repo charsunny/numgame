@@ -285,29 +285,26 @@
             controller.score = _scoreLabel.text;
             NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
             if ([levelInfo[@"score"] intValue] <= self.score) {
-                float shorttime = [[NGGameConfig sharedGameConfig] classicScore];
-                if(_leftTime < shorttime || shorttime == 0) {
-                    [[NGGameConfig sharedGameConfig] setClassicScore:_leftTime];
-                    controller.isHighScore = YES;
-                    [self playSoundFXnamed:@"cheer.m4a" Loop:NO];
-                    GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier:@"mintime"];
-                    scoreReporter.value = _leftTime*10;
-                    [GKScore reportScores:@[scoreReporter] withCompletionHandler:nil];
-                }
+                [self playSoundFXnamed:@"cheer.m4a" Loop:NO];
                 controller.completed = YES;
                 _currectLevel++;
             } else {
                 controller.completed = NO;
+                if(_score > [[NGGameConfig sharedGameConfig] classicScore]) {
+                    controller.isHighScore = YES;
+                    GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier:@"CMHS"];
+                    scoreReporter.value = _score;
+                    [GKScore reportScores:@[scoreReporter] withCompletionHandler:nil];
+                }
             }
             [self initGameData];
-        } else if (_gameMode == NGGameModeTimed) {
+        } else if (_gameMode == NGGameModeTimed || _gameMode == NGGameModeSteped) {
             controller.time = _timeLabel.text;
             controller.score = _scoreLabel.text;
             controller.completed = YES;
             if(_score > [[NGGameConfig sharedGameConfig] timedScore]) {
                 [[NGGameConfig sharedGameConfig] setTimedScore:_score];
                 controller.isHighScore = YES;
-                
                 GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier:@"scorewithlimittime"];
                 scoreReporter.value = _score;
                 [GKScore reportScores:@[scoreReporter] withCompletionHandler:nil];

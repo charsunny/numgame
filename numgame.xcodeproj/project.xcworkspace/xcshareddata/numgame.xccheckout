@@ -26,7 +26,7 @@
 		<string>https://svn.baidu.com/app/wise/wmap</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/charsunny/numgame.git</string>
+	<string>https://svn.baidu.com/app/wise/wmap</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
