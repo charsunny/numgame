@@ -15,7 +15,9 @@
 @interface NumberSelectionVIew ()<UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) NSArray * items;
+
 @property (nonatomic,assign) CGFloat viewWidth;
+
 @property (nonatomic,assign) CGFloat viewHight;
 
 @property (nonatomic,assign, readwrite)BOOL isShow;

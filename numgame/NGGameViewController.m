@@ -18,6 +18,8 @@
 #import <pop/pop.h>
 #import "GameResultView.h"
 #import "NGGameUtil.h"
+#import "GameCountingCircleView.h"
+
 @import AudioToolbox;
 @import AVFoundation;
 @import iAd;
@@ -136,6 +138,7 @@
     
     [self initGameData];
     
+    
     _gameBoardView.delegate = self;
     [_gameBoardView layoutBoardWithCellNum:6];
     
@@ -146,6 +149,8 @@
     [_scoreLabel setAdjustsFontSizeToFitWidth:YES];
     self.gameBoardView.isChangeColor = NO;
     self.changeTrickBtn = NO; //用来改变切换的TrickBtn
+    
+    [self initHeaderView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -173,6 +178,29 @@
     }
 }
 
+#pragma --mark init header UI
+- (void)initHeaderView
+{
+    switch (self.gameMode) {
+        case NGGameModeClassic:
+        {
+        
+//            GameCountingCircleView* stepCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(10, 10, 60, 60)];
+//            [stepCountingView initData:0 withStart:15];
+//            stepCountingView.pieCapacity = 360;
+//            stepCountingView.clockwise = 0;
+//            [_headView addSubview:stepCountingView];
+            
+            GameCountingCircleView* timeCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(130, 10, 60, 60)];
+            [timeCountingView initData:60 withStart:0];
+            [_headView addSubview:timeCountingView];
+            [timeCountingView startCounting];
+            break;
+        }
+        default:
+            break;
+    }
+}
 - (void)initGameData {
     switch (_gameMode) {
         case NGGameModeClassic: {
