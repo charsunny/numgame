@@ -261,7 +261,7 @@
                                 <rect key="frame" x="0.0" y="80" width="320" height="320"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pv6-cI-9Bl">
-                                        <rect key="frame" x="37" y="20" width="100" height="100"/>
+                                        <rect key="frame" x="64" y="20" width="80" height="80"/>
                                         <color key="backgroundColor" red="0.2666666667" green="0.81176470590000005" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="24"/>
                                         <state key="normal" title="A">
@@ -270,19 +270,16 @@
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="50"/>
+                                                <integer key="value" value="40"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="onClickMode:" destination="lhW-bX-WxH" eventType="touchUpInside" id="yAN-0I-oRr"/>
-                                            <action selector="touchCanceled:" destination="lhW-bX-WxH" eventType="touchCancel" id="Sdi-q7-kV9"/>
-                                            <action selector="touchDown:" destination="lhW-bX-WxH" eventType="touchDown" id="KO1-H6-jKU"/>
-                                            <action selector="touchUpOutSide:" destination="lhW-bX-WxH" eventType="touchUpOutside" id="VOP-J1-hZo"/>
-                                            <segue destination="Euq-Gn-BWU" kind="push" identifier="classicsegue" id="ZZY-YY-BWX"/>
+                                            <action selector="onClickMode:" destination="lhW-bX-WxH" eventType="touchUpInside" id="uOb-UM-UHL"/>
+                                            <action selector="onTouchDownMode:" destination="lhW-bX-WxH" eventType="touchDown" id="Ul6-Lr-7Gk"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LTH-7f-DtO">
-                                        <rect key="frame" x="183" y="20" width="100" height="100"/>
+                                    <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LTH-7f-DtO">
+                                        <rect key="frame" x="178" y="20" width="80" height="80"/>
                                         <color key="backgroundColor" red="0.12941176469999999" green="0.72549019609999998" blue="0.90588235289999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="24"/>
                                         <state key="normal" title="B">
@@ -291,16 +288,16 @@
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="50"/>
+                                                <integer key="value" value="40"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="onClickMode:" destination="lhW-bX-WxH" eventType="touchUpInside" id="DJr-tp-Aye"/>
-                                            <segue destination="Euq-Gn-BWU" kind="push" identifier="timedsegue" id="Xcg-qr-joQ"/>
+                                            <action selector="onTouchDownMode:" destination="lhW-bX-WxH" eventType="touchDown" id="fmK-5a-S8Q"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tgo-k5-KZD">
-                                        <rect key="frame" x="37" y="182" width="100" height="100"/>
+                                    <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tgo-k5-KZD">
+                                        <rect key="frame" x="64" y="120" width="80" height="80"/>
                                         <color key="backgroundColor" red="0.96078431369999995" green="0.59215686270000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="24"/>
                                         <state key="normal" title="E">
@@ -309,16 +306,16 @@
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="50"/>
+                                                <integer key="value" value="40"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="onClickMode:" destination="lhW-bX-WxH" eventType="touchUpInside" id="tH7-q0-IrY"/>
-                                            <segue destination="Euq-Gn-BWU" kind="push" identifier="stepedsegue" id="OKw-1S-EJX"/>
+                                            <action selector="onTouchDownMode:" destination="lhW-bX-WxH" eventType="touchDown" id="ogy-or-2wb"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9wB-yg-kzd">
-                                        <rect key="frame" x="183" y="182" width="100" height="100"/>
+                                    <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9wB-yg-kzd">
+                                        <rect key="frame" x="178" y="120" width="80" height="80"/>
                                         <color key="backgroundColor" red="0.5450980392" green="0.24313725489999999" blue="0.74117647060000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="24"/>
                                         <state key="normal" title="D">
@@ -327,34 +324,37 @@
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="50"/>
+                                                <integer key="value" value="40"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="onClickMode:" destination="lhW-bX-WxH" eventType="touchUpInside" id="fiC-Jk-lGT"/>
-                                            <segue destination="Euq-Gn-BWU" kind="push" identifier="endlesssegue" id="tqq-ZM-MNv"/>
+                                            <action selector="onTouchDownMode:" destination="lhW-bX-WxH" eventType="touchDown" id="bPf-M1-aRG"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="classic" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nbg-Re-d3E">
-                                        <rect key="frame" x="37" y="128" width="100" height="21"/>
-                                        <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="17"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="classic mode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nbg-Re-d3E">
+                                        <rect key="frame" x="110" y="227" width="100" height="21"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="15"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="timed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XE5-Dl-3he">
-                                        <rect key="frame" x="183" y="128" width="100" height="21"/>
-                                        <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="17"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="steped" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="afZ-79-og2">
-                                        <rect key="frame" x="20" y="290" width="143" height="21"/>
-                                        <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="17"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="endless" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LDs-cp-cti">
-                                        <rect key="frame" x="183" y="290" width="100" height="21"/>
-                                        <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="17"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uH1-GV-bvO">
+                                        <rect key="frame" x="100" y="260" width="120" height="40"/>
+                                        <color key="backgroundColor" red="0.2666666667" green="0.81176470590000005" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="15"/>
+                                        <state key="normal" title="Play Now">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="onTouchDownMode:" destination="lhW-bX-WxH" eventType="touchDown" id="fIs-CA-r7q"/>
+                                            <segue destination="Euq-Gn-BWU" kind="push" identifier="playsegue" id="RbF-cI-NcH"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
@@ -367,7 +367,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="aEf-9v-DtU"/>
                                 </constraints>
-                                <state key="normal" title="leaderboard">
+                                <state key="normal" title="E">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -376,7 +376,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="yqc-34-s3q"/>
                                 </constraints>
-                                <state key="normal" title="settings">
+                                <state key="normal" title="D">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -402,18 +402,22 @@
                     </view>
                     <navigationItem key="navigationItem" id="94A-eu-OUx"/>
                     <connections>
-                        <outlet property="classicButton" destination="Pv6-cI-9Bl" id="3ND-ON-CjO"/>
                         <outlet property="containerView" destination="YYV-Sd-MUw" id="1uV-Mo-UFH"/>
-                        <outlet property="leaderButton" destination="Tgo-k5-KZD" id="Dg3-aa-0iq"/>
-                        <outlet property="settingButton" destination="9wB-yg-kzd" id="jxn-IK-f7G"/>
-                        <outlet property="timedButton" destination="LTH-7f-DtO" id="dxG-mo-hRT"/>
+                        <outlet property="modeLabel" destination="Nbg-Re-d3E" id="d1e-wP-1Up"/>
+                        <outlet property="playButton" destination="uH1-GV-bvO" id="o1b-ze-Z0w"/>
+                        <outlet property="rankButton" destination="Urk-uD-tcK" id="PKu-q5-hUz"/>
+                        <outlet property="settingButton" destination="kop-Bg-y5B" id="G6O-5i-wdL"/>
                         <outlet property="titleLabel" destination="6KZ-Zy-UAI" id="BLk-7l-GWW"/>
+                        <outletCollection property="modeButtons" destination="Pv6-cI-9Bl" id="VpG-MC-7Jm"/>
+                        <outletCollection property="modeButtons" destination="LTH-7f-DtO" id="mA6-1W-ZgF"/>
+                        <outletCollection property="modeButtons" destination="Tgo-k5-KZD" id="uuE-vA-VuK"/>
+                        <outletCollection property="modeButtons" destination="9wB-yg-kzd" id="H9J-Xx-MAy"/>
                         <segue destination="7Hu-Q0-XDj" kind="push" identifier="guidesegue" id="Jb5-Vu-pgL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vYv-GZ-TE6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-416" y="48"/>
+            <point key="canvasLocation" x="-370" y="48"/>
         </scene>
         <!--Result View Controller-->
         <scene sceneID="WXg-Gb-Xbt">
@@ -1102,7 +1106,6 @@
         </simulatedScreenMetrics>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="tqq-ZM-MNv"/>
         <segue reference="Jb5-Vu-pgL"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -20,6 +20,9 @@
 }
 
 - (NGGameMode)gamemode {
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"gamemode"]) {
+        [self setGamemode:NGGameModeClassic];
+    }
     return [[[NSUserDefaults standardUserDefaults] objectForKey:@"gamemode"] intValue];
 }
 

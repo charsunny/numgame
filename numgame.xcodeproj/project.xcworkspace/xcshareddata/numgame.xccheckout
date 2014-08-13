@@ -10,29 +10,42 @@
 	<string>numgame</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>FFC61659-8762-42A0-8A08-58F3A787A603</key>
-		<string>https://github.com/charsunny/numgame.git</string>
+		<key>eaf5257b-151d-409c-9a3d-1d92102da1a4</key>
+		<string>https://svn.baidu.com/app/wise/wmap/trunk/client/components/ios/complatform</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>numgame.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>FFC61659-8762-42A0-8A08-58F3A787A603</key>
-		<string>../..</string>
+		<key>eaf5257b-151d-409c-9a3d-1d92102da1a4</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectRepositoryRootDictionary</key>
+	<dict>
+		<key>eaf5257b-151d-409c-9a3d-1d92102da1a4</key>
+		<string>https://svn.baidu.com/app/wise/wmap</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/charsunny/numgame.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>FFC61659-8762-42A0-8A08-58F3A787A603</string>
+	<string>eaf5257b-151d-409c-9a3d-1d92102da1a4</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>eaf5257b-151d-409c-9a3d-1d92102da1a4</string>
+			<key>IDESourceControlWCCName</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>FFC61659-8762-42A0-8A08-58F3A787A603</string>
+			<string>eaf5257b-151d-409c-9a3d-1d92102da1a4</string>
 			<key>IDESourceControlWCCName</key>
 			<string>numgame</string>
 		</dict>
