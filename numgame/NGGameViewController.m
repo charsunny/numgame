@@ -118,9 +118,12 @@
     //init gameconfig
     for (UIBarButtonItem* item in _toolBar.items) {
         if ([item isKindOfClass:[UIBarButtonItem class]]) {
-            item.image = [item.image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+            //item.image = [item.image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         }
     }
+    //remove hariLine
+    //ref:http://stackoverflow.com/questions/19110883/remove-uitoolbar-hairline-in-ios-7
+    _toolBar.clipsToBounds = YES;
     _currectLevel = 1;
     
     NSString* levelPath = [[NSBundle mainBundle] pathForResource:@"config" ofType:@"plist"];
@@ -161,10 +164,11 @@
     UIView* spLine  = [_headView viewWithTag:100];
     if (spLine == nil) {
         UIToolbar* toolbar = [[UIToolbar alloc] initWithFrame:_headView.bounds];
+        toolbar.clipsToBounds = YES;
         [_headView insertSubview:toolbar atIndex:0];
-        spLine = [[UIView alloc] initWithFrame:CGRectMake(0, _headView.frame.size.height - 0.5f, _headView.frame.size.width, 0.5f)];
-        spLine.backgroundColor = [UIColor lightGrayColor];
-        [_headView addSubview:spLine];
+//        spLine = [[UIView alloc] initWithFrame:CGRectMake(0, _headView.frame.size.height - 0.5f, _headView.frame.size.width, 0.5f)];
+//        spLine.backgroundColor = [UIColor lightGrayColor];
+        //[_headView addSubview:spLine];
         [_headView setTag:100];
     }
 }
@@ -466,8 +470,12 @@
     [view.layer pop_addAnimation:scaleAnimation forKey:@"scoreScaleSpring"];
 }
 
-- (IBAction)showMenu:(id)sender {
-    [self onTapHeaderView:nil];
+//- (IBAction)showMenu:(id)sender {
+//    [self onTapHeaderView:nil];
+//}
+
+- (IBAction)burnCell:(id)sender {
+    NSLog(@"burning");
 }
 
 

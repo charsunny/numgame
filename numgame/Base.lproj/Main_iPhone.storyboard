@@ -147,31 +147,59 @@
                                 </constraints>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4ej-gM-mPW">
-                                <rect key="frame" x="0.0" y="436" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="416" width="320" height="64"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="Yhz-Km-tVm"/>
+                                    <constraint firstAttribute="height" constant="64" id="Yhz-Km-tVm"/>
                                 </constraints>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="I7x-aU-Q70"/>
-                                    <barButtonItem image="toolbar1" style="plain" id="VcL-2O-8tR">
+                                    <barButtonItem style="plain" id="a4F-Uv-gzk">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Xe8-Hc-Gin">
+                                            <rect key="frame" x="49" y="17" width="45" height="45"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="wand">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="changeCellColor:" destination="Euq-Gn-BWU" eventType="touchUpInside" id="lAB-El-x10"/>
+                                            </connections>
+                                        </button>
                                         <connections>
-                                            <action selector="showMenu:" destination="Euq-Gn-BWU" id="Mgx-Sd-YBD"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="GlL-o5-ngI"/>
-                                    <barButtonItem image="toolbar2" id="ytJ-Ev-alb">
-                                        <connections>
-                                            <action selector="changeCellNumber:" destination="Euq-Gn-BWU" id="Dtl-rK-KOe"/>
+                                            <action selector="changeCellColor:" destination="Euq-Gn-BWU" id="Cks-Bo-M7I"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="C3l-Gd-0tv"/>
-                                    <barButtonItem image="toolbar3" id="tLy-Wf-sfb">
+                                    <barButtonItem style="plain" id="iKl-re-Cgy">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="KLB-Y5-JjW">
+                                            <rect key="frame" x="137" y="17" width="45" height="45"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="fire">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="burnCell:" destination="Euq-Gn-BWU" eventType="touchUpInside" id="l5f-UI-XiJ"/>
+                                            </connections>
+                                        </button>
                                         <connections>
-                                            <action selector="changeCellColor:" destination="Euq-Gn-BWU" id="kbe-sK-Q6O"/>
+                                            <action selector="burnCell:" destination="Euq-Gn-BWU" id="8Nx-jz-wKB"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="5jo-wP-y6u"/>
-                                    <barButtonItem image="toolbar4" id="Emp-Xf-1OU"/>
+                                    <barButtonItem style="plain" id="7YF-PO-b9a">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="e3L-sy-5jP">
+                                            <rect key="frame" x="49" y="7" width="45" height="45"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" backgroundImage="hammer">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="changeCellNumber:" destination="Euq-Gn-BWU" eventType="touchUpInside" id="UpU-zQ-Sdp"/>
+                                            </connections>
+                                        </button>
+                                        <connections>
+                                            <action selector="changeCellNumber:" destination="Euq-Gn-BWU" id="wsd-EK-V3f"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="j6W-UB-Sbr"/>
                                 </items>
                             </toolbar>
@@ -1092,10 +1120,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="toolbar1" width="30" height="30"/>
-        <image name="toolbar2" width="30" height="30"/>
-        <image name="toolbar3" width="30" height="30"/>
-        <image name="toolbar4" width="30" height="30"/>
+        <image name="fire" width="142" height="142"/>
+        <image name="hammer" width="142" height="142"/>
+        <image name="wand" width="70" height="70"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
