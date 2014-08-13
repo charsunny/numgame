@@ -29,86 +29,98 @@
 
 @implementation GameBoardCell
 
+//增加方法
+-(id)initWithFrame:(CGRect)frame Position:(GBCellPosition)cellPosition{
+
+    self = [self initWithFrame:frame];
+    if (self) {
+        self.cellPositon = cellPosition;
+    }
+    
+    return self;
+}
+
+-(id)initWithFrame:(CGRect)frame withNumber:(int)number andColor:(int)color{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.number = number;
+        self.color = color;
+        [self initUI:number withFrame:frame andColor:[GameBoardCell generateColor:self.color]];
+    }
+    return self;
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.layer.cornerRadius = frame.size.width/2;
-        self.clipsToBounds = NO;
         self.number = [self genRandNumber];
-        self.numLabel.alpha = 0;
-        
-        
-        UIImage* shadowImg = [UIImage imageNamed:@"cell_shadow@2x"];
-        UIImageView* imgView = [[UIImageView alloc]initWithFrame:CGRectInset(frame, -5, -5)];
-        imgView.image = shadowImg;
-        
-        CALayer* backgroundLayer = [CALayer layer];
-        backgroundLayer.backgroundColor = [self genRandColor].CGColor;
-        backgroundLayer.cornerRadius = frame.size.width/2;
-        backgroundLayer.frame = self.bounds;
-        
-        
-        UIImage* numberShadowImg = [UIImage imageNamed:[NSString stringWithFormat:@"number%d@2x",self.number]];
-        UIImageView* numberImgView = [[UIImageView alloc]initWithFrame:CGRectInset(frame, 0, 0)];
-        numberImgView.image = numberShadowImg;
-        
-        
-        [self.layer insertSublayer:backgroundLayer atIndex:0];
-        [self.layer insertSublayer:imgView.layer below:backgroundLayer];
-        [self.layer insertSublayer:numberImgView.layer above:backgroundLayer];
+        self.color = [self genRandColor];
+        [self initUI:self.number withFrame:frame andColor:[GameBoardCell generateColor:self.color]];
         
     }
     return self;
 }
-- (void)setColor:(int)color
+- (void)initUI:(int)number withFrame:(CGRect)frame andColor:(UIColor*)color
 {
-    _color = color;
-    //self.backgroundColor = [GameBoardCell generateColor:color];
+    
+    self.layer.cornerRadius = frame.size.width/2;
+    self.clipsToBounds = NO;
+    
+    UIImage* shadowImg = [UIImage imageNamed:@"cell_shadow@2x"];
+    CGRect layerFrame = CGRectMake(0, 0, frame.size.width, frame.size.height);
+    //UIImageView* imgView = [[UIImageView alloc]initWithFrame:layerFrame];
+    UIImageView* imgView = [[UIImageView alloc]initWithFrame:CGRectInset(layerFrame, -5, -5)];
+    imgView.image = shadowImg;
+    
+    CALayer* backgroundLayer = [CALayer layer];
+    backgroundLayer.backgroundColor = color.CGColor;
+    backgroundLayer.cornerRadius = frame.size.width/2;
+    //backgroundLayer.frame = self.bounds;
+    backgroundLayer.frame = layerFrame;
+    
+    
+    UIImage* numberShadowImg = [UIImage imageNamed:[NSString stringWithFormat:@"number%d@2x",number]];
+    UIImageView* numberImgView = [[UIImageView alloc]initWithFrame:layerFrame];
+    numberImgView.image = numberShadowImg;
+    
+    
+    [self.layer insertSublayer:backgroundLayer atIndex:0];
+    [self.layer insertSublayer:imgView.layer below:backgroundLayer];
+    [self.layer insertSublayer:numberImgView.layer above:backgroundLayer];
 }
-- (UIColor*)genRandColor {
-    //NSArray* colors = @[RGBA(0x3a,0xc5,0x74,1.0), RGBA(0xf1,0x6b,0x52,1.0), RGBA(0x44,0x8e,0xc9,1.0), RGBA(0x8b,0x3e,0xbd,1.0)];
-    //return colors[rand()%4];
-    int ranNum = rand() % 4;
-    self.color = ranNum;
-    return [GameBoardCell generateColor:ranNum];
+
+- (int)genRandColor {
+    return rand() % 4;
+    //self.color = ranNum;
+    //return [GameBoardCell generateColor:ranNum];
 }
 
 - (int)genRandNumber {
     return rand()%4+1;
 }
 
--(void)setNumber:(int)number{
+//-(void)setNumber:(int)number{
+//
+//    _number = number;
+//    
+//    if (!_numLabel) {
+//        _numLabel = [[UILabel alloc] initWithFrame:CGRectOffset(self.bounds, 0, 1.5)];
+//        [_numLabel setText:[NSString stringWithFormat:@"%d",_number ]];
+//        [_numLabel setFont:[UIFont fontWithName:DefalutNumFontFamily size:self.frame.size.width/2]];
+//        [_numLabel setTextColor:[UIColor whiteColor]];
+//        _numLabel.numberOfLines = 0;
+//        
+//        [_numLabel setTextAlignment:NSTextAlignmentCenter];
+//        [self addSubview:_numLabel];
+//    }
+//    else{
+//      [_numLabel setText:[NSString stringWithFormat:@"%d",_number ]];
+//    }
+//
+//
+//}
 
-    _number = number;
-    
-    if (!_numLabel) {
-        _numLabel = [[UILabel alloc] initWithFrame:CGRectOffset(self.bounds, 0, 1.5)];
-        //_numLabel.backgroundColor = [UIColor blackColor];
-        //_numLabel.alpha = .4;
-        [_numLabel setText:[NSString stringWithFormat:@"%d",_number ]];
-        [_numLabel setFont:[UIFont fontWithName:DefalutNumFontFamily size:self.frame.size.width/2]];
-        [_numLabel setTextColor:[UIColor whiteColor]];
-        
-        /*
-        _numLabel.layer.shadowColor = [UIColor blackColor].CGColor;
-        _numLabel.layer.shadowOffset = CGSizeMake(0, 1);
-        _numLabel.layer.shadowOpacity = 0.5;
-        _numLabel.layer.shadowRadius = 1;
-         */
-        _numLabel.numberOfLines = 0;
-        
-        [_numLabel setTextAlignment:NSTextAlignmentCenter];
-        [self addSubview:_numLabel];
-    }
-    else{
-      [_numLabel setText:[NSString stringWithFormat:@"%d",_number ]];
-    }
-
-
-}
-
-//color scheme from:http://www.colourlovers.com/palette/2584642/Vital_Passion
 + (UIColor*)generateColor:(int)number
 {
     switch (number) {
@@ -151,7 +163,8 @@
         _effectLayer.backgroundColor = self.backgroundColor.CGColor;
         _effectLayer.opacity = 0.7;
         _effectLayer.transform = CATransform3DMakeScale(1.3, 1.3, 1.0);
-        [self.layer insertSublayer:_effectLayer below:self.numLabel.layer];
+        //[self.layer insertSublayer:_effectLayer below:self.numLabel.layer];
+        [self.layer insertSublayer:_effectLayer atIndex:0];
     }
 }
 
@@ -208,23 +221,10 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    GameBoardCell* copyCell = [[GameBoardCell alloc]initWithFrame:self.frame];
-    copyCell.number = self.number;
-    copyCell.backgroundColor = self.backgroundColor;
-    [copyCell.numLabel setText:[NSString stringWithFormat:@"%d",_number ]];
+    GameBoardCell* copyCell = [[GameBoardCell alloc]initWithFrame:self.frame withNumber:self.number andColor:self.color];
     return copyCell;
 }
 
-//增加方法
--(id)initWithFrame:(CGRect)frame Position:(GBCellPosition)cellPosition{
-
-    self = [self initWithFrame:frame];
-    if (self) {
-        self.cellPositon = cellPosition;
-    }
-    
-    return self;
-}
 
 
 -(void)addTrickingWithType:(GBTrakingCategory)category{
@@ -271,7 +271,7 @@
         
             NSMutableArray * itemArray = [NSMutableArray arrayWithArray:@[@"1",@"2",@"3",@"4"]];
             
-            [itemArray removeObject: self.numLabel.text];
+            [itemArray removeObject: @(self.number)];
   
             for (int i = 0;  i < self.accessoryItems.count; i ++) {
                 UILabel * label = [[UILabel alloc]initWithFrame:CGRectZero];
@@ -342,6 +342,15 @@
 }
 
 
+-(void)performNumberPopAnimation:(UIView*)item toPoint:(CGPoint)point withName:(NSString*)name
+{
+    POPSpringAnimation * springAnimation = [POPSpringAnimation animation];
+    springAnimation.property = [POPMutableAnimatableProperty propertyWithName:kPOPViewCenter];
+    springAnimation.fromValue = [NSValue valueWithCGPoint:item.center];
+    springAnimation.toValue =[NSValue valueWithCGPoint: point];
+    springAnimation.springBounciness = 20;
+    [item  pop_addAnimation:springAnimation forKey:name];
+}
 
 
 -(void)showNumberItem:(UIView*)item withDirection:(NSInteger) direction{
@@ -351,97 +360,43 @@
     switch (direction) {
         case 0:
         {
-            POPSpringAnimation * springAnimation = [POPSpringAnimation animation];
-            springAnimation.property = [POPMutableAnimatableProperty propertyWithName:kPOPViewCenter];
-            springAnimation.fromValue = [NSValue valueWithCGPoint:item.center];
-            springAnimation.toValue =[NSValue valueWithCGPoint: CGPointMake(item.center.x-45, item.center.y)];
-            springAnimation.springBounciness = 20;
-            [item  pop_addAnimation:springAnimation forKey:@"centerLeft"];
-        
-        }
+            [self performNumberPopAnimation:item toPoint:CGPointMake(item.center.x-45, item.center.y) withName:@"centerLeft"];
             break;
+        }
         case 1:
         {
-         
-            POPSpringAnimation * springAnimation = [POPSpringAnimation animation];
-            springAnimation.property = [POPMutableAnimatableProperty propertyWithName:kPOPViewCenter];
-            springAnimation.fromValue = [NSValue valueWithCGPoint:item.center];
-            springAnimation.toValue =[NSValue valueWithCGPoint: CGPointMake(item.center.x+45, item.center.y)];
-            springAnimation.springBounciness = 20;
-            [item  pop_addAnimation:springAnimation forKey:@"centerRight"];
-        }
+            [self performNumberPopAnimation:item toPoint:CGPointMake(item.center.x+45, item.center.y) withName:@"centerRight"];
             break;
-            
+        }
         case 2:
         {
-        
-            POPSpringAnimation * springAnimation = [POPSpringAnimation animation];
-            springAnimation.property = [POPMutableAnimatableProperty propertyWithName:kPOPViewCenter];
-            springAnimation.fromValue = [NSValue valueWithCGPoint:item.center];
-            springAnimation.toValue =[NSValue valueWithCGPoint: CGPointMake(item.center.x, item.center.y-45)];
-            springAnimation.springBounciness = 20;
-            [item  pop_addAnimation:springAnimation forKey:@"centerTop"];
-        }
+            [self performNumberPopAnimation:item toPoint:CGPointMake(item.center.x, item.center.y-45) withName:@"centerTop"];
             break;
+        }
         case 3:{
-        
-        
-            POPSpringAnimation * springAnimation = [POPSpringAnimation animation];
-            springAnimation.property = [POPMutableAnimatableProperty propertyWithName:kPOPViewCenter];
-            springAnimation.fromValue = [NSValue valueWithCGPoint:item.center];
-            springAnimation.toValue =[NSValue valueWithCGPoint: CGPointMake(item.center.x, item.center.y+45)];
-            springAnimation.springBounciness = 20;
-            [item  pop_addAnimation:springAnimation forKey:@"centerBottom"];
+            [self performNumberPopAnimation:item toPoint:CGPointMake(item.center.x, item.center.y+45) withName:@"centerBottom"];
             break;
         }
              //右下
         case 4:{
-           
-            POPSpringAnimation * springAnimation = [POPSpringAnimation animation];
-            springAnimation.property = [POPMutableAnimatableProperty propertyWithName:kPOPViewCenter];
-            springAnimation.fromValue = [NSValue valueWithCGPoint:item.center];
-            springAnimation.toValue =[NSValue valueWithCGPoint: CGPointMake(item.center.x+45, item.center.y+45)];
-            springAnimation.springBounciness = 20;
-            [item  pop_addAnimation:springAnimation forKey:@"centerRightDown"];
+            [self performNumberPopAnimation:item toPoint:CGPointMake(item.center.x+45, item.center.y+45) withName:@"centerRightDown"];
             break;
         }
            //左下
         case 5:{
-            POPSpringAnimation * springAnimation = [POPSpringAnimation animation];
-            springAnimation.property = [POPMutableAnimatableProperty propertyWithName:kPOPViewCenter];
-            springAnimation.fromValue = [NSValue valueWithCGPoint:item.center];
-            springAnimation.toValue =[NSValue valueWithCGPoint: CGPointMake(item.center.x-45, item.center.y+45)];
-            springAnimation.springBounciness = 20;
-            [item  pop_addAnimation:springAnimation forKey:@"centerLeftDown"];
+            [self performNumberPopAnimation:item toPoint:CGPointMake(item.center.x-45, item.center.y+45) withName:@"centerLeftDown"];
             break;
-        
         }
          // 右上
         case 6:{
-            POPSpringAnimation * springAnimation = [POPSpringAnimation animation];
-            springAnimation.property = [POPMutableAnimatableProperty propertyWithName:kPOPViewCenter];
-            springAnimation.fromValue = [NSValue valueWithCGPoint:item.center];
-            springAnimation.toValue =[NSValue valueWithCGPoint: CGPointMake(item.center.x+45, item.center.y-45)];
-            springAnimation.springBounciness = 20;
-            [item  pop_addAnimation:springAnimation forKey:@"centerRightUp"];
+            [self performNumberPopAnimation:item toPoint:CGPointMake(item.center.x+45, item.center.y-45) withName:@"centerRightUp"];
             break;
-
-        
         }
          //左上
         case 7:{
-            POPSpringAnimation * springAnimation = [POPSpringAnimation animation];
-            springAnimation.property = [POPMutableAnimatableProperty propertyWithName:kPOPViewCenter];
-            springAnimation.fromValue = [NSValue valueWithCGPoint:item.center];
-            springAnimation.toValue =[NSValue valueWithCGPoint: CGPointMake(item.center.x-45, item.center.y-45)];
-            springAnimation.springBounciness = 20;
-            [item  pop_addAnimation:springAnimation forKey:@"centerLeftUp"];
+            [self performNumberPopAnimation:item toPoint:CGPointMake(item.center.x-45, item.center.y-45) withName:@"centerLeftUp"];
             break;
-        
-        
         }
-            
-            
         default:
             break;
     }
@@ -462,21 +417,6 @@
     [anim setCompletionBlock:^(POPAnimation * ani, BOOL finish) {
         [item removeFromSuperview];
     }];
-   // POPSpringAnimation* anim =[POPSpringAnimation animationWithPropertyNamed:kPOPViewCenter];
- //   anim.fromValue = [NSValue valueWithCGPoint:item.center];
-   // anim.toValue = [NSValue valueWithCGPoint:self.center];
-   // anim.springBounciness = 20;
-   
-//    [UIView animateWithDuration:0.3 animations:^{
-//        item.opaque = 0;
-//    } completion:^(BOOL finished) {
-//        [item removeFromSuperview];
-//        [self.accessoryItems removeObject:item];
-//    }];
-    
-   // item.opaque = 0;
-   // [item removeFromSuperview];
-  //  [self.accessoryItems removeObject:item];
 }
 
 
@@ -490,9 +430,6 @@
             return YES;
         }
     }
-//
-//    return NO;
-    
     CGPoint tmpPoint = [ self convertPoint:point toView:self.superview];
     
     if (CGRectContainsPoint(self.frame, tmpPoint)) {

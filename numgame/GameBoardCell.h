@@ -47,6 +47,7 @@ typedef NS_ENUM(NSUInteger, GBTrakingCategory) {
 @property (nonatomic) int color;
 
 @property (nonatomic) int desTag;
+
 @property (nonatomic, assign)id<GameboardCellDelegate> delegate;
 //初始化cell的位置
 @property (nonatomic,assign) GBCellPosition  cellPositon;
