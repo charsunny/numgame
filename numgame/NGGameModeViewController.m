@@ -68,6 +68,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self playSoundFXnamed:@"game_mode_bg.mp3" Loop:YES];
+}
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     if ([[[NGGameConfig sharedGameConfig] sound] isEqualToString:@"J"]) {
@@ -127,6 +132,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.destinationViewController isKindOfClass:[NGGameViewController class]]) {
+        [_audioPlayer stop];
         NGGameViewController* destVC = (NGGameViewController*)segue.destinationViewController;
         destVC.gameMode = [[NGGameConfig sharedGameConfig] gamemode];
     }
