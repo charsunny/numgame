@@ -30,9 +30,7 @@ CGFloat pieStart = 270;//起始的角度
 
 @property (nonatomic)int addCountCurrentNumber;
 
-@property (nonatomic)int currentCount;
 
-@property (nonatomic)int deltaCount;
 @end
 
 @implementation GameCountingCircleView

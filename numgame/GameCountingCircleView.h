@@ -30,6 +30,10 @@
 
 @property (nonatomic)int clockwise;//0=逆时针,1=顺时针
 
+@property (nonatomic)int currentCount;
+
+@property (nonatomic)int deltaCount;
+
 @property (strong,nonatomic)id<GameCountingCircleDelegate> delegate;
 
 - (void)addCount:(int)deltaNum;

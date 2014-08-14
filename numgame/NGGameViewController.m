@@ -32,7 +32,6 @@
 
 @property (weak, nonatomic) IBOutlet GameBoardView *gameBoardView;
 
-@property (weak, nonatomic) IBOutlet UILabel *timeTitle;
 
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
@@ -42,7 +41,6 @@
 
 @property (nonatomic, strong) NSArray* levelConfig;
 
-@property (weak, nonatomic) IBOutlet UILabel *scoreTitle;
 
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 
@@ -143,6 +141,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onResignActive:) name:@"resignactive" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onBecomeActive:) name:@"becomeactive" object:nil];
     
+    //init counting circle view
+    [self initHeaderView];
     [self initGameData];
     
     
@@ -157,7 +157,6 @@
     self.gameBoardView.isChangeColor = NO;
     self.changeTrickBtn = NO; //用来改变切换的TrickBtn
     
-    [self initHeaderView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -226,6 +225,7 @@
             break;
     }
 }
+
 - (void)initGameData {
     switch (_gameMode) {
         case NGGameModeClassic: {
@@ -234,6 +234,16 @@
             [_levelLabel setText:[NSString stringWithFormat:@"%d",_currectLevel]];
             [_scoreLabel setText:[NSString stringWithFormat:@"%d/%@",_score, levelInfo[@"score"]]];
             [_timeLabel setText:[NSString stringWithFormat:@"0/%@",levelInfo[@"step"]]];
+            
+            _stepCountingView.destinationCount = 0;
+            _stepCountingView.deltaCount = [levelInfo[@"step"] integerValue];
+            _stepCountingView.currentCount = _stepCountingView.deltaCount;
+            //update circle
+            [_stepCountingView addCount:0];
+            
+            _scoreCountingView.destinationCount = [levelInfo[@"score"] integerValue];
+            _scoreCountingView.deltaCount = [levelInfo[@"score"] integerValue] - _scoreCountingView.currentCount?:0;
+            [_scoreCountingView addCount:0];
             break;
         }
         case NGGameModeTimed:
