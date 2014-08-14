@@ -121,6 +121,7 @@
 		9D24FE00199CCE0000550071 /* game_mode_bg.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D24FDFF199CCE0000550071 /* game_mode_bg.mp3 */; };
 		9D5A1074197D3627007BBECE /* NGGameUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D5A1073197D3627007BBECE /* NGGameUtil.m */; };
 		9DFA42E8199B7A1A0014C492 /* GameCountingCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DFA42E7199B7A1A0014C492 /* GameCountingCircleView.m */; };
+		9DFF66D6199CF6410069F436 /* NGPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DFF66D5199CF6410069F436 /* NGPlayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -299,6 +300,8 @@
 		9D5A1073197D3627007BBECE /* NGGameUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NGGameUtil.m; sourceTree = "<group>"; };
 		9DFA42E6199B7A1A0014C492 /* GameCountingCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCountingCircleView.h; sourceTree = "<group>"; };
 		9DFA42E7199B7A1A0014C492 /* GameCountingCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCountingCircleView.m; sourceTree = "<group>"; };
+		9DFF66D4199CF6410069F436 /* NGPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGPlayer.h; sourceTree = "<group>"; };
+		9DFF66D5199CF6410069F436 /* NGPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NGPlayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -490,6 +493,8 @@
 		50EDF3AD18FFB755003FBA71 /* numgame */ = {
 			isa = PBXGroup;
 			children = (
+				9DFF66D4199CF6410069F436 /* NGPlayer.h */,
+				9DFF66D5199CF6410069F436 /* NGPlayer.m */,
 				50FB049819694C5E00941EEF /* MatrixMath.h */,
 				50FB049919694C5E00941EEF /* MatrixMath.m */,
 				9D5A1072197D3627007BBECE /* NGGameUtil.h */,
@@ -800,6 +805,7 @@
 				50EDF3B818FFB755003FBA71 /* NGAppDelegate.m in Sources */,
 				508B8B0D191891E900DC9FA6 /* NGAboutViewController.m in Sources */,
 				18459D9F196D951800CC0F39 /* HMSideMenu.m in Sources */,
+				9DFF66D6199CF6410069F436 /* NGPlayer.m in Sources */,
 				9DFA42E8199B7A1A0014C492 /* GameCountingCircleView.m in Sources */,
 				50FB049719694C2500941EEF /* GameBoardView.m in Sources */,
 			);

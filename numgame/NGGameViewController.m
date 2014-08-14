@@ -17,6 +17,7 @@
 #import "GameResultView.h"
 #import "NGGameUtil.h"
 #import "GameCountingCircleView.h"
+#import "NGPlayer.h"
 
 @import AudioToolbox;
 @import AVFoundation;
@@ -24,11 +25,21 @@
 @import GameKit;
 @import StoreKit;
 
+
+#define TOOL_BAR_COLOR 0xF7F7F7
+
 @interface NGGameViewController ()<UIAlertViewDelegate,GameBoardViewDelegate,GameCountingCircleDelegate>
 
-@property (weak, nonatomic) IBOutlet UIView *headView;
+@property (weak, nonatomic) IBOutlet UIButton *hammerBtn;
+@property (weak, nonatomic) IBOutlet UILabel *hammerLabel;
 
-@property (weak, nonatomic) IBOutlet UIToolbar *toolBar;
+@property (weak, nonatomic) IBOutlet UIButton *fireBtn;
+@property (weak, nonatomic) IBOutlet UILabel *fireLabel;
+
+@property (weak, nonatomic) IBOutlet UIButton *wandBtn;
+@property (weak, nonatomic) IBOutlet UILabel *wandLabel;
+
+@property (weak, nonatomic) IBOutlet UIView *headView;
 
 @property (weak, nonatomic) IBOutlet GameBoardView *gameBoardView;
 
@@ -124,14 +135,6 @@
     [super viewDidLoad];
     srand((unsigned int)time(NULL));
     //init gameconfig
-    for (UIBarButtonItem* item in _toolBar.items) {
-        if ([item isKindOfClass:[UIBarButtonItem class]]) {
-            //item.image = [item.image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        }
-    }
-    //remove hariLine
-    //ref:http://stackoverflow.com/questions/19110883/remove-uitoolbar-hairline-in-ios-7
-    _toolBar.clipsToBounds = YES;
     _currectLevel = 1;
     
     NSString* levelPath = [[NSBundle mainBundle] pathForResource:@"config" ofType:@"plist"];
@@ -144,6 +147,7 @@
     
     //init counting circle view
     [self initHeaderView];
+    [self addButtonToolBarView];
     [self initGameData];
     
     
@@ -172,22 +176,24 @@
     }
 }
 
-- (void)viewDidLayoutSubviews {
-    UIView* spLine  = [_headView viewWithTag:100];
-    if (spLine == nil) {
-        UIToolbar* toolbar = [[UIToolbar alloc] initWithFrame:_headView.bounds];
-        toolbar.clipsToBounds = YES;
-        [_headView insertSubview:toolbar atIndex:0];
-//        spLine = [[UIView alloc] initWithFrame:CGRectMake(0, _headView.frame.size.height - 0.5f, _headView.frame.size.width, 0.5f)];
-//        spLine.backgroundColor = [UIColor lightGrayColor];
-        //[_headView addSubview:spLine];
-        [_headView setTag:100];
-    }
-}
+//- (void)viewDidLayoutSubviews {
+//    UIView* spLine  = [_headView viewWithTag:100];
+//    if (spLine == nil) {
+//        UIToolbar* toolbar = [[UIToolbar alloc] initWithFrame:_headView.bounds];
+//        toolbar.clipsToBounds = YES;
+//        //[_headView insertSubview:toolbar atIndex:0];
+////        spLine = [[UIView alloc] initWithFrame:CGRectMake(0, _headView.frame.size.height - 0.5f, _headView.frame.size.width, 0.5f)];
+////        spLine.backgroundColor = [UIColor lightGrayColor];
+//        //[_headView addSubview:spLine];
+//        [_headView setTag:100];
+//    }
+//}
 
 #pragma --mark init header UI
 - (void)initHeaderView
 {
+    _headView.backgroundColor = UIColorFromRGB(TOOL_BAR_COLOR);
+    _headView.alpha = 1;
     switch (self.gameMode) {
         case NGGameModeClassic:
         {
@@ -353,7 +359,7 @@
             controller.score = _scoreLabel.text;
             NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
             if ([levelInfo[@"score"] intValue] <= self.score) {
-                [self playSoundFXnamed:@"cheer.m4a" Loop:NO];
+                [[NGPlayer player] playSoundFXnamed:@"cheer.m4a" Loop:NO];
                 controller.completed = YES;
                 _currectLevel++;
             } else {
@@ -410,30 +416,7 @@
         return;
     }
     NSString* soundStr = [NSString stringWithFormat:@"sound%c.mp3",'T'+rand()%7];
-    [self playSoundFXnamed:soundStr Loop:NO];
-}
-
--(void) playSoundFXnamed:(NSString*) vSFXName Loop:(BOOL) vLoop
-{
-    if (!_haveSound) {
-        return;
-    }
-    NSError *error;
-    
-    NSBundle* bundle = [NSBundle mainBundle];
-    
-    NSString* bundleDirectory = (NSString*)[bundle bundlePath];
-    
-    NSURL *url = [NSURL fileURLWithPath:[bundleDirectory stringByAppendingPathComponent:vSFXName]];
-    
-    _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-    
-    if(vLoop)
-        _audioPlayer.numberOfLoops = -1;
-    else
-        _audioPlayer.numberOfLoops = 0;
-    
-    [_audioPlayer play];
+    [[NGPlayer player] playSoundFXnamed:soundStr Loop:NO];
 }
 
 - (IBAction)onButtonClick:(UIButton *)sender {
@@ -605,11 +588,24 @@
         self.changeTrickBtn = YES;
     }
    
-   
-
 }
 
 
+- (void)addButtonToolBarView
+{
+    CGRect sFrame = self.view.bounds;
+    CGFloat cellWidth = _wandBtn.frame.size.width;
+    UIView* bgView = [[UIView alloc]initWithFrame:CGRectMake(0, sFrame.size.height - 64 , sFrame.size.width, 64)];
+    bgView.backgroundColor = UIColorFromRGB(TOOL_BAR_COLOR);
+    [self.view insertSubview:bgView atIndex:0];
+    
+    //update the frame , I'll come back once I've mastered AutoLayout
+    
+    
+    //_wandBtn.center.y = sFrame.size.height - 10 - _wandBtn.frame.size.width;
+    //_wandBtn.center = CGPointMake(_wandBtn.center.x, sFrame.size.height - 10 - cellWidth);
+    _wandBtn.frame = CGRectOffset(_wandBtn.frame, 0, sFrame.size.height - _wandBtn.frame.origin.y);
+}
 -(UIImage*)drawMaskImagofBtnItem:(UIBarButtonItem*)btnItem{
 
     UIGraphicsBeginImageContext(btnItem.image.size);

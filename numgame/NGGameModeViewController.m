@@ -11,6 +11,7 @@
 #import "NGGameViewController.h"
 #import "NGGuideViewController.h"
 #import <pop/pop.h>
+#import "NGPlayer.h"
 @import GameKit;
 @import StoreKit;
 @import AVFoundation;
@@ -18,6 +19,8 @@
 @interface NGGameModeViewController ()<GKGameCenterControllerDelegate,SKProductsRequestDelegate, SKPaymentTransactionObserver>
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
+@property (strong, nonatomic) NSMutableArray *playerArray;
 
 @property (strong, nonatomic) AVAudioPlayer *audioPlayer;
 
@@ -62,6 +65,7 @@
     if ([[NGGameConfig sharedGameConfig] isFirstLoad]) {
         [self performSegueWithIdentifier:@"guidesegue" sender:self];
     }
+    _playerArray = [NSMutableArray new];
 }
 
 - (void)didReceiveMemoryWarning
@@ -73,7 +77,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self playSoundFXnamed:@"game_mode_bg.mp3" Loop:YES];
+    [[NGPlayer player] playSoundFXnamed:@"game_mode_bg.mp3" Loop:YES];
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -117,9 +121,11 @@
 - (IBAction)onClickMode:(UIButton *)sender {
     if([SKPaymentQueue canMakePayments])
     {
-        SKProductsRequest* request = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithObject:@"EMUT0"]];
-        request.delegate = self;
-        [request start];
+//        SKProductsRequest* request = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithObject:@"EMUT0"]];
+//        request.delegate = self;
+//        [request start];
+        SKPayment *payment = [SKPayment paymentWithProductIdentifier:@"EMUT0"];
+        [[SKPaymentQueue defaultQueue] addPayment: payment];
     }
     else
     {
@@ -129,7 +135,7 @@
     [_modeButtons enumerateObjectsUsingBlock:^(UIButton* button, NSUInteger idx, BOOL *stop) {
         [button setAlpha:(sender == button)?1.0f:0.5f];
         if (sender == button) {
-            [self playSoundFXnamed:[NSString stringWithFormat:@"square_%d.aif",idx+2] Loop:NO];
+            [[NGPlayer player] playSoundFXnamed:[NSString stringWithFormat:@"square_%d.aif",idx+2] Loop:NO];
             [[NGGameConfig sharedGameConfig] setGamemode:idx];
             [_modeLabel setText:[self getModeString:idx]];
             [_playButton setBackgroundColor:button.backgroundColor];
@@ -171,9 +177,7 @@
 #pragma mark -- buy item delegate -- 
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response {
     SKProduct *product = [[response products] firstObject];
-    SKPayment *payment = [SKPayment paymentWithProductIdentifier:@"EMUT0"];
-    [[SKPaymentQueue defaultQueue] addPayment: payment];
-    NSLog(@"%@", product.localizedTitle);
+        NSLog(@"%@", product.localizedTitle);
 }
 
 - (void)paymentQueue: (SKPaymentQueue *)queue updatedTransactions: (NSArray *)transactions
@@ -194,29 +198,6 @@
                 break;
         }
     }
-}
-
--(void) playSoundFXnamed:(NSString*) vSFXName Loop:(BOOL) vLoop
-{
-    if (!_haveSound) {
-        return;
-    }
-    NSError *error;
-    
-    NSBundle* bundle = [NSBundle mainBundle];
-    
-    NSString* bundleDirectory = (NSString*)[bundle bundlePath];
-    
-    NSURL *url = [NSURL fileURLWithPath:[bundleDirectory stringByAppendingPathComponent:vSFXName]];
-    
-    _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-    
-    if(vLoop)
-        _audioPlayer.numberOfLoops = -1;
-    else
-        _audioPlayer.numberOfLoops = 0;
-    
-    [_audioPlayer play];
 }
 
 

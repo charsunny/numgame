@@ -14,7 +14,7 @@
 #import "GameResultView.h"
 #import "NumberSelectionVIew.h"
 #import "NGGameUtil.h"
-//#import "NEContainerView.h"
+#import "NGPlayer.h"
 @import CoreGraphics;
 @import AVFoundation;
 
@@ -52,8 +52,6 @@ typedef void(^TrickBlock)();
 
 @property (nonatomic, strong) NSMutableArray* effectViewArray;
 
-@property (nonatomic, strong) NSMutableDictionary* playerForSound;
-
 @property (nonatomic,strong) HMSideMenu* sideMenu;
 @property (nonatomic, assign) int  SelectedCellColor;
 @property (nonatomic,strong) NSMutableSet * storeSelectedCellSet;
@@ -77,7 +75,6 @@ typedef void(^TrickBlock)();
         _selectedCell = [NSMutableArray new];
         _posArray = [NSMutableArray new];
         _effectViewArray = [NSMutableArray new];
-        _playerForSound = [NSMutableDictionary new];
         self.backgroundColor = [UIColor clearColor];
         self.multipleTouchEnabled = NO;
         self.storeSelectedCellSet = [[NSMutableSet alloc]initWithCapacity:1];
@@ -265,7 +262,7 @@ typedef void(^TrickBlock)();
         [self addBorderEffectWithCell:cell eliminated:NO];
         //[cell addRippleEffectToView:YES];
         // play sound
-        [self playSoundFXnamed:@"1.aif"];
+        [[NGPlayer player] playSoundFXnamed:@"1.aif" Loop:NO];
         [self addBouncingAnimation:view];
     }
     
@@ -306,13 +303,13 @@ typedef void(^TrickBlock)();
                 }
                 else if ( [self validateIfCanLine:cell]&&([self currectNum] + cell.number < 10)) {
                     //[cell addRippleEffectToView:YES];
-                    [self playSoundFXnamed:[NSString stringWithFormat:@"%d.aif", _selectedCell.count]];
+                    [[NGPlayer player] playSoundFXnamed:[NSString stringWithFormat:@"%d.aif", _selectedCell.count] Loop:NO];
                     [_selectedCell addObject:cell];
                     [self addBorderEffectWithCell:cell eliminated:NO];
                 } else if([self validateIfCanLine:cell]&&[self currectNum] + cell.number == 10) {
                     [_selectedCell addObject:cell];
                     [self addBorderEffectWithCell:cell eliminated:NO];
-                    [self playSoundFXnamed:[NSString stringWithFormat:@"%d.aif", _selectedCell.count]];
+                    [[NGPlayer player] playSoundFXnamed:[NSString stringWithFormat:@"%d.aif", _selectedCell.count] Loop:NO];
                     if([self eliminatedSameColorCell]) {
                         NSArray* colorArray = [self getAllCellWithColor:cell.color];
                         [colorArray enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
@@ -334,7 +331,7 @@ typedef void(^TrickBlock)();
     [self removeAllBorderEffect];
     if ([self currectNum] == 10 || canEliminated) {
         [self removeEffectView];
-        [self performSelector:@selector(playSoundFXnamed:) withObject:[NSString stringWithFormat:@"square_%d.aif", _selectedCell.count]];
+        [[NGPlayer player] playSoundFXnamed:[NSString stringWithFormat:@"square_%d.aif", _selectedCell.count] Loop:NO];
         //4个cell是否拥有相同颜色
         if([self eliminatedSameColorCell]) {
             int curColor = ((GameBoardCell*)_selectedCell.firstObject).color;
@@ -681,22 +678,6 @@ typedef void(^TrickBlock)();
         GameBoardCell* addCell = (GameBoardCell*)[self viewWithTag:obj.intValue];
         [addCell pop_addAnimation:animation forKey:@"addmove"];
     }];
-}
-
--(void) playSoundFXnamed:(NSString*)vSFXName
-{
-    NSBundle* bundle = [NSBundle mainBundle];
-    
-    NSString* bundleDirectory = (NSString*)[bundle bundlePath];
-    
-    NSURL *url = [NSURL fileURLWithPath:[bundleDirectory stringByAppendingPathComponent:vSFXName]];
-    AVAudioPlayer* player = [_playerForSound objectForKey:vSFXName];
-    if (!player) {
-        player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
-        [_playerForSound setObject:player forKey:vSFXName];
-    }
-    [player prepareToPlay];
-    [player play];
 }
 
 #pragma mark touch cell poping animation
