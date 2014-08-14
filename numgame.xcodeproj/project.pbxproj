@@ -10,12 +10,9 @@
 		18459D9F196D951800CC0F39 /* HMSideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 18459D9E196D951800CC0F39 /* HMSideMenu.m */; };
 		18B0CF851971959700FBA5A7 /* NumberSelectionVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B0CF841971959700FBA5A7 /* NumberSelectionVIew.m */; };
 		18E903481971329700935BD7 /* GameResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E903471971329700935BD7 /* GameResultView.m */; };
-		50066275190E065C00CCE97E /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50066274190E065C00CCE97E /* iAd.framework */; };
 		5006627D190E504D00CCE97E /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5006627C190E504D00CCE97E /* GameKit.framework */; };
 		5014AE2C190E920400827D82 /* NGGameModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5014AE2B190E920400827D82 /* NGGameModeViewController.m */; };
 		5014AE2F190E982C00827D82 /* NGOptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5014AE2E190E982C00827D82 /* NGOptionViewController.m */; };
-		5014AF1A190F86D500827D82 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5014AECA190F86D500827D82 /* README.txt */; };
-		5014AF23190F8AC200827D82 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5014AEC9190F86D500827D82 /* libGoogleAdMobAds.a */; };
 		5014AF25190F8AE000827D82 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5014AF24190F8AE000827D82 /* CFNetwork.framework */; };
 		5014AF27190F8B0E00827D82 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5014AF26190F8B0E00827D82 /* MessageUI.framework */; };
 		5014AF29190F8B3000827D82 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5014AF28190F8B3000827D82 /* SystemConfiguration.framework */; };
@@ -121,7 +118,9 @@
 		50FCBE4A19166EC500203703 /* bauhs93.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 50FCBE4919166EC500203703 /* bauhs93.ttf */; };
 		50FCBE57191763B100203703 /* showg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 50FCBE56191763B100203703 /* showg.ttf */; };
 		50FCBE591917655B00203703 /* Curlz MT.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 50FCBE581917655B00203703 /* Curlz MT.TTF */; };
+		9D24FE00199CCE0000550071 /* game_mode_bg.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D24FDFF199CCE0000550071 /* game_mode_bg.mp3 */; };
 		9D5A1074197D3627007BBECE /* NGGameUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D5A1073197D3627007BBECE /* NGGameUtil.m */; };
+		9DFA42E8199B7A1A0014C492 /* GameCountingCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DFA42E7199B7A1A0014C492 /* GameCountingCircleView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,17 +175,6 @@
 		5014AE2B190E920400827D82 /* NGGameModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NGGameModeViewController.m; sourceTree = "<group>"; };
 		5014AE2D190E982C00827D82 /* NGOptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGOptionViewController.h; sourceTree = "<group>"; };
 		5014AE2E190E982C00827D82 /* NGOptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NGOptionViewController.m; sourceTree = "<group>"; };
-		5014AEC0190F86D500827D82 /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdMobExtras.h; sourceTree = "<group>"; };
-		5014AEC1190F86D500827D82 /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdNetworkExtras.h; sourceTree = "<group>"; };
-		5014AEC2190F86D500827D82 /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdSize.h; sourceTree = "<group>"; };
-		5014AEC3190F86D500827D82 /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerView.h; sourceTree = "<group>"; };
-		5014AEC4190F86D500827D82 /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerViewDelegate.h; sourceTree = "<group>"; };
-		5014AEC5190F86D500827D82 /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitial.h; sourceTree = "<group>"; };
-		5014AEC6190F86D500827D82 /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitialDelegate.h; sourceTree = "<group>"; };
-		5014AEC7190F86D500827D82 /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
-		5014AEC8190F86D500827D82 /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
-		5014AEC9190F86D500827D82 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
-		5014AECA190F86D500827D82 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		5014AF24190F8AE000827D82 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		5014AF26190F8B0E00827D82 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		5014AF28190F8B3000827D82 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -306,8 +294,11 @@
 		50FCBE4919166EC500203703 /* bauhs93.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bauhs93.ttf; sourceTree = "<group>"; };
 		50FCBE56191763B100203703 /* showg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = showg.ttf; sourceTree = "<group>"; };
 		50FCBE581917655B00203703 /* Curlz MT.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Curlz MT.TTF"; sourceTree = "<group>"; };
+		9D24FDFF199CCE0000550071 /* game_mode_bg.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = game_mode_bg.mp3; sourceTree = "<group>"; };
 		9D5A1072197D3627007BBECE /* NGGameUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGGameUtil.h; sourceTree = "<group>"; };
 		9D5A1073197D3627007BBECE /* NGGameUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NGGameUtil.m; sourceTree = "<group>"; };
+		9DFA42E6199B7A1A0014C492 /* GameCountingCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCountingCircleView.h; sourceTree = "<group>"; };
+		9DFA42E7199B7A1A0014C492 /* GameCountingCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCountingCircleView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -326,8 +317,6 @@
 				5014AF29190F8B3000827D82 /* SystemConfiguration.framework in Frameworks */,
 				5014AF27190F8B0E00827D82 /* MessageUI.framework in Frameworks */,
 				5014AF25190F8AE000827D82 /* CFNetwork.framework in Frameworks */,
-				50066275190E065C00CCE97E /* iAd.framework in Frameworks */,
-				5014AF23190F8AC200827D82 /* libGoogleAdMobAds.a in Frameworks */,
 				50EDF3AC18FFB755003FBA71 /* UIKit.framework in Frameworks */,
 				50EDF3A818FFB755003FBA71 /* Foundation.framework in Frameworks */,
 				5006627D190E504D00CCE97E /* GameKit.framework in Frameworks */,
@@ -354,24 +343,6 @@
 				18459D9E196D951800CC0F39 /* HMSideMenu.m */,
 			);
 			path = HMSideView;
-			sourceTree = "<group>";
-		};
-		5014AE33190F86D400827D82 /* GoogleAdMobAdsSdkiOS-6.5.1 */ = {
-			isa = PBXGroup;
-			children = (
-				5014AEC0190F86D500827D82 /* GADAdMobExtras.h */,
-				5014AEC1190F86D500827D82 /* GADAdNetworkExtras.h */,
-				5014AEC2190F86D500827D82 /* GADAdSize.h */,
-				5014AEC3190F86D500827D82 /* GADBannerView.h */,
-				5014AEC4190F86D500827D82 /* GADBannerViewDelegate.h */,
-				5014AEC5190F86D500827D82 /* GADInterstitial.h */,
-				5014AEC6190F86D500827D82 /* GADInterstitialDelegate.h */,
-				5014AEC7190F86D500827D82 /* GADRequest.h */,
-				5014AEC8190F86D500827D82 /* GADRequestError.h */,
-				5014AEC9190F86D500827D82 /* libGoogleAdMobAds.a */,
-				5014AECA190F86D500827D82 /* README.txt */,
-			);
-			path = "GoogleAdMobAdsSdkiOS-6.5.1";
 			sourceTree = "<group>";
 		};
 		5014AF4119163AA700827D82 /* res */ = {
@@ -425,6 +396,7 @@
 				5014AF4419163AA700827D82 /* Josefin Sans Bold.ttf */,
 				5014AF4519163AA700827D82 /* Josefin Sans.ttf */,
 				5014AF6119163AA700827D82 /* touch.m4a */,
+				9D24FDFF199CCE0000550071 /* game_mode_bg.mp3 */,
 			);
 			path = res;
 			sourceTree = "<group>";
@@ -524,7 +496,6 @@
 				9D5A1073197D3627007BBECE /* NGGameUtil.m */,
 				50FB049119694C1600941EEF /* view */,
 				5014AF4119163AA700827D82 /* res */,
-				5014AE33190F86D400827D82 /* GoogleAdMobAdsSdkiOS-6.5.1 */,
 				50EDF3B618FFB755003FBA71 /* NGAppDelegate.h */,
 				50EDF3B718FFB755003FBA71 /* NGAppDelegate.m */,
 				5014AF33190F9B1F00827D82 /* NGResultViewController.h */,
@@ -537,12 +508,12 @@
 				5014AE2B190E920400827D82 /* NGGameModeViewController.m */,
 				508B8B0B191891E900DC9FA6 /* NGAboutViewController.h */,
 				508B8B0C191891E900DC9FA6 /* NGAboutViewController.m */,
+				508B8B001918861900DC9FA6 /* NGGuideViewController.h */,
+				508B8B011918861900DC9FA6 /* NGGuideViewController.m */,
 				5014AF36190FF45E00827D82 /* NGGameConfig.h */,
 				5014AF37190FF45E00827D82 /* NGGameConfig.m */,
 				50EDF3C218FFB756003FBA71 /* Images.xcassets */,
 				50EDF3AE18FFB755003FBA71 /* Supporting Files */,
-				508B8B001918861900DC9FA6 /* NGGuideViewController.h */,
-				508B8B011918861900DC9FA6 /* NGGuideViewController.m */,
 			);
 			path = numgame;
 			sourceTree = "<group>";
@@ -590,6 +561,8 @@
 				18E903471971329700935BD7 /* GameResultView.m */,
 				18B0CF831971959700FBA5A7 /* NumberSelectionVIew.h */,
 				18B0CF841971959700FBA5A7 /* NumberSelectionVIew.m */,
+				9DFA42E6199B7A1A0014C492 /* GameCountingCircleView.h */,
+				9DFA42E7199B7A1A0014C492 /* GameCountingCircleView.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -643,7 +616,6 @@
 				ORGANIZATIONNAME = "Sun Xi";
 				TargetAttributes = {
 					50EDF3A318FFB755003FBA71 = {
-						DevelopmentTeam = CX3SW7JBRE;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
 								enabled = 1;
@@ -726,7 +698,6 @@
 				503401FC19695DCA00AAD2B6 /* soundV.mp3 in Resources */,
 				503401EA19695DCA00AAD2B6 /* soundD.mp3 in Resources */,
 				503401E719695DCA00AAD2B6 /* soundA.mp3 in Resources */,
-				5014AF1A190F86D500827D82 /* README.txt in Resources */,
 				50FA44681918C47400D24F7B /* Icon-72@2x.png in Resources */,
 				503401FD19695DCA00AAD2B6 /* soundW.mp3 in Resources */,
 				50FCBE4819164C0000203703 /* icomoon.ttf in Resources */,
@@ -744,6 +715,7 @@
 				503401E519695DCA00AAD2B6 /* 12.aif in Resources */,
 				503401F919695DCA00AAD2B6 /* soundS.mp3 in Resources */,
 				50FA446C1918C47400D24F7B /* Icon-Small-50@2x.png in Resources */,
+				9D24FE00199CCE0000550071 /* game_mode_bg.mp3 in Resources */,
 				503401FA19695DCA00AAD2B6 /* soundT.mp3 in Resources */,
 				503401E819695DCA00AAD2B6 /* soundB.mp3 in Resources */,
 				50FA446F1918C47400D24F7B /* Icon.png in Resources */,
@@ -828,6 +800,7 @@
 				50EDF3B818FFB755003FBA71 /* NGAppDelegate.m in Sources */,
 				508B8B0D191891E900DC9FA6 /* NGAboutViewController.m in Sources */,
 				18459D9F196D951800CC0F39 /* HMSideMenu.m in Sources */,
+				9DFA42E8199B7A1A0014C492 /* GameCountingCircleView.m in Sources */,
 				50FB049719694C2500941EEF /* GameBoardView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
