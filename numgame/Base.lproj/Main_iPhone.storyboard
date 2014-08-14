@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6205" systemVersion="14A314h" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="ktx-ga-6Ec">
     <dependencies>
-        <deployment version="1792" identifier="iOS"/>
+        <deployment version="1792" defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6198"/>
     </dependencies>
     <scenes>
@@ -129,7 +129,7 @@
                                 </constraints>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4ej-gM-mPW">
-                                <rect key="frame" x="0.0" y="401" width="320" height="64"/>
+                                <rect key="frame" x="0.0" y="416" width="320" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="Yhz-Km-tVm"/>
                                 </constraints>
@@ -185,26 +185,18 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="j6W-UB-Sbr"/>
                                 </items>
                             </toolbar>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lAW-5D-AGf">
-                                <rect key="frame" x="0.0" y="465" width="320" height="15"/>
-                                <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Rv7-mT-eyh" secondAttribute="trailing" id="5qA-Wt-YeB"/>
-                            <constraint firstItem="lAW-5D-AGf" firstAttribute="leading" secondItem="CJb-HF-sOf" secondAttribute="leading" id="CoL-f9-RwE"/>
                             <constraint firstAttribute="trailing" secondItem="JcA-ad-MAr" secondAttribute="trailing" constant="-320" id="HRG-HY-IBn"/>
-                            <constraint firstItem="lAW-5D-AGf" firstAttribute="trailing" secondItem="CJb-HF-sOf" secondAttribute="trailing" id="O1D-LQ-Tce"/>
                             <constraint firstItem="JcA-ad-MAr" firstAttribute="top" secondItem="y4h-6H-pbq" secondAttribute="top" constant="90" id="RW8-lP-6hv"/>
                             <constraint firstItem="J5Y-w2-x2M" firstAttribute="bottom" secondItem="JcA-ad-MAr" secondAttribute="bottom" id="YSZ-JZ-blX"/>
-                            <constraint firstItem="CJb-HF-sOf" firstAttribute="top" secondItem="lAW-5D-AGf" secondAttribute="bottom" id="ZDA-SC-YK2"/>
-                            <constraint firstItem="lAW-5D-AGf" firstAttribute="top" secondItem="4ej-gM-mPW" secondAttribute="bottom" id="d91-qg-MEa"/>
                             <constraint firstItem="Rv7-mT-eyh" firstAttribute="leading" secondItem="y4h-6H-pbq" secondAttribute="leading" id="dsR-dR-uLq"/>
                             <constraint firstItem="J5Y-w2-x2M" firstAttribute="leading" secondItem="y4h-6H-pbq" secondAttribute="leading" id="hj9-zX-Hg9"/>
                             <constraint firstAttribute="bottom" secondItem="JcA-ad-MAr" secondAttribute="bottom" constant="50" id="iSB-fJ-LdO"/>
                             <constraint firstItem="4ej-gM-mPW" firstAttribute="leading" secondItem="y4h-6H-pbq" secondAttribute="leading" id="lAX-sh-Xwb"/>
-                            <constraint firstItem="CJb-HF-sOf" firstAttribute="top" secondItem="4ej-gM-mPW" secondAttribute="bottom" constant="15" id="lXe-YG-HEh"/>
+                            <constraint firstItem="CJb-HF-sOf" firstAttribute="top" secondItem="4ej-gM-mPW" secondAttribute="bottom" id="lXe-YG-HEh"/>
                             <constraint firstAttribute="trailing" secondItem="4ej-gM-mPW" secondAttribute="trailing" id="mO9-Db-Qp7"/>
                             <constraint firstItem="J5Y-w2-x2M" firstAttribute="trailing" secondItem="Rv7-mT-eyh" secondAttribute="trailing" id="mXq-K1-Wt4"/>
                             <constraint firstItem="JcA-ad-MAr" firstAttribute="leading" secondItem="J5Y-w2-x2M" secondAttribute="trailing" id="r2x-XY-HPd"/>
@@ -1108,9 +1100,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="fire" width="142" height="142"/>
-        <image name="hammer" width="142" height="142"/>
-        <image name="wand" width="70" height="70"/>
+        <image name="fire" width="130" height="130"/>
+        <image name="hammer" width="130" height="130"/>
+        <image name="wand" width="130" height="130"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

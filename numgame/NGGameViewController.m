@@ -24,7 +24,7 @@
 @import GameKit;
 @import StoreKit;
 
-@interface NGGameViewController ()<UIAlertViewDelegate,GameBoardViewDelegate>
+@interface NGGameViewController ()<UIAlertViewDelegate,GameBoardViewDelegate,GameCountingCircleDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *headView;
 
@@ -65,6 +65,10 @@
 @property (nonatomic)BOOL unwindFromResultVC;
 
 @property (nonatomic)BOOL changeTrickBtn;
+
+@property (strong,nonatomic)GameCountingCircleView* stepCountingView;
+
+@property (strong,nonatomic)GameCountingCircleView* scoreCountingView;
 @end
 
 @implementation NGGameViewController
@@ -78,6 +82,9 @@
         //_timeLabel.text = [NSString stringWithFormat:@"%d/%@",_timeSpent, levelInfo[@"step"]];
         NSString* wholeString =[NSString stringWithFormat:@"%d/%@",_timeSpent, levelInfo[@"step"]];
         
+        if (_stepCountingView) {
+            [_stepCountingView addCount:-1];
+        }
         NSMutableAttributedString* mutableAttrString = [[NSMutableAttributedString alloc]initWithString:wholeString];
         [mutableAttrString addAttribute:NSFontAttributeName
                                   value:[UIFont fontWithName:@"AppleSDGothicNeo-Light" size:30]
@@ -100,11 +107,13 @@
 
 - (void)setScore:(int)score
 {
+    int deltaCount = score - _score;
     _score = score;
     self.timeSpent++;
     NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
     if (_gameMode == NGGameModeClassic) {
         [_scoreLabel setText:[NSString stringWithFormat:@"%d/%@",_score, levelInfo[@"score"]]];
+        [_scoreCountingView addCount:deltaCount];
     } else {
         [_scoreLabel setText:[NSString stringWithFormat:@"%d",_score]];
     }
@@ -183,14 +192,32 @@
         case NGGameModeClassic:
         {
         
-//            GameCountingCircleView* stepCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(10, 10, 60, 60)];
-//            [stepCountingView initData:0 withStart:15];
-//            stepCountingView.pieCapacity = 360;
-//            stepCountingView.clockwise = 0;
-//            [_headView addSubview:stepCountingView];
+            NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
+            _stepCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(50, 50, 60, 60)];
             
-            GameCountingCircleView* timeCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(130, 10, 60, 60)];
+            [_stepCountingView initData:0 withStart:[levelInfo[@"step"] integerValue] ];
+            _stepCountingView.pieCapacity = 360;
+            _stepCountingView.circleKey = @"stepCount";
+            _stepCountingView.delegate = self;
+            [_headView addSubview:_stepCountingView];
+            
+            _scoreCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(230, 50, 60, 60)];
+            
+            [_scoreCountingView initData:[levelInfo[@"score"] integerValue] withStart:0];
+            _scoreCountingView.pieCapacity = 0;
+            _scoreCountingView.circleKey = @"scoreCount";
+            _scoreCountingView.clockwise = 0;
+            _scoreCountingView.delegate = self;
+            [_headView addSubview:_scoreCountingView];
+            
+            
+            break;
+        }
+        case NGGameModeTimed:
+        {
+            GameCountingCircleView* timeCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(230, 10, 60, 60)];
             [timeCountingView initData:60 withStart:0];
+            timeCountingView.circleKey = @"timeCount";
             [_headView addSubview:timeCountingView];
             [timeCountingView startCounting];
             break;
@@ -434,6 +461,12 @@
     } completion:^(BOOL finished) {
         
     }];
+}
+
+#pragma mark Game Counting Circle Delegate
+- (void)GameCoutingCircleDidEndCount:(NSString *)circleKey
+{
+    NSLog(@"%@",circleKey);
 }
 
 #pragma mark GameBoardViewDelegate

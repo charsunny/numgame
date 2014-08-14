@@ -31,6 +31,8 @@ CGFloat pieStart = 270;//起始的角度
 @property (nonatomic)int addCountCurrentNumber;
 
 @property (nonatomic)int currentCount;
+
+@property (nonatomic)int deltaCount;
 @end
 
 @implementation GameCountingCircleView
@@ -65,7 +67,7 @@ CGFloat pieStart = 270;//起始的角度
         startY = self.bounds.size.height/2;
         radius = smallerFrame.size.width/2 + 1;
         _pieCapacity = 0;
-        _clockwise = 1;
+        _clockwise = 0;
         _frontLayer.frame = smallerFrame;
         _frontLayer.cornerRadius = smallerFrame.size.width / 2;
         _frontLayer.backgroundColor = [UIColor orangeColor].CGColor;
@@ -82,6 +84,7 @@ CGFloat pieStart = 270;//起始的角度
     _destinationCount = destinationCount;
     _addCountCeiling = 30;
     _countStep = 1;
+    _deltaCount = abs(_destinationCount - startCount);
     _countLabel.textAlignment = NSTextAlignmentCenter;
     _countLabel.textColor = [UIColor whiteColor];
     _countLabel.font =[UIFont fontWithName:@"AppleSDGothicNeo-Light" size:20];
@@ -91,14 +94,15 @@ CGFloat pieStart = 270;//起始的角度
 
 - (void)addCount:(int)deltaNum
 {
-    _currentCount += deltaNum;
+    self.currentCount += deltaNum;
+    _pieCapacity = 1.0 * _currentCount / _deltaCount * 360;
     
-    //abs(_currentCount - _destinationCount) / 360
     if (_currentCount == _destinationCount) {
         if ([self.delegate respondsToSelector:@selector(GameCoutingCircleDidEndCount:)]) {
             [self.delegate GameCoutingCircleDidEndCount:self.circleKey];
         }
     }
+    [self setNeedsDisplay];
 }
 - (void)updateSector
 {
