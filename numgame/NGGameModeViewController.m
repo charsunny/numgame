@@ -15,7 +15,7 @@
 @import StoreKit;
 @import AVFoundation;
 
-@interface NGGameModeViewController ()<GKGameCenterControllerDelegate>
+@interface NGGameModeViewController ()<GKGameCenterControllerDelegate,SKProductsRequestDelegate, SKPaymentTransactionObserver>
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
@@ -42,6 +42,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
     
     [_rankButton.titleLabel setFont:[UIFont fontWithName:@"icomoon" size:24]];
     [_settingButton.titleLabel setFont:[UIFont fontWithName:@"icomoon" size:24]];
@@ -113,6 +115,17 @@
 }
 
 - (IBAction)onClickMode:(UIButton *)sender {
+    if([SKPaymentQueue canMakePayments])
+    {
+        SKProductsRequest* request = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithObject:@"EMUT0"]];
+        request.delegate = self;
+        [request start];
+    }
+    else
+    {
+        //Warn the user that purchases are disabled.
+    }
+    
     [_modeButtons enumerateObjectsUsingBlock:^(UIButton* button, NSUInteger idx, BOOL *stop) {
         [button setAlpha:(sender == button)?1.0f:0.5f];
         if (sender == button) {
@@ -152,6 +165,34 @@
     [gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
     if (![[GKLocalPlayer localPlayer] isAuthenticated]) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"gamecenter:"]];
+    }
+}
+
+#pragma mark -- buy item delegate -- 
+- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response {
+    SKProduct *product = [[response products] firstObject];
+    SKPayment *payment = [SKPayment paymentWithProductIdentifier:@"EMUT0"];
+    [[SKPaymentQueue defaultQueue] addPayment: payment];
+    NSLog(@"%@", product.localizedTitle);
+}
+
+- (void)paymentQueue: (SKPaymentQueue *)queue updatedTransactions: (NSArray *)transactions
+{
+    for(SKPaymentTransaction * transaction in transactions)
+    {
+        switch(transaction.transactionState)
+        {
+            case SKPaymentTransactionStatePurchased:
+                //[self completeTransaction: transaction];
+                break;
+            case SKPaymentTransactionStateFailed:
+                //[self failedTransaction: transaction];
+                break;
+            case SKPaymentTransactionStateRestored:
+                //[self restoreTransaction: transaction];
+            default:
+                break;
+        }
     }
 }
 
