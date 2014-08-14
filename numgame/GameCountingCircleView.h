@@ -34,6 +34,10 @@
 
 @property (nonatomic)int deltaCount;
 
+@property (strong,nonatomic)UIColor* frontColor;
+
+@property (strong,nonatomic)UIColor* circleColor;
+
 @property (strong,nonatomic)id<GameCountingCircleDelegate> delegate;
 
 - (void)addCount:(int)deltaNum;

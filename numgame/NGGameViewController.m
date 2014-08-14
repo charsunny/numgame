@@ -198,12 +198,16 @@
             _stepCountingView.pieCapacity = 360;
             _stepCountingView.circleKey = @"stepCount";
             _stepCountingView.delegate = self;
+            _stepCountingView.frontColor = UIColorFromRGB(0x4DC9FD);
+            _stepCountingView.circleColor = UIColorFromRGB(0xF56363);
             [_headView addSubview:_stepCountingView];
             
             _scoreCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(230, 50, 60, 60)];
             
             [_scoreCountingView initData:[levelInfo[@"score"] integerValue] withStart:0];
             _scoreCountingView.pieCapacity = 0;
+            _scoreCountingView.frontColor = UIColorFromRGB(0x00CE61);
+            _scoreCountingView.circleColor = UIColorFromRGB(0xFFC53F);
             _scoreCountingView.circleKey = @"scoreCount";
             _scoreCountingView.clockwise = 0;
             _scoreCountingView.delegate = self;

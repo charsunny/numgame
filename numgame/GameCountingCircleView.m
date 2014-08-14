@@ -24,6 +24,8 @@ CGFloat pieStart = 270;//起始的角度
 
 @property (strong,nonatomic)CALayer* frontLayer;
 
+@property (strong,nonatomic)CALayer* frontBgLayer;
+
 @property (strong,nonatomic)NSTimer* timer;
 
 @property (strong,nonatomic)UILabel* countLabel;
@@ -38,7 +40,8 @@ CGFloat pieStart = 270;//起始的角度
 - (void)drawRect:(CGRect)rect {
 
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetRGBStrokeColor(context, 0, 1, 1, 1);
+    //CGContextSetRGBStrokeColor(context, 0, 1, 1, 1);
+    CGContextSetStrokeColorWithColor(context, _circleColor.CGColor);
     CGContextSetLineWidth(context, 5);
     CGContextSetLineCap(context, kCGLineCapRound);
     CGContextAddArc(context, startX, startY, radius, DEG2RAD(pieStart), DEG2RAD( pieStart + _pieCapacity), _clockwise);
@@ -50,6 +53,16 @@ CGFloat pieStart = 270;//起始的角度
 {
     _currentCount = currentCount;
     _countLabel.text = [NSString stringWithFormat:@"%d",currentCount];
+}
+- (void)setFrontColor:(UIColor *)frontColor
+{
+    _frontColor = frontColor;
+    _frontLayer.backgroundColor = _frontColor.CGColor;
+}
+- (void)setCircleColor:(UIColor *)circleColor
+{
+    _circleColor = circleColor;
+    _frontBgLayer.backgroundColor = _circleColor.CGColor;
 }
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -68,8 +81,18 @@ CGFloat pieStart = 270;//起始的角度
         _clockwise = 0;
         _frontLayer.frame = smallerFrame;
         _frontLayer.cornerRadius = smallerFrame.size.width / 2;
-        _frontLayer.backgroundColor = [UIColor orangeColor].CGColor;
+        
+        //Default color
+        _frontColor = [UIColor orangeColor];
+        _circleColor = [UIColor blackColor];
+        
+        _frontBgLayer = [CALayer layer];
+        _frontBgLayer.opacity = 0.5;
+        _frontBgLayer.frame = CGRectInset(smallerFrame, -2, -2);
+        _frontBgLayer.cornerRadius = smallerFrame.size.width  / 2 + 1;
+        
         [self.layer addSublayer:_frontLayer];
+        [self.layer insertSublayer:_frontBgLayer below:_frontLayer];
         
     }
     return self;
