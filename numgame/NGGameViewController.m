@@ -17,6 +17,7 @@
 #import "GameResultView.h"
 #import "NGGameUtil.h"
 #import "GameCountingCircleView.h"
+#import "NGPlayer.h"
 
 @import AudioToolbox;
 @import AVFoundation;
@@ -353,7 +354,7 @@
             controller.score = _scoreLabel.text;
             NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
             if ([levelInfo[@"score"] intValue] <= self.score) {
-                [self playSoundFXnamed:@"cheer.m4a" Loop:NO];
+                [[NGPlayer player] playSoundFXnamed:@"cheer.m4a" Loop:NO];
                 controller.completed = YES;
                 _currectLevel++;
             } else {
@@ -410,30 +411,7 @@
         return;
     }
     NSString* soundStr = [NSString stringWithFormat:@"sound%c.mp3",'T'+rand()%7];
-    [self playSoundFXnamed:soundStr Loop:NO];
-}
-
--(void) playSoundFXnamed:(NSString*) vSFXName Loop:(BOOL) vLoop
-{
-    if (!_haveSound) {
-        return;
-    }
-    NSError *error;
-    
-    NSBundle* bundle = [NSBundle mainBundle];
-    
-    NSString* bundleDirectory = (NSString*)[bundle bundlePath];
-    
-    NSURL *url = [NSURL fileURLWithPath:[bundleDirectory stringByAppendingPathComponent:vSFXName]];
-    
-    _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-    
-    if(vLoop)
-        _audioPlayer.numberOfLoops = -1;
-    else
-        _audioPlayer.numberOfLoops = 0;
-    
-    [_audioPlayer play];
+    [[NGPlayer player] playSoundFXnamed:soundStr Loop:NO];
 }
 
 - (IBAction)onButtonClick:(UIButton *)sender {
