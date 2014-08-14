@@ -262,8 +262,8 @@ typedef void(^TrickBlock)();
         GameBoardCell* cell = (GameBoardCell*)view;
         [_selectedCell addObject:cell];
         //add effect
-        [self addBorderEffectWithCell:cell eliminated:NO];
-        [cell addRippleEffectToView:YES];
+        //[self addBorderEffectWithCell:cell eliminated:NO];
+        //[cell addRippleEffectToView:YES];
         // play sound
         [self playSoundFXnamed:@"1.aif"];
         [self addBouncingAnimation:view];
@@ -284,41 +284,43 @@ typedef void(^TrickBlock)();
             return;
         }
         if ([self view:cell.tag isNearby:preCell.tag]) {
+            //往回拖动
             if ([_selectedCell containsObject:cell]) {
                 if([_selectedCell indexOfObject:preCell] -[_selectedCell indexOfObject:cell] == 1) {
-                    [self removeEffectView];
+                    //[self removeEffectView];
                     [_selectedCell removeLastObject];
-                    [self removeBorderEffectWithCell:preCell];
+                    //[self removeBorderEffectWithCell:preCell];
                     canEliminated = NO;
                 }
+            //继续拖动
             } else {
                 [self addBouncingAnimation:view];
                 //检测两个数字相同的cell
                 if (_selectedCell.count == 1 && cell.number == preCell.number) {
                     [_selectedCell addObject:cell];
                     canEliminated = YES;
-                    [self addBorderEffectWithCell:cell eliminated:YES];
+                    //[self addBorderEffectWithCell:cell eliminated:YES];
                     [_selectedCell enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
-                        [cell addRippleEffectToView:NO];
+                        //[cell addRippleEffectToView:NO];
                     }];
                 }
                 else if ( [self validateIfCanLine:cell]&&([self currectNum] + cell.number < 10)) {
-                    [cell addRippleEffectToView:YES];
+                    //[cell addRippleEffectToView:YES];
                     [self playSoundFXnamed:[NSString stringWithFormat:@"%d.aif", _selectedCell.count]];
                     [_selectedCell addObject:cell];
-                    [self addBorderEffectWithCell:cell eliminated:NO];
+                    //[self addBorderEffectWithCell:cell eliminated:NO];
                 } else if([self validateIfCanLine:cell]&&[self currectNum] + cell.number == 10) {
                     [_selectedCell addObject:cell];
-                    [self addBorderEffectWithCell:cell eliminated:NO];
+                    //[self addBorderEffectWithCell:cell eliminated:NO];
                     [self playSoundFXnamed:[NSString stringWithFormat:@"%d.aif", _selectedCell.count]];
                     if([self eliminatedSameColorCell]) {
                         NSArray* colorArray = [self getAllCellWithColor:cell.color];
                         [colorArray enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
-                            [cell addRippleEffectToView:NO];
+                            //[cell addRippleEffectToView:NO];
                         }];
                     } else {
                         [_selectedCell enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
-                            [cell addRippleEffectToView:NO];
+                            //[cell addRippleEffectToView:NO];
                         }];
                     }
                 }
