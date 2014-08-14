@@ -262,7 +262,7 @@ typedef void(^TrickBlock)();
         GameBoardCell* cell = (GameBoardCell*)view;
         [_selectedCell addObject:cell];
         //add effect
-        //[self addBorderEffectWithCell:cell eliminated:NO];
+        [self addBorderEffectWithCell:cell eliminated:NO];
         //[cell addRippleEffectToView:YES];
         // play sound
         [self playSoundFXnamed:@"1.aif"];
@@ -299,7 +299,7 @@ typedef void(^TrickBlock)();
                 if (_selectedCell.count == 1 && cell.number == preCell.number) {
                     [_selectedCell addObject:cell];
                     canEliminated = YES;
-                    //[self addBorderEffectWithCell:cell eliminated:YES];
+                    [self addBorderEffectWithCell:cell eliminated:YES];
                     [_selectedCell enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
                         //[cell addRippleEffectToView:NO];
                     }];
@@ -308,10 +308,10 @@ typedef void(^TrickBlock)();
                     //[cell addRippleEffectToView:YES];
                     [self playSoundFXnamed:[NSString stringWithFormat:@"%d.aif", _selectedCell.count]];
                     [_selectedCell addObject:cell];
-                    //[self addBorderEffectWithCell:cell eliminated:NO];
+                    [self addBorderEffectWithCell:cell eliminated:NO];
                 } else if([self validateIfCanLine:cell]&&[self currectNum] + cell.number == 10) {
                     [_selectedCell addObject:cell];
-                    //[self addBorderEffectWithCell:cell eliminated:NO];
+                    [self addBorderEffectWithCell:cell eliminated:NO];
                     [self playSoundFXnamed:[NSString stringWithFormat:@"%d.aif", _selectedCell.count]];
                     if([self eliminatedSameColorCell]) {
                         NSArray* colorArray = [self getAllCellWithColor:cell.color];

@@ -50,7 +50,7 @@
     NGGameMode gameMode = [[NGGameConfig sharedGameConfig] gamemode];
     [_modeLabel setText:[self getModeString:gameMode]];
     [_modeButtons enumerateObjectsUsingBlock:^(UIButton* button, NSUInteger idx, BOOL *stop) {
-        [button setAlpha:(gameMode == idx)?1.0f:0.5f];
+        [button setAlpha:(gameMode == idx)?1.0f:0.65f];
         [button.titleLabel setFont:[UIFont fontWithName:@"icomoon" size:40]];
         if (gameMode == idx) {
              [_playButton setBackgroundColor:button.backgroundColor];
@@ -85,13 +85,13 @@
 - (NSString*)getModeString:(NGGameMode)mode {
     switch (mode) {
         case NGGameModeClassic:
-            return NSLocalizedString(@"classic mode", @"classic");
+            return NSLocalizedString(@"Classic Mode", @"classic");
         case NGGameModeTimed:
-            return NSLocalizedString(@"timed mode", @"classic");
+            return NSLocalizedString(@"Time Mode", @"classic");
         case NGGameModeSteped:
-            return NSLocalizedString(@"stepped mode", @"classic");
+            return NSLocalizedString(@"Step Mode", @"classic");
         case NGGameModeEndless:
-            return NSLocalizedString(@"endless mode", @"classic");
+            return NSLocalizedString(@"Endless Mode", @"classic");
         default:
             break;
     }

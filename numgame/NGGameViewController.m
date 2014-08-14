@@ -115,7 +115,8 @@
     } else {
         [_scoreLabel setText:[NSString stringWithFormat:@"%d",_score]];
     }
-    [self addPopSpringAnimation:_scoreLabel];
+    //[self addPopSpringAnimation:_scoreLabel];
+    [self addPopSpringAnimation:_scoreCountingView];
 }
 
 - (void)viewDidLoad
@@ -192,7 +193,7 @@
         {
         
             NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
-            _stepCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(50, 50, 60, 60)];
+            _stepCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(50, 5, 60, 60)];
             
             [_stepCountingView initData:0 withStart:[levelInfo[@"step"] integerValue] ];
             _stepCountingView.pieCapacity = 360;
@@ -202,7 +203,7 @@
             _stepCountingView.circleColor = UIColorFromRGB(0xF56363);
             [_headView addSubview:_stepCountingView];
             
-            _scoreCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(230, 50, 60, 60)];
+            _scoreCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(210, 5, 60, 60)];
             
             [_scoreCountingView initData:[levelInfo[@"score"] integerValue] withStart:0];
             _scoreCountingView.pieCapacity = 0;
@@ -501,7 +502,8 @@
     keyFrameAnimation.keyTimes = @[@0, @(0.2),@(0.7), @(0.8)];
     keyFrameAnimation.duration = 0.8;
     keyFrameAnimation.additive = YES;
-    [scoreDeltaLabel.layer addAnimation:keyFrameAnimation forKey:@"opacityAnimation"];
+    //[scoreDeltaLabel.layer addAnimation:keyFrameAnimation forKey:@"opacityAnimation"];
+    //[_scoreCountingView.layer addAnimation:keyFrameAnimation forKey:@"opacityAnimation"];
     
     [UIView animateWithDuration:0.8 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         scoreDeltaLabel.transform = CGAffineTransformMakeTranslation(0, -50);
