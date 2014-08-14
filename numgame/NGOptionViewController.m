@@ -89,7 +89,7 @@
         storeProductViewContorller.delegate = self;
         [self presentViewController:storeProductViewContorller animated:YES completion:nil];
         [storeProductViewContorller loadProductWithParameters:
-         @{SKStoreProductParameterITunesItemIdentifier : @"870428896"} completionBlock:^(BOOL result, NSError *error) {
+         @{SKStoreProductParameterITunesItemIdentifier : @"908971537"} completionBlock:^(BOOL result, NSError *error) {
              if(error){
                  [[[UIAlertView alloc] initWithTitle:@"Tips" message:@"cannot connect to iTunes Store" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
              }
