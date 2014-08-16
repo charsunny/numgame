@@ -26,6 +26,8 @@ CGFloat pieStart = 270;//起始的角度
 
 @property (strong,nonatomic)CALayer* frontBgLayer;
 
+@property (strong,nonatomic)CAShapeLayer* circleLayer;
+
 @property (strong,nonatomic)NSTimer* timer;
 
 @property (strong,nonatomic)UILabel* countLabel;
@@ -37,6 +39,7 @@ CGFloat pieStart = 270;//起始的角度
 
 @implementation GameCountingCircleView
 
+/*
 - (void)drawRect:(CGRect)rect {
 
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -48,6 +51,7 @@ CGFloat pieStart = 270;//起始的角度
     
     CGContextStrokePath(context);
 }
+*/
 
 - (void)setCurrentCount:(int)currentCount
 {
@@ -63,6 +67,7 @@ CGFloat pieStart = 270;//起始的角度
 {
     _circleColor = circleColor;
     _frontBgLayer.backgroundColor = _circleColor.CGColor;
+    _circleLayer.strokeColor = _circleColor.CGColor;
 }
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -91,11 +96,33 @@ CGFloat pieStart = 270;//起始的角度
         _frontBgLayer.frame = CGRectInset(smallerFrame, -2, -2);
         _frontBgLayer.cornerRadius = smallerFrame.size.width  / 2 + 1;
         
+        _circleLayer = [CAShapeLayer layer];
+        _circleLayer.fillColor = [UIColor clearColor].CGColor;
+        _circleLayer.strokeStart = 0;
+        _circleLayer.strokeEnd = 1;
+        _circleLayer.lineWidth = 5;
+        _circleLayer.lineCap = @"round";
+        
         [self.layer addSublayer:_frontLayer];
         [self.layer insertSublayer:_frontBgLayer below:_frontLayer];
+        [self.layer insertSublayer:_circleLayer above:_frontBgLayer];
+        
+        
         
     }
     return self;
+}
+
+
+- (UIBezierPath*)getCurrentPath
+{
+    UIBezierPath* path = [UIBezierPath bezierPath];
+    [path addArcWithCenter:CGPointMake(startX, startY) radius:radius startAngle:DEG2RAD(pieStart) endAngle:DEG2RAD(pieStart + _pieCapacity) clockwise:!_clockwise];
+    return path;
+}
+- (void)initShapeLayer
+{
+    _circleLayer.path = [self getCurrentPath].CGPath;
 }
 
 - (void)initData:(int)destinationCount withStart:(int)startCount
@@ -119,12 +146,48 @@ CGFloat pieStart = 270;//起始的角度
     _pieCapacity = 1.0 * _currentCount / _deltaCount * 360;
     
     if (_currentCount == _destinationCount) {
-        if ([self.delegate respondsToSelector:@selector(GameCoutingCircleDidEndCount:)]) {
+        if([self.delegate respondsToSelector:@selector(GameCoutingCircleDidEndCount:)]){
             [self.delegate GameCoutingCircleDidEndCount:self.circleKey];
         }
     }
     [self setNeedsDisplay];
 }
+
+- (void)addCount:(int)deltaNum isReverse:(BOOL)isReverse
+{
+    CAKeyframeAnimation* circleAnimation = [CAKeyframeAnimation animationWithKeyPath:@"strokeEnd"];
+    self.currentCount += deltaNum;
+    _pieCapacity = 1.0 * _currentCount / _deltaCount * 360;
+    _circleLayer.path = [self getCurrentPath].CGPath;
+    
+    if (isReverse) {
+        circleAnimation.values = @[@(1),@(0.9),@(1)];
+        circleAnimation.keyTimes = @[@(0),@(0.3),@(1)];
+    }
+    else
+    {
+        circleAnimation.values = @[@(1),@(0.9),@(1)];
+        circleAnimation.keyTimes = @[@(0),@(0.3),@(1)];
+    }
+    
+    circleAnimation.duration = 0.3;
+    circleAnimation.removedOnCompletion = NO;
+    circleAnimation.fillMode = kCAFillModeForwards;
+    circleAnimation.delegate = self;
+    
+    [_circleLayer addAnimation:circleAnimation forKey:@"sucker"];
+}
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+{
+    return;
+    if (_currentCount == _destinationCount) {
+        if([self.delegate respondsToSelector:@selector(GameCoutingCircleDidEndCount:)]){
+            [self.delegate GameCoutingCircleDidEndCount:self.circleKey];
+        }
+    }
+}
+
 - (void)updateSector
 {
     _pieCapacity += 360 / ( _destinationCount / (1.0 / 30 ));

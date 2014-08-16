@@ -11,9 +11,10 @@
 	<key>fonts</key>
 	<array>
 		<string>AppleSDGothicNeo-Thin</string>
+		<string>AppleSDGothicNeo-Light</string>
 	</array>
 	<key>length</key>
-	<integer>360233</integer>
+	<integer>656771</integer>
 	<key>version</key>
 	<integer>37</integer>
 </dict>

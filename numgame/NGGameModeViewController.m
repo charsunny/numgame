@@ -77,7 +77,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [[NGPlayer player] playSoundFXnamed:@"game_mode_bg.mp3" Loop:YES];
+    //[[NGPlayer player] playSoundFXnamed:@"game_mode_bg.mp3" Loop:YES];
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];

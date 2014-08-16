@@ -47,26 +47,27 @@
     [self.view insertSubview:blurView atIndex:1];
     if (_gameMode == NGGameModeClassic) {
         if (_isHighScore) {
-            [_highScoreLabel setText:@"new best record!"];
+            [_highScoreLabel setText:@"New Best Record!"];
+            
         } else {
             if (_completed) {
-                [_highScoreLabel setText:@"score this round :"];
+                [_highScoreLabel setText:@"Score at this round"];
             } else {
-                [_highScoreLabel setText:@"😕fail to finish! "];
-                [_backButton setTitle:@"try again" forState:UIControlStateNormal];
+                [_highScoreLabel setText:@"Fail!"];
+                [_backButton setTitle:@"Try Again" forState:UIControlStateNormal];
             }
         }
         [_scoreLabel setText:_score];
-        [_modeLabel setText:@"classic mode"];
+        [_modeLabel setText:@"Classic Mode"];
     } else if (_gameMode == NGGameModeTimed) {
         if (_isHighScore) {
-            [_highScoreLabel setText:@"new high score!"];
+            [_highScoreLabel setText:@"New Higheset Score!"];
             [_scoreLabel setText:_score];
         } else {
-            [_highScoreLabel setText:@"score this round :"];
+            [_highScoreLabel setText:@"Score at this round"];
             [_scoreLabel setText:_score];
         }
-        [_modeLabel setText:@"timed mode"];
+        [_modeLabel setText:@"Time Mode"];
     }
 }
 

@@ -42,6 +42,10 @@
 
 - (void)addCount:(int)deltaNum;
 
+- (void)addCount:(int)deltaNum isReverse:(BOOL)isReverse;
+
+- (void)initShapeLayer;
+
 - (void)startCounting;
 
 - (void)stopCounting;

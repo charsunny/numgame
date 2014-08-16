@@ -92,7 +92,7 @@
         NSString* wholeString =[NSString stringWithFormat:@"%d/%@",_timeSpent, levelInfo[@"step"]];
         
         if (_stepCountingView) {
-            [_stepCountingView addCount:-1];
+            [_stepCountingView addCount:-1 isReverse:YES];
         }
         NSMutableAttributedString* mutableAttrString = [[NSMutableAttributedString alloc]initWithString:wholeString];
         [mutableAttrString addAttribute:NSFontAttributeName
@@ -122,7 +122,7 @@
     NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
     if (_gameMode == NGGameModeClassic) {
         [_scoreLabel setText:[NSString stringWithFormat:@"%d/%@",_score, levelInfo[@"score"]]];
-        [_scoreCountingView addCount:deltaCount];
+        [_scoreCountingView addCount:deltaCount isReverse:NO];
     } else {
         [_scoreLabel setText:[NSString stringWithFormat:@"%d",_score]];
     }
@@ -205,8 +205,11 @@
             _stepCountingView.pieCapacity = 360;
             _stepCountingView.circleKey = @"stepCount";
             _stepCountingView.delegate = self;
+            
             _stepCountingView.frontColor = UIColorFromRGB(0x4DC9FD);
             _stepCountingView.circleColor = UIColorFromRGB(0xF56363);
+            
+            [_stepCountingView initShapeLayer];
             [_headView addSubview:_stepCountingView];
             
             _scoreCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(210, 5, 60, 60)];
@@ -250,11 +253,11 @@
             _stepCountingView.deltaCount = [levelInfo[@"step"] integerValue];
             _stepCountingView.currentCount = _stepCountingView.deltaCount;
             //update circle
-            [_stepCountingView addCount:0];
+            [_stepCountingView addCount:0 isReverse:YES];
             
             _scoreCountingView.destinationCount = [levelInfo[@"score"] integerValue];
             _scoreCountingView.deltaCount = [levelInfo[@"score"] integerValue] - _scoreCountingView.currentCount?:0;
-            [_scoreCountingView addCount:0];
+            [_scoreCountingView addCount:0 isReverse:NO];
             break;
         }
         case NGGameModeTimed:
