@@ -102,6 +102,11 @@
         _frontBgLayer.opacity = 0.5;
         _frontBgLayer.frame = CGRectInset(smallerFrame, -2, -2);
         _frontBgLayer.cornerRadius = smallerFrame.size.width  / 2 + 1;
+        _frontBgLayer.shadowOpacity = 0.3;
+        _frontBgLayer.shadowOffset = CGSizeMake(0,2);
+        _frontBgLayer.shadowColor = [UIColor blackColor].CGColor;
+        _frontBgLayer.shadowRadius = 4;
+        _frontBgLayer.masksToBounds = NO;
         
         _circleLayer = [CAShapeLayer layer];
         //_circleLayer.frame = CGRectInset(smallerFrame, -2, -2);
@@ -155,7 +160,12 @@
 
 - (void)setContentImage:(UIImage*)image{
     _countLabel.alpha = 0;
-    UIImageView* imgView = [[UIImageView alloc]initWithFrame:CGRectInset(self.bounds, 8, 8)];
+    UIImageView* imgView = [[UIImageView alloc]initWithFrame:CGRectInset(self.bounds, 10, 10)];
+    imgView.layer.shadowOpacity = 0.3;
+    imgView.layer.shadowOffset = CGSizeMake(0,2);
+    imgView.layer.shadowColor = [UIColor blackColor].CGColor;
+    imgView.layer.shadowRadius = 3;
+    imgView.layer.masksToBounds = NO;
     imgView.image = image;
     [self addSubview:imgView];
 }

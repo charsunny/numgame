@@ -144,6 +144,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     srand((unsigned int)time(NULL));
     //init gameconfig
     _currectLevel = 1;
@@ -156,6 +157,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onResignActive:) name:@"resignactive" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onBecomeActive:) name:@"becomeactive" object:nil];
     
+    self.view.layer.cornerRadius = 50;
     //init counting circle view
     [self initHeaderView];
     [self initToolBarView];
@@ -219,7 +221,7 @@
             [self registerToolTapGesture:_colorToolCountingView withSelector:@selector(changeCellColor:)];
             
             _colorToolCountingView.frontColor = UIColorFromRGB(0xFFC53F);
-            _colorToolCountingView.circleColor = UIColorFromRGB(0x00F3C2);
+            _colorToolCountingView.circleColor = UIColorFromRGB(0x00CE61);
             [_colorToolCountingView setContentImage:[UIImage imageNamed:@"wand"]];
 
             [_colorToolCountingView initShapeLayer];
@@ -235,9 +237,8 @@
             [self registerToolTapGesture:_numberToolCountingView withSelector:@selector(changeCellNumber:)];
             
             _numberToolCountingView.frontColor = UIColorFromRGB(0xFFC53F);
-            _numberToolCountingView.circleColor = UIColorFromRGB(0x00F3C2);
+            _numberToolCountingView.circleColor = UIColorFromRGB(0x00CE61);
             [_numberToolCountingView setContentImage:[UIImage imageNamed:@"hammer"]];
-
             [_numberToolCountingView initShapeLayer];
             
             [self.view addSubview:_numberToolCountingView];
@@ -520,12 +521,10 @@
     if (_pauseView.center.x < 320) {
         return;
     }
-    [UIView animateWithDuration:0.3f animations:^{
+    [UIView animateWithDuration:0.3f delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:0.2 options:UIViewAnimationOptionCurveEaseIn animations:^{
         _gameBoardView.center = CGPointMake(_gameBoardView.center.x - 320, _gameBoardView.center.y);
         _pauseView.center = CGPointMake(_pauseView.center.x - 320, _pauseView.center.y);
-    } completion:^(BOOL finished) {
-        
-    }];
+    } completion:nil];
 }
 
 - (void)onSwipePauseView:(UISwipeGestureRecognizer*)recognizer {
