@@ -149,6 +149,7 @@
     _countLabel.textAlignment = NSTextAlignmentCenter;
     _countLabel.textColor = [UIColor whiteColor];
     _countLabel.font =[UIFont fontWithName:@"AppleSDGothicNeo-Light" size:20];
+    _countLabel.adjustsFontSizeToFitWidth = YES;
     _countLabel.layer.shadowOpacity = 0.5;
     _countLabel.layer.shadowOffset = CGSizeMake(0,2);
     _countLabel.layer.shadowColor = [UIColor blackColor].CGColor;

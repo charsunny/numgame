@@ -12,7 +12,7 @@
 
 #define DefalutNumFontSize 30
 #define DefalutNumFontFamily @"AppleSDGothicNeo-Regular"
-#define SubViewBaseTag (2004)
+#define SubViewBaseTag 2004
 #define kAnimationDelay 0.1
 
 @interface GameBoardCell()<NSCopying>
@@ -262,14 +262,14 @@
           
         case GBTrakingCategoryNum:{
         
-            NSMutableArray * itemArray = [NSMutableArray arrayWithArray:@[@"1",@"2",@"3",@"4"]];
+            NSMutableArray * itemArray = [NSMutableArray arrayWithArray:@[@(1),@(2),@(3),@(4)]];
             
             [itemArray removeObject: @(self.number)];
   
             for (int i = 0;  i < self.accessoryItems.count; i ++) {
                 UILabel * label = [[UILabel alloc]initWithFrame:CGRectZero];
                 label.textAlignment = NSTextAlignmentCenter ;
-                label.text = itemArray[i];
+                label.text = [NSString stringWithFormat:@"%d",[itemArray[i] intValue] ];
                 label.textColor = [UIColor whiteColor];
                 //label.font = [UIFont systemFontOfSize:20];
                 label.font = [UIFont fontWithName:DefalutNumFontFamily size:20];
@@ -277,7 +277,7 @@
                 [(UIView*)self.accessoryItems[i] addSubview:label];
                 [label sizeToFit];
                 label.center =((UIView*)self.accessoryItems[i]).center;
-                ((UIView*)self.accessoryItems[i]).tag = SubViewBaseTag + [itemArray[i]intValue];
+                ((UIView*)self.accessoryItems[i]).tag = SubViewBaseTag + [itemArray[i] intValue];
             }
             break;
         }

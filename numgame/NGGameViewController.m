@@ -227,8 +227,8 @@
             _colorToolCountingView.delegate = self;
             [self registerToolTapGesture:_colorToolCountingView withSelector:@selector(changeCellColor:)];
             
-            _colorToolCountingView.frontColor = UIColorFromRGB(0xFFC53F);
-            _colorToolCountingView.circleColor = UIColorFromRGB(0x00CE61);
+            _colorToolCountingView.circleColor = UIColorFromRGB(0xFFC53F);
+            _colorToolCountingView.frontColor = UIColorFromRGB(0x00CE61);
             [_colorToolCountingView setContentImage:[UIImage imageNamed:@"wand"]];
 
             [_colorToolCountingView initShapeLayer];
@@ -243,8 +243,8 @@
             _numberToolCountingView.delegate = self;
             [self registerToolTapGesture:_numberToolCountingView withSelector:@selector(changeCellNumber:)];
             
-            _numberToolCountingView.frontColor = UIColorFromRGB(0xFFC53F);
-            _numberToolCountingView.circleColor = UIColorFromRGB(0x00CE61);
+            _numberToolCountingView.circleColor = UIColorFromRGB(0xFFC53F);
+            _numberToolCountingView.frontColor = UIColorFromRGB(0x00CE61);
             [_numberToolCountingView setContentImage:[UIImage imageNamed:@"hammer"]];
             [_numberToolCountingView initShapeLayer];
             

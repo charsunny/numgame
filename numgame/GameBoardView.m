@@ -285,7 +285,7 @@ typedef void(^TrickBlock)();
                     [[NGPlayer player] playSoundFXnamed:@"generalclick19.mp3" Loop:NO];
                     //[self removeEffectView];
                     [_selectedCell removeLastObject];
-                    //[self removeBorderEffectWithCell:preCell];
+                    [self removeBorderEffectWithCell:preCell];
                     canEliminated = NO;
                 }
             //继续拖动
@@ -354,20 +354,20 @@ typedef void(^TrickBlock)();
                 isTwoCellSameColor = YES;
             }
             
-                if (isTwoCellSameColor) {
-                    
-                    [[NGPlayer player] playSoundFXnamed:@"success_playful_22.mp3" Loop:NO];
-                    [self addCellFlyAnimation:^{
-                        [weakSelf addDashBoardScore:Two_Same_Number_Color_Score];
-                    }];
-                }
-                else
-                {
-                    [[NGPlayer player] playSoundFXnamed:[NSString stringWithFormat:@"square_%d.aif", _selectedCell.count] Loop:NO];
-                    [self addCellFlyAnimation:^{
-                        [weakSelf addDashBoardScore:Two_Same_Number_Score];
-                    }];
-                }
+            if (isTwoCellSameColor) {
+                
+                [[NGPlayer player] playSoundFXnamed:@"success_playful_22.mp3" Loop:NO];
+                [self addCellFlyAnimation:^{
+                    [weakSelf addDashBoardScore:Two_Same_Number_Color_Score];
+                }];
+            }
+            else
+            {
+                [[NGPlayer player] playSoundFXnamed:[NSString stringWithFormat:@"square_%d.aif", _selectedCell.count] Loop:NO];
+                [self addCellFlyAnimation:^{
+                    [weakSelf addDashBoardScore:Two_Same_Number_Score];
+                }];
+            }
             
         }
         //消除不同颜色的4个cell所得分数
