@@ -45,6 +45,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view insertSubview:self.prevBgImageView atIndex:0];
     [self.view insertSubview:blurView atIndex:1];
+    _highScoreLabel.adjustsFontSizeToFitWidth = YES;
     if (_gameMode == NGGameModeClassic) {
         if (_isHighScore) {
             [_highScoreLabel setText:@"New Best Record!"];

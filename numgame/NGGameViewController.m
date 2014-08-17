@@ -129,15 +129,15 @@
     int deltaCount = score - _score;
     _score = score;
     self.timeSpent++;
-    //NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
     
-    /*
+    //the score label's text is prepared for result view controller
+    NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
     if (_gameMode == NGGameModeClassic) {
         [_scoreLabel setText:[NSString stringWithFormat:@"%d/%@",_score, levelInfo[@"score"]]];
     } else {
         [_scoreLabel setText:[NSString stringWithFormat:@"%d",_score]];
     }
-     */
+    
     [_scoreCountingView addCount:deltaCount isReverse:NO];
     [self addPopSpringAnimation:_scoreCountingView];
 }
@@ -283,7 +283,7 @@
         case NGGameModeTimed:
         {
             _timeCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(50, 5, 60, 60)];
-            [_timeCountingView initData:0 withStart:3];
+            [_timeCountingView initData:0 withStart:60];
             _timeCountingView.pieCapacity = 360;
             _timeCountingView.frontColor = UIColorFromRGB(0x00CE61);
             _timeCountingView.circleColor = UIColorFromRGB(0xFFC53F);

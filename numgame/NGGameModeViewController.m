@@ -77,7 +77,13 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    //[[NGPlayer player] playSoundFXnamed:@"game_mode_bg.mp3" Loop:YES];
+    if (arc4random() % 2  == 0) {
+        [[NGPlayer player] playSoundFXnamed:@"game_mode_bg.mp3" Loop:NO];
+    }
+    else
+    {
+        [[NGPlayer player] playSoundFXnamed:@"tuitorial.mp3" Loop:NO];
+    }
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -141,10 +147,11 @@
             [_modeLabel setText:[self getModeString:idx]];
             [_playButton setBackgroundColor:button.backgroundColor];
             CATransition* moveAnimation = [CATransition animation];
-            [moveAnimation setType:kCATransitionMoveIn];
+            [moveAnimation setType:kCATransitionReveal];
             [moveAnimation setSubtype:kCATransitionFromRight];
+            
             [moveAnimation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-            [_modeLabel.layer addAnimation:moveAnimation forKey:@"xxx"];
+            [_modeLabel.layer addAnimation:moveAnimation forKey:@"moveModeText"];
             
         }
     }];
