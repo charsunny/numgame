@@ -50,6 +50,8 @@
 
 - (void)stopCounting;
 
+- (void)pauseCounting;
+
 - (void)initData:(int)destinationCount withStart:(int)startCount;
 
 - (void)setContentImage:(UIImage*)image;

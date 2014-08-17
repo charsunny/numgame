@@ -194,7 +194,6 @@
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
-    return;
     if (_currentCount == _destinationCount) {
         if([self.delegate respondsToSelector:@selector(GameCoutingCircleDidEndCount:)]){
             [self.delegate GameCoutingCircleDidEndCount:self.circleKey];
@@ -204,22 +203,25 @@
 
 - (void)updateSector
 {
-    _pieCapacity += 360 / ( _destinationCount / (1.0 / 30 ));
-    
-    _addCountCurrentNumber += 1;
-    
-    if (_addCountCurrentNumber >= _addCountCeiling) {
-        _addCountCurrentNumber = 0;
-        self.currentCount += self.countStep;
-    }
-    [self setNeedsDisplay];
+//    _pieCapacity += 360 / ( _destinationCount / (1.0 / 30 ));
+//    
+//    _addCountCurrentNumber += 1;
+//    
+//    if (_addCountCurrentNumber >= _addCountCeiling) {
+//        _addCountCurrentNumber = 0;
+//        self.currentCount += self.countStep;
+//    }
+//    [self setNeedsDisplay];
+    [self addCount:-1 isReverse:YES];
 }
 
 - (void)startCounting
 {
-    _timer = [NSTimer scheduledTimerWithTimeInterval:0.032 target:self selector:@selector(updateSector) userInfo:nil repeats:YES];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateSector) userInfo:nil repeats:YES];
 }
-
+- (void)pauseCounting
+{
+}
 - (void)stopCounting
 {
     [_timer invalidate];

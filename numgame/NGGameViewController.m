@@ -61,8 +61,6 @@
 
 @property (weak, nonatomic) IBOutlet UIView *pauseView;
 
-@property (strong, nonatomic) NSTimer* progressTimer;
-
 @property (strong, nonatomic) AVAudioPlayer *audioPlayer;
 
 @property (nonatomic) float leftTime;
@@ -78,6 +76,8 @@
 @property (strong,nonatomic)GameCountingCircleView* stepCountingView;
 
 @property (strong,nonatomic)GameCountingCircleView* scoreCountingView;
+
+@property (strong,nonatomic)GameCountingCircleView* timeCountingView;
 
 @property (strong,nonatomic)GameCountingCircleView* colorToolCountingView;
 
@@ -194,10 +194,13 @@
 //}
 
 
+#pragma mark Init ToolBar Circle View
 - (void)initToolBarView
 {
     CGRect sFrame = self.view.frame;
     switch (self.gameMode) {
+        case NGGameModeTimed:
+        case NGGameModeSteped:
         case NGGameModeClassic:
         {
             
@@ -206,8 +209,7 @@
             _colorToolCountingView.pieCapacity = 360;
             _colorToolCountingView.circleKey = @"colorCount";
             _colorToolCountingView.delegate = self;
-            UITapGestureRecognizer* changeColorTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(changeCellColor:)];
-            [_colorToolCountingView addGestureRecognizer:changeColorTap];
+            [self registerToolTapGesture:_colorToolCountingView withSelector:@selector(changeCellColor:)];
             
             _colorToolCountingView.frontColor = UIColorFromRGB(0xFFC53F);
             _colorToolCountingView.circleColor = UIColorFromRGB(0x00F3C2);
@@ -221,10 +223,9 @@
             _numberToolCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(220, sFrame.size.height - 50 - 5 , 50, 50)];
             [_numberToolCountingView initData:0 withStart:5];
             _numberToolCountingView.pieCapacity = 360;
-            _numberToolCountingView.circleKey = @"colorCount";
+            _numberToolCountingView.circleKey = @"numCount";
             _numberToolCountingView.delegate = self;
-            UITapGestureRecognizer* changeNumberTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(changeCellNumber:)];
-            [_numberToolCountingView addGestureRecognizer:changeNumberTap];
+            [self registerToolTapGesture:_numberToolCountingView withSelector:@selector(changeCellNumber:)];
             
             _numberToolCountingView.frontColor = UIColorFromRGB(0xFFC53F);
             _numberToolCountingView.circleColor = UIColorFromRGB(0x00F3C2);
@@ -239,6 +240,11 @@
             break;
     }
     
+}
+- (void)registerToolTapGesture:(GameCountingCircleView*)circleView withSelector:(SEL)selector
+{
+    UITapGestureRecognizer* changeSomethingTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:selector];
+    [circleView addGestureRecognizer:changeSomethingTap];
 }
 
 #pragma --mark init header UI
@@ -256,6 +262,7 @@
             [_stepCountingView initData:0 withStart:[levelInfo[@"step"] integerValue] ];
             _stepCountingView.pieCapacity = 360;
             _stepCountingView.circleKey = @"stepCount";
+            //we don't set delegate here cause we've already have it done in the legacy code
             //_stepCountingView.delegate = self;
             
             _stepCountingView.frontColor = UIColorFromRGB(0x4DC9FD);
@@ -280,11 +287,18 @@
         }
         case NGGameModeTimed:
         {
-            GameCountingCircleView* timeCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(230, 10, 60, 60)];
-            [timeCountingView initData:60 withStart:0];
-            timeCountingView.circleKey = @"timeCount";
-            [_headView addSubview:timeCountingView];
-            [timeCountingView startCounting];
+            _timeCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(210, 5, 60, 60)];
+            [_timeCountingView initData:0 withStart:60];
+            _timeCountingView.pieCapacity = 360;
+            _timeCountingView.frontColor = UIColorFromRGB(0x00CE61);
+            _timeCountingView.circleColor = UIColorFromRGB(0xFFC53F);
+            _timeCountingView.clockwise = 0;
+            _timeCountingView.circleKey = @"timeCount";
+            _timeCountingView.delegate = self;
+            [_timeCountingView addCount:0 isReverse:YES];
+            [_timeCountingView startCounting];
+            
+            [_headView addSubview:_timeCountingView];
             break;
         }
         default:
@@ -320,7 +334,6 @@
             _score = 0;
             [_scoreLabel setText:@"0"];
             [_timeLabel setText:@"60"];
-            [self initGameTimer];
             break;
         case NGGameModeSteped:
             _score = 0;
@@ -345,24 +358,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-- (void)initGameTimer {
-    _progressTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateGameTime) userInfo:nil repeats:YES];
-    [_progressTimer fire];
-}
-
--(void)updateGameTime
-{
-    _leftTime -= 1;
-    if (_leftTime > 0) {
-        [_timeLabel setText:[NSString stringWithFormat:@"%.0f",_leftTime]];
-    } else {
-        [_timeLabel setText:@"0"];
-        [_progressTimer invalidate];
-        [self showResult:YES];
-    }
-
-}
 
 #pragma mark  --IBACTION--
 
@@ -399,7 +394,7 @@
     if (_pauseView.center.x > 320) {
         [self performSelector:@selector(onTapHeaderView:) withObject:nil afterDelay:0.3f];
     }
-    [_progressTimer invalidate];
+    [_timeCountingView stopCounting];
 }
 
 #pragma mark - Navigation
@@ -407,7 +402,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     UIViewController* destinationViewController = [segue destinationViewController];
-    [_progressTimer invalidate];
+    [_timeCountingView stopCounting];
     if([destinationViewController isKindOfClass:[NGResultViewController class]]) {
         NGResultViewController* controller = (NGResultViewController*)destinationViewController;
         controller.prevBgImageView = [[UIImageView alloc]initWithImage:[NGGameUtil screenshot:self.view]];
@@ -481,7 +476,7 @@
     if (sender.tag == 1) {
         [self onSwipePauseView:nil];
         if (_gameMode == NGGameModeTimed) {
-            [self initGameTimer];
+            [_timeCountingView startCounting];
         }
     } else if (sender.tag == 2) {
         [UIView animateWithDuration:0.3f animations:^{
@@ -498,7 +493,7 @@
 }
 
 - (IBAction)onTapHeaderView:(UITapGestureRecognizer*)recognizer {
-    [_progressTimer invalidate];
+    [_timeCountingView stopCounting];
     if (_pauseView.center.x < 320) {
         return;
     }
@@ -523,6 +518,19 @@
 - (void)GameCoutingCircleDidEndCount:(NSString *)circleKey
 {
     NSLog(@"%@",circleKey);
+    if ([circleKey isEqualToString:@"colorCount"]) {
+        _colorToolCountingView.alpha = 0.6;
+        _colorToolCountingView.gestureRecognizers = nil;
+    }
+    else if([circleKey isEqualToString:@"numCount"])
+    {
+        _numberToolCountingView.alpha = 0.6;
+        _numberToolCountingView.gestureRecognizers = nil;
+    }
+    else if([circleKey isEqualToString:@"timeCount"])
+    {
+        [_timeCountingView stopCounting];
+    }
 }
 
 #pragma mark GameBoardViewDelegate
@@ -594,7 +602,7 @@
 
 -(IBAction)changeCellColor:(id)sender{
 
-    [self.progressTimer invalidate];
+    [_timeCountingView stopCounting];
     self.gameBoardView.isChangeColor = YES;
     //__block UIBarButtonItem* barBtnItem = (UIBarButtonItem*)sender;
     __weak typeof(self) weakself = self;
@@ -613,7 +621,7 @@
 }
 
 -(IBAction)changeCellNumber:(id)sender{
-    [self.progressTimer invalidate];
+    [_timeCountingView stopCounting];
     self.gameBoardView.isChangeColor = NO;
     __weak typeof(self) weakself = self;
     //__block UIBarButtonItem* barBtnItem = (UIBarButtonItem*)sender;
