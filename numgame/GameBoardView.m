@@ -363,7 +363,7 @@ typedef void(^TrickBlock)();
             }
             else
             {
-                [[NGPlayer player] playSoundFXnamed:[NSString stringWithFormat:@"square_%d.aif", _selectedCell.count] Loop:NO];
+                [[NGPlayer player] playSoundFXnamed:[NSString stringWithFormat:@"score_counter_16.mp3", _selectedCell.count] Loop:NO];
                 [self addCellFlyAnimation:^{
                     [weakSelf addDashBoardScore:Two_Same_Number_Score];
                 }];
@@ -374,7 +374,7 @@ typedef void(^TrickBlock)();
         else
         {
             __weak typeof(self) weakSelf = self;
-            [[NGPlayer player] playSoundFXnamed:[NSString stringWithFormat:@"square_%d.aif", _selectedCell.count] Loop:NO];
+            [[NGPlayer player] playSoundFXnamed:[NSString stringWithFormat:@"success_playful_23.mp3", _selectedCell.count] Loop:NO];
             [self addCellFlyAnimation:^{
                 [weakSelf addDashBoardScore:Four_Diff_Color_Number_Score];
             }];
