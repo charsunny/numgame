@@ -102,10 +102,10 @@
         _frontBgLayer.opacity = 0.5;
         _frontBgLayer.frame = CGRectInset(smallerFrame, -2, -2);
         _frontBgLayer.cornerRadius = smallerFrame.size.width  / 2 + 1;
-        _frontBgLayer.shadowOpacity = 0.3;
+        _frontBgLayer.shadowOpacity = 0.4;
         _frontBgLayer.shadowOffset = CGSizeMake(0,2);
         _frontBgLayer.shadowColor = [UIColor blackColor].CGColor;
-        _frontBgLayer.shadowRadius = 4;
+        _frontBgLayer.shadowRadius = 5;
         _frontBgLayer.masksToBounds = NO;
         
         _circleLayer = [CAShapeLayer layer];
