@@ -10,7 +10,13 @@
 	</dict>
 	<dict>
 		<key>score</key>
-		<string>1000</string>
+		<string>500</string>
+		<key>step</key>
+		<string>10</string>
+	</dict>
+	<dict>
+		<key>score</key>
+		<string>900</string>
 		<key>step</key>
 		<string>10</string>
 	</dict>
@@ -22,15 +28,9 @@
 	</dict>
 	<dict>
 		<key>score</key>
-		<string>2000</string>
+		<string>2500</string>
 		<key>step</key>
-		<string>15</string>
-	</dict>
-	<dict>
-		<key>score</key>
-		<string>3000</string>
-		<key>step</key>
-		<string>15</string>
+		<string>10</string>
 	</dict>
 	<dict>
 		<key>score</key>

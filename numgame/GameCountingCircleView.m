@@ -7,6 +7,7 @@
 //
 
 #import "GameCountingCircleView.h"
+#import <QuartzCore/QuartzCore.h>
 
 
 #define DEG2RAD(angle) ( angle )*M_PI/180.0
@@ -143,6 +144,11 @@
     _countLabel.textAlignment = NSTextAlignmentCenter;
     _countLabel.textColor = [UIColor whiteColor];
     _countLabel.font =[UIFont fontWithName:@"AppleSDGothicNeo-Light" size:20];
+    _countLabel.layer.shadowOpacity = 0.5;
+    _countLabel.layer.shadowOffset = CGSizeMake(0,2);
+    _countLabel.layer.shadowColor = [UIColor blackColor].CGColor;
+    _countLabel.layer.shadowRadius = 1.5;
+    _countLabel.layer.masksToBounds = NO;
     //TODO: add shadow
     [self addSubview:_countLabel];
 }

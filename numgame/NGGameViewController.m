@@ -345,7 +345,7 @@
             [_stepCountingView addCount:0 isReverse:YES];
             
             _scoreCountingView.destinationCount = [levelInfo[@"score"] integerValue];
-            _scoreCountingView.deltaCount = [levelInfo[@"score"] integerValue] - _scoreCountingView.currentCount?:0;
+            _scoreCountingView.deltaCount = [levelInfo[@"score"] integerValue];
             [_scoreCountingView addCount:0 isReverse:NO];
             
             break;
