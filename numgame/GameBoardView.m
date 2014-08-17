@@ -258,7 +258,8 @@ typedef void(^TrickBlock)();
         [self addBorderEffectWithCell:cell eliminated:NO];
         //[cell addRippleEffectToView:YES];
         // play sound
-        [[NGPlayer player] playSoundFXnamed:@"1.aif" Loop:NO];
+        //[[NGPlayer player] playSoundFXnamed:@"1.aif" Loop:NO];
+        [[NGPlayer player] playSoundFXnamed:@"score_counter_01.mp3" Loop:NO];
         [self addBouncingAnimation:view];
     }
     
@@ -280,6 +281,7 @@ typedef void(^TrickBlock)();
             //往回拖动
             if ([_selectedCell containsObject:cell]) {
                 if([_selectedCell indexOfObject:preCell] -[_selectedCell indexOfObject:cell] == 1) {
+                    [[NGPlayer player] playSoundFXnamed:@"generalclick19.mp3" Loop:NO];
                     //[self removeEffectView];
                     [_selectedCell removeLastObject];
                     //[self removeBorderEffectWithCell:preCell];
@@ -293,19 +295,22 @@ typedef void(^TrickBlock)();
                     [_selectedCell addObject:cell];
                     canEliminated = YES;
                     [self addBorderEffectWithCell:cell eliminated:YES];
+                    [[NGPlayer player] playSoundFXnamed:@"glossy_click_13.mp3" Loop:NO];
                     [_selectedCell enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
                         //[cell addRippleEffectToView:NO];
                     }];
                 }
                 else if ( [self validateIfCanLine:cell]&&([self currectNum] + cell.number < 10)) {
                     //[cell addRippleEffectToView:YES];
-                    [[NGPlayer player] playSoundFXnamed:[NSString stringWithFormat:@"%d.aif", _selectedCell.count] Loop:NO];
+                    //[[NGPlayer player] playSoundFXnamed:[NSString stringWithFormat:@"%d.aif", _selectedCell.count] Loop:NO];
+                    [[NGPlayer player] playSoundFXnamed:@"score_counter_01.mp3" Loop:NO];
                     [_selectedCell addObject:cell];
                     [self addBorderEffectWithCell:cell eliminated:NO];
                 } else if([self validateIfCanLine:cell]&&[self currectNum] + cell.number == 10) {
                     [_selectedCell addObject:cell];
                     [self addBorderEffectWithCell:cell eliminated:NO];
-                    [[NGPlayer player] playSoundFXnamed:[NSString stringWithFormat:@"%d.aif", _selectedCell.count] Loop:NO];
+                    //[[NGPlayer player] playSoundFXnamed:[NSString stringWithFormat:@"%d.aif", _selectedCell.count] Loop:NO];
+                    [[NGPlayer player] playSoundFXnamed:@"score_counter_01.mp3" Loop:NO];
                     if([self eliminatedSameColorCell]) {
                         NSArray* colorArray = [self getAllCellWithColor:cell.color];
                         [colorArray enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
@@ -327,9 +332,10 @@ typedef void(^TrickBlock)();
     [self removeAllBorderEffect];
     if ([self currectNum] == 10 || canEliminated) {
         [self removeEffectView];
-        [[NGPlayer player] playSoundFXnamed:[NSString stringWithFormat:@"square_%d.aif", _selectedCell.count] Loop:NO];
+        //[[NGPlayer player] playSoundFXnamed:[NSString stringWithFormat:@"square_%d.aif", _selectedCell.count] Loop:NO];
         //4个cell是否拥有相同颜色
         if([self eliminatedSameColorCell]) {
+            [[NGPlayer player] playSoundFXnamed:@"success_playful_29.mp3" Loop:NO];
             int curColor = ((GameBoardCell*)_selectedCell.firstObject).color;
             [_selectedCell setArray:[self getAllCellWithColor:curColor]];
             __weak typeof(self) weakSelf = self;
@@ -347,20 +353,27 @@ typedef void(^TrickBlock)();
                 isTwoCellSameColor = YES;
             }
             
-            [self addCellFlyAnimation:^{
                 if (isTwoCellSameColor) {
-                    [weakSelf addDashBoardScore:Two_Same_Number_Color_Score];
+                    
+                    [[NGPlayer player] playSoundFXnamed:@"success_playful_22.mp3" Loop:NO];
+                    [self addCellFlyAnimation:^{
+                        [weakSelf addDashBoardScore:Two_Same_Number_Color_Score];
+                    }];
                 }
                 else
                 {
-                    [weakSelf addDashBoardScore:Two_Same_Number_Score];
+                    [[NGPlayer player] playSoundFXnamed:[NSString stringWithFormat:@"square_%d.aif", _selectedCell.count] Loop:NO];
+                    [self addCellFlyAnimation:^{
+                        [weakSelf addDashBoardScore:Two_Same_Number_Score];
+                    }];
                 }
-            }];
+            
         }
         //消除不同颜色的4个cell所得分数
         else
         {
             __weak typeof(self) weakSelf = self;
+            [[NGPlayer player] playSoundFXnamed:[NSString stringWithFormat:@"square_%d.aif", _selectedCell.count] Loop:NO];
             [self addCellFlyAnimation:^{
                 [weakSelf addDashBoardScore:Four_Diff_Color_Number_Score];
             }];

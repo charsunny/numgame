@@ -626,6 +626,7 @@
 -(IBAction)changeCellColor:(id)sender{
 
     [_timeCountingView stopCounting];
+    [[NGPlayer player] playSoundFXnamed:@"item_click.mp3" Loop:NO];
     self.gameBoardView.isChangeColor = YES;
     //__block UIBarButtonItem* barBtnItem = (UIBarButtonItem*)sender;
     __weak typeof(self) weakself = self;
@@ -645,6 +646,7 @@
 
 -(IBAction)changeCellNumber:(id)sender{
     [_timeCountingView stopCounting];
+    [[NGPlayer player] playSoundFXnamed:@"item_click.mp3" Loop:NO];
     self.gameBoardView.isChangeColor = NO;
     __weak typeof(self) weakself = self;
     //__block UIBarButtonItem* barBtnItem = (UIBarButtonItem*)sender;

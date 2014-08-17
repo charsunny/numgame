@@ -106,6 +106,7 @@
 
 - (IBAction)onTouchDownMode:(UIButton*)button {
     [button setAlpha:1.0f];
+    [[NGPlayer player] playSoundFXnamed:@"item_click.mp3" Loop:NO];
     POPSpringAnimation* animation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewScaleXY];
     animation.toValue = [NSValue valueWithCGPoint:CGPointMake(1.2, 1.2)];
     animation.springBounciness = 3;
@@ -159,6 +160,7 @@
 
 - (void)onClickRankButton {
     GKGameCenterViewController *gameCenterController = [[GKGameCenterViewController alloc] init];
+    [[NGPlayer player] playSoundFXnamed:@"item_click.mp3" Loop:NO];
     if (gameCenterController != nil)
     {
         gameCenterController.gameCenterDelegate = self;
