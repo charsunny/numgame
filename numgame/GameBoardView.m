@@ -208,10 +208,7 @@ typedef void(^TrickBlock)();
                 [self bringSubviewToFront:cell];
                 [cell addTrickingWithType:GBTrakingCategoryColor];
                 [cell showAnimation];
-                
             }
-        
-            
         }
         
         if ([view isEqual:self.maskView]) {
@@ -719,26 +716,6 @@ typedef void(^TrickBlock)();
 
 
 
--(void)changeCellColor:(TrickBlock)block{
-    
-    if (self.trickBlock) {
-        return;
-    }
-    self.trickBlock = block;
-
-    if (!self.isChangeColor) {
-        CALayer* layer = [CALayer layer];
-        layer.frame = CGRectMake(0, self.boardInset, self.frame.size.width, _cellNum*(_cellWidth+EDGE_INSET) -EDGE_INSET);
-        layer.backgroundColor = [UIColor blueColor].CGColor;
-        [layer setOpacity:0.3];
-        [self.layer setMask:layer];
-        
-        self.isChangeColor = YES;
-    }
-    //控制另一个道具
-
-
-}
 
 ///增加停顿时候的效果
 -(void) showPauseCellEffective{
@@ -807,39 +784,35 @@ typedef void(^TrickBlock)();
     
 }
 
-
-
-//-(void) changeCellColor{
-//
-////  GameBoardCell * cell =[self.storeSelectedCellSet anyObject];
-////    [cell setColor:self.SelectedCellColor];
-////    [self.storeSelectedCellSet removeAllObjects];
-////    [self.maskView removeFromSuperview];
-//    
-//   
-//}
-
-
 - (void)changeCellNumber:(TrickBlock) block{
     
     if (self.trickBlock) {
         return;
     }
     self.trickBlock = block;
-    //what nico is writing here?
-    if (!self.isChangeNumer) {
-        //添加乳白色mask
-        CALayer* layer = [CALayer layer];
-        layer.frame = CGRectMake(0, self.boardInset, self.frame.size.width, _cellNum*(_cellWidth+EDGE_INSET) -EDGE_INSET);
-        layer.backgroundColor = [UIColor blueColor].CGColor;
-        [layer setOpacity:0.3];
-        [self.layer setMask:layer];
-         self.isChangeNumer = YES;
-    }
- 
-   
+    self.isChangeNumer = YES;
+    [self showToolBarMaskView];
 }
 
+//添加乳白色mask
+- (void)showToolBarMaskView
+{
+    CALayer* layer = [CALayer layer];
+    layer.frame = CGRectMake(0, self.boardInset, self.frame.size.width, _cellNum*(_cellWidth+EDGE_INSET) -EDGE_INSET);
+    layer.backgroundColor = [UIColor blueColor].CGColor;
+    [layer setOpacity:0.3];
+    [self.layer setMask:layer];
+}
+
+-(void)changeCellColor:(TrickBlock)block{
+    
+    if (self.trickBlock) {
+        return;
+    }
+    self.isChangeColor = YES;
+    self.trickBlock = block;
+    [self showToolBarMaskView];
+}
 
 #pragma mark fly cell animtion
 - (void)addCellFlyAnimation:(void (^)())callback

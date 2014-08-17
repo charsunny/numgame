@@ -224,6 +224,7 @@
     self.trakingCategory = category;
     self.accessoryItems = [[NSMutableArray alloc]initWithCapacity:3];
     
+    //弹出4个cell
     for (int i = 0; i < 3; i++){
        
         UIView * item = [[UIView alloc]initWithFrame:self.bounds];
@@ -269,7 +270,7 @@
                 UILabel * label = [[UILabel alloc]initWithFrame:CGRectZero];
                 label.textAlignment = NSTextAlignmentCenter ;
                 label.text = itemArray[i];
-                label.textColor = [UIColor blackColor];
+                label.textColor = [UIColor whiteColor];
                 //label.font = [UIFont systemFontOfSize:20];
                 label.font = [UIFont fontWithName:DefalutNumFontFamily size:20];
                 [(UIView*)self.accessoryItems[i] setBackgroundColor:[GameBoardCell generateColor:self.color]];
@@ -349,44 +350,45 @@
 
     [NSObject cancelPreviousPerformRequestsWithTarget:item.layer];
     item.layer.opacity = 1.0f;
+    int offset = 50;
     switch (direction) {
         case 0:
         {
-            [self performNumberPopAnimation:item toPoint:CGPointMake(item.center.x-45, item.center.y) withName:@"centerLeft"];
+            [self performNumberPopAnimation:item toPoint:CGPointMake(item.center.x - offset, item.center.y) withName:@"centerLeft"];
             break;
         }
         case 1:
         {
-            [self performNumberPopAnimation:item toPoint:CGPointMake(item.center.x+45, item.center.y) withName:@"centerRight"];
+            [self performNumberPopAnimation:item toPoint:CGPointMake(item.center.x + offset, item.center.y) withName:@"centerRight"];
             break;
         }
         case 2:
         {
-            [self performNumberPopAnimation:item toPoint:CGPointMake(item.center.x, item.center.y-45) withName:@"centerTop"];
+            [self performNumberPopAnimation:item toPoint:CGPointMake(item.center.x, item.center.y - offset) withName:@"centerTop"];
             break;
         }
         case 3:{
-            [self performNumberPopAnimation:item toPoint:CGPointMake(item.center.x, item.center.y+45) withName:@"centerBottom"];
+            [self performNumberPopAnimation:item toPoint:CGPointMake(item.center.x, item.center.y + offset) withName:@"centerBottom"];
             break;
         }
              //右下
         case 4:{
-            [self performNumberPopAnimation:item toPoint:CGPointMake(item.center.x+45, item.center.y+45) withName:@"centerRightDown"];
+            [self performNumberPopAnimation:item toPoint:CGPointMake(item.center.x + offset, item.center.y + offset) withName:@"centerRightDown"];
             break;
         }
            //左下
         case 5:{
-            [self performNumberPopAnimation:item toPoint:CGPointMake(item.center.x-45, item.center.y+45) withName:@"centerLeftDown"];
+            [self performNumberPopAnimation:item toPoint:CGPointMake(item.center.x - offset, item.center.y + offset) withName:@"centerLeftDown"];
             break;
         }
          // 右上
         case 6:{
-            [self performNumberPopAnimation:item toPoint:CGPointMake(item.center.x+45, item.center.y-45) withName:@"centerRightUp"];
+            [self performNumberPopAnimation:item toPoint:CGPointMake(item.center.x + offset, item.center.y - offset) withName:@"centerRightUp"];
             break;
         }
          //左上
         case 7:{
-            [self performNumberPopAnimation:item toPoint:CGPointMake(item.center.x-45, item.center.y-45) withName:@"centerLeftUp"];
+            [self performNumberPopAnimation:item toPoint:CGPointMake(item.center.x - offset, item.center.y - offset) withName:@"centerLeftUp"];
             break;
         }
         default:
