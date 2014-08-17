@@ -30,6 +30,7 @@
 typedef void(^TrickBlock)();
 //score marco
 #define Two_Same_Number_Score           10
+#define Two_Same_Number_Color_Score     20
 #define Four_Same_Number_Score          100
 #define Four_Diff_Color_Number_Score    50
 @interface GameBoardView()<GameboardCellDelegate>
@@ -339,9 +340,21 @@ typedef void(^TrickBlock)();
         //消除2个cell所得分数
         else if(canEliminated)
         {
+            
             __weak typeof(self) weakSelf = self;
+            BOOL isTwoCellSameColor = NO;
+            if ([(GameBoardCell*)_selectedCell[0] color] == [(GameBoardCell*)_selectedCell[1] color]) {
+                isTwoCellSameColor = YES;
+            }
+            
             [self addCellFlyAnimation:^{
-                [weakSelf addDashBoardScore:Two_Same_Number_Score];
+                if (isTwoCellSameColor) {
+                    [weakSelf addDashBoardScore:Two_Same_Number_Color_Score];
+                }
+                else
+                {
+                    [weakSelf addDashBoardScore:Two_Same_Number_Score];
+                }
             }];
         }
         //消除不同颜色的4个cell所得分数
@@ -549,8 +562,8 @@ typedef void(^TrickBlock)();
     if (_selectedCell.count < 4) {
         return NO;
     }
-  // 判断相同颜色
-   int cellColorNum = ((GameBoardCell*)_selectedCell[0]).color;
+    // 判断相同颜色
+    int cellColorNum = ((GameBoardCell*)_selectedCell[0]).color;
     for (int i =1 ; i < _selectedCell.count ; i++) {
         if (cellColorNum != ((GameBoardCell*)_selectedCell[i]).color) {
             return NO;
@@ -558,6 +571,7 @@ typedef void(^TrickBlock)();
     }
     return YES;
 }
+
 
 - (NSArray*)getAllCellWithColor:(int)color {
     NSMutableArray* array = [NSMutableArray new];

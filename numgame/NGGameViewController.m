@@ -86,18 +86,19 @@
 
 @implementation NGGameViewController
 
+//well,this's the legacy code,timeSpent seems related to step count
 #pragma mark property
 - (void)setTimeSpent:(int)timeSpent
 {
+    _timeSpent = timeSpent;
+    //setting the attribute string to indicate the current status,legacy
+    /*
     if (_gameMode == NGGameModeClassic) {
-        _timeSpent = timeSpent;
+        
         NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
         //_timeLabel.text = [NSString stringWithFormat:@"%d/%@",_timeSpent, levelInfo[@"step"]];
         NSString* wholeString =[NSString stringWithFormat:@"%d/%@",_timeSpent, levelInfo[@"step"]];
         
-        if (_stepCountingView) {
-            [_stepCountingView addCount:-1 isReverse:YES];
-        }
         NSMutableAttributedString* mutableAttrString = [[NSMutableAttributedString alloc]initWithString:wholeString];
         [mutableAttrString addAttribute:NSFontAttributeName
                                   value:[UIFont fontWithName:@"AppleSDGothicNeo-Light" size:30]
@@ -115,6 +116,10 @@
         _timeLabel.attributedText = mutableAttrString;
         [self addPopSpringAnimation:_timeLabel];
     }
+     */
+    if (_gameMode == NGGameModeSteped || _gameMode == NGGameModeClassic) {
+        [_stepCountingView addCount:-1 isReverse:YES];
+    }
     
 }
 
@@ -123,14 +128,16 @@
     int deltaCount = score - _score;
     _score = score;
     self.timeSpent++;
-    NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
+    //NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
+    
+    /*
     if (_gameMode == NGGameModeClassic) {
         [_scoreLabel setText:[NSString stringWithFormat:@"%d/%@",_score, levelInfo[@"score"]]];
-        [_scoreCountingView addCount:deltaCount isReverse:NO];
     } else {
         [_scoreLabel setText:[NSString stringWithFormat:@"%d",_score]];
     }
-    //[self addPopSpringAnimation:_scoreLabel];
+     */
+    [_scoreCountingView addCount:deltaCount isReverse:NO];
     [self addPopSpringAnimation:_scoreCountingView];
 }
 
@@ -255,40 +262,14 @@
     switch (self.gameMode) {
         case NGGameModeClassic:
         {
-        
-            NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
-            _stepCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(50, 5, 60, 60)];
-            
-            [_stepCountingView initData:0 withStart:[levelInfo[@"step"] integerValue] ];
-            _stepCountingView.pieCapacity = 360;
-            _stepCountingView.circleKey = @"stepCount";
-            //we don't set delegate here cause we've already have it done in the legacy code
-            //_stepCountingView.delegate = self;
-            
-            _stepCountingView.frontColor = UIColorFromRGB(0x4DC9FD);
-            _stepCountingView.circleColor = UIColorFromRGB(0xF56363);
-            
-            //[_stepCountingView initShapeLayer];
-            [_headView addSubview:_stepCountingView];
-            
-            _scoreCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(210, 5, 60, 60)];
-            
-            [_scoreCountingView initData:[levelInfo[@"score"] integerValue] withStart:0];
-            _scoreCountingView.pieCapacity = 0;
-            _scoreCountingView.frontColor = UIColorFromRGB(0x00CE61);
-            _scoreCountingView.circleColor = UIColorFromRGB(0xFFC53F);
-            _scoreCountingView.circleKey = @"scoreCount";
-            _scoreCountingView.clockwise = 0;
-            //_scoreCountingView.delegate = self;
-            [_headView addSubview:_scoreCountingView];
-            
-            
+            [self initStepCircleView];
+            [self initScoreCircleView];
             break;
         }
         case NGGameModeTimed:
         {
-            _timeCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(210, 5, 60, 60)];
-            [_timeCountingView initData:0 withStart:60];
+            _timeCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(50, 5, 60, 60)];
+            [_timeCountingView initData:0 withStart:3];
             _timeCountingView.pieCapacity = 360;
             _timeCountingView.frontColor = UIColorFromRGB(0x00CE61);
             _timeCountingView.circleColor = UIColorFromRGB(0xFFC53F);
@@ -296,14 +277,56 @@
             _timeCountingView.circleKey = @"timeCount";
             _timeCountingView.delegate = self;
             [_timeCountingView addCount:0 isReverse:YES];
-            [_timeCountingView startCounting];
             
             [_headView addSubview:_timeCountingView];
+            [self initScoreCircleView];
+            break;
+        }
+        case NGGameModeSteped:
+        {
+            [self initStepCircleView];
+            [self initScoreCircleView];
+            break;
+        }
+        case NGGameModeEndless:
+        {
             break;
         }
         default:
             break;
     }
+}
+- (void)initStepCircleView
+{
+    NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
+    _stepCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(50, 5, 60, 60)];
+    
+    [_stepCountingView initData:0 withStart:[levelInfo[@"step"] integerValue] ];
+    _stepCountingView.pieCapacity = 360;
+    _stepCountingView.circleKey = @"stepCount";
+    //we don't set delegate here cause we've already have it done in the legacy code
+    //_stepCountingView.delegate = self;
+    
+    _stepCountingView.frontColor = UIColorFromRGB(0x4DC9FD);
+    _stepCountingView.circleColor = UIColorFromRGB(0xF56363);
+    
+    //[_stepCountingView initShapeLayer];
+    [_headView addSubview:_stepCountingView];
+}
+- (void)initScoreCircleView
+{
+    NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
+    _scoreCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(210, 5, 60, 60)];
+    
+    [_scoreCountingView initData:[levelInfo[@"score"] integerValue] withStart:0];
+    _scoreCountingView.pieCapacity = 0;
+    _scoreCountingView.frontColor = UIColorFromRGB(0x00CE61);
+    _scoreCountingView.circleColor = UIColorFromRGB(0xFFC53F);
+    _scoreCountingView.circleKey = @"scoreCount";
+    _scoreCountingView.clockwise = 0;
+    //we don't set delegate here cause we've already have it done in the legacy code
+    //_scoreCountingView.delegate = self;
+    [_headView addSubview:_scoreCountingView];
 }
 
 - (void)initGameData {
@@ -325,8 +348,6 @@
             _scoreCountingView.deltaCount = [levelInfo[@"score"] integerValue] - _scoreCountingView.currentCount?:0;
             [_scoreCountingView addCount:0 isReverse:NO];
             
-            
-            
             break;
         }
         case NGGameModeTimed:
@@ -334,12 +355,14 @@
             _score = 0;
             [_scoreLabel setText:@"0"];
             [_timeLabel setText:@"60"];
+            [_timeCountingView startCounting];
             break;
         case NGGameModeSteped:
             _score = 0;
             _leftTime = 30;
             [_scoreLabel setText:@"0"];
             [_timeLabel setText:@"30"];
+            [_stepCountingView addCount:0 isReverse:YES];
             break;
         case NGGameModeEndless:
             _score = 0;
@@ -530,6 +553,7 @@
     else if([circleKey isEqualToString:@"timeCount"])
     {
         [_timeCountingView stopCounting];
+        [self showResult:NO];
     }
 }
 
