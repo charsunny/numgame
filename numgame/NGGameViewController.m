@@ -40,6 +40,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *wandLabel;
 
 @property (weak, nonatomic) IBOutlet UIView *headView;
+@property (weak, nonatomic) IBOutlet UIView *toolBarContainerView;
 
 @property (weak, nonatomic) IBOutlet GameBoardView *gameBoardView;
 
@@ -207,6 +208,12 @@
 - (void)initToolBarView
 {
     CGRect sFrame = self.view.frame;
+    
+    _toolBarContainerView.layer.shadowOpacity = 0.15;
+    _toolBarContainerView.layer.shadowOffset = CGSizeMake(0,-2);
+    _toolBarContainerView.layer.shadowColor = [UIColor blackColor].CGColor;
+    _toolBarContainerView.layer.shadowRadius = 3.5;
+    _toolBarContainerView.layer.masksToBounds = NO;
     switch (self.gameMode) {
         case NGGameModeTimed:
         case NGGameModeSteped:
@@ -260,6 +267,12 @@
 {
     _headView.backgroundColor = UIColorFromRGB(TOOL_BAR_COLOR);
     _headView.alpha = 1;
+    
+    _headView.layer.shadowOpacity = 0.15;
+    _headView.layer.shadowOffset = CGSizeMake(0,2);
+    _headView.layer.shadowColor = [UIColor blackColor].CGColor;
+    _headView.layer.shadowRadius = 3.5;
+    _headView.layer.masksToBounds = NO;
     switch (self.gameMode) {
         case NGGameModeClassic:
         {
@@ -300,7 +313,7 @@
 - (void)initStepCircleView
 {
     NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
-    _stepCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(50, 5, 60, 60)];
+    _stepCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(50, 2, 60, 60)];
     
     [_stepCountingView initData:0 withStart:[levelInfo[@"step"] integerValue] ];
     _stepCountingView.pieCapacity = 360;
@@ -317,7 +330,7 @@
 - (void)initScoreCircleView
 {
     NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
-    _scoreCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(210, 5, 60, 60)];
+    _scoreCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(210, 2, 60, 60)];
     
     [_scoreCountingView initData:[levelInfo[@"score"] integerValue] withStart:0];
     _scoreCountingView.pieCapacity = 0;
@@ -497,6 +510,7 @@
 }
 
 - (IBAction)onButtonClick:(UIButton *)sender {
+    [[NGPlayer player] playSoundFXnamed:@"item_click.mp3" Loop:NO];
     if (sender.tag == 1) {
         [self onSwipePauseView:nil];
         if (_gameMode == NGGameModeTimed) {
@@ -521,6 +535,7 @@
     if (_pauseView.center.x < 320) {
         return;
     }
+    [[NGPlayer player] playSoundFXnamed:@"item_click.mp3" Loop:NO];
     [UIView animateWithDuration:0.3f delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:0.2 options:UIViewAnimationOptionCurveEaseIn animations:^{
         _gameBoardView.center = CGPointMake(_gameBoardView.center.x - 320, _gameBoardView.center.y);
         _pauseView.center = CGPointMake(_pauseView.center.x - 320, _pauseView.center.y);

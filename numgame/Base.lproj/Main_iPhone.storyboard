@@ -179,6 +179,7 @@
                         <outlet property="pauseView" destination="JcA-ad-MAr" id="cj2-zA-zEQ"/>
                         <outlet property="scoreLabel" destination="fCu-zB-BWS" id="ssc-bd-00g"/>
                         <outlet property="timeLabel" destination="95y-co-i5M" id="Sx7-Ct-40n"/>
+                        <outlet property="toolBarContainerView" destination="7gH-Jy-t6T" id="Qcq-wn-UO3"/>
                         <outlet property="wandBtn" destination="f0K-bU-RTJ" id="QxL-Zh-ChT"/>
                         <outlet property="wandLabel" destination="pJB-Jx-cxd" id="dbV-m8-lRs"/>
                         <segue destination="pdg-fq-gYQ" kind="modal" identifier="resultsegue" id="KgX-gi-aJz"/>

@@ -218,6 +218,7 @@ typedef void(^TrickBlock)();
             [self.curCell hideAnimation];
             self.isChangeColor = NO;
             [self callbackToMainGameController];
+            [[NGPlayer player] playSoundFXnamed:@"glossy_click_22.mp3" Loop:NO];
         }
     }
     
