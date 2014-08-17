@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "hammer@2x-1.png"
+      "filename" : "hammer-1.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "hammer@2x.png"
+      "filename" : "hammer.png"
     }
   ],
   "info" : {

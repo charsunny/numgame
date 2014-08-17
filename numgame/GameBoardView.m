@@ -199,16 +199,16 @@ typedef void(^TrickBlock)();
             if (!(cell.accessoryItems.count >0)) {
                 
                 [self.layer.mask removeFromSuperlayer];
-            self.maskView = [[UIView alloc]initWithFrame:CGRectMake(0, self.boardInset, self.frame.size.width, _cellNum*(_cellWidth+EDGE_INSET) -EDGE_INSET)];
-            
-            self.maskView.backgroundColor = [UIColor whiteColor];
-            self.maskView.alpha = 0.5;
-            [self addSubview:self.maskView];
-
-            [self bringSubviewToFront:cell];
+                self.maskView = [[UIView alloc]initWithFrame:CGRectMake(0, self.boardInset, self.frame.size.width, _cellNum*(_cellWidth+EDGE_INSET) -EDGE_INSET)];
+                
+                self.maskView.backgroundColor = [UIColor whiteColor];
+                self.maskView.alpha = 0.5;
+                [self addSubview:self.maskView];
+                
+                [self bringSubviewToFront:cell];
                 [cell addTrickingWithType:GBTrakingCategoryColor];
                 [cell showAnimation];
-  
+                
             }
         
             
@@ -229,14 +229,12 @@ typedef void(^TrickBlock)();
             self.curCell = cell;
             if (!(cell.accessoryItems.count >0)) {
                 [self.layer.mask removeFromSuperlayer];
-            self.maskView = [[UIView alloc]initWithFrame:CGRectMake(0, self.boardInset, self.frame.size.width, _cellNum*(_cellWidth+EDGE_INSET) -EDGE_INSET)];
-            
-            self.maskView.backgroundColor = [UIColor whiteColor];
-            self.maskView.alpha = 0.5;
-            [self addSubview:self.maskView];
-            [self bringSubviewToFront:cell];
-            
-            
+                self.maskView = [[UIView alloc]initWithFrame:CGRectMake(0, self.boardInset, self.frame.size.width, _cellNum*(_cellWidth+EDGE_INSET) -EDGE_INSET)];
+                
+                self.maskView.backgroundColor = [UIColor whiteColor];
+                self.maskView.alpha = 0.5;
+                [self addSubview:self.maskView];
+                [self bringSubviewToFront:cell];
                 [cell addTrickingWithType:GBTrakingCategoryNum];
                 [cell showAnimation];
      
@@ -828,7 +826,9 @@ typedef void(^TrickBlock)();
         return;
     }
     self.trickBlock = block;
+    //what nico is writing here?
     if (!self.isChangeNumer) {
+        //添加乳白色mask
         CALayer* layer = [CALayer layer];
         layer.frame = CGRectMake(0, self.boardInset, self.frame.size.width, _cellNum*(_cellWidth+EDGE_INSET) -EDGE_INSET);
         layer.backgroundColor = [UIColor blueColor].CGColor;

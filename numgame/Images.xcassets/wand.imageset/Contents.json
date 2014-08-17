@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "wand@2x-1.png"
+      "filename" : "wand_nobg@2x-1.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "wand@2x.png"
+      "filename" : "wand_nobg@2x.png"
     }
   ],
   "info" : {

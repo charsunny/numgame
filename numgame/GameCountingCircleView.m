@@ -13,10 +13,10 @@
 
 #define UpdateFrequency 1/30
 
-CGFloat radius = 30;//半径
-CGFloat startX = 50;//圆心x坐标
-CGFloat startY = 50;//圆心y坐标
-CGFloat pieStart = 270;//起始的角度
+//CGFloat radius = 30;//半径
+//CGFloat startX = 50;//圆心x坐标
+//CGFloat startY = 50;//圆心y坐标
+//CGFloat pieStart = 270;//起始的角度
 //CGFloat pieCapacity = 0;//角度增量值
 //int clockwise = 1;//0=逆时针,1=顺时针
 
@@ -34,6 +34,10 @@ CGFloat pieStart = 270;//起始的角度
 
 @property (nonatomic)int addCountCurrentNumber;
 
+@property (nonatomic)CGFloat startX;
+@property (nonatomic)CGFloat startY;
+@property (nonatomic)CGFloat radius;
+@property (nonatomic)CGFloat pieStart;
 
 @end
 
@@ -78,10 +82,12 @@ CGFloat pieStart = 270;//起始的角度
         self.clipsToBounds = NO;
         self.layer.masksToBounds = NO;
         CGRect smallerFrame = CGRectInset(self.bounds, 10, 10);
+        
         _frontLayer = [CALayer layer];
-        startX = self.bounds.size.width/2;
-        startY = self.bounds.size.height/2;
-        radius = smallerFrame.size.width/2 + 1;
+        _startX = self.bounds.size.width/2;
+        _startY = self.bounds.size.height/2;
+        _radius = smallerFrame.size.width/2 + 1;
+        _pieStart = 270;
         _pieCapacity = 0;
         _clockwise = 0;
         _frontLayer.frame = smallerFrame;
@@ -97,6 +103,7 @@ CGFloat pieStart = 270;//起始的角度
         _frontBgLayer.cornerRadius = smallerFrame.size.width  / 2 + 1;
         
         _circleLayer = [CAShapeLayer layer];
+        //_circleLayer.frame = CGRectInset(smallerFrame, -2, -2);
         _circleLayer.fillColor = [UIColor clearColor].CGColor;
         _circleLayer.strokeStart = 0;
         _circleLayer.strokeEnd = 1;
@@ -117,7 +124,7 @@ CGFloat pieStart = 270;//起始的角度
 - (UIBezierPath*)getCurrentPath
 {
     UIBezierPath* path = [UIBezierPath bezierPath];
-    [path addArcWithCenter:CGPointMake(startX, startY) radius:radius startAngle:DEG2RAD(pieStart) endAngle:DEG2RAD(pieStart + _pieCapacity) clockwise:!_clockwise];
+    [path addArcWithCenter:CGPointMake(_startX, _startY) radius:_radius startAngle:DEG2RAD(_pieStart) endAngle:DEG2RAD(_pieStart + _pieCapacity) clockwise:!_clockwise];
     return path;
 }
 - (void)initShapeLayer
@@ -138,6 +145,13 @@ CGFloat pieStart = 270;//起始的角度
     _countLabel.font =[UIFont fontWithName:@"AppleSDGothicNeo-Light" size:20];
     //TODO: add shadow
     [self addSubview:_countLabel];
+}
+
+- (void)setContentImage:(UIImage*)image{
+    _countLabel.alpha = 0;
+    UIImageView* imgView = [[UIImageView alloc]initWithFrame:CGRectInset(self.bounds, 8, 8)];
+    imgView.image = image;
+    [self addSubview:imgView];
 }
 
 - (void)addCount:(int)deltaNum

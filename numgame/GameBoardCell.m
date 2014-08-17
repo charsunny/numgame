@@ -21,6 +21,10 @@
 
 @property (strong, nonatomic) CALayer* effectLayer;
 
+@property (strong,nonatomic)UIImageView* numberImgView;
+
+@property (strong,nonatomic)CALayer* backgroundLayer;
+
 @property (strong,nonatomic)void (^animtionCallback)();
 //增加方法
 
@@ -73,53 +77,41 @@
     UIImageView* imgView = [[UIImageView alloc]initWithFrame:CGRectInset(layerFrame, -5, -5)];
     imgView.image = shadowImg;
     
-    CALayer* backgroundLayer = [CALayer layer];
-    backgroundLayer.backgroundColor = color.CGColor;
-    backgroundLayer.cornerRadius = frame.size.width/2;
-    //backgroundLayer.frame = self.bounds;
-    backgroundLayer.frame = layerFrame;
+    _backgroundLayer = [CALayer layer];
+    _backgroundLayer.backgroundColor = color.CGColor;
+    _backgroundLayer.cornerRadius = frame.size.width/2;
+    _backgroundLayer.frame = layerFrame;
     
     
     UIImage* numberShadowImg = [UIImage imageNamed:[NSString stringWithFormat:@"number%d@2x",number]];
-    UIImageView* numberImgView = [[UIImageView alloc]initWithFrame:layerFrame];
-    numberImgView.image = numberShadowImg;
+    _numberImgView = [[UIImageView alloc]initWithFrame:layerFrame];
+    _numberImgView.image = numberShadowImg;
     
     
-    [self.layer insertSublayer:backgroundLayer atIndex:0];
-    [self.layer insertSublayer:imgView.layer below:backgroundLayer];
-    [self.layer insertSublayer:numberImgView.layer above:backgroundLayer];
+    [self.layer insertSublayer:_backgroundLayer atIndex:0];
+    [self.layer insertSublayer:imgView.layer below:_backgroundLayer];
+    [self.layer insertSublayer:_numberImgView.layer above:_backgroundLayer];
 }
 
 - (int)genRandColor {
     return rand() % 4;
-    //self.color = ranNum;
-    //return [GameBoardCell generateColor:ranNum];
 }
 
 - (int)genRandNumber {
     return rand()%4+1;
 }
 
-//-(void)setNumber:(int)number{
-//
-//    _number = number;
-//    
-//    if (!_numLabel) {
-//        _numLabel = [[UILabel alloc] initWithFrame:CGRectOffset(self.bounds, 0, 1.5)];
-//        [_numLabel setText:[NSString stringWithFormat:@"%d",_number ]];
-//        [_numLabel setFont:[UIFont fontWithName:DefalutNumFontFamily size:self.frame.size.width/2]];
-//        [_numLabel setTextColor:[UIColor whiteColor]];
-//        _numLabel.numberOfLines = 0;
-//        
-//        [_numLabel setTextAlignment:NSTextAlignmentCenter];
-//        [self addSubview:_numLabel];
-//    }
-//    else{
-//      [_numLabel setText:[NSString stringWithFormat:@"%d",_number ]];
-//    }
-//
-//
-//}
+-(void)setNumber:(int)number{
+    _number = number;
+    UIImage* numberShadowImg = [UIImage imageNamed:[NSString stringWithFormat:@"number%d@2x",number]];
+    _numberImgView.image = numberShadowImg;
+}
+
+- (void)setColor:(int)color
+{
+    _color = color;
+    _backgroundLayer.backgroundColor = [GameBoardCell generateColor:color].CGColor;
+}
 
 + (UIColor*)generateColor:(int)number
 {

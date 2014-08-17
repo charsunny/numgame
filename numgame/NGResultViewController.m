@@ -48,7 +48,12 @@
     if (_gameMode == NGGameModeClassic) {
         if (_isHighScore) {
             [_highScoreLabel setText:@"New Best Record!"];
-            
+            if( !_completed)
+            {
+                [_highScoreLabel setText:@"Fail,but with New Best Record"];
+                //[_backButton setTitle:@"Try Again" forState:UIControlStateNormal];
+                _backButton.hidden = YES;
+            }
         } else {
             if (_completed) {
                 [_highScoreLabel setText:@"Score at this round"];

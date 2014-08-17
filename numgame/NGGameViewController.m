@@ -78,6 +78,10 @@
 @property (strong,nonatomic)GameCountingCircleView* stepCountingView;
 
 @property (strong,nonatomic)GameCountingCircleView* scoreCountingView;
+
+@property (strong,nonatomic)GameCountingCircleView* colorToolCountingView;
+
+@property (strong,nonatomic)GameCountingCircleView* numberToolCountingView;
 @end
 
 @implementation NGGameViewController
@@ -147,7 +151,7 @@
     
     //init counting circle view
     [self initHeaderView];
-    [self addButtonToolBarView];
+    [self initToolBarView];
     [self initGameData];
     
     
@@ -189,6 +193,54 @@
 //    }
 //}
 
+
+- (void)initToolBarView
+{
+    CGRect sFrame = self.view.frame;
+    switch (self.gameMode) {
+        case NGGameModeClassic:
+        {
+            
+            _colorToolCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(50, sFrame.size.height - 50 - 5 , 50, 50)];
+            [_colorToolCountingView initData:0 withStart:5];
+            _colorToolCountingView.pieCapacity = 360;
+            _colorToolCountingView.circleKey = @"colorCount";
+            _colorToolCountingView.delegate = self;
+            UITapGestureRecognizer* changeColorTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(changeCellColor:)];
+            [_colorToolCountingView addGestureRecognizer:changeColorTap];
+            
+            _colorToolCountingView.frontColor = UIColorFromRGB(0xFFC53F);
+            _colorToolCountingView.circleColor = UIColorFromRGB(0x00F3C2);
+            [_colorToolCountingView setContentImage:[UIImage imageNamed:@"wand"]];
+
+            [_colorToolCountingView initShapeLayer];
+            
+            [self.view addSubview:_colorToolCountingView];
+            
+            
+            _numberToolCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(220, sFrame.size.height - 50 - 5 , 50, 50)];
+            [_numberToolCountingView initData:0 withStart:5];
+            _numberToolCountingView.pieCapacity = 360;
+            _numberToolCountingView.circleKey = @"colorCount";
+            _numberToolCountingView.delegate = self;
+            UITapGestureRecognizer* changeNumberTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(changeCellNumber:)];
+            [_numberToolCountingView addGestureRecognizer:changeNumberTap];
+            
+            _numberToolCountingView.frontColor = UIColorFromRGB(0xFFC53F);
+            _numberToolCountingView.circleColor = UIColorFromRGB(0x00F3C2);
+            [_numberToolCountingView setContentImage:[UIImage imageNamed:@"hammer"]];
+
+            [_numberToolCountingView initShapeLayer];
+            
+            [self.view addSubview:_numberToolCountingView];
+            break;
+        }
+        default:
+            break;
+    }
+    
+}
+
 #pragma --mark init header UI
 - (void)initHeaderView
 {
@@ -204,12 +256,12 @@
             [_stepCountingView initData:0 withStart:[levelInfo[@"step"] integerValue] ];
             _stepCountingView.pieCapacity = 360;
             _stepCountingView.circleKey = @"stepCount";
-            _stepCountingView.delegate = self;
+            //_stepCountingView.delegate = self;
             
             _stepCountingView.frontColor = UIColorFromRGB(0x4DC9FD);
             _stepCountingView.circleColor = UIColorFromRGB(0xF56363);
             
-            [_stepCountingView initShapeLayer];
+            //[_stepCountingView initShapeLayer];
             [_headView addSubview:_stepCountingView];
             
             _scoreCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(210, 5, 60, 60)];
@@ -220,7 +272,7 @@
             _scoreCountingView.circleColor = UIColorFromRGB(0xFFC53F);
             _scoreCountingView.circleKey = @"scoreCount";
             _scoreCountingView.clockwise = 0;
-            _scoreCountingView.delegate = self;
+            //_scoreCountingView.delegate = self;
             [_headView addSubview:_scoreCountingView];
             
             
@@ -258,6 +310,9 @@
             _scoreCountingView.destinationCount = [levelInfo[@"score"] integerValue];
             _scoreCountingView.deltaCount = [levelInfo[@"score"] integerValue] - _scoreCountingView.currentCount?:0;
             [_scoreCountingView addCount:0 isReverse:NO];
+            
+            
+            
             break;
         }
         case NGGameModeTimed:
@@ -540,26 +595,17 @@
 -(IBAction)changeCellColor:(id)sender{
 
     [self.progressTimer invalidate];
-    //让所有cell处于激活状态
-       //当点击了cell识别这个cell在这个view上弹出一个popView，有4种颜色
-    
-    
-    //点击popView的颜色改变cell的颜色，popView移除
-    
-    
-    //
-    
     self.gameBoardView.isChangeColor = YES;
-    __block UIBarButtonItem* barBtnItem = (UIBarButtonItem*)sender;
+    //__block UIBarButtonItem* barBtnItem = (UIBarButtonItem*)sender;
     __weak typeof(self) weakself = self;
     [self.gameBoardView performSelector:@selector(changeCellColor:) withObject:^(){
-    
-        [barBtnItem setEnabled:YES];
+        //[barBtnItem setEnabled:YES];
         weakself.changeTrickBtn = NO;
+        [weakself.colorToolCountingView addCount:-1 isReverse:YES];
     }];
   
     if (!self.changeTrickBtn) {
-        [barBtnItem setEnabled:NO];
+        //[barBtnItem setEnabled:NO];
         self.changeTrickBtn = YES;
     }
     
@@ -567,48 +613,23 @@
 }
 
 -(IBAction)changeCellNumber:(id)sender{
- 
-    
-    
     [self.progressTimer invalidate];
-   // self.gameBoardView.isChangeNumer = YES;
     self.gameBoardView.isChangeColor = NO;
     __weak typeof(self) weakself = self;
-    __block UIBarButtonItem* barBtnItem = (UIBarButtonItem*)sender;
-    
-
+    //__block UIBarButtonItem* barBtnItem = (UIBarButtonItem*)sender;
     [self.gameBoardView performSelector:@selector(changeCellNumber:) withObject:^(){
-    
-        [barBtnItem setEnabled:YES];
+        //[barBtnItem setEnabled:YES];
         weakself.changeTrickBtn = NO;
+        [weakself.numberToolCountingView addCount:-1 isReverse:YES];
     } ];
     
     if (!self.changeTrickBtn) {
-        
-         [barBtnItem setEnabled:NO];
-     
-        
+        //[barBtnItem setEnabled:NO];
         self.changeTrickBtn = YES;
     }
-   
 }
 
 
-- (void)addButtonToolBarView
-{
-    CGRect sFrame = self.view.bounds;
-    CGFloat cellWidth = _wandBtn.frame.size.width;
-    UIView* bgView = [[UIView alloc]initWithFrame:CGRectMake(0, sFrame.size.height - 64 , sFrame.size.width, 64)];
-    bgView.backgroundColor = UIColorFromRGB(TOOL_BAR_COLOR);
-    [self.view insertSubview:bgView atIndex:0];
-    
-    //update the frame , I'll come back once I've mastered AutoLayout
-    
-    
-    //_wandBtn.center.y = sFrame.size.height - 10 - _wandBtn.frame.size.width;
-    //_wandBtn.center = CGPointMake(_wandBtn.center.x, sFrame.size.height - 10 - cellWidth);
-    _wandBtn.frame = CGRectOffset(_wandBtn.frame, 0, sFrame.size.height - _wandBtn.frame.origin.y);
-}
 -(UIImage*)drawMaskImagofBtnItem:(UIBarButtonItem*)btnItem{
 
     UIGraphicsBeginImageContext(btnItem.image.size);

@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "fire@2x-1.png"
+      "filename" : "fire-1.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "fire@2x.png"
+      "filename" : "fire.png"
     }
   ],
   "info" : {
