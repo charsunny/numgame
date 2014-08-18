@@ -183,6 +183,15 @@
 /* Begin PBXFileReference section */
 		02E3EF56E92B403A9BF79E26 /* boost */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = archive.ar; name = boost; path = ../../Vendor/Boost/boost.framework/boost; sourceTree = SRCROOT; };
 		403DCBBC1783F4A000793AE1 /* libFBWebP.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFBWebP.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		5045913119A1D972002E6C79 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5045913219A1D972002E6C79 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5045913319A1D972002E6C79 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5067BFA119A1BFCA00E6E377 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5067BFA219A1BFCA00E6E377 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5067BFA319A1BFCB00E6E377 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5067BFAD19A1BFFC00E6E377 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		5067BFAE19A1BFFC00E6E377 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		5067BFAF19A1BFFD00E6E377 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		5E17BB1E17457345009842B6 /* POPCustomAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POPCustomAnimation.h; sourceTree = "<group>"; };
 		5E17BB1F17457345009842B6 /* POPCustomAnimation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = POPCustomAnimation.mm; sourceTree = "<group>"; };
 		68569BF4084F464294AFEBA1 /* libFBReachability.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFBReachability.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -823,7 +832,7 @@
 			name = "pop-tests-osx";
 			productName = "pop-tests-osx";
 			productReference = EC7E319918C93D6500B38170 /* pop-tests-osx.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 		ECF01ED218C92B7F009E0AD1 /* pop-tests */ = {
 			isa = PBXNativeTarget;
@@ -843,7 +852,7 @@
 			name = "pop-tests";
 			productName = "pop-tests";
 			productReference = ECF01ED318C92B7F009E0AD1 /* pop-tests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -868,6 +877,11 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				ja,
+				"ko-KR",
+				"zh-Hant",
+				"zh-Hans",
+				ko,
 			);
 			mainGroup = EC19120D162FB53A00E0CC76;
 			productRefGroup = EC191219162FB53A00E0CC76 /* Products */;
@@ -1080,6 +1094,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				EC68858A18C7B60000C6194C /* en */,
+				5067BFA119A1BFCA00E6E377 /* ja */,
+				5067BFAD19A1BFFC00E6E377 /* zh-Hant */,
+				5045913119A1D972002E6C79 /* ko */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1088,6 +1105,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				EC7E319F18C93D6500B38170 /* en */,
+				5067BFA219A1BFCA00E6E377 /* ja */,
+				5067BFAE19A1BFFC00E6E377 /* zh-Hant */,
+				5045913219A1D972002E6C79 /* ko */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1096,6 +1116,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				EC882A7918C91983007829CC /* en */,
+				5067BFA319A1BFCB00E6E377 /* ja */,
+				5067BFAF19A1BFFD00E6E377 /* zh-Hant */,
+				5045913319A1D972002E6C79 /* ko */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

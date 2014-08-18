@@ -3,7 +3,7 @@
 "0Wv-b0-UrL.normalTitle" = "L";
 
 /* Class = "IBUIButton"; normalTitle = "email"; ObjectID = "5ML-Dc-2id"; */
-"5ML-Dc-2id.normalTitle" = "邮件";
+"5ML-Dc-2id.normalTitle" = "メール";
 
 /* Class = "IBUIButton"; normalTitle = "J"; ObjectID = "5RR-rK-vZR"; */
 "5RR-rK-vZR.normalTitle" = "J";
@@ -12,28 +12,28 @@
 "6KZ-Zy-UAI.text" = "Sum Ten";
 
 /* Class = "IBUIButton"; normalTitle = "Resume"; ObjectID = "6vG-xA-XEa"; */
-"6vG-xA-XEa.normalTitle" = "恢复游戏";
+"6vG-xA-XEa.normalTitle" = "リカバリゲーム";
 
 /* Class = "IBUIButton"; normalTitle = "play!"; ObjectID = "8OI-7h-aMf"; */
-"8OI-7h-aMf.normalTitle" = "开始玩!";
+"8OI-7h-aMf.normalTitle" = "遊ぶ!";
 
 /* Class = "IBUILabel"; text = "20/20"; ObjectID = "95y-co-i5M"; */
 "95y-co-i5M.text" = "20/20";
 
 /* Class = "IBUILabel"; text = "SCORES"; ObjectID = "9h4-Nq-OUQ"; */
-"9h4-Nq-OUQ.text" = "得分";
+"9h4-Nq-OUQ.text" = "スコア";
 
 /* Class = "IBUIButton"; normalTitle = "D"; ObjectID = "9wB-yg-kzd"; */
 "9wB-yg-kzd.normalTitle" = "D";
 
 /* Class = "IBUIButton"; normalTitle = "Main Menu"; ObjectID = "D1y-DB-RVP"; */
-"D1y-DB-RVP.normalTitle" = "主菜单";
+"D1y-DB-RVP.normalTitle" = "メインメニュー";
 
 /* Class = "IBUILabel"; text = "We're here for you"; ObjectID = "Dz9-aH-CkM"; */
-"Dz9-aH-CkM.text" = "我们在这儿等你";
+"Dz9-aH-CkM.text" = "私たちはあなたのためにここにいる";
 
 /* Class = "IBUILabel"; text = "Contact Us"; ObjectID = "Jh0-w4-0Wv"; */
-"Jh0-w4-0Wv.text" = "联系我们";
+"Jh0-w4-0Wv.text" = "お問い合わせ";
 
 /* Class = "IBUIButton"; normalTitle = "L"; ObjectID = "L6e-Pn-FaI"; */
 "L6e-Pn-FaI.normalTitle" = "L";
@@ -42,19 +42,19 @@
 "LTH-7f-DtO.normalTitle" = "B";
 
 /* Class = "IBUIButton"; normalTitle = "Main Menu"; ObjectID = "MZd-Fg-9Tm"; */
-"MZd-Fg-9Tm.normalTitle" = "主菜单";
+"MZd-Fg-9Tm.normalTitle" = "メインメニュー";
 
 /* Class = "IBUIButton"; normalTitle = "H"; ObjectID = "Mb6-Kb-tTp"; */
 "Mb6-Kb-tTp.normalTitle" = "H";
 
 /* Class = "IBUILabel"; text = "YOU MADE IT !"; ObjectID = "MfH-0J-KWr"; */
-"MfH-0J-KWr.text" = "恭喜过关 !";
+"MfH-0J-KWr.text" = "よくできたね !";
 
 /* Class = "IBUILabel"; text = "Classic Mode"; ObjectID = "Nbg-Re-d3E"; */
-"Nbg-Re-d3E.text" = "经典模式";
+"Nbg-Re-d3E.text" = "クラシックモード";
 
 /* Class = "IBUIButton"; normalTitle = "Next Level"; ObjectID = "Oqy-0T-VGA"; */
-"Oqy-0T-VGA.normalTitle" = "下一关";
+"Oqy-0T-VGA.normalTitle" = "次のレベル";
 
 /* Class = "IBUILabel"; text = "10"; ObjectID = "PXt-lJ-ula"; */
 "PXt-lJ-ula.text" = "10";
@@ -63,7 +63,7 @@
 "Pv6-cI-9Bl.normalTitle" = "A";
 
 /* Class = "IBUIButton"; normalTitle = "Restart"; ObjectID = "Q9x-9h-hRU"; */
-"Q9x-9h-hRU.normalTitle" = "重新开始";
+"Q9x-9h-hRU.normalTitle" = "再起動";
 
 /* Class = "IBUIButton"; normalTitle = "E"; ObjectID = "Tgo-k5-KZD"; */
 "Tgo-k5-KZD.normalTitle" = "E";
@@ -72,7 +72,7 @@
 "Urk-uD-tcK.normalTitle" = "E";
 
 /* Class = "IBUILabel"; text = "how to play"; ObjectID = "Uua-CW-Jyr"; */
-"Uua-CW-Jyr.text" = "玩法简介";
+"Uua-CW-Jyr.text" = "はじめにプレイ";
 
 /* Class = "IBUILabel"; text = "3000"; ObjectID = "Z4h-Nb-zvG"; */
 "Z4h-Nb-zvG.text" = "3000";
@@ -81,10 +81,10 @@
 "Zh0-Xc-fjs.text" = "10";
 
 /* Class = "IBUILabel"; text = "Classic Mode"; ObjectID = "bnI-v8-2q6"; */
-"bnI-v8-2q6.text" = "经典模式";
+"bnI-v8-2q6.text" = "クラシックモード";
 
 /* Class = "IBUILabel"; text = "sound"; ObjectID = "ch5-sl-t6S"; */
-"ch5-sl-t6S.text" = "声音";
+"ch5-sl-t6S.text" = "サウンド";
 
 /* Class = "IBUIButton"; normalTitle = "I"; ObjectID = "dZh-v3-iHc"; */
 "dZh-v3-iHc.normalTitle" = "I";
@@ -96,16 +96,16 @@
 "gzQ-CV-HQF.normalTitle" = "twitter";
 
 /* Class = "IBUILabel"; text = "ABOUT"; ObjectID = "igd-IC-Yjd"; */
-"igd-IC-Yjd.text" = "关于";
+"igd-IC-Yjd.text" = "について";
 
 /* Class = "IBUIButton"; normalTitle = "D"; ObjectID = "kop-Bg-y5B"; */
 "kop-Bg-y5B.normalTitle" = "D";
 
 /* Class = "IBUILabel"; text = "rate"; ObjectID = "nkr-Tu-RZd"; */
-"nkr-Tu-RZd.text" = "评分";
+"nkr-Tu-RZd.text" = "評価";
 
 /* Class = "IBUILabel"; text = "how to play"; ObjectID = "oBR-jR-wZ2"; */
-"oBR-jR-wZ2.text" = "玩法简介";
+"oBR-jR-wZ2.text" = "はじめにプレイ";
 
 /* Class = "IBUILabel"; text = "12"; ObjectID = "pJB-Jx-cxd"; */
 "pJB-Jx-cxd.text" = "12";
@@ -120,7 +120,7 @@
 "sl5-EN-NSK.text" = "9";
 
 /* Class = "IBUIButton"; normalTitle = "Play Now"; ObjectID = "uH1-GV-bvO"; */
-"uH1-GV-bvO.normalTitle" = "开始游戏!";
+"uH1-GV-bvO.normalTitle" = "遊ぶ!";
 
 /* Class = "IBUIButton"; normalTitle = "Facebook"; ObjectID = "v4M-38-MXm"; */
 "v4M-38-MXm.normalTitle" = "Facebook";
@@ -129,7 +129,7 @@
 "xwD-nF-xhX.normalTitle" = "C";
 
 /* Class = "IBUILabel"; text = "settings"; ObjectID = "yJw-pE-OT6"; */
-"yJw-pE-OT6.text" = "设置";
+"yJw-pE-OT6.text" = "設定";
 
 /* Class = "IBUILabel"; text = "ABOUT"; ObjectID = "ykb-dF-4rJ"; */
-"ykb-dF-4rJ.text" = "关于";
+"ykb-dF-4rJ.text" = "に関して";

@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  numgame
+
+  Created by Sun Xi on 8/18/14.
+  Copyright (c) 2014 Sun Xi. All rights reserved.
+*/
+"Classic Mode"  = "經典模式";
+
+"Time Mode" = "計時模式";
+
+"Step Mode" = "計步模式";
+
+"Endless Mode" = "無盡模式";

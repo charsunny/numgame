@@ -52,7 +52,7 @@
 */
 
 - (IBAction)onBack:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:^{}];
 }
 
 - (IBAction)onClickButton:(UIButton*)sender {

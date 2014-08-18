@@ -56,7 +56,7 @@
     if ([sender.titleLabel.text isEqualToString:@"play!"]) {
         [self.navigationController popToRootViewControllerAnimated:YES];
     } else {
-        [self.navigationController popViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:^{}];
     }
 }
 

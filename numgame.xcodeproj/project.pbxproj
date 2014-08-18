@@ -78,6 +78,7 @@
 		5034020819695DCA00AAD2B6 /* square_9.aif in Resources */ = {isa = PBXBuildFile; fileRef = 503401D819695DCA00AAD2B6 /* square_9.aif */; };
 		5034020919695DCA00AAD2B6 /* square_10.aif in Resources */ = {isa = PBXBuildFile; fileRef = 503401D919695DCA00AAD2B6 /* square_10.aif */; };
 		5043F980196C1FCA00BD2DB5 /* libpop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5043F979196C1FC100BD2DB5 /* libpop.a */; };
+		5045912A19A1C918002E6C79 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5045912819A1C918002E6C79 /* Localizable.strings */; };
 		508B8AFF1917BEC100DC9FA6 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 508B8AFE1917BEC100DC9FA6 /* Social.framework */; };
 		508B8B021918861900DC9FA6 /* NGGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 508B8B011918861900DC9FA6 /* NGGuideViewController.m */; };
 		508B8B0D191891E900DC9FA6 /* NGAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 508B8B0C191891E900DC9FA6 /* NGAboutViewController.m */; };
@@ -237,14 +238,28 @@
 		503401D819695DCA00AAD2B6 /* square_9.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = square_9.aif; sourceTree = "<group>"; };
 		503401D919695DCA00AAD2B6 /* square_10.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = square_10.aif; sourceTree = "<group>"; };
 		5043F971196C1FC100BD2DB5 /* pop.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = pop.xcodeproj; path = pop/pop.xcodeproj; sourceTree = "<group>"; };
+		5045912919A1C918002E6C79 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		5045912B19A1C946002E6C79 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		5045912D19A1C94A002E6C79 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5045912E19A1C94D002E6C79 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5045912F19A1C94E002E6C79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5045913019A1D972002E6C79 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main_iPhone.strings; sourceTree = "<group>"; };
+		5045913419A1D972002E6C79 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5045913519A1D972002E6C79 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5045913619A1D972002E6C79 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5067BF9C19A1BFCA00E6E377 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main_iPhone.strings; sourceTree = "<group>"; };
+		5067BFA419A1BFCB00E6E377 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5067BFA519A1BFCB00E6E377 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5067BFAC19A1BFFC00E6E377 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main_iPhone.strings"; sourceTree = "<group>"; };
+		5067BFB019A1BFFD00E6E377 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		5067BFB119A1BFFD00E6E377 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		5067BFB619A1C37100E6E377 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		5067BFB719A1C37200E6E377 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main_iPhone.strings"; sourceTree = "<group>"; };
 		508B8AFE1917BEC100DC9FA6 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		508B8B001918861900DC9FA6 /* NGGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGGuideViewController.h; sourceTree = "<group>"; };
 		508B8B011918861900DC9FA6 /* NGGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NGGuideViewController.m; sourceTree = "<group>"; };
 		508B8B0B191891E900DC9FA6 /* NGAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGAboutViewController.h; sourceTree = "<group>"; };
 		508B8B0C191891E900DC9FA6 /* NGAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NGAboutViewController.m; sourceTree = "<group>"; };
-		50949E6B196EB98100903689 /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/Main_iPhone.strings"; sourceTree = "<group>"; };
-		50949E73196EB98100903689 /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		50949E74196EB98100903689 /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		50949E75196EBBCB00903689 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 		50EDF3A418FFB755003FBA71 /* numgame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = numgame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50EDF3A718FFB755003FBA71 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -511,6 +526,7 @@
 		50EDF3AE18FFB755003FBA71 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5045912819A1C918002E6C79 /* Localizable.strings */,
 				503401A3196954D800AAD2B6 /* Main_iPhone.storyboard */,
 				50EDF3AF18FFB755003FBA71 /* numgame-Info.plist */,
 				50EDF3B018FFB755003FBA71 /* InfoPlist.strings */,
@@ -624,7 +640,10 @@
 			knownRegions = (
 				en,
 				Base,
-				"zh-Hans-CN",
+				ja,
+				"zh-Hant",
+				"zh-Hans",
+				ko,
 			);
 			mainGroup = 50EDF39B18FFB755003FBA71;
 			productRefGroup = 50EDF3A518FFB755003FBA71 /* Products */;
@@ -740,6 +759,7 @@
 				503401FB19695DCA00AAD2B6 /* soundU.mp3 in Resources */,
 				9D07868819A0CF100056F4BE /* score_counter_16.mp3 in Resources */,
 				503401E619695DCA00AAD2B6 /* 13.aif in Resources */,
+				5045912A19A1C918002E6C79 /* Localizable.strings in Resources */,
 				5034020819695DCA00AAD2B6 /* square_9.aif in Resources */,
 				503401ED19695DCA00AAD2B6 /* soundG.mp3 in Resources */,
 				503401F819695DCA00AAD2B6 /* soundR.mp3 in Resources */,
@@ -814,16 +834,35 @@
 			isa = PBXVariantGroup;
 			children = (
 				503401A4196954D800AAD2B6 /* Base */,
-				50949E6B196EB98100903689 /* zh-Hans-CN */,
+				5067BF9C19A1BFCA00E6E377 /* ja */,
+				5067BFAC19A1BFFC00E6E377 /* zh-Hant */,
+				5067BFB719A1C37200E6E377 /* zh-Hans */,
+				5045913019A1D972002E6C79 /* ko */,
 			);
 			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		5045912819A1C918002E6C79 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5045912919A1C918002E6C79 /* zh-Hans */,
+				5045912B19A1C946002E6C79 /* zh-Hant */,
+				5045912D19A1C94A002E6C79 /* ja */,
+				5045912E19A1C94D002E6C79 /* en */,
+				5045912F19A1C94E002E6C79 /* Base */,
+				5045913419A1D972002E6C79 /* ko */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		50EDF3B018FFB755003FBA71 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				50EDF3B118FFB755003FBA71 /* en */,
-				50949E73196EB98100903689 /* zh-Hans-CN */,
+				5067BFA419A1BFCB00E6E377 /* ja */,
+				5067BFB019A1BFFD00E6E377 /* zh-Hant */,
+				5067BFB619A1C37100E6E377 /* zh-Hans */,
+				5045913519A1D972002E6C79 /* ko */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -832,7 +871,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				50EDF3D318FFB756003FBA71 /* en */,
-				50949E74196EB98100903689 /* zh-Hans-CN */,
+				5067BFA519A1BFCB00E6E377 /* ja */,
+				5067BFB119A1BFFD00E6E377 /* zh-Hant */,
+				5045913619A1D972002E6C79 /* ko */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

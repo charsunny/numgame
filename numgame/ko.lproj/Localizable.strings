@@ -1,0 +1,14 @@
+/*
+ Localizable.strings
+ numgame
+ 
+ Created by Sun Xi on 8/18/14.
+ Copyright (c) 2014 Sun Xi. All rights reserved.
+ */
+"Classic Mode"  = "클래식 모드";
+
+"Time Mode" = "타이밍 모드";
+
+"Step Mode" = "보수계 모드";
+
+"Endless Mode" = "무한 모드";

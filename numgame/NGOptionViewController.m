@@ -59,7 +59,7 @@
 }
 
 - (IBAction)onResume:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+   [self dismissViewControllerAnimated:YES completion:^{}];
 }
 
 /*

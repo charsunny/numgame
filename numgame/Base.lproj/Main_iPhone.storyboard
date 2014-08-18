@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6205" systemVersion="14A314h" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="ktx-ga-6Ec">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="14A314h" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="ktx-ga-6Ec">
     <dependencies>
         <deployment version="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6198"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
         <!--Game View Controller-->
@@ -303,7 +303,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Classic Mode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nbg-Re-d3E">
-                                        <rect key="frame" x="110" y="227" width="100" height="21"/>
+                                        <rect key="frame" x="91" y="231" width="139" height="21"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="15"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -572,7 +572,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="onClickButton:" destination="FsD-Bs-7uW" eventType="touchUpInside" id="VCT-OQ-Lbu"/>
-                                            <segue destination="7Hu-Q0-XDj" kind="push" id="hyf-pz-hnl"/>
+                                            <segue destination="7Hu-Q0-XDj" kind="modal" id="hyf-pz-hnl"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mb6-Kb-tTp">
@@ -607,7 +607,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="onClickButton:" destination="FsD-Bs-7uW" eventType="touchUpInside" id="ohY-jl-X1P"/>
-                                            <segue destination="O7H-WL-zgm" kind="push" id="n16-og-EGO"/>
+                                            <segue destination="O7H-WL-zgm" kind="modal" id="n16-og-EGO"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="sound" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ch5-sl-t6S">
@@ -752,8 +752,8 @@
                                             <action selector="onClickButton:" destination="O7H-WL-zgm" eventType="touchUpInside" id="waO-NV-jFu"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="We're here for you" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dz9-aH-CkM">
-                                        <rect key="frame" x="60" y="279" width="200" height="21"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="We're here for you" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="Dz9-aH-CkM">
+                                        <rect key="frame" x="60" y="279" width="200" height="41"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -1062,23 +1062,6 @@
             </objects>
             <point key="canvasLocation" x="780" y="875"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="xEO-Np-XrP">
-            <objects>
-                <viewController id="tsW-0D-ZId" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="HTw-OI-y4I"/>
-                        <viewControllerLayoutGuide type="bottom" id="jab-uf-ktZ"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="GdP-Ez-QNv">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="unF-yA-F23" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
     </scenes>
     <resources>
         <image name="fire" width="130" height="130"/>
@@ -1088,10 +1071,7 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination">
-            <size key="portraitSize" width="320" height="480"/>
-            <size key="landscapeSize" width="480" height="320"/>
-        </simulatedScreenMetrics>
+        <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="Jb5-Vu-pgL"/>

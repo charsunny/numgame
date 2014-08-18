@@ -3,7 +3,7 @@
 "0Wv-b0-UrL.normalTitle" = "L";
 
 /* Class = "IBUIButton"; normalTitle = "email"; ObjectID = "5ML-Dc-2id"; */
-"5ML-Dc-2id.normalTitle" = "邮件";
+"5ML-Dc-2id.normalTitle" = "電子郵件";
 
 /* Class = "IBUIButton"; normalTitle = "J"; ObjectID = "5RR-rK-vZR"; */
 "5RR-rK-vZR.normalTitle" = "J";
@@ -12,10 +12,10 @@
 "6KZ-Zy-UAI.text" = "Sum Ten";
 
 /* Class = "IBUIButton"; normalTitle = "Resume"; ObjectID = "6vG-xA-XEa"; */
-"6vG-xA-XEa.normalTitle" = "恢复游戏";
+"6vG-xA-XEa.normalTitle" = "恢復遊戲";
 
 /* Class = "IBUIButton"; normalTitle = "play!"; ObjectID = "8OI-7h-aMf"; */
-"8OI-7h-aMf.normalTitle" = "开始玩!";
+"8OI-7h-aMf.normalTitle" = "開始玩!";
 
 /* Class = "IBUILabel"; text = "20/20"; ObjectID = "95y-co-i5M"; */
 "95y-co-i5M.text" = "20/20";
@@ -27,13 +27,13 @@
 "9wB-yg-kzd.normalTitle" = "D";
 
 /* Class = "IBUIButton"; normalTitle = "Main Menu"; ObjectID = "D1y-DB-RVP"; */
-"D1y-DB-RVP.normalTitle" = "主菜单";
+"D1y-DB-RVP.normalTitle" = "主菜單";
 
 /* Class = "IBUILabel"; text = "We're here for you"; ObjectID = "Dz9-aH-CkM"; */
-"Dz9-aH-CkM.text" = "我们在这儿等你";
+"Dz9-aH-CkM.text" = "我們等著你的消息";
 
 /* Class = "IBUILabel"; text = "Contact Us"; ObjectID = "Jh0-w4-0Wv"; */
-"Jh0-w4-0Wv.text" = "联系我们";
+"Jh0-w4-0Wv.text" = "聯繫我們";
 
 /* Class = "IBUIButton"; normalTitle = "L"; ObjectID = "L6e-Pn-FaI"; */
 "L6e-Pn-FaI.normalTitle" = "L";
@@ -42,19 +42,19 @@
 "LTH-7f-DtO.normalTitle" = "B";
 
 /* Class = "IBUIButton"; normalTitle = "Main Menu"; ObjectID = "MZd-Fg-9Tm"; */
-"MZd-Fg-9Tm.normalTitle" = "主菜单";
+"MZd-Fg-9Tm.normalTitle" = "主菜單";
 
 /* Class = "IBUIButton"; normalTitle = "H"; ObjectID = "Mb6-Kb-tTp"; */
 "Mb6-Kb-tTp.normalTitle" = "H";
 
 /* Class = "IBUILabel"; text = "YOU MADE IT !"; ObjectID = "MfH-0J-KWr"; */
-"MfH-0J-KWr.text" = "恭喜过关 !";
+"MfH-0J-KWr.text" = "恭喜過關 !";
 
 /* Class = "IBUILabel"; text = "Classic Mode"; ObjectID = "Nbg-Re-d3E"; */
-"Nbg-Re-d3E.text" = "经典模式";
+"Nbg-Re-d3E.text" = "經典模式";
 
 /* Class = "IBUIButton"; normalTitle = "Next Level"; ObjectID = "Oqy-0T-VGA"; */
-"Oqy-0T-VGA.normalTitle" = "下一关";
+"Oqy-0T-VGA.normalTitle" = "下一關";
 
 /* Class = "IBUILabel"; text = "10"; ObjectID = "PXt-lJ-ula"; */
 "PXt-lJ-ula.text" = "10";
@@ -63,7 +63,7 @@
 "Pv6-cI-9Bl.normalTitle" = "A";
 
 /* Class = "IBUIButton"; normalTitle = "Restart"; ObjectID = "Q9x-9h-hRU"; */
-"Q9x-9h-hRU.normalTitle" = "重新开始";
+"Q9x-9h-hRU.normalTitle" = "重新開始";
 
 /* Class = "IBUIButton"; normalTitle = "E"; ObjectID = "Tgo-k5-KZD"; */
 "Tgo-k5-KZD.normalTitle" = "E";
@@ -72,7 +72,7 @@
 "Urk-uD-tcK.normalTitle" = "E";
 
 /* Class = "IBUILabel"; text = "how to play"; ObjectID = "Uua-CW-Jyr"; */
-"Uua-CW-Jyr.text" = "玩法简介";
+"Uua-CW-Jyr.text" = "玩法簡介";
 
 /* Class = "IBUILabel"; text = "3000"; ObjectID = "Z4h-Nb-zvG"; */
 "Z4h-Nb-zvG.text" = "3000";
@@ -81,10 +81,10 @@
 "Zh0-Xc-fjs.text" = "10";
 
 /* Class = "IBUILabel"; text = "Classic Mode"; ObjectID = "bnI-v8-2q6"; */
-"bnI-v8-2q6.text" = "经典模式";
+"bnI-v8-2q6.text" = "經典模式";
 
 /* Class = "IBUILabel"; text = "sound"; ObjectID = "ch5-sl-t6S"; */
-"ch5-sl-t6S.text" = "声音";
+"ch5-sl-t6S.text" = "聲音";
 
 /* Class = "IBUIButton"; normalTitle = "I"; ObjectID = "dZh-v3-iHc"; */
 "dZh-v3-iHc.normalTitle" = "I";
@@ -96,16 +96,16 @@
 "gzQ-CV-HQF.normalTitle" = "twitter";
 
 /* Class = "IBUILabel"; text = "ABOUT"; ObjectID = "igd-IC-Yjd"; */
-"igd-IC-Yjd.text" = "关于";
+"igd-IC-Yjd.text" = "關於";
 
 /* Class = "IBUIButton"; normalTitle = "D"; ObjectID = "kop-Bg-y5B"; */
 "kop-Bg-y5B.normalTitle" = "D";
 
 /* Class = "IBUILabel"; text = "rate"; ObjectID = "nkr-Tu-RZd"; */
-"nkr-Tu-RZd.text" = "评分";
+"nkr-Tu-RZd.text" = "應用評分";
 
 /* Class = "IBUILabel"; text = "how to play"; ObjectID = "oBR-jR-wZ2"; */
-"oBR-jR-wZ2.text" = "玩法简介";
+"oBR-jR-wZ2.text" = "玩法簡介";
 
 /* Class = "IBUILabel"; text = "12"; ObjectID = "pJB-Jx-cxd"; */
 "pJB-Jx-cxd.text" = "12";
@@ -120,7 +120,7 @@
 "sl5-EN-NSK.text" = "9";
 
 /* Class = "IBUIButton"; normalTitle = "Play Now"; ObjectID = "uH1-GV-bvO"; */
-"uH1-GV-bvO.normalTitle" = "开始游戏!";
+"uH1-GV-bvO.normalTitle" = "開始遊戲";
 
 /* Class = "IBUIButton"; normalTitle = "Facebook"; ObjectID = "v4M-38-MXm"; */
 "v4M-38-MXm.normalTitle" = "Facebook";
@@ -129,7 +129,7 @@
 "xwD-nF-xhX.normalTitle" = "C";
 
 /* Class = "IBUILabel"; text = "settings"; ObjectID = "yJw-pE-OT6"; */
-"yJw-pE-OT6.text" = "设置";
+"yJw-pE-OT6.text" = "設置";
 
 /* Class = "IBUILabel"; text = "ABOUT"; ObjectID = "ykb-dF-4rJ"; */
-"ykb-dF-4rJ.text" = "关于";
+"ykb-dF-4rJ.text" = "關於";

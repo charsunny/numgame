@@ -99,11 +99,11 @@
         case NGGameModeClassic:
             return NSLocalizedString(@"Classic Mode", @"classic");
         case NGGameModeTimed:
-            return NSLocalizedString(@"Time Mode", @"classic");
+            return NSLocalizedString(@"Time Mode", @"timed");
         case NGGameModeSteped:
-            return NSLocalizedString(@"Step Mode", @"classic");
+            return NSLocalizedString(@"Step Mode", @"steped");
         case NGGameModeEndless:
-            return NSLocalizedString(@"Endless Mode", @"classic");
+            return NSLocalizedString(@"Endless Mode", @"endless");
         default:
             break;
     }
