@@ -12,3 +12,19 @@
 "Step Mode" = "計步模式";
 
 "Endless Mode" = "無盡模式";
+
+"Unlock" = "解鎖/恢復";
+
+"Play" = "開始遊戲!";
+
+"Tip" = "貼士";
+
+"Cancel" = "取消";
+
+"Buy" = "購買";
+
+"OK" = "確認";
+
+"Buy failed, please try again!" = "購買失敗，請重試！";
+
+"This Mode is temporarily unreachable, wait for a second" = "解鎖暫時不可用，請確認購買信息";

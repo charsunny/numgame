@@ -79,6 +79,7 @@
 		5034020919695DCA00AAD2B6 /* square_10.aif in Resources */ = {isa = PBXBuildFile; fileRef = 503401D919695DCA00AAD2B6 /* square_10.aif */; };
 		5043F980196C1FCA00BD2DB5 /* libpop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5043F979196C1FC100BD2DB5 /* libpop.a */; };
 		5045912A19A1C918002E6C79 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5045912819A1C918002E6C79 /* Localizable.strings */; };
+		50739D1219A221EE00B39071 /* SKProduct+LocalizedPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = 50739D1119A221EE00B39071 /* SKProduct+LocalizedPrice.m */; };
 		508B8AFF1917BEC100DC9FA6 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 508B8AFE1917BEC100DC9FA6 /* Social.framework */; };
 		508B8B021918861900DC9FA6 /* NGGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 508B8B011918861900DC9FA6 /* NGGuideViewController.m */; };
 		508B8B0D191891E900DC9FA6 /* NGAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 508B8B0C191891E900DC9FA6 /* NGAboutViewController.m */; };
@@ -255,6 +256,8 @@
 		5067BFB119A1BFFD00E6E377 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		5067BFB619A1C37100E6E377 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		5067BFB719A1C37200E6E377 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main_iPhone.strings"; sourceTree = "<group>"; };
+		50739D1019A221EE00B39071 /* SKProduct+LocalizedPrice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKProduct+LocalizedPrice.h"; sourceTree = "<group>"; };
+		50739D1119A221EE00B39071 /* SKProduct+LocalizedPrice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKProduct+LocalizedPrice.m"; sourceTree = "<group>"; };
 		508B8AFE1917BEC100DC9FA6 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		508B8B001918861900DC9FA6 /* NGGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGGuideViewController.h; sourceTree = "<group>"; };
 		508B8B011918861900DC9FA6 /* NGGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NGGuideViewController.m; sourceTree = "<group>"; };
@@ -448,6 +451,21 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		50739D1719A221FC00B39071 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				9DFF66D4199CF6410069F436 /* NGPlayer.h */,
+				9DFF66D5199CF6410069F436 /* NGPlayer.m */,
+				50FB049819694C5E00941EEF /* MatrixMath.h */,
+				50FB049919694C5E00941EEF /* MatrixMath.m */,
+				9D5A1072197D3627007BBECE /* NGGameUtil.h */,
+				9D5A1073197D3627007BBECE /* NGGameUtil.m */,
+				50739D1019A221EE00B39071 /* SKProduct+LocalizedPrice.h */,
+				50739D1119A221EE00B39071 /* SKProduct+LocalizedPrice.m */,
+			);
+			name = utils;
+			sourceTree = "<group>";
+		};
 		50EDF39B18FFB755003FBA71 = {
 			isa = PBXGroup;
 			children = (
@@ -493,12 +511,7 @@
 		50EDF3AD18FFB755003FBA71 /* numgame */ = {
 			isa = PBXGroup;
 			children = (
-				9DFF66D4199CF6410069F436 /* NGPlayer.h */,
-				9DFF66D5199CF6410069F436 /* NGPlayer.m */,
-				50FB049819694C5E00941EEF /* MatrixMath.h */,
-				50FB049919694C5E00941EEF /* MatrixMath.m */,
-				9D5A1072197D3627007BBECE /* NGGameUtil.h */,
-				9D5A1073197D3627007BBECE /* NGGameUtil.m */,
+				50739D1719A221FC00B39071 /* utils */,
 				50FB049119694C1600941EEF /* view */,
 				5014AF4119163AA700827D82 /* res */,
 				50EDF3B618FFB755003FBA71 /* NGAppDelegate.h */,
@@ -795,6 +808,7 @@
 				50FB049A19694C5E00941EEF /* MatrixMath.m in Sources */,
 				5014AE2F190E982C00827D82 /* NGOptionViewController.m in Sources */,
 				9D5A1074197D3627007BBECE /* NGGameUtil.m in Sources */,
+				50739D1219A221EE00B39071 /* SKProduct+LocalizedPrice.m in Sources */,
 				5014AE2C190E920400827D82 /* NGGameModeViewController.m in Sources */,
 				50FB049619694C2500941EEF /* GameBoardCell.m in Sources */,
 				50EDF3B418FFB755003FBA71 /* main.m in Sources */,

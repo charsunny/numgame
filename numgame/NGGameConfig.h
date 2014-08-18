@@ -29,10 +29,6 @@ typedef enum {
 
 @property (nonatomic, strong) NSString* sound;
 
-@property (nonatomic) int streetHighscore;
-
-@property (nonatomic) int rushSpeed;
-
-@property (nonatomic) int zenHighScore;
+@property (nonatomic) BOOL unlockEndlessMode;
 
 @end

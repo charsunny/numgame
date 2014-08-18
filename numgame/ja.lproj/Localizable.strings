@@ -12,3 +12,19 @@
 "Step Mode" = "歩数計モード";
 
 "Endless Mode" = "エンドレスモード";
+
+"Unlock" = "アンロック";
+
+"Play" = "遊ぶ";
+
+"Tip" = "ヒント";
+
+"Cancel" = "キャンセル";
+
+"Buy" = "買う";
+
+"OK" = "グッド";
+
+"Buy failed, please try again!" = "購入失敗し、もう一度試してください！";
+
+"This Mode is temporarily unreachable, wait for a second" = "一時的に利用できないロックを解除しています。しばらくお待ちください";

@@ -30,6 +30,17 @@
     [[NSUserDefaults standardUserDefaults] setValue:@(gamemode) forKey:@"gamemode"];
 }
 
+- (BOOL)unlockEndlessMode {
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"endlessmodeunlock"]) {
+        [self setUnlockEndlessMode:NO];
+    }
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:@"endlessmodeunlock"] boolValue];
+}
+
+- (void)setUnlockEndlessMode:(BOOL)unlockEndlessModegamemode {
+    [[NSUserDefaults standardUserDefaults] setValue:@(unlockEndlessModegamemode) forKey:@"endlessmodeunlock"];
+}
+
 - (NSString*)sound {
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"sound"]) {
         [self setSound:@"J"];

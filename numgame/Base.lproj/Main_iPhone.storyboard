@@ -321,8 +321,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="onTouchDownMode:" destination="lhW-bX-WxH" eventType="touchDown" id="fIs-CA-r7q"/>
-                                            <segue destination="Euq-Gn-BWU" kind="push" identifier="playsegue" id="RbF-cI-NcH"/>
+                                            <action selector="onPlay:" destination="lhW-bX-WxH" eventType="touchUpInside" id="IPM-a5-dx7"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -385,6 +384,7 @@
                         <outletCollection property="modeButtons" destination="Tgo-k5-KZD" id="uuE-vA-VuK"/>
                         <outletCollection property="modeButtons" destination="9wB-yg-kzd" id="H9J-Xx-MAy"/>
                         <segue destination="7Hu-Q0-XDj" kind="push" identifier="guidesegue" id="Jb5-Vu-pgL"/>
+                        <segue destination="Euq-Gn-BWU" kind="push" identifier="playsegue" id="DJe-oI-Em2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vYv-GZ-TE6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1014,7 +1014,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8OI-7h-aMf">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8OI-7h-aMf">
                                 <rect key="frame" x="60" y="420" width="200" height="40"/>
                                 <color key="backgroundColor" red="0.2666666667" green="0.81176470590000005" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1074,6 +1074,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="hyf-pz-hnl"/>
+        <segue reference="Jb5-Vu-pgL"/>
     </inferredMetricsTieBreakers>
 </document>

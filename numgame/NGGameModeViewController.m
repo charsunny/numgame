@@ -13,6 +13,8 @@
 #import <pop/pop.h>
 #import <objc/runtime.h>
 #import "NGPlayer.h"
+#import "SKProduct+LocalizedPrice.h"
+
 @import GameKit;
 @import StoreKit;
 @import AVFoundation;
@@ -68,6 +70,9 @@
     }
     _playerArray = [NSMutableArray new];
     [[NGPlayer player] playSoundFXnamed:@"game_mode_bg.mp3" Loop:YES];
+    if (![[NGGameConfig sharedGameConfig] unlockEndlessMode] && [[NGGameConfig sharedGameConfig] gamemode] == NGGameModeEndless) {
+        [_playButton setTitle:NSLocalizedString(@"Unlock", @"UnLock") forState:UIControlStateNormal];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -119,17 +124,18 @@
         animate.springBounciness = 20;
         [button pop_addAnimation:animate forKey:@"bouces1"];
     }];
-    if ([[NGGameConfig sharedGameConfig] gamemode] == NGGameModeEndless) {
-            if([SKPaymentQueue canMakePayments])
-            {
-                SKProductsRequest* request = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithObject:@"EMUT0"]];
-                request.delegate = self;
-                [request start];
-            }
-            else
-            {
-                return;
-            }
+}
+
+- (IBAction)onPlay:(UIButton*)sender {
+    if ([[NGGameConfig sharedGameConfig] gamemode] == NGGameModeEndless && ![[NGGameConfig sharedGameConfig] unlockEndlessMode]) {
+        if([SKPaymentQueue canMakePayments])
+        {
+            SKProductsRequest* request = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithObject:@"EMUT0"]];
+            request.delegate = self;
+            [request start];
+        }
+    } else {
+        [self performSegueWithIdentifier:@"playsegue" sender:sender];
     }
 }
 
@@ -147,9 +153,13 @@
             
             [moveAnimation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
             [_modeLabel.layer addAnimation:moveAnimation forKey:@"moveModeText"];
-            
         }
     }];
+    if (![[NGGameConfig sharedGameConfig] unlockEndlessMode] && [[NGGameConfig sharedGameConfig] gamemode] == NGGameModeEndless) {
+        [_playButton setTitle:NSLocalizedString(@"Unlock", @"UnLock") forState:UIControlStateNormal];
+    } else {
+        [_playButton setTitle:NSLocalizedString(@"Play", @"UnLock") forState:UIControlStateNormal];
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -182,14 +192,10 @@
 #pragma mark -- buy item delegate -- 
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response {
     SKProduct *product = [[response products] firstObject];
-        NSLog(@"%@", product.localizedTitle);
-    NSString* tipStr = NSLocalizedString(@"Do you want to buy", @"buy str");
     UIAlertView* alertView;
     if (product != nil) {
-        NSString* string = [NSString stringWithFormat:@"%@ %@ \n %@", tipStr, product.localizedTitle, product.localizedDescription];
-        alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Tip", @"Tip") message:string delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")  otherButtonTitles:NSLocalizedString(@"Buy", @"Buy") , nil];
-        alertView.delegate = self;
-        objc_setAssociatedObject(alertView, @"product", product, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        SKPayment *payment = [SKPayment paymentWithProduct:product];
+        [[SKPaymentQueue defaultQueue] addPayment: payment];
     } else {
         NSString* string = NSLocalizedString(@"This Mode is temporarily unreachable, wait for a second", @"unreachable staff");
         alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Tip", @"Tip") message:string delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"OK") otherButtonTitles:nil];
@@ -200,13 +206,6 @@
 
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 1) {
-        SKProduct *product = objc_getAssociatedObject(alertView, @"product");
-        SKPayment *payment = [SKPayment paymentWithProduct:product];
-        [[SKPaymentQueue defaultQueue] addPayment: payment];
-    }
-}
 
 - (void)paymentQueue: (SKPaymentQueue *)queue updatedTransactions: (NSArray *)transactions
 {
@@ -215,13 +214,17 @@
         switch(transaction.transactionState)
         {
             case SKPaymentTransactionStatePurchased:
-                //[self completeTransaction: transaction];
+                [_playButton setTitle:NSLocalizedString(@"Play", @"Play") forState:UIControlStateNormal];
+                [[NGGameConfig sharedGameConfig] setUnlockEndlessMode:YES];
+                [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
                 break;
             case SKPaymentTransactionStateFailed:
-                //[self failedTransaction: transaction];
+                [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
+                [[[UIAlertView alloc] initWithTitle:@"Tip" message:@"Buy failed, please try again!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
                 break;
             case SKPaymentTransactionStateRestored:
-                //[self restoreTransaction: transaction];
+                [[NGGameConfig sharedGameConfig] setUnlockEndlessMode:YES];
+                [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
             default:
                 break;
         }

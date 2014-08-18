@@ -53,7 +53,7 @@
  */
 
 - (IBAction)onBack:(UIButton*)sender {
-    if ([sender.titleLabel.text isEqualToString:@"play!"]) {
+    if (sender.tag == 1) {
         [self.navigationController popToRootViewControllerAnimated:YES];
     } else {
         [self dismissViewControllerAnimated:YES completion:^{}];
