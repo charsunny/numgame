@@ -60,4 +60,20 @@
     [_audioPlayer play];
 }
 
+-(void)stopPlaySoundFXnamed:(NSString*)vSFXName
+{
+    NSBundle* bundle = [NSBundle mainBundle];
+    
+    NSString* bundleDirectory = (NSString*)[bundle bundlePath];
+    
+    NSURL *url = [NSURL fileURLWithPath:[bundleDirectory stringByAppendingPathComponent:vSFXName]];
+    
+    [_playerArray enumerateObjectsUsingBlock:^(AVAudioPlayer* obj, NSUInteger idx, BOOL *stop) {
+        if ([obj isPlaying] && [obj.url.absoluteString isEqualToString:url.absoluteString]) {
+            [obj stop];
+            [_playerArray removeObject:obj];
+        }
+    }];
+}
+
 @end

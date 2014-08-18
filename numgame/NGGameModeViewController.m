@@ -66,6 +66,7 @@
         [self performSegueWithIdentifier:@"guidesegue" sender:self];
     }
     _playerArray = [NSMutableArray new];
+    [[NGPlayer player] playSoundFXnamed:@"game_mode_bg.mp3" Loop:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -77,13 +78,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    if (arc4random() % 2  == 0) {
-        [[NGPlayer player] playSoundFXnamed:@"game_mode_bg.mp3" Loop:NO];
-    }
-    else
-    {
-        [[NGPlayer player] playSoundFXnamed:@"tuitorial.mp3" Loop:NO];
-    }
+    //[[NGPlayer player] playSoundFXnamed:@"tuitorial.mp3" Loop:NO];
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -160,6 +155,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.destinationViewController isKindOfClass:[NGGameViewController class]]) {
         [_audioPlayer stop];
+        [[NGPlayer player]stopPlaySoundFXnamed:@"game_mode_bg.mp3"];
         NGGameViewController* destVC = (NGGameViewController*)segue.destinationViewController;
         destVC.gameMode = [[NGGameConfig sharedGameConfig] gamemode];
     }

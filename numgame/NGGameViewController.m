@@ -316,6 +316,8 @@
     _stepCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(50, 2, 60, 60)];
     
     [_stepCountingView initData:0 withStart:[levelInfo[@"step"] integerValue] ];
+    //we'll reset the currentCount in initGameData
+    _stepCountingView.currentCount = 0;
     _stepCountingView.pieCapacity = 360;
     _stepCountingView.circleKey = @"stepCount";
     //we don't set delegate here cause we've already have it done in the legacy code
@@ -344,16 +346,16 @@
 }
 
 - (void)initGameData {
+    NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
     switch (_gameMode) {
         case NGGameModeClassic: {
-            NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
             _timeSpent = 0;
             [_levelLabel setText:[NSString stringWithFormat:@"%d",_currectLevel]];
             [_scoreLabel setText:[NSString stringWithFormat:@"%d/%@",_score, levelInfo[@"score"]]];
             [_timeLabel setText:[NSString stringWithFormat:@"0/%@",levelInfo[@"step"]]];
             
             _stepCountingView.destinationCount = 0;
-            _stepCountingView.deltaCount = [levelInfo[@"step"] integerValue];
+            _stepCountingView.deltaCount = [levelInfo[@"step"] integerValue] + _stepCountingView.currentCount;
             _stepCountingView.currentCount = _stepCountingView.deltaCount;
             //update circle
             [_stepCountingView addCount:0 isReverse:YES];
@@ -376,6 +378,9 @@
             _leftTime = 30;
             [_scoreLabel setText:@"0"];
             [_timeLabel setText:@"30"];
+            _stepCountingView.destinationCount = 0;
+            _stepCountingView.deltaCount = [levelInfo[@"step"] integerValue] + _stepCountingView.currentCount;
+            _stepCountingView.currentCount = _stepCountingView.deltaCount;
             [_stepCountingView addCount:0 isReverse:YES];
             break;
         case NGGameModeEndless:

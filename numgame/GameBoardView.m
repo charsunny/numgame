@@ -728,17 +728,7 @@ typedef void(^TrickBlock)();
 {
     NSArray* arr = [self getAllCellWithColor:curColor];
     
-    return (arr.count - _selectedCell.count)*10;
-    
-    int sum = 0;
-    for (int i = 0 ; i<arr.count; i++) {
-        sum+=((GameBoardCell*)arr[i]).number;
-    }
-    for(int k=0;k<_selectedCell.count;k++)
-    {
-        sum-=((GameBoardCell*)_selectedCell[k]).number;
-    }
-    return sum;
+    return (arr.count - _selectedCell.count) * 10;
 }
 
 

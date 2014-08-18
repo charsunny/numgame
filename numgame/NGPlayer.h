@@ -14,4 +14,5 @@
 
 -(void) playSoundFXnamed:(NSString*)vSFXName Loop:(BOOL) vLoop;
 
+-(void)stopPlaySoundFXnamed:(NSString*)vSFXName;
 @end
