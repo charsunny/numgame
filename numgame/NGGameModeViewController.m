@@ -11,6 +11,7 @@
 #import "NGGameViewController.h"
 #import "NGGuideViewController.h"
 #import <pop/pop.h>
+#import <objc/runtime.h>
 #import "NGPlayer.h"
 @import GameKit;
 @import StoreKit;
@@ -118,22 +119,21 @@
         animate.springBounciness = 20;
         [button pop_addAnimation:animate forKey:@"bouces1"];
     }];
+    if ([[NGGameConfig sharedGameConfig] gamemode] == NGGameModeEndless) {
+            if([SKPaymentQueue canMakePayments])
+            {
+                SKProductsRequest* request = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithObject:@"EMUT0"]];
+                request.delegate = self;
+                [request start];
+            }
+            else
+            {
+                return;
+            }
+    }
 }
 
 - (IBAction)onClickMode:(UIButton *)sender {
-    if([SKPaymentQueue canMakePayments])
-    {
-//        SKProductsRequest* request = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithObject:@"EMUT0"]];
-//        request.delegate = self;
-//        [request start];
-        SKPayment *payment = [SKPayment paymentWithProductIdentifier:@"EMUT0"];
-        [[SKPaymentQueue defaultQueue] addPayment: payment];
-    }
-    else
-    {
-        //Warn the user that purchases are disabled.
-    }
-    
     [_modeButtons enumerateObjectsUsingBlock:^(UIButton* button, NSUInteger idx, BOOL *stop) {
         [button setAlpha:(sender == button)?1.0f:0.5f];
         if (sender == button) {
@@ -183,6 +183,29 @@
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response {
     SKProduct *product = [[response products] firstObject];
         NSLog(@"%@", product.localizedTitle);
+    NSString* tipStr = NSLocalizedString(@"Do you want to buy", @"buy str");
+    UIAlertView* alertView;
+    if (product != nil) {
+        NSString* string = [NSString stringWithFormat:@"%@ %@ \n %@", tipStr, product.localizedTitle, product.localizedDescription];
+        alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Tip", @"Tip") message:string delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")  otherButtonTitles:NSLocalizedString(@"Buy", @"Buy") , nil];
+        alertView.delegate = self;
+        objc_setAssociatedObject(alertView, @"product", product, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    } else {
+        NSString* string = NSLocalizedString(@"This Mode is temporarily unreachable, wait for a second", @"unreachable staff");
+        alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Tip", @"Tip") message:string delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"OK") otherButtonTitles:nil];
+    }
+    alertView.tag = 100;
+    [alertView show];
+    
+
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        SKProduct *product = objc_getAssociatedObject(alertView, @"product");
+        SKPayment *payment = [SKPayment paymentWithProduct:product];
+        [[SKPaymentQueue defaultQueue] addPayment: payment];
+    }
 }
 
 - (void)paymentQueue: (SKPaymentQueue *)queue updatedTransactions: (NSArray *)transactions
