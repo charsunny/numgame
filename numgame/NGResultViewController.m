@@ -65,7 +65,8 @@
         }
         [_scoreLabel setText:_score];
         [_modeLabel setText:@"Classic Mode"];
-    } else if (_gameMode == NGGameModeTimed) {
+    } else if (_gameMode == NGGameModeTimed || _gameMode == NGGameModeSteped) {
+        [_backButton setTitle:@"Try Again" forState:UIControlStateNormal];
         if (_isHighScore) {
             [_highScoreLabel setText:@"New Higheset Score!"];
             [_scoreLabel setText:_score];

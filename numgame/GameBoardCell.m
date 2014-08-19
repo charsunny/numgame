@@ -255,8 +255,6 @@
                 
                 [(UIView*)self.accessoryItems[i] setBackgroundColor:[GameBoardCell generateColor:colorIdx]];
             }
-            
-            
           break;
         }
           

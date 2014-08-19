@@ -835,7 +835,8 @@ typedef void(^TrickBlock)();
 #pragma mark fly cell animtion
 - (void)addCellFlyAnimation:(void (^)())callback
 {
-    UILabel* scoreLabel = (UILabel*)[self.superview viewWithTag:1898];
+    //UILabel* scoreLabel = (UILabel*)[self.superview viewWithTag:1898];
+    UIView* scoreView = (UILabel*)[self.superview viewWithTag:1989];
     __weak typeof(self) weakSelf = self;
     [_selectedCell enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
         GameBoardCell* copyCell = [cell copy];
@@ -843,11 +844,11 @@ typedef void(^TrickBlock)();
         copyCell.frame = CGRectMake(newPoint.x, newPoint.y, copyCell.frame.size.width, copyCell.frame.size.height);
         [weakSelf.superview addSubview:copyCell];
         if (idx == 0) {
-            [copyCell addFlyEffect:scoreLabel.center callback:^{
+            [copyCell addFlyEffect:scoreView.center callback:^{
                 callback();
             }];
         } else {
-            [copyCell addFlyEffect:scoreLabel.center callback:nil];
+            [copyCell addFlyEffect:scoreView.center callback:nil];
         }
     }];
 }

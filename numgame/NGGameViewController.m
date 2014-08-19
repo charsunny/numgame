@@ -74,6 +74,8 @@
 
 @property (nonatomic)BOOL changeTrickBtn;
 
+@property (nonatomic)BOOL isCompleted;
+
 @property (strong,nonatomic)GameCountingCircleView* stepCountingView;
 
 @property (strong,nonatomic)GameCountingCircleView* scoreCountingView;
@@ -190,19 +192,6 @@
     }
 }
 
-//- (void)viewDidLayoutSubviews {
-//    UIView* spLine  = [_headView viewWithTag:100];
-//    if (spLine == nil) {
-//        UIToolbar* toolbar = [[UIToolbar alloc] initWithFrame:_headView.bounds];
-//        toolbar.clipsToBounds = YES;
-//        //[_headView insertSubview:toolbar atIndex:0];
-////        spLine = [[UIView alloc] initWithFrame:CGRectMake(0, _headView.frame.size.height - 0.5f, _headView.frame.size.width, 0.5f)];
-////        spLine.backgroundColor = [UIColor lightGrayColor];
-//        //[_headView addSubview:spLine];
-//        [_headView setTag:100];
-//    }
-//}
-
 
 #pragma mark Init ToolBar Circle View
 - (void)initToolBarView
@@ -217,6 +206,7 @@
     switch (self.gameMode) {
         case NGGameModeTimed:
         case NGGameModeSteped:
+        case NGGameModeEndless:
         case NGGameModeClassic:
         {
             
@@ -273,6 +263,7 @@
     _headView.layer.shadowColor = [UIColor blackColor].CGColor;
     _headView.layer.shadowRadius = 3.5;
     _headView.layer.masksToBounds = NO;
+    
     switch (self.gameMode) {
         case NGGameModeClassic:
         {
@@ -283,7 +274,7 @@
         case NGGameModeTimed:
         {
             _timeCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(50, 5, 60, 60)];
-            [_timeCountingView initData:0 withStart:60];
+            [_timeCountingView initData:0 withStart: 60];
             _timeCountingView.pieCapacity = 360;
             _timeCountingView.frontColor = UIColorFromRGB(0x00CE61);
             _timeCountingView.circleColor = UIColorFromRGB(0xFFC53F);
@@ -300,10 +291,13 @@
         {
             [self initStepCircleView];
             [self initScoreCircleView];
+            _stepCountingView.delegate = self;
             break;
         }
         case NGGameModeEndless:
         {
+            [self initScoreCircleView];
+            _scoreCountingView.center = CGPointMake(160, 30);
             break;
         }
         default:
@@ -321,7 +315,7 @@
     _stepCountingView.pieCapacity = 360;
     _stepCountingView.circleKey = @"stepCount";
     //we don't set delegate here cause we've already have it done in the legacy code
-    //_stepCountingView.delegate = self;
+    _stepCountingView.delegate = nil;
     
     _stepCountingView.frontColor = UIColorFromRGB(0x4DC9FD);
     _stepCountingView.circleColor = UIColorFromRGB(0xF56363);
@@ -340,6 +334,7 @@
     _scoreCountingView.circleColor = UIColorFromRGB(0xFFC53F);
     _scoreCountingView.circleKey = @"scoreCount";
     _scoreCountingView.clockwise = 0;
+    _scoreCountingView.tag = 1989;
     //we don't set delegate here cause we've already have it done in the legacy code
     //_scoreCountingView.delegate = self;
     [_headView addSubview:_scoreCountingView];
@@ -371,17 +366,27 @@
             _score = 0;
             [_scoreLabel setText:@"0"];
             [_timeLabel setText:@"60"];
+            _timeCountingView.currentCount = _leftTime;
             [_timeCountingView startCounting];
+            _scoreCountingView.currentCount = 0;
+            [_scoreCountingView addCount:0 isReverse:NO];
             break;
         case NGGameModeSteped:
             _score = 0;
             _leftTime = 30;
             [_scoreLabel setText:@"0"];
             [_timeLabel setText:@"30"];
+            //hell yeah,duplicated code here
             _stepCountingView.destinationCount = 0;
             _stepCountingView.deltaCount = [levelInfo[@"step"] integerValue] + _stepCountingView.currentCount;
             _stepCountingView.currentCount = _stepCountingView.deltaCount;
             [_stepCountingView addCount:0 isReverse:YES];
+            
+            _scoreCountingView.destinationCount = [levelInfo[@"score"] integerValue];
+            _scoreCountingView.deltaCount = [levelInfo[@"score"] integerValue];
+            _scoreCountingView.currentCount = 0;
+            [_scoreCountingView addCount:0 isReverse:NO];
+            
             break;
         case NGGameModeEndless:
             _score = 0;
@@ -405,6 +410,7 @@
 
 - (void)showResult:(BOOL)completed {
     
+    self.isCompleted = completed;
     [self performSegueWithIdentifier:@"resultsegue" sender:self];
     return;
     self.gameResultView = [[GameResultView alloc]initGameResultViewWithScore:self.score Completion:completed];
@@ -466,11 +472,10 @@
                     [GKScore reportScores:@[scoreReporter] withCompletionHandler:nil];
                 }
             }
-            [self initGameData];
         } else if (_gameMode == NGGameModeTimed || _gameMode == NGGameModeSteped) {
             controller.time = _timeLabel.text;
             controller.score = _scoreLabel.text;
-            controller.completed = YES;
+            controller.completed = self.isCompleted;
             if(_score > [[NGGameConfig sharedGameConfig] timedScore]) {
                 [[NGGameConfig sharedGameConfig] setTimedScore:_score];
                 controller.isHighScore = YES;
@@ -479,6 +484,8 @@
                 [GKScore reportScores:@[scoreReporter] withCompletionHandler:nil];
             }
         }
+        //reset data for next round
+        [self initGameData];
     }
 }
 
@@ -574,6 +581,10 @@
         [_timeCountingView stopCounting];
         [self showResult:NO];
     }
+    else if([circleKey isEqualToString:@"stepCount"])
+    {
+        [self showResult:NO];
+    }
 }
 
 #pragma mark GameBoardViewDelegate
@@ -619,6 +630,13 @@
         _leftTime++;
         [_timeLabel setText:[NSString stringWithFormat:@"%.0f",_leftTime]];
     }
+    else if (_gameMode == NGGameModeTimed){
+        _leftTime--;
+        [_timeLabel setText:[NSString stringWithFormat:@"%.0f",_leftTime]];
+        if (_leftTime == 0) {
+            [self showResult:YES];
+        }
+    }
 }
 -(void)decreaseScore:(int)deltaScore
 {
@@ -654,6 +672,7 @@
         //[barBtnItem setEnabled:YES];
         weakself.changeTrickBtn = NO;
         [weakself.colorToolCountingView addCount:-1 isReverse:YES];
+        [weakself.timeCountingView startCounting];
     }];
   
     if (!self.changeTrickBtn) {
@@ -674,6 +693,7 @@
         //[barBtnItem setEnabled:YES];
         weakself.changeTrickBtn = NO;
         [weakself.numberToolCountingView addCount:-1 isReverse:YES];
+        [weakself.timeCountingView startCounting];
     } ];
     
     if (!self.changeTrickBtn) {

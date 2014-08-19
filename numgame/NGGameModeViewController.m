@@ -158,7 +158,7 @@
     if (![[NGGameConfig sharedGameConfig] unlockEndlessMode] && [[NGGameConfig sharedGameConfig] gamemode] == NGGameModeEndless) {
         [_playButton setTitle:NSLocalizedString(@"Unlock", @"UnLock") forState:UIControlStateNormal];
     } else {
-        [_playButton setTitle:NSLocalizedString(@"Play", @"UnLock") forState:UIControlStateNormal];
+        [_playButton setTitle:NSLocalizedString(@"Play", @"Play") forState:UIControlStateNormal];
     }
 }
 
