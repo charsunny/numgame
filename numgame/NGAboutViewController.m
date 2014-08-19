@@ -34,6 +34,11 @@
     [_titleLabel setFont:[UIFont fontWithName:TITLE_FONT size:40]];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.screenName = @"About Screen";
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -56,14 +61,14 @@
 }
 
 - (IBAction)onClickButton:(UIButton*)sender {
-    if ([sender.titleLabel.text isEqualToString:@"email"]) {
+    if ([sender.titleLabel.text isEqualToString:@"Email"]) {
         [self sendMail];
-    } else if([sender.titleLabel.text isEqualToString:@"facebook"]) {
-        [[[UIAlertView alloc] initWithTitle:@"tips" message:@"We  can't Access facebook behind the great fire wall" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-    } else if([sender.titleLabel.text isEqualToString:@"twitter"]) {
-        [[[UIAlertView alloc] initWithTitle:@"tips" message:@"I never heard anything about this website before 😃" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+    } else if([sender.titleLabel.text isEqualToString:@"Facebook"]) {
+        [[[UIAlertView alloc] initWithTitle:@"tips" message:@"@charsunny @lanstonpeng" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+    } else if([sender.titleLabel.text isEqualToString:@"Twitter"]) {
+        [[[UIAlertView alloc] initWithTitle:@"tips" message:@"@charsunny @lanstonpeng" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
     } else {
-        [[[UIAlertView alloc] initWithTitle:@"tips" message:@"We  can't access a lot of unknown website behind the great fire wall 😕" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+        [[[UIAlertView alloc] initWithTitle:@"tips" message:@"😕" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
     }
 }
 
@@ -72,9 +77,9 @@
     mailPicker.mailComposeDelegate = self;
     
     //设置主题
-    [mailPicker setSubject: @"some thing import about tap tap num"];
+    [mailPicker setSubject: @"[4 Dots]Suggestion"];
     //添加收件人
-    NSArray *toRecipients = [NSArray arrayWithObject: @"charsunny@gmail.com"];
+    NSArray *toRecipients = @[@"charsunny@gmail.com",@"lanstonpeng@gmail.com"];
     [mailPicker setToRecipients: toRecipients];
     
     NSString *emailBody = @"I have some to say about the game: \n";

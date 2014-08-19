@@ -14,6 +14,7 @@
 #import <objc/runtime.h>
 #import "NGPlayer.h"
 #import "SKProduct+LocalizedPrice.h"
+#import "NGGameLogger.h"
 
 @import GameKit;
 @import StoreKit;
@@ -93,6 +94,7 @@
     } else {
         _haveSound = NO;
     }
+    self.screenName = @"Game Mode Screen";
 }
 
 - (NSString*)getModeString:(NGGameMode)mode {
@@ -168,6 +170,7 @@
         [[NGPlayer player]stopPlaySoundFXnamed:@"game_mode_bg.mp3"];
         NGGameViewController* destVC = (NGGameViewController*)segue.destinationViewController;
         destVC.gameMode = [[NGGameConfig sharedGameConfig] gamemode];
+        [NGGameLogger logGameData:destVC.gameMode];
     }
 }
 

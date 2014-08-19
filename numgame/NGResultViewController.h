@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "NGGameConfig.h"
+#import "GAITrackedViewController.h"
 
-@interface NGResultViewController : UIViewController
+@interface NGResultViewController : GAITrackedViewController
 
 @property (nonatomic) NGGameMode gameMode;
 

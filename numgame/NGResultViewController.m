@@ -82,6 +82,10 @@
     [super viewDidAppear:animated];
     //[_gADInterstitial presentFromRootViewController:self];
 }
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.screenName = @"About Screen";
+}
 
 - (void)didReceiveMemoryWarning
 {

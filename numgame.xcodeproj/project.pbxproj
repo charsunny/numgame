@@ -15,7 +15,6 @@
 		5014AE2F190E982C00827D82 /* NGOptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5014AE2E190E982C00827D82 /* NGOptionViewController.m */; };
 		5014AF25190F8AE000827D82 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5014AF24190F8AE000827D82 /* CFNetwork.framework */; };
 		5014AF27190F8B0E00827D82 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5014AF26190F8B0E00827D82 /* MessageUI.framework */; };
-		5014AF29190F8B3000827D82 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5014AF28190F8B3000827D82 /* SystemConfiguration.framework */; };
 		5014AF2A190F8B4D00827D82 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50066276190E066600CCE97E /* AdSupport.framework */; };
 		5014AF2C190F8D0600827D82 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5014AF2B190F8D0600827D82 /* AVFoundation.framework */; };
 		5014AF2E190F8D1000827D82 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5014AF2D190F8D1000827D82 /* AudioToolbox.framework */; };
@@ -116,9 +115,18 @@
 		9D07868819A0CF100056F4BE /* score_counter_16.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D07868619A0CF100056F4BE /* score_counter_16.mp3 */; };
 		9D07868919A0CF100056F4BE /* success_playful_23.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D07868719A0CF100056F4BE /* success_playful_23.mp3 */; };
 		9D24FE00199CCE0000550071 /* game_mode_bg.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9D24FDFF199CCE0000550071 /* game_mode_bg.mp3 */; };
+		9D5241F219A32F3F00674E20 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D5241DC19A32B8400674E20 /* CoreData.framework */; };
+		9D5241F319A32F4A00674E20 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5014AF28190F8B3000827D82 /* SystemConfiguration.framework */; };
+		9D5241F419A32F6400674E20 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D5241E219A32B9600674E20 /* libz.dylib */; };
+		9D5242DC19A331E700674E20 /* Changelog.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9D52426119A331E700674E20 /* Changelog.txt */; };
+		9D5242FB19A331E800674E20 /* Readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9D52429719A331E700674E20 /* Readme.txt */; };
+		9D52432819A331E800674E20 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D5242DA19A331E700674E20 /* libGoogleAnalyticsServices.a */; };
+		9D52432919A331E800674E20 /* Readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9D5242DB19A331E700674E20 /* Readme.txt */; };
+		9D52433119A332C900674E20 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D52433019A332C900674E20 /* libsqlite3.dylib */; };
 		9D5A1074197D3627007BBECE /* NGGameUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D5A1073197D3627007BBECE /* NGGameUtil.m */; };
 		9DFA42E8199B7A1A0014C492 /* GameCountingCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DFA42E7199B7A1A0014C492 /* GameCountingCircleView.m */; };
 		9DFF66D6199CF6410069F436 /* NGPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DFF66D5199CF6410069F436 /* NGPlayer.m */; };
+		9DFFFBFB19A342C600A7188B /* NGGameLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DFFFBFA19A342C600A7188B /* NGGameLogger.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -304,12 +312,32 @@
 		9D07868619A0CF100056F4BE /* score_counter_16.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = score_counter_16.mp3; sourceTree = "<group>"; };
 		9D07868719A0CF100056F4BE /* success_playful_23.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = success_playful_23.mp3; sourceTree = "<group>"; };
 		9D24FDFF199CCE0000550071 /* game_mode_bg.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = game_mode_bg.mp3; sourceTree = "<group>"; };
+		9D5241DC19A32B8400674E20 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		9D5241E219A32B9600674E20 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		9D5241EF19A32EB300674E20 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalyticsServices.a; path = ../../Downloads/GoogleAnalyticsServicesiOS_3.09/libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		9D52426119A331E700674E20 /* Changelog.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Changelog.txt; sourceTree = "<group>"; };
+		9D52428D19A331E700674E20 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		9D52428E19A331E700674E20 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		9D52428F19A331E700674E20 /* GAIEcommerceFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceFields.h; sourceTree = "<group>"; };
+		9D52429019A331E700674E20 /* GAIEcommerceProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProduct.h; sourceTree = "<group>"; };
+		9D52429119A331E700674E20 /* GAIEcommerceProductAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProductAction.h; sourceTree = "<group>"; };
+		9D52429219A331E700674E20 /* GAIEcommercePromotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommercePromotion.h; sourceTree = "<group>"; };
+		9D52429319A331E700674E20 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		9D52429419A331E700674E20 /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		9D52429519A331E700674E20 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		9D52429619A331E700674E20 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		9D52429719A331E700674E20 /* Readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Readme.txt; sourceTree = "<group>"; };
+		9D5242DA19A331E700674E20 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		9D5242DB19A331E700674E20 /* Readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Readme.txt; sourceTree = "<group>"; };
+		9D52433019A332C900674E20 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		9D5A1072197D3627007BBECE /* NGGameUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGGameUtil.h; sourceTree = "<group>"; };
 		9D5A1073197D3627007BBECE /* NGGameUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NGGameUtil.m; sourceTree = "<group>"; };
 		9DFA42E6199B7A1A0014C492 /* GameCountingCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCountingCircleView.h; sourceTree = "<group>"; };
 		9DFA42E7199B7A1A0014C492 /* GameCountingCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCountingCircleView.m; sourceTree = "<group>"; };
 		9DFF66D4199CF6410069F436 /* NGPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGPlayer.h; sourceTree = "<group>"; };
 		9DFF66D5199CF6410069F436 /* NGPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NGPlayer.m; sourceTree = "<group>"; };
+		9DFFFBF919A342C600A7188B /* NGGameLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NGGameLogger.h; sourceTree = "<group>"; };
+		9DFFFBFA19A342C600A7188B /* NGGameLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NGGameLogger.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -317,6 +345,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D52433119A332C900674E20 /* libsqlite3.dylib in Frameworks */,
+				9D52432819A331E800674E20 /* libGoogleAnalyticsServices.a in Frameworks */,
+				9D5241F419A32F6400674E20 /* libz.dylib in Frameworks */,
+				9D5241F319A32F4A00674E20 /* SystemConfiguration.framework in Frameworks */,
+				9D5241F219A32F3F00674E20 /* CoreData.framework in Frameworks */,
 				5043F980196C1FCA00BD2DB5 /* libpop.a in Frameworks */,
 				508B8AFF1917BEC100DC9FA6 /* Social.framework in Frameworks */,
 				5014AF32190F8D2A00827D82 /* CoreTelephony.framework in Frameworks */,
@@ -325,7 +358,6 @@
 				5014AF2E190F8D1000827D82 /* AudioToolbox.framework in Frameworks */,
 				5014AF2C190F8D0600827D82 /* AVFoundation.framework in Frameworks */,
 				5014AF2A190F8B4D00827D82 /* AdSupport.framework in Frameworks */,
-				5014AF29190F8B3000827D82 /* SystemConfiguration.framework in Frameworks */,
 				5014AF27190F8B0E00827D82 /* MessageUI.framework in Frameworks */,
 				5014AF25190F8AE000827D82 /* CFNetwork.framework in Frameworks */,
 				50EDF3AC18FFB755003FBA71 /* UIKit.framework in Frameworks */,
@@ -454,6 +486,8 @@
 		50739D1719A221FC00B39071 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				9DFFFBF919A342C600A7188B /* NGGameLogger.h */,
+				9DFFFBFA19A342C600A7188B /* NGGameLogger.m */,
 				9DFF66D4199CF6410069F436 /* NGPlayer.h */,
 				9DFF66D5199CF6410069F436 /* NGPlayer.m */,
 				50FB049819694C5E00941EEF /* MatrixMath.h */,
@@ -489,6 +523,10 @@
 		50EDF3A618FFB755003FBA71 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9D52433019A332C900674E20 /* libsqlite3.dylib */,
+				9D5241EF19A32EB300674E20 /* libGoogleAnalyticsServices.a */,
+				9D5241E219A32B9600674E20 /* libz.dylib */,
+				9D5241DC19A32B8400674E20 /* CoreData.framework */,
 				508B8AFE1917BEC100DC9FA6 /* Social.framework */,
 				5014AF31190F8D2A00827D82 /* CoreTelephony.framework */,
 				5014AF2F190F8D2400827D82 /* StoreKit.framework */,
@@ -511,6 +549,7 @@
 		50EDF3AD18FFB755003FBA71 /* numgame */ = {
 			isa = PBXGroup;
 			children = (
+				9D52425F19A331E700674E20 /* GoogleAnalyticsServicesiOS_3.09 */,
 				50739D1719A221FC00B39071 /* utils */,
 				50FB049119694C1600941EEF /* view */,
 				5014AF4119163AA700827D82 /* res */,
@@ -584,6 +623,43 @@
 				9DFA42E7199B7A1A0014C492 /* GameCountingCircleView.m */,
 			);
 			name = view;
+			sourceTree = "<group>";
+		};
+		9D52425F19A331E700674E20 /* GoogleAnalyticsServicesiOS_3.09 */ = {
+			isa = PBXGroup;
+			children = (
+				9D52426019A331E700674E20 /* GoogleAnalytics */,
+				9D5242DA19A331E700674E20 /* libGoogleAnalyticsServices.a */,
+				9D5242DB19A331E700674E20 /* Readme.txt */,
+			);
+			path = GoogleAnalyticsServicesiOS_3.09;
+			sourceTree = "<group>";
+		};
+		9D52426019A331E700674E20 /* GoogleAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				9D52426119A331E700674E20 /* Changelog.txt */,
+				9D52428C19A331E700674E20 /* Library */,
+				9D52429719A331E700674E20 /* Readme.txt */,
+			);
+			path = GoogleAnalytics;
+			sourceTree = "<group>";
+		};
+		9D52428C19A331E700674E20 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				9D52428D19A331E700674E20 /* GAI.h */,
+				9D52428E19A331E700674E20 /* GAIDictionaryBuilder.h */,
+				9D52428F19A331E700674E20 /* GAIEcommerceFields.h */,
+				9D52429019A331E700674E20 /* GAIEcommerceProduct.h */,
+				9D52429119A331E700674E20 /* GAIEcommerceProductAction.h */,
+				9D52429219A331E700674E20 /* GAIEcommercePromotion.h */,
+				9D52429319A331E700674E20 /* GAIFields.h */,
+				9D52429419A331E700674E20 /* GAILogger.h */,
+				9D52429519A331E700674E20 /* GAITrackedViewController.h */,
+				9D52429619A331E700674E20 /* GAITracker.h */,
+			);
+			path = Library;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -734,6 +810,7 @@
 				5034020119695DCA00AAD2B6 /* square_2.aif in Resources */,
 				5034020519695DCA00AAD2B6 /* square_6.aif in Resources */,
 				9D07867D19A0A5E40056F4BE /* glossy_click_13.mp3 in Resources */,
+				9D52432919A331E800674E20 /* Readme.txt in Resources */,
 				503401E519695DCA00AAD2B6 /* 12.aif in Resources */,
 				503401F919695DCA00AAD2B6 /* soundS.mp3 in Resources */,
 				9D24FE00199CCE0000550071 /* game_mode_bg.mp3 in Resources */,
@@ -755,6 +832,7 @@
 				5034020919695DCA00AAD2B6 /* square_10.aif in Resources */,
 				5014AF6419163AA700827D82 /* Josefin Sans Bold.ttf in Resources */,
 				503401F219695DCA00AAD2B6 /* soundL.mp3 in Resources */,
+				9D5242DC19A331E700674E20 /* Changelog.txt in Resources */,
 				503401A5196954D800AAD2B6 /* Main_iPhone.storyboard in Resources */,
 				9D07867B19A0A4F40056F4BE /* score_counter_01.mp3 in Resources */,
 				503401F619695DCA00AAD2B6 /* soundP.mp3 in Resources */,
@@ -784,6 +862,7 @@
 				5014AF6519163AA700827D82 /* Josefin Sans.ttf in Resources */,
 				503401DA19695DCA00AAD2B6 /* 1.aif in Resources */,
 				9D07868519A0ACBA0056F4BE /* glossy_click_22.mp3 in Resources */,
+				9D5242FB19A331E800674E20 /* Readme.txt in Resources */,
 				5034020619695DCA00AAD2B6 /* square_7.aif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -803,6 +882,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DFFFBFB19A342C600A7188B /* NGGameLogger.m in Sources */,
 				50EDF3C118FFB755003FBA71 /* NGGameViewController.m in Sources */,
 				5014AF38190FF45E00827D82 /* NGGameConfig.m in Sources */,
 				50FB049A19694C5E00941EEF /* MatrixMath.m in Sources */,
@@ -988,6 +1068,11 @@
 					"$(PROJECT_DIR)/numgame/GoogleAdMobAdsSdkiOS-6.5.1/Add-ons/GoogleAnalyticsServicesiOS_3.0/GoogleAnalytics/Library",
 					"$(PROJECT_DIR)/numgame/GoogleAdMobAdsSdkiOS-6.5.1/Add-ons/GoogleAnalyticsServicesiOS_3.0",
 					"$(PROJECT_DIR)/numgame/GoogleAdMobAdsSdkiOS-6.5.1",
+					/Users/lanstonpeng/Downloads/GoogleAnalyticsServicesiOS_3.09,
+					/Users/lanstonpeng/Downloads/GoogleAnalyticsServicesiOS_3.09,
+					2,
+					"$(PROJECT_DIR)$(LOCAL_LIBRARY_DIR)",
+					"$(PROJECT_DIR)/numgame/GoogleAnalyticsServicesiOS_3.09",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -1023,6 +1108,11 @@
 					"$(PROJECT_DIR)/numgame/GoogleAdMobAdsSdkiOS-6.5.1/Add-ons/GoogleAnalyticsServicesiOS_3.0/GoogleAnalytics/Library",
 					"$(PROJECT_DIR)/numgame/GoogleAdMobAdsSdkiOS-6.5.1/Add-ons/GoogleAnalyticsServicesiOS_3.0",
 					"$(PROJECT_DIR)/numgame/GoogleAdMobAdsSdkiOS-6.5.1",
+					/Users/lanstonpeng/Downloads/GoogleAnalyticsServicesiOS_3.09,
+					/Users/lanstonpeng/Downloads/GoogleAnalyticsServicesiOS_3.09,
+					2,
+					"$(PROJECT_DIR)$(LOCAL_LIBRARY_DIR)",
+					"$(PROJECT_DIR)/numgame/GoogleAnalyticsServicesiOS_3.09",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",

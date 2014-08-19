@@ -51,6 +51,10 @@
     [_soundButton setTitle:sound forState:UIControlStateNormal];
     [_titleLabel setFont:[UIFont fontWithName:TITLE_FONT size:40]];
 }
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.screenName = @"Option Screen";
+}
 
 - (void)didReceiveMemoryWarning
 {

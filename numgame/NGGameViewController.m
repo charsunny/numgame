@@ -18,6 +18,7 @@
 #import "NGGameUtil.h"
 #import "GameCountingCircleView.h"
 #import "NGPlayer.h"
+#import "NGGameLogger.h"
 
 @import AudioToolbox;
 @import AVFoundation;
@@ -166,7 +167,6 @@
     [self initToolBarView];
     [self initGameData];
     
-    
     _gameBoardView.delegate = self;
     [_gameBoardView layoutBoardWithCellNum:6];
     
@@ -190,6 +190,7 @@
     } else {
         _haveSound = NO;
     }
+    self.screenName = @"Game Screen";
 }
 
 
@@ -419,12 +420,12 @@
     if (completed) {
         self.timeSpent = 0;
         _currectLevel +=1;
-     
+        [NGGameLogger logGameLevel:_currectLevel inGameMode:_gameMode];
     }
     else{
         self.timeSpent = 0;
         self.score = 0;
-    
+        [NGGameLogger logGameFail:_currectLevel inGameMode:_gameMode];
     }
 
     NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
@@ -614,6 +615,8 @@
         [scoreDeltaLabel removeFromSuperview];
     }];
     
+    [NGGameLogger logGameEachScore:deltaScore];
+    
     if (_gameMode == NGGameModeClassic) {
         if ([levelInfo[@"score"] intValue] <= self.score) {
             [self showResult:YES];
@@ -700,6 +703,7 @@
         //[barBtnItem setEnabled:NO];
         self.changeTrickBtn = YES;
     }
+    [NGGameLogger logChangeCellNumber];
 }
 
 
