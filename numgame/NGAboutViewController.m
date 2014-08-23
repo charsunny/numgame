@@ -39,6 +39,7 @@
         _backButton.transform = CGAffineTransformMakeRotation(- M_PI / 2);
     }];
 }
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.screenName = @"About Screen";

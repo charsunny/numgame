@@ -42,11 +42,18 @@
     [_aboutButton.titleLabel setFont:[UIFont fontWithName:@"icomoon" size:44]];
     NSString* sound = [[NGGameConfig sharedGameConfig] sound]?:@"K";
     [_soundButton setTitle:sound forState:UIControlStateNormal];
-    [_titleLabel setFont:[UIFont fontWithName:TITLE_FONT size:40]];
 }
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.screenName = @"Option Screen";
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [UIView animateWithDuration:0.3 animations:^{
+        _backButton.transform = CGAffineTransformMakeRotation(- M_PI / 2);
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -56,7 +63,7 @@
 }
 
 - (IBAction)onResume:(id)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*
@@ -95,7 +102,7 @@
     
     [[NGPlayer player] playSoundFXnamed:@"item_click.mp3" Loop:NO];
     POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
-    scaleAnimation.velocity = [NSValue valueWithCGSize:CGSizeMake(3.f, 3.f)];
+    scaleAnimation.velocity = [NSValue valueWithCGSize:CGSizeMake(5.f, 5.f)];
     scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.f, 1.f)];
     scaleAnimation.springBounciness = 18.0f;
     [sender.layer pop_addAnimation:scaleAnimation forKey:@"scoreScaleSpring"];

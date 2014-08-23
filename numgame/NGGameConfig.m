@@ -74,6 +74,29 @@
     [[NSUserDefaults standardUserDefaults] setValue:@(timedScore) forKey:@"timedscore"];
 }
 
+- (int)stepedScore {
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"stepedScore"]) {
+        [self setTimedScore:0];
+    }
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:@"stepedScore"] intValue];
+}
+
+- (void)setStepedScore:(int)timedScore {
+    [[NSUserDefaults standardUserDefaults] setValue:@(timedScore) forKey:@"stepedScore"];
+}
+
+- (int)endlessScore {
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"endlessScore"]) {
+        [self setTimedScore:0];
+    }
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:@"endlessScore"] intValue];
+}
+
+- (void)setEndlessScore:(int)timedScore {
+    [[NSUserDefaults standardUserDefaults] setValue:@(timedScore) forKey:@"endlessScore"];
+}
+
+
 - (BOOL)isFirstLoad {
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
          [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];

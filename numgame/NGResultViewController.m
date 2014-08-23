@@ -39,33 +39,33 @@
     _highScoreLabel.adjustsFontSizeToFitWidth = YES;
     if (_gameMode == NGGameModeClassic) {
         if (_isHighScore) {
-            [_highScoreLabel setText:@"New Best Record!"];
+            [_highScoreLabel setText:NSLocalizedString(@"New Best Record!",@"xx")];
             if( !_completed)
             {
-                [_highScoreLabel setText:@"Fail,but with New Best Record"];
+                [_highScoreLabel setText:NSLocalizedString(@"Fail,but with New Best Record",@"xx")];
                 //[_backButton setTitle:@"Try Again" forState:UIControlStateNormal];
                 _backButton.hidden = YES;
             }
         } else {
             if (_completed) {
-                [_highScoreLabel setText:@"Score at this round"];
+                [_highScoreLabel setText:NSLocalizedString(@"Score at this round",@"xx")];
             } else {
-                [_highScoreLabel setText:@"Fail!"];
+                [_highScoreLabel setText:NSLocalizedString(@"Fail!",@"xx")];
                 [_backButton setTitle:@"Try Again" forState:UIControlStateNormal];
             }
         }
         [_scoreLabel setText:_score];
-        [_modeLabel setText:@"Classic Mode"];
+        [_modeLabel setText:NSLocalizedString(@"Classic Mode", @"xx")];
     } else if (_gameMode == NGGameModeTimed || _gameMode == NGGameModeSteped) {
-        [_backButton setTitle:@"Try Again" forState:UIControlStateNormal];
+        [_backButton setTitle:NSLocalizedString(@"Try Again",@"xx") forState:UIControlStateNormal];
         if (_isHighScore) {
-            [_highScoreLabel setText:@"New Higheset Score!"];
+            [_highScoreLabel setText:NSLocalizedString(@"New Higheset Score!",@"xx")];
             [_scoreLabel setText:_score];
         } else {
-            [_highScoreLabel setText:@"Score at this round"];
+            [_highScoreLabel setText:NSLocalizedString(@"Score at this round",@"xx")];
             [_scoreLabel setText:_score];
         }
-        [_modeLabel setText:@"Time Mode"];
+        [_modeLabel setText:NSLocalizedString(@"Time Mode",@"xx")];
     }
 }
 
@@ -110,15 +110,15 @@
 
 - (IBAction)onShare:(UIButton*)sender {
     
-    NSString *textToShare = @"A really good game to play!";
+    NSString *textToShare = NSLocalizedString(@"A really good game to play!",@"xx");
     
     if (_gameMode == NGGameModeClassic){
         if (_isHighScore) {
-            textToShare = @"I just have got my new record in game tap tap number!";
+            textToShare = NSLocalizedString(@"I just have got my new record in game tap tap number!",@"xx");
         }
     } else if (_gameMode == NGGameModeTimed) {
         if (_isHighScore) {
-            textToShare = @"I just have got my new high score in game tap tap number!";
+            textToShare = NSLocalizedString(@"I just have got my new high score in game tap tap number!",@"xx");
         }
     }
     
