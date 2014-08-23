@@ -10,28 +10,25 @@
 @import MessageUI;
 
 @interface NGAboutViewController ()<MFMailComposeViewControllerDelegate>
+
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
+@property (weak, nonatomic) IBOutlet UIView *panel;
 
 @end
 
 @implementation NGAboutViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [_backButton.titleLabel setFont:[UIFont fontWithName:@"icomoon" size:30]];
-    [_titleLabel setFont:[UIFont fontWithName:TITLE_FONT size:40]];
+    for (UIButton* button in [_panel subviews]) {
+        if ([button isKindOfClass:[UIButton class]]) {
+            [button.titleLabel setFont:[UIFont fontWithName:@"icomoon" size:40]];
+        }
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -61,14 +58,21 @@
 }
 
 - (IBAction)onClickButton:(UIButton*)sender {
-    if ([sender.titleLabel.text isEqualToString:@"Email"]) {
-        [self sendMail];
-    } else if([sender.titleLabel.text isEqualToString:@"Facebook"]) {
-        [[[UIAlertView alloc] initWithTitle:@"tips" message:@"@charsunny @lanstonpeng" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-    } else if([sender.titleLabel.text isEqualToString:@"Twitter"]) {
-        [[[UIAlertView alloc] initWithTitle:@"tips" message:@"@charsunny @lanstonpeng" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
-    } else {
-        [[[UIAlertView alloc] initWithTitle:@"tips" message:@"😕" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+    switch (sender.tag) {
+        case 1:
+            [[[UIAlertView alloc] initWithTitle:@"tips" message:@"@charsunny @lanstonpeng" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+            break;
+        case 2:
+            [[[UIAlertView alloc] initWithTitle:@"tips" message:@"😕" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+            break;
+        case 3:
+            [self sendMail];
+            break;
+        case 4:
+            [[[UIAlertView alloc] initWithTitle:@"tips" message:@"@charsunny @lanstonpeng" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+            break;
+        default:
+            break;
     }
 }
 

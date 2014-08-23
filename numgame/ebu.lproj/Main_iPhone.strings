@@ -1,0 +1,129 @@
+
+/* Class = "IBUIButton"; normalTitle = "Email"; ObjectID = "5ML-Dc-2id"; */
+"5ML-Dc-2id.normalTitle" = "M";
+
+/* Class = "IBUIButton"; normalTitle = "K"; ObjectID = "5RR-rK-vZR"; */
+"5RR-rK-vZR.normalTitle" = "K";
+
+/* Class = "IBUILabel"; text = "4 Dots"; ObjectID = "6KZ-Zy-UAI"; */
+"6KZ-Zy-UAI.text" = "4 Dots";
+
+/* Class = "IBUIButton"; normalTitle = "Resume"; ObjectID = "6vG-xA-XEa"; */
+"6vG-xA-XEa.normalTitle" = "Resume";
+
+/* Class = "IBUIButton"; normalTitle = "play!"; ObjectID = "8OI-7h-aMf"; */
+"8OI-7h-aMf.normalTitle" = "play!";
+
+/* Class = "IBUILabel"; text = "20/20"; ObjectID = "95y-co-i5M"; */
+"95y-co-i5M.text" = "20/20";
+
+/* Class = "IBUILabel"; text = "SCORES"; ObjectID = "9h4-Nq-OUQ"; */
+"9h4-Nq-OUQ.text" = "SCORES";
+
+/* Class = "IBUIButton"; normalTitle = "E"; ObjectID = "9wB-yg-kzd"; */
+"9wB-yg-kzd.normalTitle" = "E";
+
+/* Class = "IBUIButton"; normalTitle = "Main Menu"; ObjectID = "D1y-DB-RVP"; */
+"D1y-DB-RVP.normalTitle" = "Main Menu";
+
+/* Class = "IBUILabel"; text = "We're here for you"; ObjectID = "Dz9-aH-CkM"; */
+"Dz9-aH-CkM.text" = "We're here for you";
+
+/* Class = "IBUILabel"; text = "Contact Us"; ObjectID = "Jh0-w4-0Wv"; */
+"Jh0-w4-0Wv.text" = "Contact Us";
+
+/* Class = "IBUIButton"; normalTitle = "T"; ObjectID = "L6e-Pn-FaI"; */
+"L6e-Pn-FaI.normalTitle" = "T";
+
+/* Class = "IBUIButton"; normalTitle = "B"; ObjectID = "LTH-7f-DtO"; */
+"LTH-7f-DtO.normalTitle" = "B";
+
+/* Class = "IBUIButton"; normalTitle = "Main Menu"; ObjectID = "MZd-Fg-9Tm"; */
+"MZd-Fg-9Tm.normalTitle" = "Main Menu";
+
+/* Class = "IBUIButton"; normalTitle = "J"; ObjectID = "Mb6-Kb-tTp"; */
+"Mb6-Kb-tTp.normalTitle" = "J";
+
+/* Class = "IBUILabel"; text = "YOU MADE IT !"; ObjectID = "MfH-0J-KWr"; */
+"MfH-0J-KWr.text" = "YOU MADE IT !";
+
+/* Class = "IBUILabel"; text = "Classic Mode"; ObjectID = "Nbg-Re-d3E"; */
+"Nbg-Re-d3E.text" = "Classic Mode";
+
+/* Class = "IBUIButton"; normalTitle = "Next Level"; ObjectID = "Oqy-0T-VGA"; */
+"Oqy-0T-VGA.normalTitle" = "Next Level";
+
+/* Class = "IBUILabel"; text = "10"; ObjectID = "PXt-lJ-ula"; */
+"PXt-lJ-ula.text" = "10";
+
+/* Class = "IBUIButton"; normalTitle = "I"; ObjectID = "Pv6-cI-9Bl"; */
+"Pv6-cI-9Bl.normalTitle" = "I";
+
+/* Class = "IBUIButton"; normalTitle = "Restart"; ObjectID = "Q9x-9h-hRU"; */
+"Q9x-9h-hRU.normalTitle" = "Restart";
+
+/* Class = "IBUIButton"; normalTitle = "C"; ObjectID = "Tgo-k5-KZD"; */
+"Tgo-k5-KZD.normalTitle" = "C";
+
+/* Class = "IBUIButton"; normalTitle = "H"; ObjectID = "Urk-uD-tcK"; */
+"Urk-uD-tcK.normalTitle" = "H";
+
+/* Class = "IBUILabel"; text = "How to Play"; ObjectID = "Uua-CW-Jyr"; */
+"Uua-CW-Jyr.text" = "How to Play";
+
+/* Class = "IBUILabel"; text = "3000"; ObjectID = "Z4h-Nb-zvG"; */
+"Z4h-Nb-zvG.text" = "3000";
+
+/* Class = "IBUILabel"; text = "10"; ObjectID = "Zh0-Xc-fjs"; */
+"Zh0-Xc-fjs.text" = "10";
+
+/* Class = "IBUILabel"; text = "Classic Mode"; ObjectID = "bnI-v8-2q6"; */
+"bnI-v8-2q6.text" = "Classic Mode";
+
+/* Class = "IBUILabel"; text = "Sound"; ObjectID = "ch5-sl-t6S"; */
+"ch5-sl-t6S.text" = "Sound";
+
+/* Class = "IBUIButton"; normalTitle = "A"; ObjectID = "dZh-v3-iHc"; */
+"dZh-v3-iHc.normalTitle" = "A";
+
+/* Class = "IBUILabel"; text = "0/10000"; ObjectID = "fCu-zB-BWS"; */
+"fCu-zB-BWS.text" = "0/10000";
+
+/* Class = "IBUIButton"; normalTitle = "Twitter"; ObjectID = "gzQ-CV-HQF"; */
+"gzQ-CV-HQF.normalTitle" = "Twitter";
+
+/* Class = "IBUILabel"; text = "ABOUT"; ObjectID = "igd-IC-Yjd"; */
+"igd-IC-Yjd.text" = "ABOUT";
+
+/* Class = "IBUIButton"; normalTitle = "F"; ObjectID = "kop-Bg-y5B"; */
+"kop-Bg-y5B.normalTitle" = "F";
+
+/* Class = "IBUILabel"; text = "Rate"; ObjectID = "nkr-Tu-RZd"; */
+"nkr-Tu-RZd.text" = "Rate";
+
+/* Class = "IBUILabel"; text = "12"; ObjectID = "pJB-Jx-cxd"; */
+"pJB-Jx-cxd.text" = "12";
+
+/* Class = "IBUIButton"; normalTitle = "T"; ObjectID = "qOz-YM-XUZ"; */
+"qOz-YM-XUZ.normalTitle" = "T";
+
+/* Class = "IBUIButton"; normalTitle = "M"; ObjectID = "r5A-pp-EvP"; */
+"r5A-pp-EvP.normalTitle" = "M";
+
+/* Class = "IBUILabel"; text = "9"; ObjectID = "sl5-EN-NSK"; */
+"sl5-EN-NSK.text" = "9";
+
+/* Class = "IBUIButton"; normalTitle = "Play Now"; ObjectID = "uH1-GV-bvO"; */
+"uH1-GV-bvO.normalTitle" = "Play Now";
+
+/* Class = "IBUIButton"; normalTitle = "Facebook"; ObjectID = "v4M-38-MXm"; */
+"v4M-38-MXm.normalTitle" = "Facebook";
+
+/* Class = "IBUIButton"; normalTitle = "D"; ObjectID = "xwD-nF-xhX"; */
+"xwD-nF-xhX.normalTitle" = "D";
+
+/* Class = "IBUILabel"; text = "Settings"; ObjectID = "yJw-pE-OT6"; */
+"yJw-pE-OT6.text" = "Settings";
+
+/* Class = "IBUILabel"; text = "ABOUT"; ObjectID = "ykb-dF-4rJ"; */
+"ykb-dF-4rJ.text" = "ABOUT";

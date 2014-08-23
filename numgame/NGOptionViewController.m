@@ -29,15 +29,6 @@
 
 @implementation NGOptionViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -47,7 +38,7 @@
     [_removeButton.titleLabel setFont:[UIFont fontWithName:@"icomoon" size:44]];
     [_rateButton.titleLabel setFont:[UIFont fontWithName:@"icomoon" size:44]];
     [_aboutButton.titleLabel setFont:[UIFont fontWithName:@"icomoon" size:44]];
-    NSString* sound = [[NGGameConfig sharedGameConfig] sound]?:@"J";
+    NSString* sound = [[NGGameConfig sharedGameConfig] sound]?:@"K";
     [_soundButton setTitle:sound forState:UIControlStateNormal];
     [_titleLabel setFont:[UIFont fontWithName:TITLE_FONT size:40]];
 }
@@ -81,12 +72,12 @@
 
 - (IBAction)onClickButton:(UIButton*)sender {
     if ([sender isEqual:_soundButton]) {
-        if([_soundButton.titleLabel.text isEqualToString:@"J"]) {
+        if([_soundButton.titleLabel.text isEqualToString:@"K"]) {
+            [_soundButton setTitle:@"L" forState:UIControlStateNormal];
+            [[NGGameConfig sharedGameConfig] setSound:@"L"];
+        } else {
             [_soundButton setTitle:@"K" forState:UIControlStateNormal];
             [[NGGameConfig sharedGameConfig] setSound:@"K"];
-        } else {
-            [_soundButton setTitle:@"J" forState:UIControlStateNormal];
-            [[NGGameConfig sharedGameConfig] setSound:@"J"];
         }
     } else if([sender isEqual:_rateButton]) {
         SKStoreProductViewController *storeProductViewContorller = [[SKStoreProductViewController alloc] init];
