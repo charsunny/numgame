@@ -27,6 +27,10 @@ typedef enum {
 
 @property (nonatomic) int timedScore;
 
+@property (nonatomic) int stepedScore;
+
+@property (nonatomic) int endlessScore;
+
 @property (nonatomic, strong) NSString* sound;
 
 @property (nonatomic) BOOL unlockEndlessMode;

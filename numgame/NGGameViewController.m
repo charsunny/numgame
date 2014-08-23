@@ -96,32 +96,6 @@
 - (void)setTimeSpent:(int)timeSpent
 {
     _timeSpent = timeSpent;
-    //setting the attribute string to indicate the current status,legacy
-    /*
-    if (_gameMode == NGGameModeClassic) {
-        
-        NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
-        //_timeLabel.text = [NSString stringWithFormat:@"%d/%@",_timeSpent, levelInfo[@"step"]];
-        NSString* wholeString =[NSString stringWithFormat:@"%d/%@",_timeSpent, levelInfo[@"step"]];
-        
-        NSMutableAttributedString* mutableAttrString = [[NSMutableAttributedString alloc]initWithString:wholeString];
-        [mutableAttrString addAttribute:NSFontAttributeName
-                                  value:[UIFont fontWithName:@"AppleSDGothicNeo-Light" size:30]
-                                  range:NSMakeRange(0, wholeString.length)];
-        
-        int delta =[levelInfo[@"step"] intValue]- self.timeSpent;
-        if(delta <= 5)
-        {
-            [mutableAttrString addAttribute:NSForegroundColorAttributeName value:[UIColor orangeColor] range:NSMakeRange(0, [NSString stringWithFormat:@"%d",_timeSpent].length)];
-            if(delta <= 3)
-            {
-                [mutableAttrString addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, [NSString stringWithFormat:@"%d",_timeSpent].length)];
-            }
-        }
-        _timeLabel.attributedText = mutableAttrString;
-        [self addPopSpringAnimation:_timeLabel];
-    }
-     */
     if (_gameMode == NGGameModeSteped || _gameMode == NGGameModeClassic) {
         [_stepCountingView addCount:-1 isReverse:YES];
     }
@@ -193,6 +167,15 @@
         _haveSound = NO;
     }
     self.screenName = @"Game Screen";
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    if (_gameMode == NGGameModeEndless) {
+        GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier:@"EMHS"];
+        scoreReporter.value = _score;
+        [GKScore reportScores:@[scoreReporter] withCompletionHandler:nil];
+    }
 }
 
 
@@ -285,7 +268,6 @@
             _timeCountingView.circleKey = @"timeCount";
             _timeCountingView.delegate = self;
             [_timeCountingView addCount:0 isReverse:YES];
-            
             [_headView addSubview:_timeCountingView];
             [self initScoreCircleView];
             break;
@@ -355,6 +337,7 @@
     _colorToolCountingView.currentCount += colorAddRandomCount > colorUsedCount ? 0 : colorAddRandomCount;
     _numberToolCountingView.currentCount += numberAddRandomCount > numberUsedCount ? 0 : numberAddRandomCount;
 }
+
 - (void)initGameData {
     NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
     [self addRandomToolCount];
@@ -413,9 +396,11 @@
             
             break;
         case NGGameModeEndless:
-            _score = 0;
+            _score = [[NGGameConfig sharedGameConfig] endlessScore];
             _leftTime = 0;
-            [_scoreLabel setText:@"0"];
+            [_scoreLabel setText:[NSString stringWithFormat:@"%d", _score]];
+            [_scoreLabel setHidden:NO];
+            [_scoreCountingView setHidden:YES];
             [_timeLabel setText:@"0"];
             break;
         default:
@@ -491,10 +476,11 @@
     if([destinationViewController isKindOfClass:[NGResultViewController class]]) {
         NGResultViewController* controller = (NGResultViewController*)destinationViewController;
         controller.prevBgImageView = [[UIImageView alloc]initWithImage:[NGGameUtil screenshot:self.view]];
+        controller.time = _timeLabel.text;
+        controller.score = _scoreLabel.text;
         controller.gameMode = _gameMode;
         if (_gameMode == NGGameModeClassic) {
-            controller.time = _timeLabel.text;
-            controller.score = _scoreLabel.text;
+
             NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
             if ([levelInfo[@"score"] intValue] <= self.score) {
                 [[NGPlayer player] playSoundFXnamed:@"cheer.m4a" Loop:NO];
@@ -509,14 +495,21 @@
                     [GKScore reportScores:@[scoreReporter] withCompletionHandler:nil];
                 }
             }
-        } else if (_gameMode == NGGameModeTimed || _gameMode == NGGameModeSteped) {
-            controller.time = _timeLabel.text;
-            controller.score = _scoreLabel.text;
+        } else if (_gameMode == NGGameModeTimed) {
             controller.completed = self.isCompleted;
             if(_score > [[NGGameConfig sharedGameConfig] timedScore]) {
                 [[NGGameConfig sharedGameConfig] setTimedScore:_score];
                 controller.isHighScore = YES;
-                GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier:@"scorewithlimittime"];
+                GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier:@"TMHS"];
+                scoreReporter.value = _score;
+                [GKScore reportScores:@[scoreReporter] withCompletionHandler:nil];
+            }
+        } else if (_gameMode == NGGameModeSteped) {
+            controller.completed = self.isCompleted;
+            if(_score > [[NGGameConfig sharedGameConfig] timedScore]) {
+                [[NGGameConfig sharedGameConfig] setTimedScore:_score];
+                controller.isHighScore = YES;
+                GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier:@"SMHS"];
                 scoreReporter.value = _score;
                 [GKScore reportScores:@[scoreReporter] withCompletionHandler:nil];
             }
@@ -634,10 +627,12 @@
     [NGGameLogger logGameEachScore:deltaScore];
     
     if (_gameMode == NGGameModeClassic) {
-        if ([levelInfo[@"score"] intValue] <= self.score) {
-            [self showResult:YES];
-        } else if ([levelInfo[@"step"] intValue] <= self.timeSpent) {
-            [self showResult:NO];
+        if ([levelInfo[@"step"] intValue] <= self.timeSpent) {
+            if ([levelInfo[@"score"] intValue] <= self.score) {
+                [self showResult:YES];
+            } else {
+                [self showResult:NO];
+            }
         }
     } else if (_gameMode == NGGameModeSteped) {
         _leftTime--;
@@ -648,6 +643,7 @@
     } else if (_gameMode == NGGameModeEndless) {
         _leftTime++;
         [_timeLabel setText:[NSString stringWithFormat:@"%.0f",_leftTime]];
+        [[NGGameConfig sharedGameConfig] setEndlessScore:self.score];
     }
     else if (_gameMode == NGGameModeTimed){
         _leftTime--;
