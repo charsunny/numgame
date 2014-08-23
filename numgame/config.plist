@@ -116,5 +116,17 @@
 		<key>step</key>
 		<string>30</string>
 	</dict>
+	<dict>
+		<key>score</key>
+		<string>62500</string>
+		<key>step</key>
+		<string>35</string>
+	</dict>
+	<dict>
+		<key>score</key>
+		<string>70000</string>
+		<key>step</key>
+		<string>35</string>
+	</dict>
 </array>
 </plist>
