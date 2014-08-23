@@ -36,7 +36,7 @@
     
     NSString* action = [NSString stringWithFormat:@"game_success_%d",level];
     [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"game_action"     // Event category (required)
-                                                          action:@"next_level"  // Event action (required)
+                                                          action:action  // Event action (required)
                                                            label:@"game_log"          // Event label
                                                            value:@(level)
                                                                    ] build]];    // Event value

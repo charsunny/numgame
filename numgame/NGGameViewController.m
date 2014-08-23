@@ -678,50 +678,55 @@
 
 -(IBAction)changeCellColor:(id)sender{
 
+    if (_changeTrickBtn) {
+        return;
+    }
+    self.changeTrickBtn = YES;
+    
     [_timeCountingView stopCounting];
     [[NGPlayer player] playSoundFXnamed:@"item_click.mp3" Loop:NO];
     self.gameBoardView.isChangeColor = YES;
-    //__block UIBarButtonItem* barBtnItem = (UIBarButtonItem*)sender;
     __weak typeof(self) weakself = self;
     [self.gameBoardView performSelector:@selector(changeCellColor:) withObject:^(BOOL hasChange){
-        //[barBtnItem setEnabled:YES];
         weakself.changeTrickBtn = NO;
         if (hasChange) {
             [weakself.colorToolCountingView addCount:-1 isReverse:YES];
         }
         [weakself.timeCountingView startCounting];
         [weakself.colorToolCountingView showContentImageView];
+        [weakself.numberToolCountingView showContentImageView];
     }];
     
-  
-    if (!self.changeTrickBtn) {
-        //[barBtnItem setEnabled:NO];
-        self.changeTrickBtn = YES;
-    }
-    
-
+//    if (!self.changeTrickBtn) {
+//        self.changeTrickBtn = YES;
+//    }
+    [NGGameLogger logChangeColor];
 }
 
 -(IBAction)changeCellNumber:(id)sender{
+    
+    if (_changeTrickBtn) {
+        return;
+    }
+    self.changeTrickBtn = YES;
+    
     [_timeCountingView stopCounting];
     [[NGPlayer player] playSoundFXnamed:@"item_click.mp3" Loop:NO];
     self.gameBoardView.isChangeColor = NO;
     __weak typeof(self) weakself = self;
-    //__block UIBarButtonItem* barBtnItem = (UIBarButtonItem*)sender;
     [self.gameBoardView performSelector:@selector(changeCellNumber:) withObject:^(BOOL hasChange){
-        //[barBtnItem setEnabled:YES];
         weakself.changeTrickBtn = NO;
         if (hasChange) {
             [weakself.numberToolCountingView addCount:-1 isReverse:YES];
         }
         [weakself.timeCountingView startCounting];
         [weakself.numberToolCountingView showContentImageView];
+        [weakself.colorToolCountingView showContentImageView];
     } ];
     
-    if (!self.changeTrickBtn) {
-        //[barBtnItem setEnabled:NO];
-        self.changeTrickBtn = YES;
-    }
+//    if (!self.changeTrickBtn) {
+//        self.changeTrickBtn = YES;
+//    }
     [NGGameLogger logChangeCellNumber];
 }
 
