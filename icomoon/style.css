@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'icomoon';
-	src:url('fonts/icomoon.eot?-rgpzue');
-	src:url('fonts/icomoon.eot?#iefix-rgpzue') format('embedded-opentype'),
-		url('fonts/icomoon.woff?-rgpzue') format('woff'),
-		url('fonts/icomoon.ttf?-rgpzue') format('truetype'),
-		url('fonts/icomoon.svg?-rgpzue#icomoon') format('svg');
+	src:url('fonts/icomoon.eot?j8d83i');
+	src:url('fonts/icomoon.eot?#iefixj8d83i') format('embedded-opentype'),
+		url('fonts/icomoon.woff?j8d83i') format('woff'),
+		url('fonts/icomoon.ttf?j8d83i') format('truetype'),
+		url('fonts/icomoon.svg?j8d83i#icomoon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -73,6 +73,12 @@
 }
 .icon-joomla:before {
 	content: "\51";
+}
+.icon-export:before {
+	content: "\55";
+}
+.icon-arrow-left:before {
+	content: "\54";
 }
 .icon-sina-weibo:before {
 	content: "\52";

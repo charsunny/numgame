@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rv7-mT-eyh">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rv7-mT-eyh">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PXt-lJ-ula">
@@ -41,15 +41,18 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="uDW-Hn-3eA"/>
+                                </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="SnS-F0-q3K" appends="YES" id="8eu-hk-ryQ"/>
                                 </connections>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J5Y-w2-x2M" customClass="GameBoardView">
-                                <rect key="frame" x="0.0" y="64" width="320" height="366"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J5Y-w2-x2M" customClass="GameBoardView">
+                                <rect key="frame" x="0.0" y="64" width="320" height="352"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JcA-ad-MAr">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JcA-ad-MAr">
                                 <rect key="frame" x="320" y="90" width="320" height="340"/>
                                 <subviews>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6vG-xA-XEa">
@@ -156,20 +159,27 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="85b-m8-fOU"/>
-                                    <constraint firstAttribute="width" constant="320" id="8OQ-jK-Iat"/>
+                                    <constraint firstAttribute="height" constant="64" id="Wbe-Fm-qoy"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Rv7-mT-eyh" secondAttribute="trailing" id="1XI-PZ-NeP"/>
                             <constraint firstItem="JcA-ad-MAr" firstAttribute="leading" secondItem="y4h-6H-pbq" secondAttribute="leading" constant="320" id="3RM-e7-1aD"/>
                             <constraint firstAttribute="trailing" secondItem="JcA-ad-MAr" secondAttribute="trailing" constant="-320" id="6HQ-pJ-G01"/>
-                            <constraint firstAttribute="bottom" secondItem="JcA-ad-MAr" secondAttribute="bottom" constant="50" id="A1u-Qc-h3j"/>
-                            <constraint firstItem="JcA-ad-MAr" firstAttribute="leading" secondItem="7gH-Jy-t6T" secondAttribute="trailing" id="B0a-Hf-6sH"/>
+                            <constraint firstItem="JcA-ad-MAr" firstAttribute="leading" secondItem="7gH-Jy-t6T" secondAttribute="trailing" id="8y2-m0-0fk"/>
+                            <constraint firstItem="JcA-ad-MAr" firstAttribute="leading" secondItem="J5Y-w2-x2M" secondAttribute="trailing" id="GEg-Ib-FDd"/>
+                            <constraint firstItem="Rv7-mT-eyh" firstAttribute="leading" secondItem="y4h-6H-pbq" secondAttribute="leading" id="IhY-wp-PGM"/>
                             <constraint firstItem="JcA-ad-MAr" firstAttribute="top" secondItem="y4h-6H-pbq" secondAttribute="top" constant="90" id="Nu6-gD-9Jx"/>
                             <constraint firstItem="JcA-ad-MAr" firstAttribute="bottom" secondItem="J5Y-w2-x2M" secondAttribute="bottom" id="UEs-YF-yOp"/>
-                            <constraint firstItem="CJb-HF-sOf" firstAttribute="top" secondItem="7gH-Jy-t6T" secondAttribute="bottom" id="hSh-Ib-0k2"/>
+                            <constraint firstItem="7gH-Jy-t6T" firstAttribute="leading" secondItem="y4h-6H-pbq" secondAttribute="leading" id="UtM-iy-BXB"/>
+                            <constraint firstItem="J5Y-w2-x2M" firstAttribute="top" secondItem="Rv7-mT-eyh" secondAttribute="bottom" id="VzF-ns-415"/>
+                            <constraint firstItem="J5Y-w2-x2M" firstAttribute="leading" secondItem="y4h-6H-pbq" secondAttribute="leading" id="ZM7-5d-k8U"/>
+                            <constraint firstItem="7gH-Jy-t6T" firstAttribute="top" secondItem="J5Y-w2-x2M" secondAttribute="bottom" id="a01-q0-6ac"/>
+                            <constraint firstItem="Rv7-mT-eyh" firstAttribute="top" secondItem="y4h-6H-pbq" secondAttribute="top" id="h0V-2T-zgb"/>
+                            <constraint firstItem="JcA-ad-MAr" firstAttribute="leading" secondItem="J5Y-w2-x2M" secondAttribute="trailing" id="rzT-jX-Ibx"/>
+                            <constraint firstItem="CJb-HF-sOf" firstAttribute="top" secondItem="7gH-Jy-t6T" secondAttribute="bottom" id="ydd-xL-OTQ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="l5i-Bo-Uom"/>
@@ -437,7 +447,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r5A-pp-EvP">
                                 <rect key="frame" x="257" y="20" width="63" height="60"/>
                                 <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="24"/>
-                                <state key="normal" title="M">
+                                <state key="normal" title="U">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
