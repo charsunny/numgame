@@ -798,228 +798,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="how to play" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oBR-jR-wZ2">
-                                <rect key="frame" x="71" y="20" width="193" height="60"/>
-                                <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="32"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Wv-b0-UrL">
-                                <rect key="frame" x="0.0" y="20" width="63" height="60"/>
-                                <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="24"/>
-                                <state key="normal" title="L">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="onBack:" destination="7Hu-Q0-XDj" eventType="touchUpInside" id="ffH-9g-YVp"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="290" translatesAutoresizingMaskIntoConstraints="NO" id="GYF-Li-WFm">
-                                <rect key="frame" x="15" y="100" width="290" height="40"/>
-                                <color key="backgroundColor" red="0.85490196080000003" green="0.95294117649999999" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="5BT-CF-Jl6"/>
-                                    <constraint firstAttribute="width" constant="290" id="PEV-cE-wVY"/>
-                                </constraints>
-                                <attributedString key="attributedText">
-                                    <fragment content="1. find the number in ">
-                                        <attributes>
-                                            <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <font key="NSFont" size="17" name="Copperplate"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="green ">
-                                        <attributes>
-                                            <color key="NSColor" red="0.0" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="17" name="Copperplate"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="tile same with the ">
-                                        <attributes>
-                                            <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <font key="NSFont" size="17" name="Copperplate"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="yellow">
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="17" name="Copperplate"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content=" cell ">
-                                        <attributes>
-                                            <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <font key="NSFont" size="17" name="Copperplate"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="290" translatesAutoresizingMaskIntoConstraints="NO" id="tHj-It-Q45">
-                                <rect key="frame" x="15" y="160" width="290" height="40"/>
-                                <color key="backgroundColor" red="0.85490196080000003" green="0.95294117649999999" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="290" id="iVd-y6-1cE"/>
-                                    <constraint firstAttribute="height" constant="40" id="kZu-vA-dQH"/>
-                                </constraints>
-                                <attributedString key="attributedText">
-                                    <fragment content="2. if there ">
-                                        <attributes>
-                                            <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <font key="NSFont" size="17" name="Copperplate"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="hasn't ">
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="17" name="Copperplate"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="same number, choose the ">
-                                        <attributes>
-                                            <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <font key="NSFont" size="17" name="Copperplate"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="yellow">
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="17" name="Copperplate"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content=" cell">
-                                        <attributes>
-                                            <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <font key="NSFont" size="17" name="Copperplate"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="290" translatesAutoresizingMaskIntoConstraints="NO" id="R9M-h1-B2N">
-                                <rect key="frame" x="15" y="220" width="290" height="40"/>
-                                <color key="backgroundColor" red="0.85490196080000003" green="0.95294117649999999" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="emM-WN-vSS"/>
-                                    <constraint firstAttribute="width" constant="290" id="jyS-d5-5zE"/>
-                                </constraints>
-                                <attributedString key="attributedText">
-                                    <fragment content="3.   classic mode, your need to find ">
-                                        <attributes>
-                                            <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <font key="NSFont" size="17" name="Copperplate"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="10">
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="17" name="Copperplate"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content=" cells in shortest time">
-                                        <attributes>
-                                            <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <font key="NSFont" size="17" name="Copperplate"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="290" translatesAutoresizingMaskIntoConstraints="NO" id="ENu-R6-xfG">
-                                <rect key="frame" x="15" y="280" width="290" height="40"/>
-                                <color key="backgroundColor" red="0.85490196080000003" green="0.95294117649999999" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="290" id="Eg7-Yb-CVD"/>
-                                    <constraint firstAttribute="height" constant="40" id="ma3-Zq-m14"/>
-                                </constraints>
-                                <attributedString key="attributedText">
-                                    <fragment content="4. timed mode, your have ">
-                                        <attributes>
-                                            <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <font key="NSFont" size="17" name="Copperplate"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="10s">
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="17" name="Copperplate"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content=" to find as more cells as you can">
-                                        <attributes>
-                                            <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <font key="NSFont" size="17" name="Copperplate"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="290" translatesAutoresizingMaskIntoConstraints="NO" id="40q-3h-Idi">
-                                <rect key="frame" x="15" y="340" width="290" height="40"/>
-                                <color key="backgroundColor" red="0.85490196080000003" green="0.95294117649999999" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="Gvu-SQ-Gbe"/>
-                                    <constraint firstAttribute="width" constant="290" id="lai-eS-eMl"/>
-                                </constraints>
-                                <attributedString key="attributedText">
-                                    <fragment content="5.  you can swipe left to pause game when you play, have fun!">
-                                        <attributes>
-                                            <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <font key="NSFont" size="17" name="Copperplate"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </label>
+                            <scrollView appearanceType="aqua" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eMj-Jm-pw9">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </scrollView>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8OI-7h-aMf">
-                                <rect key="frame" x="60" y="420" width="200" height="40"/>
+                                <rect key="frame" x="60" y="400" width="200" height="40"/>
                                 <color key="backgroundColor" red="0.2666666667" green="0.81176470590000005" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="Cnr-tV-uBP"/>
                                     <constraint firstAttribute="width" constant="200" id="MH9-pQ-h9g"/>
                                     <constraint firstAttribute="height" constant="40" id="Reo-Y6-uJu"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="YA0-S9-cdW"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="24"/>
                                 <state key="normal" title="play!">
@@ -1035,27 +825,37 @@
                                     <action selector="onBack:" destination="7Hu-Q0-XDj" eventType="touchUpInside" id="W3G-j4-SQl"/>
                                 </connections>
                             </button>
+                            <pageControl appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="Yx2-rV-sZZ">
+                                <rect key="frame" x="130" y="440" width="60" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="8KQ-Lq-8Ja"/>
+                                    <constraint firstAttribute="width" constant="60" id="fTM-08-zXt"/>
+                                </constraints>
+                                <color key="pageIndicatorTintColor" red="0.94509803920000002" green="0.85882352939999995" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="currentPageIndicatorTintColor" red="0.96078431369999995" green="0.59215686270000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="pageControlValueChanged:" destination="7Hu-Q0-XDj" eventType="valueChanged" id="ZER-qb-eJq"/>
+                                </connections>
+                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="tHj-It-Q45" firstAttribute="top" secondItem="GYF-Li-WFm" secondAttribute="bottom" constant="20" id="7FV-UD-MOg"/>
-                            <constraint firstItem="40q-3h-Idi" firstAttribute="top" secondItem="ENu-R6-xfG" secondAttribute="bottom" constant="20" id="Mac-Qr-Nxp"/>
-                            <constraint firstItem="ENu-R6-xfG" firstAttribute="top" secondItem="R9M-h1-B2N" secondAttribute="bottom" constant="20" id="Rfw-z9-MeI"/>
-                            <constraint firstItem="R9M-h1-B2N" firstAttribute="top" secondItem="tHj-It-Q45" secondAttribute="bottom" constant="20" id="Sc2-cX-tDJ"/>
-                            <constraint firstAttribute="centerX" secondItem="R9M-h1-B2N" secondAttribute="centerX" id="W6v-r2-FpI"/>
-                            <constraint firstAttribute="centerY" secondItem="R9M-h1-B2N" secondAttribute="centerY" id="YrC-Ol-19l"/>
-                            <constraint firstAttribute="centerX" secondItem="ENu-R6-xfG" secondAttribute="centerX" id="fKH-Kc-zi1"/>
-                            <constraint firstItem="RSJ-JX-HKb" firstAttribute="top" secondItem="8OI-7h-aMf" secondAttribute="bottom" constant="20" id="kAV-7p-exn"/>
-                            <constraint firstAttribute="centerX" secondItem="40q-3h-Idi" secondAttribute="centerX" id="kaL-Qm-pKG"/>
-                            <constraint firstAttribute="centerX" secondItem="tHj-It-Q45" secondAttribute="centerX" id="l9H-fy-EwA"/>
-                            <constraint firstAttribute="centerX" secondItem="8OI-7h-aMf" secondAttribute="centerX" id="lkg-93-Ufu"/>
-                            <constraint firstAttribute="centerX" secondItem="GYF-Li-WFm" secondAttribute="centerX" id="uEC-yj-ogU"/>
+                            <constraint firstAttribute="centerX" secondItem="Yx2-rV-sZZ" secondAttribute="centerX" id="0qq-Vj-f7T"/>
+                            <constraint firstItem="RSJ-JX-HKb" firstAttribute="top" secondItem="Yx2-rV-sZZ" secondAttribute="bottom" constant="3" id="2Va-9r-huu"/>
+                            <constraint firstAttribute="centerX" secondItem="8OI-7h-aMf" secondAttribute="centerX" id="47O-t5-6W5"/>
+                            <constraint firstItem="Yx2-rV-sZZ" firstAttribute="top" secondItem="8OI-7h-aMf" secondAttribute="bottom" id="8jN-fy-9aX"/>
+                            <constraint firstItem="eMj-Jm-pw9" firstAttribute="top" secondItem="j4w-Ab-D4N" secondAttribute="top" id="Psl-Gx-rIn"/>
+                            <constraint firstAttribute="trailing" secondItem="eMj-Jm-pw9" secondAttribute="trailing" id="Sg1-G4-SaJ"/>
+                            <constraint firstItem="eMj-Jm-pw9" firstAttribute="leading" secondItem="j4w-Ab-D4N" secondAttribute="leading" id="ZoQ-tN-sz3"/>
+                            <constraint firstItem="RSJ-JX-HKb" firstAttribute="top" secondItem="eMj-Jm-pw9" secondAttribute="bottom" id="f1n-98-cNH"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Ifj-47-wIg"/>
                     <connections>
-                        <outlet property="backButton" destination="0Wv-b0-UrL" id="ivB-cW-JFF"/>
-                        <outlet property="titleLabel" destination="oBR-jR-wZ2" id="fv3-1B-64S"/>
+                        <outlet property="pageControl" destination="Yx2-rV-sZZ" id="k1L-qH-4xL"/>
+                        <outlet property="playButton" destination="8OI-7h-aMf" id="otJ-Kw-tZS"/>
+                        <outlet property="scrollView" destination="eMj-Jm-pw9" id="rtQ-3V-MPI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pdt-EX-Zqt" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1074,6 +874,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Jb5-Vu-pgL"/>
+        <segue reference="hyf-pz-hnl"/>
     </inferredMetricsTieBreakers>
 </document>
