@@ -7,6 +7,8 @@
 //
 
 #import "NGAboutViewController.h"
+#import "NGPlayer.h"
+#import <pop/pop.h>
 @import MessageUI;
 
 @interface NGAboutViewController ()<MFMailComposeViewControllerDelegate>
@@ -80,6 +82,13 @@
         default:
             break;
     }
+    
+    [[NGPlayer player] playSoundFXnamed:@"item_click.mp3" Loop:NO];
+    POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+    scaleAnimation.velocity = [NSValue valueWithCGSize:CGSizeMake(3.f, 3.f)];
+    scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.f, 1.f)];
+    scaleAnimation.springBounciness = 18.0f;
+    [sender.layer pop_addAnimation:scaleAnimation forKey:@"scoreScaleSpring"];
 }
 
 - (void)sendMail {
