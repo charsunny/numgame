@@ -76,6 +76,8 @@
 
 @property (nonatomic)BOOL isCompleted;
 
+@property (nonatomic)BOOL isRestartGame;
+
 @property (strong,nonatomic)GameCountingCircleView* stepCountingView;
 
 @property (strong,nonatomic)GameCountingCircleView* scoreCountingView;
@@ -161,6 +163,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onBecomeActive:) name:@"becomeactive" object:nil];
     
     self.view.layer.cornerRadius = 50;
+    self.isRestartGame = NO;
     //init counting circle view
     [self initHeaderView];
     [self initToolBarView];
@@ -340,8 +343,21 @@
     [_headView addSubview:_scoreCountingView];
 }
 
+//随机增加道具数量,但是仍然限制上线
+- (void)addRandomToolCount
+{
+    int colorUsedCount = _colorToolCountingView.deltaCount - _colorToolCountingView.currentCount;
+    int numberUsedCount = _numberToolCountingView.deltaCount - _numberToolCountingView.currentCount;
+   //_colorToolCountingView.currentCount =
+    int colorAddRandomCount = arc4random() % 3;
+    int numberAddRandomCount = arc4random() % 3;
+    
+    _colorToolCountingView.currentCount += colorAddRandomCount > colorUsedCount ? 0 : colorAddRandomCount;
+    _numberToolCountingView.currentCount += numberAddRandomCount > numberUsedCount ? 0 : numberAddRandomCount;
+}
 - (void)initGameData {
     NSDictionary* levelInfo = _levelConfig[_currectLevel-1];
+    [self addRandomToolCount];
     switch (_gameMode) {
         case NGGameModeClassic: {
             _timeSpent = 0;
@@ -350,13 +366,17 @@
             [_timeLabel setText:[NSString stringWithFormat:@"0/%@",levelInfo[@"step"]]];
             
             _stepCountingView.destinationCount = 0;
-            _stepCountingView.deltaCount = [levelInfo[@"step"] integerValue] + _stepCountingView.currentCount;
+            _stepCountingView.deltaCount = [levelInfo[@"step"] integerValue] + (_isRestartGame ? 0 : _stepCountingView.currentCount);
             _stepCountingView.currentCount = _stepCountingView.deltaCount;
             //update circle
             [_stepCountingView addCount:0 isReverse:YES];
             
             _scoreCountingView.destinationCount = [levelInfo[@"score"] integerValue];
             _scoreCountingView.deltaCount = [levelInfo[@"score"] integerValue];
+            if (_isRestartGame) {
+                _score = 0;
+                _scoreCountingView.currentCount = 0;
+            }
             [_scoreCountingView addCount:0 isReverse:NO];
             
             break;
@@ -378,13 +398,17 @@
             [_timeLabel setText:@"30"];
             //hell yeah,duplicated code here
             _stepCountingView.destinationCount = 0;
-            _stepCountingView.deltaCount = [levelInfo[@"step"] integerValue] + _stepCountingView.currentCount;
+            _stepCountingView.deltaCount = [levelInfo[@"step"] integerValue] + (_isRestartGame ? 0 : _stepCountingView.currentCount);
             _stepCountingView.currentCount = _stepCountingView.deltaCount;
             [_stepCountingView addCount:0 isReverse:YES];
             
             _scoreCountingView.destinationCount = [levelInfo[@"score"] integerValue];
             _scoreCountingView.deltaCount = [levelInfo[@"score"] integerValue];
             _scoreCountingView.currentCount = 0;
+            if (_isRestartGame) {
+                _score = 0;
+                _scoreCountingView.currentCount = 0;
+            }
             [_scoreCountingView addCount:0 isReverse:NO];
             
             break;
@@ -405,7 +429,20 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+-(IBAction)unwindViewControllerForNextLevel:(UIStoryboardSegue *)unwindSegue
+{
+    NGResultViewController* gameResultViewController = (NGResultViewController*)unwindSegue.sourceViewController;
+    if ([gameResultViewController isKindOfClass:[NGResultViewController class]])
+    {
+        
+    }
+}
+-(IBAction)unwindViewControllerForMainPage:(UIStoryboardSegue *)unwindSegue
+{
+    [_gameBoardView setHidden:YES];
+    _unwindFromResultVC = YES;
+    //[self.navigationController popToRootViewControllerAnimated:YES];
+}
 #pragma mark  --IBACTION--
 
 - (void)showResult:(BOOL)completed {
@@ -485,6 +522,7 @@
             }
         }
         //reset data for next round
+        self.isRestartGame = NO;
         [self initGameData];
     }
 }
@@ -498,6 +536,7 @@
     [[NGPlayer player] playSoundFXnamed:soundStr Loop:NO];
 }
 
+//暂停界面click事件
 - (IBAction)onButtonClick:(UIButton *)sender {
     [[NGPlayer player] playSoundFXnamed:@"item_click.mp3" Loop:NO];
     if (sender.tag == 1) {
@@ -512,6 +551,7 @@
         } completion:^(BOOL finished) {
             
         }];
+        self.isRestartGame = YES;
         [self initGameData];
     } else if (sender.tag == 3) {
         [_gameBoardView setHidden:YES];
