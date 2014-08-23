@@ -52,8 +52,8 @@
     
     [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
     
-    [_rankButton.titleLabel setFont:[UIFont fontWithName:@"icomoon" size:24]];
-    [_settingButton.titleLabel setFont:[UIFont fontWithName:@"icomoon" size:24]];
+    [_rankButton.titleLabel setFont:[UIFont fontWithName:@"icomoon" size:18]];
+    [_settingButton.titleLabel setFont:[UIFont fontWithName:@"icomoon" size:18]];
     [_rankButton addTarget:self action:@selector(onClickRankButton) forControlEvents:UIControlEventTouchUpInside];
     
     NGGameMode gameMode = [[NGGameConfig sharedGameConfig] gamemode];

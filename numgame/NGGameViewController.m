@@ -22,7 +22,6 @@
 
 @import AudioToolbox;
 @import AVFoundation;
-@import iAd;
 @import GameKit;
 @import StoreKit;
 
@@ -489,29 +488,6 @@
         [self initGameData];
     }
 }
-
--(IBAction)unwindViewControllerForNextLevel:(UIStoryboardSegue *)unwindSegue
-{
-    /*
-    NGResultViewController* gameResultViewController = (NGResultViewController*)unwindSegue.sourceViewController;
-    
-    if ([gameResultViewController isKindOfClass:[NGResultViewController class]])
-    {
-        
-    }
-     */
-}
--(IBAction)unwindViewControllerForMainPage:(UIStoryboardSegue *)unwindSegue
-{
-    
-    [_gameBoardView setHidden:YES];
-    NSLog(@"%@",self.navigationController.viewControllers[0]);
-    NSLog(@"%@",self.navigationController.viewControllers[1]);
-    _unwindFromResultVC = YES;
-    //[self.navigationController popToRootViewControllerAnimated:YES];
-}
-
-
 #pragma mark -- play sound -- 
 
 - (void)playRandomKey {
@@ -671,12 +647,15 @@
     self.gameBoardView.isChangeColor = YES;
     //__block UIBarButtonItem* barBtnItem = (UIBarButtonItem*)sender;
     __weak typeof(self) weakself = self;
-    [self.gameBoardView performSelector:@selector(changeCellColor:) withObject:^(){
+    [self.gameBoardView performSelector:@selector(changeCellColor:) withObject:^(BOOL hasChange){
         //[barBtnItem setEnabled:YES];
         weakself.changeTrickBtn = NO;
-        [weakself.colorToolCountingView addCount:-1 isReverse:YES];
+        if (hasChange) {
+            [weakself.colorToolCountingView addCount:-1 isReverse:YES];
+        }
         [weakself.timeCountingView startCounting];
     }];
+    
   
     if (!self.changeTrickBtn) {
         //[barBtnItem setEnabled:NO];
@@ -692,10 +671,12 @@
     self.gameBoardView.isChangeColor = NO;
     __weak typeof(self) weakself = self;
     //__block UIBarButtonItem* barBtnItem = (UIBarButtonItem*)sender;
-    [self.gameBoardView performSelector:@selector(changeCellNumber:) withObject:^(){
+    [self.gameBoardView performSelector:@selector(changeCellNumber:) withObject:^(BOOL hasChange){
         //[barBtnItem setEnabled:YES];
         weakself.changeTrickBtn = NO;
-        [weakself.numberToolCountingView addCount:-1 isReverse:YES];
+        if (hasChange) {
+            [weakself.numberToolCountingView addCount:-1 isReverse:YES];
+        }
         [weakself.timeCountingView startCounting];
     } ];
     

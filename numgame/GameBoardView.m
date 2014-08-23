@@ -27,7 +27,7 @@
 #define SElECTED_CELL_TAG   (2048)
 
 
-typedef void(^TrickBlock)();
+typedef void(^TrickBlock)(bool hasChange);
 //score marco
 #define Two_Same_Number_Score           10
 #define Two_Same_Number_Color_Score     20
@@ -191,66 +191,42 @@ typedef void(^TrickBlock)();
     CGPoint pos = [touch locationInView:self];
     UIView* view = [self hitTest:pos withEvent:nil];
     
-    if (touch.tapCount == 1 && self.isChangeColor) {
-        
+    if (touch.tapCount == 1 &&  (self.isChangeColor || self.isChangeNumer))
+    {
         if ([view isKindOfClass:[GameBoardCell class]]) {
             GameBoardCell * cell = (GameBoardCell*)view;
             //弹出选择颜色的框
             self.curCell = cell;
             if (!(cell.accessoryItems.count >0)) {
-                
                 [self.layer.mask removeFromSuperlayer];
-                self.maskView = [[UIView alloc]initWithFrame:CGRectMake(0, self.boardInset, self.frame.size.width, _cellNum*(_cellWidth+EDGE_INSET) -EDGE_INSET)];
-                
-                self.maskView.backgroundColor = [UIColor whiteColor];
-                self.maskView.alpha = 0.5;
-                [self addSubview:self.maskView];
-                
+                [self addPendingMaskView];
                 [self bringSubviewToFront:cell];
-                [cell addTrickingWithType:GBTrakingCategoryColor];
+                if (self.isChangeNumer) {
+                    [cell addTrickingWithType:GBTrakingCategoryColor];
+                }
+                else
+                {
+                    [cell addTrickingWithType:GBTrakingCategoryNum];
+                }
                 [cell showAnimation];
             }
         }
         
         if ([view isEqual:self.maskView]) {
             
-            [self.maskView removeFromSuperview];
+            [self hideToolBarMaskView];
             [self.curCell hideAnimation];
-            self.isChangeColor = NO;
-            [self callbackToMainGameController];
+            if (self.isChangeNumer) {
+                self.isChangeNumer = NO;
+            }
+            else
+            {
+                self.isChangeColor = NO;
+            }
+            [self callbackToMainGameController:NO];
             [[NGPlayer player] playSoundFXnamed:@"glossy_click_22.mp3" Loop:NO];
         }
     }
-    
-    if (touch.tapCount == 1 && self.isChangeNumer) {
-        if ([view isKindOfClass:[GameBoardCell class]]) {
-            GameBoardCell * cell = (GameBoardCell*) view;
-            self.curCell = cell;
-            if (!(cell.accessoryItems.count >0)) {
-                [self.layer.mask removeFromSuperlayer];
-                self.maskView = [[UIView alloc]initWithFrame:CGRectMake(0, self.boardInset, self.frame.size.width, _cellNum*(_cellWidth+EDGE_INSET) -EDGE_INSET)];
-                
-                self.maskView.backgroundColor = [UIColor whiteColor];
-                self.maskView.alpha = 0.5;
-                [self addSubview:self.maskView];
-                [self bringSubviewToFront:cell];
-                [cell addTrickingWithType:GBTrakingCategoryNum];
-                [cell showAnimation];
-     
-            }
-
-        }
-        
-        if ([view isEqual:self.maskView]) {
-            
-            [self.maskView removeFromSuperview];
-            [self.curCell hideAnimation];
-            self.isChangeNumer = NO;
-            [self callbackToMainGameController];
-        }
-    }
-    
- 
     
     if ([view isKindOfClass:[GameBoardCell class]]) {
         GameBoardCell* cell = (GameBoardCell*)view;
@@ -333,7 +309,6 @@ typedef void(^TrickBlock)();
     [self removeAllBorderEffect];
     if ([self currectNum] == 10 || canEliminated) {
         [self removeEffectView];
-        //[[NGPlayer player] playSoundFXnamed:[NSString stringWithFormat:@"square_%d.aif", _selectedCell.count] Loop:NO];
         //4个cell是否拥有相同颜色
         if([self eliminatedSameColorCell]) {
             [[NGPlayer player] playSoundFXnamed:@"success_playful_29.mp3" Loop:NO];
@@ -518,7 +493,7 @@ typedef void(^TrickBlock)();
     if (_selectedCell.count) {
         CGContextRef ref = UIGraphicsGetCurrentContext();
         CGContextSetLineWidth(ref, 5.0);
-        CGContextSetStrokeColorWithColor(ref, [UIColor redColor].CGColor);
+        CGContextSetStrokeColorWithColor(ref, UIColorFromRGB(0xBD10E0).CGColor);
         CGPoint point[_selectedCell.count+1];
         for (int i = 0; i < _selectedCell.count; i++) {
             UIView* cell = _selectedCell[i];
@@ -812,14 +787,39 @@ typedef void(^TrickBlock)();
     [self showToolBarMaskView];
 }
 
+- (void)hideToolBarMaskView
+{
+    [UIView animateWithDuration:0.2 animations:^{
+        self.maskView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self.maskView removeFromSuperview];
+    }];
+}
+- (void)addPendingMaskView
+{
+    self.maskView = [[UIView alloc]initWithFrame:CGRectMake(0, self.boardInset, self.frame.size.width, _cellNum*(_cellWidth+EDGE_INSET) -EDGE_INSET)];
+    
+    self.maskView.backgroundColor = [UIColor whiteColor];
+    self.maskView.alpha = 0.5;
+    [self addSubview:self.maskView];
+}
+
 //添加乳白色mask
 - (void)showToolBarMaskView
 {
     CALayer* layer = [CALayer layer];
     layer.frame = CGRectMake(0, self.boardInset, self.frame.size.width, _cellNum*(_cellWidth+EDGE_INSET) -EDGE_INSET);
     layer.backgroundColor = [UIColor blueColor].CGColor;
-    [layer setOpacity:0.3];
-    [self.layer setMask:layer];
+    [layer setOpacity:0.5];
+    
+    [self addPendingMaskView];
+    self.maskView.alpha = 0.0;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.maskView.alpha = 0.5;
+    } completion:^(BOOL finished) {
+        [self.layer setMask:layer];
+        [self.maskView removeFromSuperview];
+    }];
 }
 
 -(void)changeCellColor:(TrickBlock)block{
@@ -870,7 +870,7 @@ typedef void(^TrickBlock)();
                  self.maskView = nil;
              }];
             self.isChangeColor = NO;
-            [self callbackToMainGameController];
+            [self callbackToMainGameController:YES];
         }
             break;
         case GBTrakingCategoryNum:
@@ -886,7 +886,7 @@ typedef void(^TrickBlock)();
             }];
             self.isChangeNumer = NO;
         
-            [self callbackToMainGameController];
+            [self callbackToMainGameController:YES];
         }
             break;
         default:
@@ -897,10 +897,10 @@ typedef void(^TrickBlock)();
 
 
 
--(void)callbackToMainGameController{
+-(void)callbackToMainGameController:(BOOL) hasChange{
 
     if (self.trickBlock) {
-        self.trickBlock();
+        self.trickBlock(hasChange);
     }
     self.trickBlock = nil;
 }

@@ -31,6 +31,12 @@
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [UIView animateWithDuration:0.3 animations:^{
+        _backButton.transform = CGAffineTransformMakeRotation(- M_PI / 2);
+    }];
+}
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.screenName = @"About Screen";

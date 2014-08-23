@@ -54,7 +54,7 @@
 }
 
 - (IBAction)onResume:(id)sender {
-   [self dismissViewControllerAnimated:YES completion:^{}];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 /*

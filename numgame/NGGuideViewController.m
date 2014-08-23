@@ -33,9 +33,10 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     _scrollView.contentSize = CGSizeMake(4*_scrollView.frame.size.width, _scrollView.frame.size.height);
-    for (int i = 0; i < 4; i++) {
-        UIImageView* imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i*_scrollView.frame.size.width, 0, _scrollView.frame.size.width, _scrollView.frame.size.height)];
-        imageView.backgroundColor = [UIColor colorWithRed:rand()%255/255.0 green:rand()%255/255.0 blue:rand()%255/255.0 alpha:1.0f];
+    for (int i = 1; i < 5; i++) {
+        UIImageView* imageView = [[UIImageView alloc] initWithFrame:CGRectMake((i - 1)*_scrollView.frame.size.width, 0, _scrollView.frame.size.width, _scrollView.frame.size.height)];
+        //imageView.backgroundColor = [UIColor colorWithRed:rand()%255/255.0 green:rand()%255/255.0 blue:rand()%255/255.0 alpha:1.0f];
+        imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"Tutorial#%d",i]];
         [_scrollView addSubview:imageView];
     }
 }

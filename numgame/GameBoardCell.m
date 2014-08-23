@@ -286,13 +286,7 @@
 }
 
 -(void)removeTricking{
-
-//    for (UIView* item in self.accessoryItems) {
-//        [item removeFromSuperview];
-//        
-//    }
     self.accessoryItems = nil;
-
 }
 
 
@@ -300,36 +294,29 @@
 -(void)handleActionForNumberTapGesture:(UITapGestureRecognizer*)tapGesture{
     
     if (tapGesture.state == UIGestureRecognizerStateRecognized && tapGesture.numberOfTouches ==1) {
-        
-  
-    switch (self.trakingCategory) {
-        case GBTrakingCategoryNum:
-        {
-            NSInteger tag = tapGesture.view.tag - SubViewBaseTag;
-            
-            self.number = tag;
-            
-         
+        switch (self.trakingCategory) {
+            case GBTrakingCategoryNum:
+            {
+                NSInteger tag = tapGesture.view.tag - SubViewBaseTag;
+                self.number = tag;
+                break;
+            }
+            case GBTrakingCategoryColor:
+            {
+                NSInteger colorIdx = tapGesture.view.tag -SubViewBaseTag;
+                self.color = colorIdx;
+                break;
+            }
+            default:
+                break;
         }
-            break;
-        case GBTrakingCategoryColor:
-        {
-            NSInteger colorIdx = tapGesture.view.tag -SubViewBaseTag;
-            self.color = colorIdx;
-            
-        }
-        default:
-            break;
-    }
 
-      }
+    }
     
     [self hideAnimation];
     if (_delegate && [_delegate respondsToSelector:@selector(gameBoardCell: withCategory:)]) {
-        
         [_delegate gameBoardCell:self withCategory:self.trakingCategory];
     }
-    //调用收起来的动画
 }
 
 

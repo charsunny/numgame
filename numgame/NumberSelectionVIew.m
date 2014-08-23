@@ -81,27 +81,18 @@
 
 
 //显示
-
 -(void)show{
 
     _isShow = YES;
     
  //   [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y-40, self.viewWidth, self.viewHight)];
-    
     for (UIView *item in self.items) {
-        
         [self performSelector:@selector(showNumberItem:)
                    withObject:item afterDelay:kAnimationDelay*[self.items indexOfObject:item]];
     }
-
-    
-
-
 }
 
-
 //隐藏
-
 -(void)hide{
 
     _isShow = NO;
@@ -110,8 +101,6 @@
     }
 
 }
-
-
 -(void)layoutSubviews{
     [super layoutSubviews];
     
@@ -143,12 +132,6 @@
     }];
     
 }
-
-
-
-
-
-
 //显示View的动画
 -(void)showNumberItem:(UIView*)item{
 
@@ -159,44 +142,7 @@
         springAnimation.springBounciness = 20;
         springAnimation.velocity = [NSValue valueWithCGPoint:CGPointMake(0, 200)];
         [item pop_addAnimation:springAnimation forKey:@"centerA"];
-    
-  //  [item setFrame:CGRectOffset(item.frame, 0, -40)];
-  
-
 }
-
-//隐藏View的动画
--(void)hideItem:(UIView*)item{
-
-
-}
-
-
-
-
-
-//检测点击事件并做相应
-//-(void)handleActionForTapGesture:(UITapGestureRecognizer*)gesture{
-// 
-//    if (gesture.state == UIGestureRecognizerStateRecognized && gesture.numberOfTouches == 1) {
-//        
-//        CGPoint touchPoint = [gesture locationInView:self];
-//        
-//        [_items enumerateObjectsUsingBlock:^(UIView* view, NSUInteger idx, BOOL *stop) {
-//           
-//        //    CGPoint subViewTouchPoint = [view convertPoint:touchPoint fromView:self];
-//          
-//            if (CGRectContainsPoint(view.frame, touchPoint)) {
-//                
-//                self.block(idx);
-//            }
-//            
-//        }];
-//    }
-//
-//
-//}
-
 
 -(void)handleActionForNumberTapGesture:(UITapGestureRecognizer*)gesture{
 
@@ -210,25 +156,17 @@
     }
 
 }
-//- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
-//{
-//    UIView* view = [super hitTest:point withEvent:event];
-//    return view;
-//}
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
     for (UIView *item in self.items) {
         if (CGRectContainsPoint(item.frame, point))
             return YES;
     }
-    
     return NO;
 }
 
 
 -(BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
-
-
     return YES;
 }
 
