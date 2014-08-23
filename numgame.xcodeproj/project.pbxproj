@@ -711,6 +711,7 @@
 				ORGANIZATIONNAME = "Sun Xi";
 				TargetAttributes = {
 					50EDF3A318FFB755003FBA71 = {
+						DevelopmentTeam = CX3SW7JBRE;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
 								enabled = 1;
@@ -1009,6 +1010,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "3b6f4cc1-d704-41d3-ad05-d8670439c296";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1041,6 +1043,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PROVISIONING_PROFILE = "3b6f4cc1-d704-41d3-ad05-d8670439c296";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
