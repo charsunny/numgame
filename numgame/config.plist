@@ -58,9 +58,63 @@
 	</dict>
 	<dict>
 		<key>score</key>
-		<string>125000</string>
+		<string>12500</string>
 		<key>step</key>
 		<string>20</string>
+	</dict>
+	<dict>
+		<key>score</key>
+		<string>15000</string>
+		<key>step</key>
+		<string>20</string>
+	</dict>
+	<dict>
+		<key>score</key>
+		<string>17500</string>
+		<key>step</key>
+		<string>20</string>
+	</dict>
+	<dict>
+		<key>score</key>
+		<string>20000</string>
+		<key>step</key>
+		<string>25</string>
+	</dict>
+	<dict>
+		<key>score</key>
+		<string>25000</string>
+		<key>step</key>
+		<string>25</string>
+	</dict>
+	<dict>
+		<key>score</key>
+		<string>30000</string>
+		<key>step</key>
+		<string>25</string>
+	</dict>
+	<dict>
+		<key>score</key>
+		<string>35000</string>
+		<key>step</key>
+		<string>25</string>
+	</dict>
+	<dict>
+		<key>score</key>
+		<string>40000</string>
+		<key>step</key>
+		<string>25</string>
+	</dict>
+	<dict>
+		<key>score</key>
+		<string>47500</string>
+		<key>step</key>
+		<string>30</string>
+	</dict>
+	<dict>
+		<key>score</key>
+		<string>55000</string>
+		<key>step</key>
+		<string>30</string>
 	</dict>
 </array>
 </plist>
