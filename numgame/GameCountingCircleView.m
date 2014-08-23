@@ -21,7 +21,7 @@
 //CGFloat pieCapacity = 0;//角度增量值
 //int clockwise = 1;//0=逆时针,1=顺时针
 
-@interface GameCountingCircleView()
+@interface GameCountingCircleView()<UIGestureRecognizerDelegate>
 
 @property (strong,nonatomic)CALayer* frontLayer;
 
@@ -33,6 +33,8 @@
 
 @property (strong,nonatomic)UILabel* countLabel;
 
+@property (strong,nonatomic)UIImageView* contentImageView;
+
 @property (nonatomic)int addCountCurrentNumber;
 
 @property (nonatomic)CGFloat startX;
@@ -43,20 +45,6 @@
 @end
 
 @implementation GameCountingCircleView
-
-/*
-- (void)drawRect:(CGRect)rect {
-
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    //CGContextSetRGBStrokeColor(context, 0, 1, 1, 1);
-    CGContextSetStrokeColorWithColor(context, _circleColor.CGColor);
-    CGContextSetLineWidth(context, 5);
-    CGContextSetLineCap(context, kCGLineCapRound);
-    CGContextAddArc(context, startX, startY, radius, DEG2RAD(pieStart), DEG2RAD( pieStart + _pieCapacity), _clockwise);
-    
-    CGContextStrokePath(context);
-}
-*/
 
 - (void)setCurrentCount:(int)currentCount
 {
@@ -161,14 +149,33 @@
 
 - (void)setContentImage:(UIImage*)image{
     _countLabel.alpha = 0;
-    UIImageView* imgView = [[UIImageView alloc]initWithFrame:CGRectInset(self.bounds, 10, 10)];
-    imgView.layer.shadowOpacity = 0.3;
-    imgView.layer.shadowOffset = CGSizeMake(0,2);
-    imgView.layer.shadowColor = [UIColor blackColor].CGColor;
-    imgView.layer.shadowRadius = 3;
-    imgView.layer.masksToBounds = NO;
-    imgView.image = image;
-    [self addSubview:imgView];
+    _contentImageView = [[UIImageView alloc]initWithFrame:CGRectInset(self.bounds, 10, 10)];
+    _contentImageView.layer.shadowOpacity = 0.3;
+    _contentImageView.layer.shadowOffset = CGSizeMake(0,2);
+    _contentImageView.layer.shadowColor = [UIColor blackColor].CGColor;
+    _contentImageView.layer.shadowRadius = 3;
+    _contentImageView.layer.masksToBounds = NO;
+    _contentImageView.image = image;
+    [self addSubview:_contentImageView];
+    
+    UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showCurrentCountNum)];
+    tapGesture.delegate = self;
+    [self addGestureRecognizer:tapGesture];
+}
+- (void)showCurrentCountNum
+{
+    [UIView animateWithDuration:0.2 animations:^{
+        _contentImageView.alpha = 0;
+        _countLabel.alpha = 1;
+    } completion:^(BOOL finished) {
+    }];
+}
+- (void)showContentImageView
+{
+    [UIView animateWithDuration:0.2 delay:0.8 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        _contentImageView.alpha = 1;
+        _countLabel.alpha = 0;
+    } completion:nil];
 }
 
 - (void)addCount:(int)deltaNum
@@ -220,15 +227,6 @@
 
 - (void)updateSector
 {
-//    _pieCapacity += 360 / ( _destinationCount / (1.0 / 30 ));
-//    
-//    _addCountCurrentNumber += 1;
-//    
-//    if (_addCountCurrentNumber >= _addCountCeiling) {
-//        _addCountCurrentNumber = 0;
-//        self.currentCount += self.countStep;
-//    }
-//    [self setNeedsDisplay];
     [self addCount:-1 isReverse:YES];
 }
 
@@ -242,5 +240,11 @@
 - (void)stopCounting
 {
     [_timer invalidate];
+}
+
+#pragma mark Gesture Recognizer Delegate
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
 }
 @end

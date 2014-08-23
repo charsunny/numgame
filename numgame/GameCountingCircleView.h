@@ -55,4 +55,6 @@
 - (void)initData:(int)destinationCount withStart:(int)startCount;
 
 - (void)setContentImage:(UIImage*)image;
+
+- (void)showContentImageView;
 @end

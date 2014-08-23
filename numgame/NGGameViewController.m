@@ -654,6 +654,7 @@
             [weakself.colorToolCountingView addCount:-1 isReverse:YES];
         }
         [weakself.timeCountingView startCounting];
+        [weakself.colorToolCountingView showContentImageView];
     }];
     
   
@@ -678,6 +679,7 @@
             [weakself.numberToolCountingView addCount:-1 isReverse:YES];
         }
         [weakself.timeCountingView startCounting];
+        [weakself.numberToolCountingView showContentImageView];
     } ];
     
     if (!self.changeTrickBtn) {
