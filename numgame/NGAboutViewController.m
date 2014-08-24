@@ -9,6 +9,7 @@
 #import "NGAboutViewController.h"
 #import "NGPlayer.h"
 #import <pop/pop.h>
+#import <Social/Social.h>
 @import MessageUI;
 
 @interface NGAboutViewController ()<MFMailComposeViewControllerDelegate>
@@ -69,11 +70,30 @@
 - (IBAction)onClickButton:(UIButton*)sender {
     switch (sender.tag) {
         case 1:
-            [[[UIAlertView alloc] initWithTitle:@"tips" message:@"@charsunny @lanstonpeng" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+            if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter ]) {
+                SLComposeViewController *tweetSheetOBJ = [SLComposeViewController
+                                                          composeViewControllerForServiceType:SLServiceTypeTwitter];
+                [tweetSheetOBJ setInitialText:@"@charsunny @lanstonpeng"];
+                [self presentViewController:tweetSheetOBJ animated:YES completion:nil];
+            }
+            else
+            {
+                [[[UIAlertView alloc] initWithTitle:@"tips" message:@"@charsunny @lanstonpeng" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+            }
             break;
         case 2:
-            [[[UIAlertView alloc] initWithTitle:@"tips" message:@"😕" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+            if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
+                SLComposeViewController *fbSheetOBJ = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+                
+                [fbSheetOBJ setInitialText:@"I'm playing the  Num Dots Game,it's freaking awesome!"];
+                [self presentViewController:fbSheetOBJ animated:YES completion:nil];
+            }
+            else
+            {
+                [[[UIAlertView alloc] initWithTitle:@"tips" message:@"😕" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+            }
             break;
+                
         case 3:
             [self sendMail];
             break;

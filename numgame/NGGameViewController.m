@@ -689,6 +689,7 @@
     __weak typeof(self) weakself = self;
     [self.gameBoardView performSelector:@selector(changeCellColor:) withObject:^(BOOL hasChange){
         weakself.changeTrickBtn = NO;
+        weakself.gameBoardView.isChangeColor = NO;
         if (hasChange) {
             [weakself.colorToolCountingView addCount:-1 isReverse:YES];
         }
@@ -697,9 +698,6 @@
         [weakself.numberToolCountingView showContentImageView];
     }];
     
-//    if (!self.changeTrickBtn) {
-//        self.changeTrickBtn = YES;
-//    }
     [NGGameLogger logChangeColor];
 }
 
@@ -712,9 +710,10 @@
     
     [_timeCountingView stopCounting];
     [[NGPlayer player] playSoundFXnamed:@"item_click.mp3" Loop:NO];
-    self.gameBoardView.isChangeColor = NO;
+    self.gameBoardView.isChangeNumer = YES;
     __weak typeof(self) weakself = self;
     [self.gameBoardView performSelector:@selector(changeCellNumber:) withObject:^(BOOL hasChange){
+        weakself.gameBoardView.isChangeNumer = NO;
         weakself.changeTrickBtn = NO;
         if (hasChange) {
             [weakself.numberToolCountingView addCount:-1 isReverse:YES];
@@ -724,9 +723,6 @@
         [weakself.colorToolCountingView showContentImageView];
     } ];
     
-//    if (!self.changeTrickBtn) {
-//        self.changeTrickBtn = YES;
-//    }
     [NGGameLogger logChangeCellNumber];
 }
 

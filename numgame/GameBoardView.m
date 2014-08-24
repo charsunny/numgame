@@ -201,7 +201,7 @@ typedef void(^TrickBlock)(bool hasChange);
                 [self.layer.mask removeFromSuperlayer];
                 [self addPendingMaskView];
                 [self bringSubviewToFront:cell];
-                if (self.isChangeNumer) {
+                if (self.isChangeColor) {
                     [cell addTrickingWithType:GBTrakingCategoryColor];
                 }
                 else
