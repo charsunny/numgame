@@ -260,7 +260,7 @@
         case NGGameModeTimed:
         {
             _timeCountingView = [[GameCountingCircleView alloc]initWithFrame:CGRectMake(50, 5, 60, 60)];
-            [_timeCountingView initData:0 withStart: 60];
+            [_timeCountingView initData:0 withStart: 30];
             _timeCountingView.pieCapacity = 360;
             _timeCountingView.frontColor = UIColorFromRGB(0x00CE61);
             _timeCountingView.circleColor = UIColorFromRGB(0xFFC53F);
@@ -365,7 +365,7 @@
             break;
         }
         case NGGameModeTimed:
-            _leftTime = 60;
+            _leftTime = 30;
             _score = 0;
             [_scoreLabel setText:@"0"];
             [_timeLabel setText:@"60"];
@@ -381,12 +381,12 @@
             [_timeLabel setText:@"30"];
             //hell yeah,duplicated code here
             _stepCountingView.destinationCount = 0;
-            _stepCountingView.deltaCount = [levelInfo[@"step"] integerValue] + (_isRestartGame ? 0 : _stepCountingView.currentCount);
+            _stepCountingView.deltaCount = 30;
             _stepCountingView.currentCount = _stepCountingView.deltaCount;
             [_stepCountingView addCount:0 isReverse:YES];
             
-            _scoreCountingView.destinationCount = [levelInfo[@"score"] integerValue];
-            _scoreCountingView.deltaCount = [levelInfo[@"score"] integerValue];
+            _scoreCountingView.destinationCount = 10000;
+            _scoreCountingView.deltaCount = 10000;
             _scoreCountingView.currentCount = 0;
             if (_isRestartGame) {
                 _score = 0;
