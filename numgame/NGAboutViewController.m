@@ -11,8 +11,9 @@
 #import <pop/pop.h>
 #import <Social/Social.h>
 @import MessageUI;
+@import StoreKit;
 
-@interface NGAboutViewController ()<MFMailComposeViewControllerDelegate>
+@interface NGAboutViewController ()<MFMailComposeViewControllerDelegate,SKStoreProductViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 
@@ -97,8 +98,17 @@
         case 3:
             [self sendMail];
             break;
-        case 4:
-            [[[UIAlertView alloc] initWithTitle:@"tips" message:@"@charsunny @lanstonpeng" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+        case 4: {
+            SKStoreProductViewController *storeProductViewContorller = [[SKStoreProductViewController alloc] init];
+            storeProductViewContorller.delegate = self;
+            [self presentViewController:storeProductViewContorller animated:YES completion:nil];
+            [storeProductViewContorller loadProductWithParameters:
+             @{SKStoreProductParameterITunesItemIdentifier : @"870428896"} completionBlock:^(BOOL result, NSError *error) {
+                 if(error){
+                     [[[UIAlertView alloc] initWithTitle:@"Tips" message:@"cannot connect to iTunes Store" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+                 }
+             }];
+        }
             break;
         default:
             break;
@@ -134,5 +144,10 @@
     //关闭邮件发送窗口
     [controller dismissViewControllerAnimated:YES completion:nil];
 }
+
+- (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController {
+    [viewController dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 @end
