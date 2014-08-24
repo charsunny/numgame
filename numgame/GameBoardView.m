@@ -233,7 +233,7 @@ typedef void(^TrickBlock)(bool hasChange);
         [_selectedCell addObject:cell];
         //add effect
         [self addBorderEffectWithCell:cell eliminated:NO];
-        //[cell addRippleEffectToView:YES];
+        [cell addRippleEffectToView:YES];
         // play sound
         //[[NGPlayer player] playSoundFXnamed:@"1.aif" Loop:NO];
         [[NGPlayer player] playSoundFXnamed:@"score_counter_01.mp3" Loop:NO];
@@ -259,7 +259,7 @@ typedef void(^TrickBlock)(bool hasChange);
             if ([_selectedCell containsObject:cell]) {
                 if([_selectedCell indexOfObject:preCell] -[_selectedCell indexOfObject:cell] == 1) {
                     [[NGPlayer player] playSoundFXnamed:@"generalclick19.mp3" Loop:NO];
-                    //[self removeEffectView];
+                    [self removeEffectView];
                     [_selectedCell removeLastObject];
                     [self removeBorderEffectWithCell:preCell];
                     canEliminated = NO;
@@ -274,28 +274,26 @@ typedef void(^TrickBlock)(bool hasChange);
                     [self addBorderEffectWithCell:cell eliminated:YES];
                     [[NGPlayer player] playSoundFXnamed:@"glossy_click_13.mp3" Loop:NO];
                     [_selectedCell enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
-                        //[cell addRippleEffectToView:NO];
+                        [cell addRippleEffectToView:NO];
                     }];
                 }
                 else if ( [self validateIfCanLine:cell]&&([self currectNum] + cell.number < 10)) {
-                    //[cell addRippleEffectToView:YES];
-                    //[[NGPlayer player] playSoundFXnamed:[NSString stringWithFormat:@"%d.aif", _selectedCell.count] Loop:NO];
+                    [cell addRippleEffectToView:YES];
                     [[NGPlayer player] playSoundFXnamed:@"score_counter_01.mp3" Loop:NO];
                     [_selectedCell addObject:cell];
                     [self addBorderEffectWithCell:cell eliminated:NO];
                 } else if([self validateIfCanLine:cell]&&[self currectNum] + cell.number == 10) {
                     [_selectedCell addObject:cell];
                     [self addBorderEffectWithCell:cell eliminated:NO];
-                    //[[NGPlayer player] playSoundFXnamed:[NSString stringWithFormat:@"%d.aif", _selectedCell.count] Loop:NO];
                     [[NGPlayer player] playSoundFXnamed:@"score_counter_01.mp3" Loop:NO];
                     if([self eliminatedSameColorCell]) {
                         NSArray* colorArray = [self getAllCellWithColor:cell.color];
                         [colorArray enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
-                            //[cell addRippleEffectToView:NO];
+                            [cell addRippleEffectToView:NO];
                         }];
                     } else {
                         [_selectedCell enumerateObjectsUsingBlock:^(GameBoardCell* cell, NSUInteger idx, BOOL *stop) {
-                            //[cell addRippleEffectToView:NO];
+                            [cell addRippleEffectToView:NO];
                         }];
                     }
                 }

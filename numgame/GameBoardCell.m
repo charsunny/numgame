@@ -89,8 +89,8 @@
     
     
     [self.layer insertSublayer:_backgroundLayer atIndex:0];
-    [self.layer insertSublayer:imgView.layer below:_backgroundLayer];
     [self.layer insertSublayer:_numberImgView.layer above:_backgroundLayer];
+    [self.layer insertSublayer:imgView.layer below:_backgroundLayer];
 }
 
 - (int)genRandColor {
@@ -139,7 +139,7 @@
     if (animate) {
         UIView* tmpView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         tmpView.layer.cornerRadius = self.layer.cornerRadius;
-        [tmpView setBackgroundColor:self.backgroundColor];
+        [tmpView setBackgroundColor:[UIColor colorWithCGColor:_backgroundLayer.backgroundColor]];
         [tmpView setClipsToBounds:YES];
         [self insertSubview:tmpView belowSubview:self];
         [UIView animateWithDuration:0.4f animations:^{
@@ -152,17 +152,19 @@
         _effectLayer = [CALayer layer];
         _effectLayer.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
         _effectLayer.cornerRadius = self.layer.cornerRadius;
-        _effectLayer.backgroundColor = self.backgroundColor.CGColor;
+        _effectLayer.backgroundColor = _backgroundLayer.backgroundColor;
         _effectLayer.opacity = 0.7;
         _effectLayer.transform = CATransform3DMakeScale(1.3, 1.3, 1.0);
         //[self.layer insertSublayer:_effectLayer below:self.numLabel.layer];
         [self.layer insertSublayer:_effectLayer atIndex:0];
+        //self.layer.transform = CATransform3DMakeScale(1.1, 1.1, 1.0);
     }
 }
 
 - (void)removeRippleEffectView {
     [_effectLayer removeFromSuperlayer];
-    [self.layer setNeedsDisplay];
+    NSLog(@"removing effectLayer");
+    //[self.layer setNeedsDisplay];
 }
 
 - (void)addFlyEffect:(CGPoint)endPoint callback:(void (^)())callback
