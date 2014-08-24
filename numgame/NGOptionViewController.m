@@ -84,9 +84,11 @@
         if([_soundButton.titleLabel.text isEqualToString:@"K"]) {
             [_soundButton setTitle:@"L" forState:UIControlStateNormal];
             [[NGGameConfig sharedGameConfig] setSound:@"L"];
+            [[NGPlayer player] stopPlaySoundFXnamed:@"game_mode_bg.mp3"];
         } else {
             [_soundButton setTitle:@"K" forState:UIControlStateNormal];
             [[NGGameConfig sharedGameConfig] setSound:@"K"];
+            [[NGPlayer player] playSoundFXnamed:@"game_mode_bg.mp3" Loop:YES];
         }
     } else if([sender isEqual:_rateButton]) {
         SKStoreProductViewController *storeProductViewContorller = [[SKStoreProductViewController alloc] init];

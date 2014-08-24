@@ -70,9 +70,11 @@
         [self performSegueWithIdentifier:@"guidesegue" sender:self];
     }
     _playerArray = [NSMutableArray new];
-    [[NGPlayer player] playSoundFXnamed:@"game_mode_bg.mp3" Loop:YES];
     if (![[NGGameConfig sharedGameConfig] unlockEndlessMode] && [[NGGameConfig sharedGameConfig] gamemode] == NGGameModeEndless) {
         [_playButton setTitle:NSLocalizedString(@"Unlock", @"UnLock") forState:UIControlStateNormal];
+    }
+    if ([[[NGGameConfig sharedGameConfig] sound] isEqualToString:@"K"]) {
+        [[NGPlayer player] playSoundFXnamed:@"game_mode_bg.mp3" Loop:YES];
     }
 }
 
