@@ -583,7 +583,6 @@
 				ORGANIZATIONNAME = "Sun Xi";
 				TargetAttributes = {
 					50EDF3A318FFB755003FBA71 = {
-						DevelopmentTeam = CX3SW7JBRE;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
 								enabled = 1;
@@ -913,7 +912,7 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "edfd74fe-d95a-48ba-9c5c-643b9e784f15";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7s armv7 arm64";
 				WRAPPER_EXTENSION = app;
@@ -952,7 +951,7 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "edfd74fe-d95a-48ba-9c5c-643b9e784f15";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7s armv7 arm64";
 				WRAPPER_EXTENSION = app;

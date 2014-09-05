@@ -42,6 +42,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *settingButton;
 
+@property (weak, nonatomic) IBOutlet UIButton *restoreButton;
 @end
 
 @implementation NGGameModeViewController
@@ -158,10 +159,15 @@
             
             [moveAnimation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
             [_modeLabel.layer addAnimation:moveAnimation forKey:@"moveModeText"];
+            if ([[NGGameConfig sharedGameConfig] gamemode] != NGGameModeEndless) {
+                _restoreButton.hidden = YES;
+            }
         }
     }];
     if (![[NGGameConfig sharedGameConfig] unlockEndlessMode] && [[NGGameConfig sharedGameConfig] gamemode] == NGGameModeEndless) {
         [_playButton setTitle:NSLocalizedString(@"Unlock", @"UnLock") forState:UIControlStateNormal];
+        //show restore button
+        _restoreButton.hidden = NO;
     } else {
         [_playButton setTitle:NSLocalizedString(@"Play", @"Play") forState:UIControlStateNormal];
     }
@@ -175,6 +181,11 @@
         destVC.gameMode = [[NGGameConfig sharedGameConfig] gamemode];
         [NGGameLogger logGameData:destVC.gameMode];
     }
+}
+
+- (IBAction)onClickRestoreButton:(id)sender {
+    [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
+    [[SKPaymentQueue defaultQueue]restoreCompletedTransactions];
 }
 
 - (void)onClickRankButton {
@@ -236,7 +247,15 @@
         }
     }
 }
+- (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
+{
+    [[NSUserDefaults standardUserDefaults] setValue:@(YES) forKey:@"removeAds"];
+    [[[UIAlertView alloc] initWithTitle:@"Tip" message:@"Restore Completed" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+}
 
-
+- (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error
+{
+    [[[UIAlertView alloc] initWithTitle:@"Tip" message:@"Restore Failed,Please Try Later" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+}
 
 @end
